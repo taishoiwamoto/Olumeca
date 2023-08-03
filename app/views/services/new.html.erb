@@ -1,0 +1,21 @@
+<div class="main posts-new">
+  <div class="container">
+    <h1 class="form-heading">投稿する</h1>
+    <!-- ここに指定されたHTMLを貼り付けてください -->
+    <%= form_tag("/services/create") do %>
+      <div class="form">
+        <div class="form-body">
+        <!-- @postのエラーメッセージが表示されるよう、「〇〇」の部分を書き換えてください -->
+          <% @service.errors.full_messages.each do |message| %>
+            <div class="form-error">
+              <%= message %>
+            </div>
+          <% end %>
+
+          <textarea name="title"><%= @service.title %></textarea>
+          <input type="submit" value="投稿">
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

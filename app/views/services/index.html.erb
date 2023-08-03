@@ -1,0 +1,17 @@
+<div class="main posts-index">
+  <div class="container">
+    <% @services.each do |service| %>
+      <div class="posts-index-item">
+        <div class="post-left">
+          <img src="<%= "/user_images/#{service.user.image_name}" %>">
+        </div>
+        <div class="post-right">
+          <div class="post-user-name">
+            <%= link_to(service.user.name, "/users/#{service.user.id}") %>
+          </div>
+          <%= link_to(service.title, "/services/#{service.id}") %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

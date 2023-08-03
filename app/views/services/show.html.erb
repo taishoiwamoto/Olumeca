@@ -1,0 +1,34 @@
+<div class="main posts-show">
+  <div class="container">
+    <div class="posts-show-item">
+      <div class="post-user-name">
+        <img src="<%= "/user_images/#{@user.image_name}" %>">
+        <%= link_to(@user.name, "/users/#{@user.id}") %>
+      </div>
+      <p>
+        <%= @service.title %>
+      </p>
+      <div class="post-time">
+        <%= @service.created_at %>
+      </div>
+      <% if Like.find_by(user_id: @current_user.id, service_id: @service.id) %>
+        <%= link_to("/likes/#{@service.id}/destroy", {method: "post"}) do %>
+          <span class="fa fa-heart liked-btn"></span>
+        <% end %>
+      <% else %>
+        <%= link_to("/likes/#{@service.id}/create", {method: "post"}) do %>
+          <span class="fa fa-heart unliked-btn"></span>
+        <% end %>
+      <% end %>
+
+      <%= @likes_count %>
+
+      <% if @service.user_id == @current_user.id %>
+        <div class="post-menus">
+          <%= link_to("編集", "/services/#{@service.id}/edit") %>
+          <%= link_to("削除", "/services/#{@service.id}/destroy", {method: "post"}) %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
