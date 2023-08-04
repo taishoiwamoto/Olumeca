@@ -25,7 +25,7 @@ class UsersController < ApplicationController
     )
     if @user.save
       session[:user_id] = @user.id
-      flash[:notice] = "ユーザー登録が完了しました"
+      flash[:notice] = "Se ha completado el registro de usuario"
       redirect_to("/users/#{@user.id}")
     else
       render("users/new")
@@ -49,7 +49,7 @@ class UsersController < ApplicationController
     end
 
     if @user.save
-      flash[:notice] = "ユーザー情報を編集しました"
+      flash[:notice] = "Has editado la información del usuario"
       redirect_to("/users/#{@user.id}")
     else
       render("users/edit")
@@ -63,10 +63,10 @@ class UsersController < ApplicationController
     @user = User.find_by(email: params[:email])
     if @user && @user.authenticate(params[:password])
       session[:user_id] = @user.id
-      flash[:notice] = "ログインしました"
+      flash[:notice] = "Has iniciado sesión"
       redirect_to("/services/index")
     else
-      @error_message = "メールアドレスまたはパスワードが間違っています"
+      @error_message = "El correo electrónico o la contraseña son incorrectos"
       @email = params[:email]
       @password = params[:password]
       render("users/login_form")
@@ -75,7 +75,7 @@ class UsersController < ApplicationController
 
   def logout
     session[:user_id] = nil
-    flash[:notice] = "ログアウトしました"
+    flash[:notice] = "Has cerrado sesión"
     redirect_to("/login")
   end
 
@@ -83,10 +83,9 @@ class UsersController < ApplicationController
     @user = User.find_by(id: params[:id])
     @likes = Like.where(user_id: @user.id)
   end
-  # ensure_correct_userを定義してください
   def ensure_correct_user
     if @current_user.id != params[:id].to_i
-      flash[:notice] = "権限がありません"
+      flash[:notice] = "No tienes autorización"
       redirect_to("/services/index")
     end
   end

@@ -1,6 +1,6 @@
 <div class="main users-new">
   <div class="container">
-    <div class="form-heading">ログイン</div>
+    <div class="form-heading">Iniciar sesión</div>
     <div class="form users-form">
       <div class="form-body">
         <% if @error_message %>
@@ -9,11 +9,11 @@
           </div>
         <% end %>
         <%= form_tag("/login") do %>
-          <p>メールアドレス</p>
+          <p>Correo electrónico</p>
           <input name="email" value="<%= @email %>">
-          <p>パスワード</p>
+          <p>Contraseña</p>
           <input type="password" name="password" value="<%= @password %>">
-          <input type="submit" value="ログイン">
+          <input type="submit" value="Iniciar">
         <% end %>
       </div>
     </div>
