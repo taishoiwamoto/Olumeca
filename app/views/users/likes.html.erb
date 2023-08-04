@@ -1,22 +1,19 @@
-<!-- 指定されたコードを貼り付けてください -->
 <div class="main user-show">
   <div class="container">
     <div class="user">
       <img src="<%= "/user_images/#{@user.image_name}" %>">
       <h2><%= @user.name %></h2>
       <% if @user.id == @current_user.id %>
-        <%= link_to("編集", "/users/#{@user.id}/edit") %>
+        <%= link_to("Editar", "/users/#{@user.id}/edit") %>
       <% end %>
     </div>
 
     <ul class="user-tabs">
-      <li><%= link_to("投稿", "/users/#{@user.id}") %></li>
-      <li class="active"><%= link_to("いいね!", "/users/#{@user.id}/likes") %></li>
+      <li><%= link_to("Servicios", "/users/#{@user.id}") %></li>
+      <li class="active"><%= link_to("Likes!", "/users/#{@user.id}/likes") %></li>
     </ul>
 
-    <!-- 変数@likesに対してeach文を用いてください -->
     <% @likes.each do |like| %>
-      <!-- 変数postを定義してください -->
       <% service = Service.find_by(id: like.service_id) %>
 
       <div class="posts-index-item">
@@ -30,7 +27,6 @@
           <%= link_to(service.title, "/services/#{service.id}") %>
         </div>
       </div>
-    <!-- each文のendを追加してください -->
     <% end %>
   </div>
 </div>

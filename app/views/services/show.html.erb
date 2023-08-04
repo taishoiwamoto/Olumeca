@@ -25,8 +25,8 @@
 
       <% if @service.user_id == @current_user.id %>
         <div class="post-menus">
-          <%= link_to("編集", "/services/#{@service.id}/edit") %>
-          <%= link_to("削除", "/services/#{@service.id}/destroy", {method: "post"}) %>
+          <%= link_to("Editar", "/services/#{@service.id}/edit") %>
+          <%= link_to("Eliminar", "/services/#{@service.id}/destroy", {method: "post"}) %>
         </div>
       <% end %>
     </div>

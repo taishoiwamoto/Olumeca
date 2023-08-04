@@ -1,6 +1,6 @@
 <div class="main users-new">
   <div class="container">
-    <div class="form-heading">新規ユーザー登録</div>
+    <div class="form-heading">Registro de nuevo usuario</div>
     <div class="form users-form">
       <div class="form-body">
         <% @user.errors.full_messages.each do |message| %>
@@ -10,13 +10,13 @@
         <% end %>
 
         <%= form_tag("/users/create") do %>
-          <p>ユーザー名</p>
+          <p>Nombre de usuario</p>
           <input name="name" value="<%= @user.name %>">
-          <p>メールアドレス</p>
+          <p>Correo electrónico</p>
           <input name="email" value="<%= @user.email %>">
-          <p>パスワード</p>
+          <p>Contraseña</p>
           <input name="password" type="password" value="<%= @user.password %>">
-          <input type="submit" value="新規登録">
+          <input type="submit" value="Registrar">
         <% end %>
       </div>
     </div>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>TweetApp</title>
+    <title>FP México</title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -14,9 +14,9 @@
     <header>
       <div class="header-logo">
         <% if @current_user %>
-          <%= link_to("TweetApp", "/services/index") %>
+          <%= link_to("FP México", "/services/index") %>
         <% else %>
-          <%= link_to("TweetApp", "/") %>
+          <%= link_to("FP México", "/") %>
         <% end %>
       </div>
       <ul class="header-menus">
@@ -24,24 +24,24 @@
           <li>
             <%= link_to(@current_user.name, "/users/#{@current_user.id}") %>
           <li>
-            <%= link_to("サービス一覧", "/services/index") %>
+            <%= link_to("Servicios", "/services/index") %>
           </li>
           <li>
-            <%= link_to("新規投稿", "/services/new") %>
+            <%= link_to("Publicar", "/services/new") %>
           </li>
           <li>
-            <%= link_to("ユーザー一覧", "/users/index") %>
+            <%= link_to("Usuarios", "/users/index") %>
           </li>
           </li>
           <li>
-            <%= link_to("ログアウト", "/logout", {method: "post"}) %>
+            <%= link_to("Cerrar sesión", "/logout", {method: "post"}) %>
           </li>
         <% else %>
           <li>
-            <%= link_to("新規登録", "/signup") %>
+            <%= link_to("Registro nuevo", "/signup") %>
           </li>
           <li>
-            <%= link_to("ログイン", "/login") %>
+            <%= link_to("Iniciar sesión", "/login") %>
           </li>
           <!--
           <li>

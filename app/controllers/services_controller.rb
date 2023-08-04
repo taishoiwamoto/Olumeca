@@ -22,7 +22,7 @@ class ServicesController < ApplicationController
       user_id: @current_user.id
     )
     if @service.save
-      flash[:notice] = "投稿を作成しました"
+      flash[:notice] = "Has creado un servicio"
       redirect_to("/services/index")
     else
       render("services/new")
@@ -38,7 +38,7 @@ class ServicesController < ApplicationController
     @service.title = params[:title]
     @service.save
     if @service.save
-      flash[:notice] = "投稿を編集しました"
+      flash[:notice] = "Has editado un servicio"
       redirect_to("/services/index")
     else
       render("services/edit")
@@ -48,14 +48,14 @@ class ServicesController < ApplicationController
   def destroy
     @service = Service.find_by(id: params[:id])
     @service.destroy
-    flash[:notice] = "投稿を削除しました"
+    flash[:notice] = "Has eliminado un servicio"
     redirect_to("/services/index")
   end
 
   def ensure_correct_user
     @service = Service.find_by(id: params[:id])
     if @service.user_id != @current_user.id
-      flash[:notice] = "権限がありません"
+      flash[:notice] = "No tienes autorización"
       redirect_to("/services/index")
     end
   end

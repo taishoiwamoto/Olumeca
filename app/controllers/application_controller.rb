@@ -7,15 +7,14 @@ class ApplicationController < ActionController::Base
 
   def authenticate_user
     if @current_user == nil
-      flash[:notice] = "ログインが必要です"
+      flash[:notice] = "Es necesario iniciar sesión"
       redirect_to("/login")
     end
   end
 
-  # forbid_login_userメソッドを定義してください
   def forbid_login_user
     if @current_user
-      flash[:notice] = "すでにログインしています"
+      flash[:notice] = "Ya has iniciado sesión"
       redirect_to("/services/index")
     end
   end

@@ -1,17 +1,16 @@
 <div class="main posts-new">
   <div class="container">
-    <h1 class="form-heading">編集する</h1>
+    <h1 class="form-heading">Editar</h1>
     <%= form_tag("/services/#{@service.id}/update") do %>
       <div class="form">
         <div class="form-body">
-        <!-- @postのエラーが表示されるよう、「〇〇」の部分を書き換えてください -->
           <% @service.errors.full_messages.each do |message| %>
             <div class="form-error">
               <%= message %>
             </div>
           <% end %>
           <textarea name="title"><%= @service.title %></textarea>
-          <input type="submit" value="保存">
+          <input type="submit" value="Guardar">
         </div>
       </div>
     <% end %>
