@@ -2,10 +2,6 @@ require_relative "boot"
 
 require "rails/all"
 
-# 2023年8月3日にDeployするため追加
-config.require_master_key = true
-config.master_key = ENV['RAILS_MASTER_KEY'] # 環境変数から取得する場合
-
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
