@@ -1,3 +1,9 @@
+#service-image {
+  width: 500px;  /* 希望の幅に変更 */
+  height: auto;  /* アスペクト比を維持 */
+  border-radius: 0%;
+}
+
 /* posts/index ================================ */
 .posts-index-item {
   padding: 20px 30px;
