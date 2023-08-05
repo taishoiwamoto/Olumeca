@@ -20,14 +20,15 @@
 
       <%= @likes_count %>
 
-
       <p>
         <h5>Nombre del servicio</h5>
         <%= @service.title %>
       </p>
       <p>
+      <div class="service-image">
         <h5>Imagen</h5>
-        <img src="<%= "/service_images/#{@service.image}" %> ">
+          <img id="service-image" src="<%= "/service_images/#{@service.image}" %> ">
+      </div>
       </p>
       <p>
         <h5>Categoría</h5>
