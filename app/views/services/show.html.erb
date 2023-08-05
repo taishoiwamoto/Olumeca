@@ -5,12 +5,9 @@
         <img src="<%= "/user_images/#{@user.image_name}" %>">
         <%= link_to(@user.name, "/users/#{@user.id}") %>
       </div>
+
       <p>
-        <%= @service.title %>
-      </p>
-      <div class="post-time">
-        <%= @service.created_at %>
-      </div>
+
       <% if Like.find_by(user_id: @current_user.id, service_id: @service.id) %>
         <%= link_to("/likes/#{@service.id}/destroy", {method: "post"}) do %>
           <span class="fa fa-heart liked-btn"></span>
@@ -22,6 +19,40 @@
       <% end %>
 
       <%= @likes_count %>
+
+
+      <p>
+        <h5>Nombre del servicio</h5>
+        <%= @service.title %>
+      </p>
+      <p>
+        <h5>Imagen</h5>
+        <img src="<%= "/service_images/#{@service.image}" %> ">
+      </p>
+      <p>
+        <h5>Categoría</h5>
+        <%= @service.category %>
+      </p>
+      <p>
+        <h5>Tiempo de servicio</h5>
+        <%= @service.hour %> min
+      </p>
+      <p>
+        <h5>Precio</h5>
+        <%= @service.price %> MXN
+      </p>
+      <p>
+        <h5>Método de provisión</h5>
+        <%= @service.method %>
+      <p>
+      <p>
+        <h5>Detalles</h5>
+        <%= @service.detail %>
+      </p>
+      <div class="post-time">
+        <h5>Fecha de creación</h5>
+        <%= @service.created_at %>
+      </div>
 
       <% if @service.user_id == @current_user.id %>
         <div class="post-menus">

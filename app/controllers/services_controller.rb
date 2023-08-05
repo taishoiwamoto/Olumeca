@@ -19,8 +19,23 @@ class ServicesController < ApplicationController
   def create
     @service = Service.new(
       title: params[:title],
-      user_id: @current_user.id
+      user_id: @current_user.id,
+      detail: params[:detail],
+      category: params[:category],
+      hour: params[:hour],
+      price: params[:price],
+      method: params[:method],
+      image: params[:image]
     )
+
+    if params[:image] && params[:image].respond_to?(:read)
+      @service.image = "#{@service.id}.jpg"
+      image = params[:image]
+      File.binwrite("public/service_images/#{@service.image}", image.read)
+    else
+      @service.image = "default_service.jpg"
+    end
+
     if @service.save
       flash[:notice] = "Has creado un servicio"
       redirect_to("/services/index")
@@ -36,6 +51,17 @@ class ServicesController < ApplicationController
   def update
     @service = Service.find_by(id: params[:id])
     @service.title = params[:title]
+    @service.detail = params[:detail]
+    @service.category = params[:category]
+    @service.hour = params[:hour]
+    @service.price = params[:price]
+    @service.method = params[:method]
+    if params[:image]
+      @service.image = "#{@service.id}.jpg"
+      image = params[:image]
+      File.binwrite("public/service_images/#{@service.image}", image.read)
+    end
+
     @service.save
     if @service.save
       flash[:notice] = "Has editado un servicio"

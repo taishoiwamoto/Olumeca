@@ -1,7 +1,7 @@
 <div class="main posts-new">
   <div class="container">
     <h1 class="form-heading">Publicar</h1>
-    <%= form_tag("/services/create") do %>
+    <%= form_tag("/services/create", {multipart: true}) do %>
       <div class="form">
         <div class="form-body">
           <% @service.errors.full_messages.each do |message| %>
@@ -10,7 +10,20 @@
             </div>
           <% end %>
 
-          <textarea name="title"><%= @service.title %></textarea>
+          <p>Nombre del servicio</p>
+          <input name="title" value="<%= @service.title %>">
+          <p>Imagen</p>
+          <input name="image" type="file">
+          <p>Categoría</p>
+          <input name="category" value="<%= @service.category %>">
+          <p>Tiempo de servicio</p>
+          <input name="hour" value="<%= @service.hour %>">
+          <p>Precio</p>
+          <input name="price" value="<%= @service.price %>">
+          <p>Método de provisión</p>
+          <input name="method" value="<%= @service.method %>">
+          <p>Detalles</p>
+          <textarea name="detail"><%= @service.detail %></textarea>
           <input type="submit" value="Publicar">
         </div>
       </div>
