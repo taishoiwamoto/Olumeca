@@ -4,55 +4,18 @@
       <div class="post-user-name">
         <img src="<%= "/user_images/#{@user.image_name}" %>">
         <%= link_to(@user.name, "/users/#{@user.id}") %>
-      </div>
 
-      <p>
-
-      <% if Like.find_by(user_id: @current_user.id, service_id: @service.id) %>
-        <%= link_to("/likes/#{@service.id}/destroy", {method: "post"}) do %>
-          <span class="fa fa-heart liked-btn"></span>
+        <% if Like.find_by(user_id: @current_user.id, service_id: @service.id) %>
+          <%= link_to("/likes/#{@service.id}/destroy", {method: "post"}) do %>
+            <span class="fa fa-heart liked-btn"></span>
+          <% end %>
+        <% else %>
+          <%= link_to("/likes/#{@service.id}/create", {method: "post"}) do %>
+            <span class="fa fa-heart unliked-btn"></span>
+          <% end %>
         <% end %>
-      <% else %>
-        <%= link_to("/likes/#{@service.id}/create", {method: "post"}) do %>
-          <span class="fa fa-heart unliked-btn"></span>
-        <% end %>
-      <% end %>
+        <%= @likes_count %>
 
-      <%= @likes_count %>
-
-      <p>
-        <h5>Nombre del servicio</h5>
-        <%= @service.title %>
-      </p>
-      <p>
-      <div class="service-image">
-        <h5>Imagen</h5>
-          <img id="service-image" src="<%= "/service_images/#{@service.image}" %> ">
-      </div>
-      </p>
-      <p>
-        <h5>Categoría</h5>
-        <%= @service.category %>
-      </p>
-      <p>
-        <h5>Tiempo de servicio</h5>
-        <%= @service.hour %> min
-      </p>
-      <p>
-        <h5>Precio</h5>
-        <%= @service.price %> MXN
-      </p>
-      <p>
-        <h5>Método de provisión</h5>
-        <%= @service.method %>
-      <p>
-      <p>
-        <h5>Detalles</h5>
-        <%= @service.detail %>
-      </p>
-      <div class="post-time">
-        <h5>Fecha de creación</h5>
-        <%= @service.created_at %>
       </div>
 
       <% if @service.user_id == @current_user.id %>
@@ -61,6 +24,39 @@
           <%= link_to("Eliminar", "/services/#{@service.id}/destroy", {method: "post"}) %>
         </div>
       <% end %>
+
+      <p>
+        <h2><%= @service.title %></h2>
+      </p>
+      <p>
+      <div class="service-image">
+        <img id="service-image" src="<%= "/service_images/#{@service.image}" %> ">
+      </div>
+      </p>
+      <p>
+        <h5>ID de Servicio</h5>
+        <%= @service.id %>
+      </p>
+      <p>
+        <h5>Categoría</h5>
+        <%= @service.category %>
+      </p>
+      <p>
+        <h5>Tiempo de servicio</h5>
+        <%= @service.hour %> minuto(s)
+      </p>
+      <p>
+        <h5>Precio</h5>
+        $<%= number_with_delimiter(@service.price) %> MXN
+      </p>
+      <p>
+        <h5>Método de provisión</h5>
+        <%= JSON.parse(@service.method).join(", ") %>
+      <p>
+      <p>
+        <h5>Detalles</h5>
+        <%= @service.detail %>
+      </p>
     </div>
   </div>
 </div>

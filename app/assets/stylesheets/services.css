@@ -113,3 +113,19 @@
   font-size: 24px;
   opacity: 0.5;
 }
+
+.checkbox-container {
+  display: flex;
+  gap: 10px; /* これにより、要素の間にスペースができます */
+}
+
+.checkbox-item {
+  white-space: nowrap; /* テキストを1行に強制 */
+  display: flex;
+  align-items: center; /* ラベルとチェックボックスを垂直方向中央に配置 */
+  gap: 10px; /* ラベルとチェックボックスの間のスペース */
+}
+
+.destroy {
+  padding: 0px 0px 20px 20px;
+}

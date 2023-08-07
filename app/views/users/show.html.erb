@@ -3,6 +3,7 @@
     <div class="user">
       <img src="<%= "/user_images/#{@user.image_name}" %>">
       <h2><%= @user.name %></h2>
+      <p>ID de Usuario: <%= @user.id %></p>
       <% if @user.id == @current_user.id %>
         <%= link_to("Editar", "/users/#{@user.id}/edit") %>
       <% end %>
@@ -13,18 +14,28 @@
       <li><%= link_to("Likes!", "/users/#{@user.id}/likes") %></li>
     </ul>
 
-    <% @user.services.each do |service| %>
-      <div class="posts-index-item">
-        <div class="post-left">
-          <img src="<%= "/user_images/#{service.user.image_name}" %>">
-        </div>
-        <div class="post-right">
-          <div class="post-user-name">
-            <%= link_to(service.user.name, "/users/#{service.user.id}") %>
+    <% @user.services.order(created_at: :desc).each do |service| %>
+      <%= link_to "/services/#{service.id}" do %>
+
+        <div class="posts-index-item">
+          <div class="post-left">
+            <img src="<%= "/service_images/#{service.image}" %>">
           </div>
-          <%= link_to(service.title, "/services/#{service.id}") %>
+          <div class="post-right">
+            <h4><%= service.title %></h4>
+            <div>
+              <div style="display: flex; justify-content: space-between;">
+                <p>ID de Servicio: <%= service.id %></p>
+                <p><%= service.hour %> minuto(s)</p>
+                <p>$<%= service.price %> MXN</p>
+              </div>
+              <div class="post-user-name">
+                <p>El vendedor: <%= service.user.name %></p>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
+      <% end %>
     <% end %>
   </div>
 </div>
