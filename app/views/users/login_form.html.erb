@@ -9,9 +9,9 @@
           </div>
         <% end %>
         <%= form_tag("/login") do %>
-          <p>Correo electrónico</p>
+          <h5>Correo electrónico</h5>
           <input name="email" value="<%= @email %>">
-          <p>Contraseña</p>
+          <h5>Contraseña</h5>
           <input type="password" name="password" value="<%= @password %>">
           <input type="submit" value="Iniciar">
         <% end %>

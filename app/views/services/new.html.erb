@@ -10,22 +10,50 @@
             </div>
           <% end %>
 
-          <p>Nombre del servicio</p>
+          <h5>Nombre del servicio</h5>
           <input name="title" value="<%= @service.title %>">
-          <p>Imagen</p>
+          <h5>Imagen</h5>
           <input name="image" type="file">
-          <p>Categoría</p>
-          <input name="category" value="<%= @service.category %>">
-          <p>Tiempo de servicio</p>
+          <h5>Categoría</h5>
+          <select name="category">
+            <option selected disabled>Por favor, elija de la siguiente lista</option>
+            <option value="Ilustración & Cómics" <%= @service.category == 'Ilustración & Cómics' ? 'selected' : '' %>>Ilustración & Cómics</option>
+            <option value="Diseño" <%= @service.category == 'Diseño' ? 'selected' : '' %>>Diseño</option>
+            <option value="Creación de sitios web & Diseño web" <%= @service.category == 'Creación de sitios web & Diseño web' ? 'selected' : '' %>>Creación de sitios web & Diseño web</option>
+            <option value="Video, Animación & Filmación" <%= @service.category == 'Video, Animación & Filmación' ? 'selected' : '' %>>Video, Animación & Filmación</option>
+            <option value="Marketing & Atracción web" <%= @service.category == 'Marketing & Atracción web' ? 'selected' : '' %>>Marketing & Atracción web</option>
+            <option value="Música & Narración" <%= @service.category == 'Música & Narración' ? 'selected' : '' %>>Música & Narración</option>
+            <option value="Escritura & Traducción" <%= @service.category == 'Escritura & Traducción' ? 'selected' : '' %>>Escritura & Traducción</option>
+            <option value="Representación de negocios, Consultoría & Servicios profesionales" <%= @service.category == 'Representación de negocios, Consultoría & Servicios profesionales' ? 'selected' : '' %>>Representación de negocios, Consultoría & Servicios profesionales</option>
+            <option value="IT, Programación & Desarrollo" <%= @service.category == 'IT, Programación & Desarrollo' ? 'selected' : '' %>>IT, Programación & Desarrollo</option>
+            <option value="Adivinación" <%= @service.category == 'Adivinación' ? 'selected' : '' %>>Adivinación</option>
+            <option value="Consejería, Consejos de amor & Compañía" <%= @service.category == 'Consejería, Consejos de amor & Compañía' ? 'selected' : '' %>>Consejería, Consejos de amor & Compañía</option>
+            <option value="Aprendizaje, Búsqueda de empleo, Certificación & Coaching" <%= @service.category == 'Aprendizaje, Búsqueda de empleo, Certificación & Coaching' ? 'selected' : '' %>>Aprendizaje, Búsqueda de empleo, Certificación & Coaching</option>
+            <option value="Vivienda, Belleza, Estilo de vida & Pasatiempos" <%= @service.category == 'Vivienda, Belleza, Estilo de vida & Pasatiempos' ? 'selected' : '' %>>Vivienda, Belleza, Estilo de vida & Pasatiempos</option>
+            <option value="Lecciones en línea & Consejos" <%= @service.category == 'Lecciones en línea & Consejos' ? 'selected' : '' %>>Lecciones en línea & Consejos</option>
+            <option value="Dinero, Trabajos secundarios & Marketing de afiliados" <%= @service.category == 'Dinero, Trabajos secundarios & Marketing de afiliados' ? 'selected' : '' %>>Dinero, Trabajos secundarios & Marketing de afiliados</option>
+          </select>
+          <h5>Tiempo de servicio</h5>
           <input name="hour" value="<%= @service.hour %>">
-          <p>Precio</p>
+          <h5>Precio</h5>
           <input name="price" value="<%= @service.price %>">
-          <p>Método de provisión</p>
-          <input name="method" value="<%= @service.method %>">
-          <p>Detalles</p>
+          <h5>Método de provisión</h5>
+          <div class="checkbox-container">
+            <div class="checkbox-item">
+                <label for="method_option1">En línea</label>
+                <input type="checkbox" name="method[]" id="method_option1" value="En línea" <%= 'checked' if @service.method&.include?('En línea') %> >
+            </div>
+            <div class="checkbox-item">
+                <label for="method_option2">Chat</label>
+                <input type="checkbox" name="method[]" id="method_option2" value="Chat" <%= 'checked' if @service.method&.include?('Chat') %> >
+            </div>
+          </div>
+          <h5>Detalles</h5>
           <textarea name="detail"><%= @service.detail %></textarea>
+
           <input type="submit" value="Publicar">
         </div>
+
       </div>
     <% end %>
   </div>

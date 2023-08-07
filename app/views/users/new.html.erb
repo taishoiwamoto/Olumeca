@@ -10,12 +10,13 @@
         <% end %>
 
         <%= form_tag("/users/create") do %>
-          <p>Nombre de usuario</p>
+          <h5>Nombre de usuario</h5>
           <input name="name" value="<%= @user.name %>">
-          <p>Correo electrónico</p>
+          <h5>Correo electrónico</h5>
           <input name="email" value="<%= @user.email %>">
-          <p>Contraseña</p>
-          <input name="password" type="password" value="<%= @user.password %>">
+          <h5>Contraseña</h5>
+          <input name="password" type="password">
+          <p>※La contraseña debe contener al menos una letra minúscula, una letra mayúscula, un número y un carácter especial.</p>
           <input type="submit" value="Registrar">
         <% end %>
       </div>

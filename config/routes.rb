@@ -11,10 +11,11 @@ Rails.application.routes.draw do
   get "logout" => "users#logout"
   get "login" => "users#login_form"
   get "users/:id/likes" => "users#likes"
+  get "users/:id/destroy" => "users#destroy"
 
   get "services/index" => "services#index"
   get "services/new" =>  "services#new"
-  get "services/:id" => "services#show"
+  get 'services/:id', to: 'services#show', as: 'service'
   post "services/create" => "services#create"
   get "services/:id/edit" => "services#edit"
   post "services/:id/update" => "services#update"
