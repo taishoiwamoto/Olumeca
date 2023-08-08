@@ -12,13 +12,13 @@
         <%= form_tag("/users/#{@user.id}/update", {multipart: true}) do %>
           <h5>Nombre de usuario</h5>
           <input name="name" value="<%= @user.name %>">
-          <h5>Imagen</h5>
+          <h5>Imagen de profile</h5>
           <input name="image" type="file">
           <h5>Correo electrónico</h5>
           <input name="email" value="<%= @user.email %>">
           <h5>Nueva contraseña</h5>
+          <p class="small-text">Mínimo 8 caracteres, con una minúscula, una mayúscula, un número y un símbolo.</p>
           <input name="password" type="password">
-          <p>※La contraseña debe contener al menos una letra minúscula, una letra mayúscula, un número y un carácter especial.</p>
           <input type="submit" value="Guardar">
         <% end %>
       </div>

@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user, {only: [:index, :show, :edit, :update]}
+  before_action :authenticate_user, {only: [:show, :edit, :update]}
   before_action :forbid_login_user, {only: [:new, :create, :login_form, :login]}
   before_action :ensure_correct_user, {only: [:edit, :update, :destroy]}
 
@@ -20,7 +20,7 @@ class UsersController < ApplicationController
     @user = User.new(
       name: params[:name],
       email: params[:email],
-      image_name: "default_user.jpg",
+      profile_image: "default_user.jpg",
       password: params[:password]
     )
     if @user.save
@@ -43,9 +43,9 @@ class UsersController < ApplicationController
     @user.password = params[:password]
 
     if params[:image]
-      @user.image_name = "#{@user.id}.jpg"
+      @user.profile_image = "#{@user.id}.jpg"
       image = params[:image]
-      File.binwrite("public/user_images/#{@user.image_name}", image.read)
+      File.binwrite("public/user_images/#{@user.profile_image}", image.read)
     end
 
     if @user.save

@@ -1,5 +1,5 @@
 class Service < ApplicationRecord
-  has_many :likes
+  has_many :likes, dependent: :destroy
   belongs_to :user
 
   validates :title,
@@ -10,18 +10,18 @@ class Service < ApplicationRecord
     }
   validates :user_id, presence: { message: ':Debe seleccionar al menos un método de provisión.' }
   validates :category, presence: { message: ':La categoría no puede estar vacía.' }
-  validates :hour, numericality: {
+  validates :service_time, numericality: {
       only_integer: true,
       greater_than_or_equal_to: 1,
       less_than_or_equal_to: 60,
-      message: ':El tiempo de servicio debe estar entre 10 minutos y 60 minutos.'
+      message: ':El tiempo de servicio debe estar entre 1 minuto y 60 minutos.'
   }
   validates :price, numericality: {
       only_integer: true,
       greater_than_or_equal_to: 0,
       message: ':El precio debe ser al menos $ 0 MXN.'
   }
-  validates :method, presence: { message: ':Debe seleccionar al menos un método de provisión.' }
+  validates :delivery_method, presence: { message: ':Debe seleccionar al menos un método de provisión.' }
   validates :detail, presence: { message: ':Los detalles no pueden estar vacíos.' }
 
   def user

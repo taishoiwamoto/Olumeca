@@ -2,7 +2,7 @@
   <div class="container">
     <div class="posts-show-item">
       <div class="post-user-name">
-        <img src="<%= "/user_images/#{@user.image_name}" %>">
+        <img src="<%= "/user_images/#{@user.profile_image}" %>">
         <%= link_to(@user.name, "/users/#{@user.id}") %>
 
         <% if Like.find_by(user_id: @current_user.id, service_id: @service.id) %>
@@ -43,7 +43,7 @@
       </p>
       <p>
         <h5>Tiempo de servicio</h5>
-        <%= @service.hour %> minuto(s)
+        <%= @service.service_time %> minuto(s)
       </p>
       <p>
         <h5>Precio</h5>
@@ -51,7 +51,7 @@
       </p>
       <p>
         <h5>Método de provisión</h5>
-        <%= JSON.parse(@service.method).join(", ") %>
+        <%= JSON.parse(@service.delivery_method).join(", ") %>
       <p>
       <p>
         <h5>Detalles</h5>

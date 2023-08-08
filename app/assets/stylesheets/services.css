@@ -129,3 +129,8 @@
 .destroy {
   padding: 0px 0px 20px 20px;
 }
+
+.small-text {
+  font-size: 0.7em; /* この値を調整して字の大きさを変更できます */
+  color: #888; /* 薄い灰色 */
+}

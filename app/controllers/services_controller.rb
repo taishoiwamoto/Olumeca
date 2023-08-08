@@ -8,6 +8,7 @@ class ServicesController < ApplicationController
 
   def show
     @service = Service.find_by(id: params[:id])
+
     @user = @service.user
     @likes_count = Like.where(service_id: @service.id).count
   end
@@ -22,9 +23,9 @@ class ServicesController < ApplicationController
       user_id: @current_user.id,
       detail: params[:detail],
       category: params[:category],
-      hour: params[:hour],
+      service_time: params[:service_time],
       price: params[:price],
-      method: params[:method],
+      delivery_method: params[:delivery_method],
       image: params[:image]
     )
 
@@ -53,9 +54,9 @@ class ServicesController < ApplicationController
     @service.title = params[:title]
     @service.detail = params[:detail]
     @service.category = params[:category]
-    @service.hour = params[:hour]
+    @service.service_time = params[:service_time]
     @service.price = params[:price]
-    @service.method = params[:method]
+    @service.delivery_method = params[:delivery_method]
     if params[:image]
       @service.image = "#{@service.id}.jpg"
       image = params[:image]

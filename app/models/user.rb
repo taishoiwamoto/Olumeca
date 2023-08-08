@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   has_secure_password
-  has_many :services
-  has_many :likes
+  has_many :services, dependent: :destroy
+  has_many :likes, dependent: :destroy
 
   validates :name,
     presence: { message: ':El nombre del usuario no puede estar vacío.' },
