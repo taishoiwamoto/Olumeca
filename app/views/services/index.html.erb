@@ -1,6 +1,7 @@
 <div class="main posts-index">
   <div class="container">
   <h1 class="form-heading">Servicios</h1>
+
     <% @services.each do |service| %>
       <%= link_to "/services/#{service.id}" do %>
         <div class="posts-index-item">
@@ -10,13 +11,13 @@
           <div class="post-right">
             <h4><%= service.title %></h4>
             <div>
-              <div style="display: flex; justify-content: space-between;">
-                <p>ID de Servicio: <%= service.id %></p>
-                <p><%= service.hour %> minuto(s)</p>
-                <p>$<%= service.price %> MXN</p>
-              </div>
               <div class="post-user-name">
                 <p>El vendedor: <%= service.user.name %></p>
+              </div>
+              <div style="display: flex; justify-content: space-between;">
+                <p><%= JSON.parse(service.delivery_method).join(", ") %></p>
+                <p><%= service.service_time %> minuto(s)</p>
+                <p>$<%= service.price %> MXN</p>
               </div>
             </div>
           </div>

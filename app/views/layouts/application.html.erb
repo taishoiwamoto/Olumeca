@@ -4,8 +4,8 @@
     <title>FP México</title>
     <%= csrf_meta_tags %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'application', media: 'all' %>
+    <%= javascript_importmap_tags %>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
@@ -23,6 +23,7 @@
         <% if @current_user %>
           <li>
             <%= link_to(@current_user.name, "/users/#{@current_user.id}") %>
+          </li>
           <li>
             <%= link_to("Servicios", "/services/index") %>
           </li>

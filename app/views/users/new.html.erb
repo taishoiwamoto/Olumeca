@@ -15,10 +15,11 @@
           <h5>Correo electrónico</h5>
           <input name="email" value="<%= @user.email %>">
           <h5>Contraseña</h5>
+          <p class="small-text">Mínimo 8 caracteres, con una minúscula, una mayúscula, un número y un símbolo.</p>
           <input name="password" type="password">
-          <p>※La contraseña debe contener al menos una letra minúscula, una letra mayúscula, un número y un carácter especial.</p>
           <input type="submit" value="Registrar">
         <% end %>
+        <p><%= link_to "Si tienes una cuenta, haz clic aquí.", "/login" %></p>
       </div>
     </div>
   </div>

@@ -1,7 +1,7 @@
 <div class="main user-show">
   <div class="container">
     <div class="user">
-      <img src="<%= "/user_images/#{@user.image_name}" %>">
+      <img src="<%= "/user_images/#{@user.profile_image}" %>">
       <h2><%= @user.name %></h2>
       <p>ID de Usuario: <%= @user.id %></p>
       <% if @user.id == @current_user.id %>
@@ -24,13 +24,13 @@
           <div class="post-right">
             <h4><%= service.title %></h4>
             <div>
-              <div style="display: flex; justify-content: space-between;">
-                <p>ID de Servicio: <%= service.id %></p>
-                <p><%= service.hour %> minuto(s)</p>
-                <p>$<%= service.price %> MXN</p>
-              </div>
               <div class="post-user-name">
                 <p>El vendedor: <%= service.user.name %></p>
+              </div>
+              <div style="display: flex; justify-content: space-between;">
+                <p><%= JSON.parse(service.delivery_method).join(", ") %></p>
+                <p><%= service.service_time %> minuto(s)</p>
+                <p>$<%= service.price %> MXN</p>
               </div>
             </div>
           </div>
