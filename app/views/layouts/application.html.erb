@@ -19,17 +19,17 @@
       </div>
       <ul class="header-menus">
         <% if @current_user %>
-          <li>
-            <%= link_to("Servicios", "/services/index") %>
-          </li>
-          <li>
-            <%= link_to("Publicar", "/services/new") %>
-          </li>
           <li class="contact-item" style="margin-left: 15px;">
               <a href="https://wa.me/4423831033" target="_blank" style="color: white; display: flex; align-items: center;">
                   <i class="fab fa-whatsapp fa-2x" style="margin-right: 5px;"></i>
                   <span class="contact-text">Contactar</span>
               </a>
+          </li>
+          <li>
+            <%= link_to("Servicios", "/services/index") %>
+          </li>
+          <li>
+            <%= link_to("Publicar", "/services/new") %>
           </li>
           <li>
             <%= link_to("Mi página", "/users/#{@current_user.id}") %>
@@ -43,6 +43,12 @@
                   <i class="fab fa-whatsapp fa-2x" style="margin-right: 5px;"></i>
                   <span class="contact-text">Contactar</span>
               </a>
+          </li>
+          <li>
+            <%= link_to("Servicios", "/services/index") %>
+          </li>
+          <li>
+            <%= link_to("Publicar", "/services/new") %>
           </li>
           <li>
             <%= link_to("Registar", "/signup") %>
