@@ -238,3 +238,9 @@ header {
   border-radius: 0 0 2px 2px;
   font-size: 14px;
 }
+
+@media screen and (max-width: 768px) {
+  .main {
+      top: 125px;
+  }
+}

@@ -1,0 +1,58 @@
+<div class="main posts-index">
+  <div class="container">
+    <h1 class="form-heading">Contactar</h1>
+    <div class="form">
+      <div class="form-body">
+        <h3>Contactar desde WhatsApp</h3>
+          <a href="https://wa.me/4423831033" target="_blank" style="color: #25D366; display: flex; align-items: center;">
+              <i class="fab fa-whatsapp fa-2x" style="margin-right: 5px;"></i>
+              Hacer un pedido / Consultar / Preguntar
+          </a>
+      </li>
+      </div>
+    </div>
+<br>
+    <div class="form">
+      <div class="form-body">
+        <h3>Contactar desde el formulario</h3>
+        <%= form_with(model: @contact, local: true) do |f| %>
+          <% if @contact.errors.any? %>
+            <div id="error_explanation">
+              <ul>
+              <% @contact.errors.full_messages.each do |message| %>
+              <div class="form-error">
+                <%= message %>
+              </div>
+              <% end %>
+              </ul>
+            </div>
+          <% end %>
+
+          <div class="field">
+            <%= f.label :name, "Nombre completo" %>
+            <%= f.text_field :name %>
+          </div>
+
+          <div class="field">
+            <%= f.label :email, "Correo electrónico" %>
+            <%= f.text_field :email %>
+          </div>
+
+          <div class="field">
+            <%= f.label :phone, "Número de teléfono" %>
+            <%= f.text_field :phone %>
+          </div>
+
+          <div class="field">
+            <%= f.label :message, "Mensaje" %>
+            <%= f.text_area :message %>
+          </div>
+
+          <div class="actions">
+             <%= f.submit "Enviar" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

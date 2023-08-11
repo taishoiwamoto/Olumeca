@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'contacts/new'
+  get 'contacts/create'
   get "likes/:service_id/create" => "likes#create"
   get "likes/:service_id/destroy" => "likes#destroy"
 
@@ -21,6 +23,9 @@ Rails.application.routes.draw do
   post "services/:id/update" => "services#update"
   get "services/:id/destroy" => "services#destroy"
 
+ # resources :contacts, only: [:new, :create]
+
   get "/" => "home#top"
+  get "about" => "home#about"
   get "about" => "home#about"
 end
