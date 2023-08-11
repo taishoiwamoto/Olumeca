@@ -239,7 +239,7 @@ header {
   font-size: 14px;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 620px) {
   .main {
       top: 125px;
   }

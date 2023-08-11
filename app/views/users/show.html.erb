@@ -4,14 +4,21 @@
       <img src="<%= "/user_images/#{@user.profile_image}" %>">
       <h2><%= @user.name %></h2>
       <p>ID de Usuario: <%= @user.id %></p>
-      <% if @user.id == @current_user.id %>
+      <% if @current_user && @user.id == @current_user.id %>
         <%= link_to("Editar", "/users/#{@user.id}/edit") %>
       <% end %>
     </div>
 
     <ul class="user-tabs">
-      <li class="active"><%= link_to("Servicios", "/users/#{@user.id}") %></li>
-      <li><%= link_to("Likes!", "/users/#{@user.id}/likes") %></li>
+      <li class="<%= 'active' if controller_name == 'users' && action_name == 'show' %>">
+        <%= link_to("Servicios", "/users/#{@user.id}") %>
+      </li>
+
+      <% if @current_user && @user.id == @current_user.id %>
+        <li class="<%= 'active' if controller_name == 'users' && action_name == 'likes' %>">
+          <%= link_to("Likes!", "/users/#{@user.id}/likes") %>
+        </li>
+      <% end %>
     </ul>
 
     <% @user.services.order(created_at: :desc).each do |service| %>

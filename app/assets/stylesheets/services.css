@@ -149,3 +149,17 @@
   cursor: pointer;
   transition: background-color 0.2s ease-in-out;
 }
+
+.flex-container {
+  display: flex;
+  align-items: center; /* アイテムを縦方向の中央に配置 */
+}
+
+.flex-container h2 {
+  margin-right: 20px; /* タイトルといいねボタンの間にスペースを追加 */
+}
+
+.like-button {
+  display: flex;
+  align-items: center; /* いいねボタンとカウントも縦方向の中央に配置 */
+}
