@@ -3,11 +3,9 @@
   <head>
     <title>FP México</title>
     <%= csrf_meta_tags %>
-
     <%= stylesheet_link_tag 'application', media: 'all' %>
     <%= javascript_importmap_tags %>
-
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
   </head>
 
   <body>
@@ -22,24 +20,35 @@
       <ul class="header-menus">
         <% if @current_user %>
           <li>
-            <%= link_to(@current_user.name, "/users/#{@current_user.id}") %>
-          </li>
-          <li>
             <%= link_to("Servicios", "/services/index") %>
           </li>
           <li>
             <%= link_to("Publicar", "/services/new") %>
           </li>
+          <li class="contact-item" style="margin-left: 15px;">
+              <a href="https://wa.me/4423831033" target="_blank" style="color: white; display: flex; align-items: center;">
+                  <i class="fab fa-whatsapp fa-2x" style="margin-right: 5px;"></i>
+                  <span class="contact-text">Contactar</span>
+              </a>
+          </li>
+          <li>
+            <%= link_to("Mi página", "/users/#{@current_user.id}") %>
           </li>
           <li>
             <%= link_to("Cerrar sesión", "/logout", {method: "post"}) %>
           </li>
         <% else %>
-          <li>
-            <%= link_to("Registro nuevo", "/signup") %>
+          <li class="contact-item" style="margin-left: 15px;">
+              <a href="https://wa.me/4423831033" target="_blank" style="color: white; display: flex; align-items: center;">
+                  <i class="fab fa-whatsapp fa-2x" style="margin-right: 5px;"></i>
+                  <span class="contact-text">Contactar</span>
+              </a>
           </li>
           <li>
-            <%= link_to("Iniciar sesión", "/login") %>
+            <%= link_to("Registar", "/signup") %>
+          </li>
+          <li>
+            <%= link_to("Iniciar", "/login") %>
           </li>
           <!--
           <li>
