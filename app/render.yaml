@@ -1,6 +1,6 @@
 databases:
   - name: FP
-    databaseName: fp_yh47
+    databaseName: FP
     user: fp_yh47_user
     region: Oregon (US West)
 
