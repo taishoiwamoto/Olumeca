@@ -1,14 +1,14 @@
 databases:
   - name: FP
     databaseName: fp_yh47
-    user: fp_yh47_user
-    region: Oregon (US West)
+    user: FP
+    region: Oregon
 
 services:
   - type: web
     name: FP
     env: ruby
-    region: Oregon (US West)
+    region: Oregon
     plan: free
     buildCommand: "./bin/render-build.sh"
     startCommand: "bundle exec puma -C config/puma.rb"
