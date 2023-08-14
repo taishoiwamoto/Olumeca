@@ -16,7 +16,7 @@
       <% if @current_user && @service.user_id == @current_user.id %>
         <div class="post-menus">
           <%= link_to("Editar", "/services/#{@service.id}/edit") %>
-          <%= link_to("Eliminar", "/services/#{@service.id}/destroy", {method: "post", confirm: "¿Estás seguro de que deseas eliminar este servicio?"}) %>
+          <%= link_to("Eliminar", "/services/#{@service.id}/destroy", method: "post", data: { confirm: "¿Estás seguro de que deseas eliminar este servicio?" }) %>
         </div>
       <% end %>
 

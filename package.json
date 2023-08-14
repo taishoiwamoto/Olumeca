@@ -1,6 +1,8 @@
 {
   "dependencies": {
-    "@rails/ujs": "^7.0.6",
+    "@hotwired/stimulus": "^3.2.2",
+    "@hotwired/turbo-rails": "^7.3.0",
+    "@rails/ujs": "^7.0.7",
     "@rails/webpacker": "5.4.4",
     "webpack": "^4.46.0",
     "webpack-cli": "^3.3.12"
