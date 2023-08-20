@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>FP México</title>
+    <title>Olumeca</title>
+    <%= favicon_link_tag 'favicon.jpeg' %>
     <%= csrf_meta_tags %>
     <%= stylesheet_link_tag 'application', media: 'all' %>
     <%= javascript_importmap_tags %>
@@ -13,15 +14,15 @@
     <header>
       <div class="header-logo">
         <% if @current_user %>
-          <%= link_to("FP México", "/services/index") %>
+          <%= link_to("Olumeca", "/services/index") %>
         <% else %>
-          <%= link_to("FP México", "/") %>
+          <%= link_to("Olumeca", "/") %>
         <% end %>
       </div>
       <ul class="header-menus">
         <% if @current_user %>
           <li class="contact-item" style="margin-left: 15px;">
-              <a href="https://wa.me/4423831033" target="_blank" style="color: white; display: flex; align-items: center;">
+              <a href="https://wa.me/4423831033" target="_blank" style="color: black; display: flex; align-items: center;">
                   <i class="fab fa-whatsapp fa-2x" style="margin-right: 5px;"></i>
                   <span class="contact-text">Contactar</span>
               </a>
@@ -40,7 +41,7 @@
           </li>
         <% else %>
           <li class="contact-item" style="margin-left: 15px;">
-              <a href="https://wa.me/4423831033" target="_blank" style="color: white; display: flex; align-items: center;">
+              <a href="https://wa.me/4423831033" target="_blank" style="color: black; display: flex; align-items: center;">
                   <i class="fab fa-whatsapp fa-2x" style="margin-right: 5px;"></i>
                   <span class="contact-text">Contactar</span>
               </a>
