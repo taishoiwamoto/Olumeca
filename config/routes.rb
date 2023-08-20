@@ -26,6 +26,5 @@ Rails.application.routes.draw do
  # resources :contacts, only: [:new, :create]
 
   get "/" => "home#top"
-  get "about" => "home#about"
-  get "about" => "home#about"
+  #get "about" => "home#about"
 end
