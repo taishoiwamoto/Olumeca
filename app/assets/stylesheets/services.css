@@ -1,7 +1,10 @@
 #service-image {
-  width: 500px;  /* 希望の幅に変更 */
-  height: auto;  /* アスペクト比を維持 */
+  max-width: 500px;  /* 希望の最大幅に変更 */
+  width: 100%;       /* コンテナの幅に合わせる */
+  height: auto;      /* アスペクト比を維持 */
   border-radius: 0%;
+  margin: 0 auto;    /* 左右のマージンを自動にして中央に配置 */
+  display: block;    /* イメージをブロック要素として扱い、margin: autoを効かせる */
 }
 
 /* posts/index ================================ */
