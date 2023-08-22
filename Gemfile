@@ -76,3 +76,5 @@ group :production do
 end
 
 gem 'webpacker'
+
+gem 'kaminari'

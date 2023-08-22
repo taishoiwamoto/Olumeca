@@ -7,13 +7,18 @@
   display: block;    /* イメージをブロック要素として扱い、margin: autoを効かせる */
 }
 
+.question-space {
+  margin-bottom: 20px;
+}
+
 /* posts/index ================================ */
 .posts-index-item {
   padding: 20px 30px;
   background-color: white;
   overflow: hidden;
   box-shadow: 0 2px 6px #c1ced7;
-  margin: 10px;
+  margin-bottom: 10px;
+  margin-top: 10px;
 }
 
 .post-left img {
