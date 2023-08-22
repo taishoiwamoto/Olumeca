@@ -1,11 +1,85 @@
-<div class="main top-main">
+<div class="top-main">
   <div class="top-mainVisual">
     <div class="top-mainVisual__container">
       <div class="top-message">
-        <h2>Mercado de Habilidades y Servicios</h2>
-        <p>Es posible comprar y vender tus habilidades y servicios.</p>
-        <%= link_to "Registrar", "/signup", class: "buttons__main" %>
+        <h1>Mercado de Servicios</h1>
       </div>
+        <p>Es posible comprar y vender habilidades y servicios.</p>
+        <%= link_to "Registrar", "/signup", class: "buttons__main" %>
+    </div>
+  </div>
+  <div class="top-newServices__container">
+    <h2 class="top-title">Servicios Nuevos</h2>
+      <% @services.each do |service| %>
+        <%= link_to "/services/#{service.id}" do %>
+          <div class="posts-index-item">
+            <div class="post-left">
+              <img src="<%= "/service_images/#{service.image}" %>">
+            </div>
+            <div class="post-right">
+              <h4><%= service.title %></h4>
+              <div>
+                <div class="post-user-name">
+                  <p>El vendedor: <%= service.user.name %></p>
+                </div>
+                <div style="display: flex; justify-content: space-between;">
+                  <p><%= JSON.parse(service.delivery_method).join(", ") %></p>
+                  <p><%= service.service_time %> minuto(s)</p>
+                  <p>$<%= service.price %> MXN</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+      <div class="top-main-button">
+      <%= link_to "Ver más servicios", "services/index", class: "buttons__main" %>
+    </div>
+    </div>
+  </div>
+  <div class="top-main-user">
+    <div class="top-main-user__container">
+      <h2 class="top-title">Lo que puede hacer el(la) comprador(a)</h2>
+      <ul>
+        <li><p>・Compra de servicios publicado</p></li>
+        <li><p>・Solicitud de presupuesto</p></li>
+      </ul>
+      <br>
+      <h2 class="top-title">Pasos para comprar un servicio</h2>
+      <ol>
+        <li>1.Búsqueda: Elija un servicio de la lista de servicios.</li>
+        <li>2.Comparación: Verifique los detalles del servicio y considere las opciones.</li>
+        <li>3.Compra: Confirme el contenido del servicio previamente por WhatsApp y compre mediante transferencia bancaria.</li>
+        <li>4.Comunicación: Después de la compra, comunique a través de WhatsApp o videoconferencia.</li>
+      </ol>
+      <%= link_to "Buscar un servicio", "services/index", class: "buttons__main" %>
+    </div>
+  </div>
+  <div class="top-main-service">
+    <div class="top-main-service__container">
+      <h2 class="top-title">Lo que puede hacer el(la) proveedor(a)</h2>
+      <ul>
+        <li><p>・Oferta de servicios</p></li>
+      </ul>
+      <br>
+      <h2 class="top-title">Pasos para ofrecer un servicio</h2>
+      <ol>
+        <li>1.Publicación: Introduce el contenido del servicio según los ítems.</li>
+        <li>2.Recepción de pedidos: Las consultas o compras del servicio se notificarán a través de WhatsApp.</li>
+        <li>3.Comunicación y entrega: Después de recibir el pedido, proporciona el servicio a través de WhatsApp o videoconferencia.</li>
+      </ol>
+      <%= link_to "Publicar un servicio", "services/new", class: "buttons__main" %>
+    </div>
+  </div>
+  <div class="top-whatsapp">
+    <div class="top-whatsapp__container">
+      <h2 class="top-title">Contacto</h2>
+        <p>Si tiene alguna pregunta, por favor contacte al administrador a través de WhatsApp.</p>
+        <br>
+        <a href="https://wa.me/4423831033" target="_blank" class="whatsapp-button">
+            <i class="fab fa-whatsapp fa-2x" style="margin-right: 5px;"></i>
+            Contactar
+        </a>
     </div>
   </div>
 </div>
