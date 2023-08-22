@@ -13,6 +13,7 @@
   background-color: white;
   overflow: hidden;
   box-shadow: 0 2px 6px #c1ced7;
+  margin: 10px;
 }
 
 .post-left img {
@@ -136,21 +137,6 @@
 .small-text {
   font-size: 0.7em; /* この値を調整して字の大きさを変更できます */
   color: #888; /* 薄い灰色 */
-}
-
-.whatsapp-button {
-  margin-top: 20px;
-  display: inline-block;
-  background-color: #25D366;
-  color: white;
-  padding: 6px 14px;
-  border-radius: 5px;
-  border: none;
-  text-decoration: none;
-  font-size: 14px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background-color 0.2s ease-in-out;
 }
 
 .flex-container {
