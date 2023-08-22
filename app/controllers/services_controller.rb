@@ -3,7 +3,7 @@ class ServicesController < ApplicationController
   before_action :ensure_correct_user, {only: [:edit, :update, :destroy]}
 
   def index
-    @services = Service.all.order(created_at: :desc)
+    @services = Service.all.order(created_at: :desc).page(params[:page]).per(10)
   end
 
   def show

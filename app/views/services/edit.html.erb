@@ -11,11 +11,11 @@
           <% end %>
 
           <h5>Nombre del servicio</h5>
-          <input name="title" value="<%= @service.title %>">
+          <input name="title" value="<%= @service.title %>" class="question-space">
           <h5>Imagen (Opcional)</h5>
-          <input name="image" type="file">
+          <input name="image" type="file" class="question-space">
           <h5>Categoría</h5>
-          <select name="category">
+          <select name="category" class="question-space">
             <option selected disabled>Por favor, elija de la siguiente lista</option>
             <option value="Ilustración & Cómics" <%= @service.category == 'Ilustración & Cómics' ? 'selected' : '' %>>Ilustración & Cómics</option>
             <option value="Diseño" <%= @service.category == 'Diseño' ? 'selected' : '' %>>Diseño</option>
@@ -34,11 +34,11 @@
             <option value="Dinero, Trabajos secundarios & Marketing de afiliados" <%= @service.category == 'Dinero, Trabajos secundarios & Marketing de afiliados' ? 'selected' : '' %>>Dinero, Trabajos secundarios & Marketing de afiliados</option>
           </select>
           <h5>Tiempo de servicio / minuto(s)</h5>
-          <input name="service_time" value="<%= @service.service_time %>">
+          <input name="service_time" value="<%= @service.service_time %>" class="question-space">
           <h5>Precio / MXN </h5>
-          <input name="price" value="<%= @service.price %>">
+          <input name="price" value="<%= @service.price %>" class="question-space">
           <h5>Método de provisión</h5>
-          <div class="checkbox-container">
+          <div class="checkbox-container question-space">
             <div class="checkbox-item">
                 <label for="delivery_method_option1">En línea</label>
                 <input type="checkbox" name="delivery_method[]" id="delivery_method_option1" value="En línea" <%= 'checked' if @service.delivery_method&.include?('En línea') %> >
