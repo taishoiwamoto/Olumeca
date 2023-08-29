@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
-  before_action :forbid_login_user, {only: [:top]}
+  before_action :forbid_login_user, except: [:top]
 
   def top
     @services = Service.order(created_at: :desc).limit(4)
