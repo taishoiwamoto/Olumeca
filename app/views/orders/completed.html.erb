@@ -1,0 +1,16 @@
+<div class="main posts-show">
+  <div class="container">
+    <div class="posts-show-item">
+      <h1>Orden Completada</h1>
+      <p>Su pedido ha sido procesado exitosamente.</p>
+      <p>En cuanto al pago, no dude en ponerse en contacto con nosotros aquí.</p>
+      <a href="https://wa.me/4423831033" target="_blank" class="whatsapp-button">
+        <i class="fab fa-whatsapp fa-2x" style="margin-right: 5px;"></i>
+        Contactar
+      </a>
+      <br>
+      <p>Para ir a mi página, por favor haga clic aquí.</p>
+      <%= link_to "Mi página", "/users/#{@current_user.id}", class: "buttons__main" if @current_user %>
+    </div>
+  </div>
+</div>

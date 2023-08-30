@@ -31,28 +31,26 @@
       <% end %>
     </ul>
 
-    <% @likes.order(created_at: :desc).each do |like| %>
-      <% service = Service.find_by(id: like.service_id) %>
-        <%= link_to service_path(service.id) do %>
-          <div class="posts-index-item">
-            <div class="post-left">
-              <img src="<%= "/service_images/#{service.image}" %>">
-            </div>
-            <div class="post-right">
-              <h4><%= service.title %></h4>
-              <div>
-                <div class="post-user-name">
-                  <p>El vendedor: <%= service.user.name %></p>
-                </div>
-                <div style="display: flex; justify-content: space-between;">
-                  <p><%= JSON.parse(service.delivery_method).join(", ") %></p>
-                  <p><%= service.service_time %> minuto(s)</p>
-                  <p>$<%= service.price %> MXN</p>
-                </div>
+    <% @orders.each do |order| %>
+      <%= link_to "/services/#{order.service.id}" do %>
+        <div class="posts-index-item">
+          <div class="post-left">
+            <img src="<%= "/service_images/#{order.service.image}" %>">
+          </div>
+          <div class="post-right">
+            <h4><%= order.service.title %></h4>
+            <div>
+              <div class="post-user-name">
+                <p>Vendedor: <%= order.seller.name %></p>
+              </div>
+              <div style="display: flex; justify-content: space-between;">
+                <p>Estado: <%= order.status %></p>
+                <p>Fecha de pedido: <%= order.created_at.strftime("%d/%m/%Y") %></p>
               </div>
             </div>
           </div>
-        <% end %>
+        </div>
+      <% end %>
     <% end %>
   </div>
 </div>

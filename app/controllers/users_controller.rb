@@ -1,8 +1,7 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user, {only: [:edit, :update]}
+  before_action :authenticate_user, {only: [:edit, :update, :orders, :sales]}
   before_action :forbid_login_user, {only: [:new, :create, :login_form, :login]}
-  before_action :ensure_correct_user, {only: [:edit, :update, :destroy, :likes]}
-
+  before_action :ensure_correct_user, {only: [:edit, :update, :destroy, :likes, :orders, :sales]}
 
   def index
     @users = User.all
@@ -64,6 +63,7 @@ class UsersController < ApplicationController
   end
 
   def login_form
+    flash[:alert] = params[:flash_alert] if params[:flash_alert].present?
   end
 
   def login
@@ -91,10 +91,21 @@ class UsersController < ApplicationController
     @likes = Like.where(user_id: @user.id)
   end
 
+
+  def orders
+    @user = User.find_by(id: params[:id])  # この行を修正
+    @orders = Order.where(buyer_id: @user.id).order(created_at: :desc)
+  end
+
+  def sales
+    @user = User.find(params[:id])
+    @sales = Order.where(seller_id: @user.id).order(created_at: :desc)
+  end
+
   def ensure_correct_user
     if @current_user.id != params[:id].to_i
       flash[:notice] = "No tienes autorización"
-      redirect_to("/services/index")
+      redirect_to("/")
     end
   end
 
