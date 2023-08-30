@@ -31,9 +31,8 @@
       <% end %>
     </ul>
 
-    <% @user.services.order(created_at: :desc).each do |service| %>
+    <% @services.each do |service| %>
       <%= link_to "/services/#{service.id}" do %>
-
         <div class="posts-index-item">
           <div class="post-left">
             <img src="<%= "/service_images/#{service.image}" %>">
@@ -54,5 +53,6 @@
         </div>
       <% end %>
     <% end %>
+    <%= paginate @services %>
   </div>
 </div>

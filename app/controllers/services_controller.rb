@@ -76,7 +76,7 @@ class ServicesController < ApplicationController
     @service = Service.find_by(id: params[:id])
     @service.destroy
     flash[:notice] = "Has eliminado un servicio"
-    redirect_to("/services/index")
+    redirect_to("/users/#{@current_user.id}")
   end
 
   def ensure_correct_user
