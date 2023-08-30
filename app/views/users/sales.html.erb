@@ -32,25 +32,47 @@
     </ul>
 
     <% @sales.each do |sale| %>
-      <%= link_to "/services/#{sale.service.id}" do %>
-        <div class="posts-index-item">
-          <div class="post-left">
+      <div class="posts-index-item">
+        <div class="post-left">
+          <% if sale.service.present? %>
             <img src="<%= "/service_images/#{sale.service.image}" %>">
-          </div>
-          <div class="post-right">
-            <h4><%= sale.service.title %></h4>
-            <div>
-              <div class="post-user-name">
+          <% else %>
+            <!-- サービスが存在しない場合の表示処理 -->
+            <img src="<%= "default_service.jpg" %>">
+          <% end %>
+        </div>
+        <div class="post-right">
+          <% if sale.service.present? %>
+            <%= link_to "/services/#{sale.service.id}" do %>
+              <h4><%= sale.service.title %></h4>
+            <% end %>
+          <% else %>
+            <!-- サービスが存在しない場合の表示処理 -->
+            <h4>Este registro ha sido eliminada.</h4>
+          <% end %>
+          <div>
+            <div class="post-user-name">
+              <% if sale.service.present? %>
                 <p>Comprador: <%= sale.buyer.name %></p>
-              </div>
-              <div style="display: flex; justify-content: space-between;">
+              <% else %>
+                <!-- サービスが存在しない場合の表示処理 -->
+                <p>Comprador: Desconocido</p>
+              <% end %>
+            </div>
+            <div style="display: flex; justify-content: space-between;">
+              <% if sale.service.present? %>
                 <p>Estado: <%= sale.status %></p>
                 <p>Fecha de pedido: <%= sale.created_at.strftime("%d/%m/%Y") %></p>
-              </div>
+              <% else %>
+                <!-- サービスが存在しない場合の表示処理 -->
+                <p>Estado: Desconocido</p>
+                <p>Fecha de pedido: Desconocido</p>
+              <% end %>
             </div>
           </div>
         </div>
-      <% end %>
+      </div>
     <% end %>
+    <%= paginate @sales %>
   </div>
 </div>

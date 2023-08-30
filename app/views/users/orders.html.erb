@@ -32,25 +32,47 @@
     </ul>
 
     <% @orders.each do |order| %>
-      <%= link_to "/services/#{order.service.id}" do %>
-        <div class="posts-index-item">
-          <div class="post-left">
+      <div class="posts-index-item">
+        <div class="post-left">
+          <% if order.service.present? %>
             <img src="<%= "/service_images/#{order.service.image}" %>">
-          </div>
-          <div class="post-right">
-            <h4><%= order.service.title %></h4>
-            <div>
-              <div class="post-user-name">
+          <% else %>
+            <!-- サービスが存在しない場合の表示処理 -->
+            <img src="<%= "default_service.jpg" %>">
+          <% end %>
+        </div>
+        <div class="post-right">
+          <% if order.service.present? %>
+            <%= link_to "/services/#{order.service.id}" do %>
+              <h4><%= order.service.title %></h4>
+            <% end %>
+          <% else %>
+            <!-- サービスが存在しない場合の表示処理 -->
+            <h4>Este registro ha sido eliminada.</h4>
+          <% end %>
+          <div>
+            <div class="post-user-name">
+              <% if order.service.present? %>
                 <p>Vendedor: <%= order.seller.name %></p>
-              </div>
-              <div style="display: flex; justify-content: space-between;">
+              <% else %>
+                <!-- サービスが存在しない場合の表示処理 -->
+                <p>Vendedor: Desconocido</p>
+              <% end %>
+            </div>
+            <div style="display: flex; justify-content: space-between;">
+              <% if order.service.present? %>
                 <p>Estado: <%= order.status %></p>
                 <p>Fecha de pedido: <%= order.created_at.strftime("%d/%m/%Y") %></p>
-              </div>
+              <% else %>
+                <!-- サービスが存在しない場合の表示処理 -->
+                <p>Estado: Desconocido</p>
+                <p>Fecha de pedido: Desconocido</p>
+              <% end %>
             </div>
           </div>
         </div>
-      <% end %>
+      </div>
     <% end %>
+    <%= paginate @orders %>
   </div>
 </div>
