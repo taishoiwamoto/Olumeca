@@ -1,6 +1,8 @@
 class Service < ApplicationRecord
   has_many :likes, dependent: :destroy
   belongs_to :user
+  has_many :orders
+
 
   validates :title,
     presence: { message: ':El nombre del servicio no puede estar vacío.' },

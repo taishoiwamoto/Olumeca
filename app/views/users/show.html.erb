@@ -19,6 +19,16 @@
           <%= link_to("Likes!", "/users/#{@user.id}/likes") %>
         </li>
       <% end %>
+      <% if @current_user && @user.id == @current_user.id %>
+        <li class="<%= 'active' if controller_name == 'users' && action_name == 'orders' %>">
+          <%= link_to("Tus pedidos", user_orders_path(@user.id)) %>
+        </li>
+      <% end %>
+      <% if @current_user && @user.id == @current_user.id %>
+        <li class="<%= 'active' if controller_name == 'users' && action_name == 'sales' %>">
+          <%= link_to("Tus ventas", user_sales_path(@user.id)) %>
+        </li>
+      <% end %>
     </ul>
 
     <% @user.services.order(created_at: :desc).each do |service| %>

@@ -86,7 +86,7 @@
 }
 
 .user-tabs {
-  margin-top: 40px;
+  margin-top: 20px;
   background-color: white;
   overflow: hidden;
   box-shadow: 0 2px 6px #c1ced7;
@@ -106,7 +106,7 @@
 
 .user-tabs a {
   display: inline-block;
-  padding: 16px 30px;
+  padding: 16px 20px;
   color: #afb6bf;
 }
 

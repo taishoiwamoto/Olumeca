@@ -6,19 +6,25 @@
         <%= link_to(@user.name, "/users/#{@user.id}") %>
       </div>
       <br>
-      <li style="margin-left: 15px;">
-          <a href="https://wa.me/4423831033" target="_blank" style="color: #25D366; display: flex; align-items: center;">
-              <i class="fab fa-whatsapp fa-2x" style="margin-right: 5px;"></i>
-              Hacer un pedido / Consultar / Preguntar / Reportar
-          </a>
-      </li>
 
-      <% if @current_user && @service.user_id == @current_user.id %>
-        <div class="post-menus">
-          <%= link_to("Editar", "/services/#{@service.id}/edit") %>
-          <%= link_to("Eliminar", "/services/#{@service.id}/destroy", method: "post", data: { confirm: "¿Estás seguro de que deseas eliminar este servicio?" }) %>
-        </div>
-      <% end %>
+      <li style="margin-left: 15px;">
+        <a href="https://wa.me/4423831033" target="_blank" class="whatsapp-button">
+          <i class="fab fa-whatsapp fa-2x" style="margin-right: 5px;"></i>
+          Consultar / Preguntar / Reportar
+        </a>
+        <% if @current_user %>
+          <%= link_to "Hacer el pedido", new_order_path(service_id: @service.id, buyer_id: @current_user.id, seller_id: @service.user_id), class: "buttons__main" %>
+        <% else %>
+          <%= link_to "Hacer el pedido", login_path(flash_alert: 'Por favor, inicia sesión'), class: "buttons__main" %>
+        <% end %>
+
+        <% if @current_user && @service.user_id == @current_user.id %>
+          <div class="post-menus">
+            <%= link_to("Editar", "/services/#{@service.id}/edit") %>
+            <%= link_to("Eliminar", "/services/#{@service.id}/destroy", method: "post", data: { confirm: "¿Estás seguro de que deseas eliminar este servicio?" }) %>
+          </div>
+        <% end %>
+      </li>
 
       <br>
 

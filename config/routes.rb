@@ -23,6 +23,10 @@ Rails.application.routes.draw do
   post "services/:id/update" => "services#update"
   get "services/:id/destroy" => "services#destroy"
 
+  resources :orders
+  get 'order_completed', to: 'orders#completed', as: 'order_completed'
+  get '/users/:id/orders', to: 'users#orders', as: 'user_orders'
+  get '/users/:id/sales', to: 'users#sales', as: 'user_sales'
  # resources :contacts, only: [:new, :create]
 
   get "/" => "home#top"
