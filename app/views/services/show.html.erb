@@ -30,6 +30,20 @@
 
       <div class="flex-container">
         <h2><%= @service.title %></h2>
+      </div>
+      <div class="flex-container" >
+        <div class="star">
+          <% if @service.service_reviews.present? %>
+            <div class="average-rating">
+              <h5>
+                Evaluaciones:<%= render_stars(calculate_average_rating(@service.service_reviews)) %>
+                (<%= sprintf('%.2f', calculate_average_rating(@service.service_reviews)) %>)
+              </h5>
+            </div>
+          <% else %>
+            <h5>Evaluaciones: -- </h5>
+          <% end %>
+        </div>
         <div class="like-button">
           <% if @current_user %>
               <% if Like.find_by(user_id: @current_user.id, service_id: @service.id) %>
@@ -42,12 +56,11 @@
                   <% end %>
               <% end %>
           <% else %>
-              <span class="fa fa-heart liked-btn"></span>
+            <span class="fa fa-heart liked-btn"></span>
           <% end %>
           <%= @likes_count %>
         </div>
       </div>
-
       <p>
         <h5>ID de Servicio</h5>
         <%= @service.id %>
@@ -79,5 +92,29 @@
         <%= @service.detail %>
       </p>
     </div>
+    <h1 class="form-heading">Evaluación</h1>
+    <% @service.service_reviews.each do |review| %>
+      <div class="posts-index-item">
+        <div class="post-left">
+          <% user = review.user %>
+          <% if user.present? && user.profile_image.present? %>
+            <img src="<%= "/user_images/#{user.profile_image}" %>">
+          <% else %>
+            <img src="<%= asset_path('default_profile_image.jpg') %>">
+          <% end %>
+        </div>
+        <div class="post-right">
+          <% if review.rating.present? %>
+            <h4>
+              <%= "⭐️" * review.rating %>
+            </h4>
+          <% end %>
+          <p><%= review.comment %></p>
+          <% if user.present? && user.name.present? %>
+            <p><%= user.name %></p>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
   </div>
 </div>

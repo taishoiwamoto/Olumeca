@@ -2,6 +2,7 @@ class Service < ApplicationRecord
   has_many :likes, dependent: :destroy
   belongs_to :user
   has_many :orders
+  has_many :service_reviews
 
 
   validates :title,

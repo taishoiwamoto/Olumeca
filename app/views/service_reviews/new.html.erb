@@ -1,0 +1,23 @@
+<div class="main posts-new">
+  <div class="container">
+    <div class="form">
+      <div class="form-body">
+        <h1>Crear una nueva evaluación</h1>
+
+        <%= form_with(model: @review, url: service_reviews_path, local: true) do |form| %>
+          <div class="field">
+            <%= form.label :rating, 'Evaluación (obligatorio)' %>
+            <%= form.select :rating, options_for_select([1, 2, 3, 4, 5]), prompt: "Seleccione un valor numérico", required: true %>
+          </div>
+          <div class="field">
+            <%= form.label :comment, 'Comentar' %>
+            <%= form.text_area :comment %>
+          </div>
+          <%= form.hidden_field :service_id, value: @review.service_id %>
+          <%= form.hidden_field :user_id, value: @review.user_id %>
+          <%= form.submit 'Evaluar',  class: "buttons__main"%>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
