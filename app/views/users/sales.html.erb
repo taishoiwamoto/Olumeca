@@ -56,7 +56,7 @@
                 <p>Comprador: <%= sale.buyer.name %></p>
               <% else %>
                 <!-- サービスが存在しない場合の表示処理 -->
-                <p>Comprador: Desconocido</p>
+                <p>Comprador: -</p>
               <% end %>
             </div>
             <div style="display: flex; justify-content: space-between;">
@@ -65,8 +65,8 @@
                 <p>Fecha de pedido: <%= sale.created_at.strftime("%d/%m/%Y") %></p>
               <% else %>
                 <!-- サービスが存在しない場合の表示処理 -->
-                <p>Estado: Desconocido</p>
-                <p>Fecha de pedido: Desconocido</p>
+                <p>Estado: -</p>
+                <p>Fecha de pedido: -</p>
               <% end %>
             </div>
           </div>

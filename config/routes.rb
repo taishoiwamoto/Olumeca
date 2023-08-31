@@ -29,6 +29,9 @@ Rails.application.routes.draw do
   get '/users/:id/sales', to: 'users#sales', as: 'user_sales'
  # resources :contacts, only: [:new, :create]
 
+  resources :orders, only: [:show]
+  resources :service_reviews, only: [:new, :create]
+
   get "/" => "home#top"
   #get "about" => "home#about"
 end

@@ -51,12 +51,21 @@
             <h4>Este registro ha sido eliminada.</h4>
           <% end %>
           <div>
-            <div class="post-user-name">
+            <div class="post-user-name", style="display: flex; justify-content: space-between;">
               <% if order.service.present? %>
                 <p>Vendedor: <%= order.seller.name %></p>
+                <% if @current_user.id != order.seller_id %>
+                  <% if !order.already_reviewed?(@current_user) %>
+                    <%= link_to "Evaluar", new_service_review_path(service_id: order.service.id, user_id: @current_user.id), class: "btn btn-primary" %>
+                  <% else %>
+                    <p></p>
+                  <% end %>
+                <% else %>
+                  <p></p>
+                <% end %>
               <% else %>
                 <!-- サービスが存在しない場合の表示処理 -->
-                <p>Vendedor: Desconocido</p>
+                <p>Vendedor: -</p>
               <% end %>
             </div>
             <div style="display: flex; justify-content: space-between;">
@@ -65,8 +74,8 @@
                 <p>Fecha de pedido: <%= order.created_at.strftime("%d/%m/%Y") %></p>
               <% else %>
                 <!-- サービスが存在しない場合の表示処理 -->
-                <p>Estado: Desconocido</p>
-                <p>Fecha de pedido: Desconocido</p>
+                <p>Estado: -</p>
+                <p>Fecha de pedido: -</p>
               <% end %>
             </div>
           </div>

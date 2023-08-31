@@ -1,10 +1,12 @@
 class User < ApplicationRecord
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   has_secure_password
   has_many :services, dependent: :destroy
   has_many :likes, dependent: :destroy
   has_many :purchased_orders, class_name: 'Order', foreign_key: 'buyer_id'
   has_many :sold_orders, class_name: 'Order', foreign_key: 'seller_id'
-
+  has_many :service_reviews
 
   validates :name,
     presence: { message: ':El nombre del usuario no puede estar vacío.' },
@@ -28,7 +30,6 @@ class User < ApplicationRecord
   message: ":La contraseña debe contener al menos una letra minúscula, una letra mayúscula, un número y un carácter especial.",
   if: -> { password.present? }
   }
-
 
   def services
     return Service.where(user_id: self.id)

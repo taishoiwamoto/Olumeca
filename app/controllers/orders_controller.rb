@@ -20,6 +20,9 @@ class OrdersController < ApplicationController
   def completed
   end
 
+  def show
+  end
+
   private
 
   def order_params
