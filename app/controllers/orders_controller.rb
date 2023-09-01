@@ -6,6 +6,11 @@ class OrdersController < ApplicationController
     @service = Service.find_by(id: params[:service_id]) # IDをservice_idから取得
     @buyer = @current_user # current_userから@current_userへ変更
     @seller = User.find(@service.user_id)
+
+    if @seller.id == @buyer.id
+      redirect_to @service, notice: 'No puedes comprar tu propio servicio.'
+      return
+    end
   end
 
   def create

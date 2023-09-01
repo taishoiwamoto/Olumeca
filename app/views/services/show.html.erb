@@ -8,12 +8,14 @@
       <br>
 
       <li style="margin-left: 15px;">
+        <% if @current_user && @service.user_id != @current_user.id %>
         <a href="https://wa.me/4423831033" target="_blank" class="whatsapp-button">
           <i class="fab fa-whatsapp fa-2x" style="margin-right: 5px;"></i>
           Consultar / Preguntar / Reportar
         </a>
-        <% if @current_user %>
           <%= link_to "Hacer el pedido", new_order_path(service_id: @service.id, buyer_id: @current_user.id, seller_id: @service.user_id), class: "buttons__main" %>
+        <% elsif @current_user && @service.user_id == @current_user.id %>
+          <!-- No puedes comprar tu propio servicio. -->
         <% else %>
           <%= link_to "Hacer el pedido", login_path(flash_alert: 'Por favor, inicia sesión'), class: "buttons__main" %>
         <% end %>
@@ -100,7 +102,7 @@
           <% if user.present? && user.profile_image.present? %>
             <img src="<%= "/user_images/#{user.profile_image}" %>">
           <% else %>
-            <img src="<%= asset_path('default_profile_image.jpg') %>">
+            <img src="<%= "default_user.jpg" %>">
           <% end %>
         </div>
         <div class="post-right">
@@ -112,6 +114,8 @@
           <p><%= review.comment %></p>
           <% if user.present? && user.name.present? %>
             <p><%= user.name %></p>
+          <% else %>
+            <p>Usuario dado de baja</p>
           <% end %>
         </div>
       </div>

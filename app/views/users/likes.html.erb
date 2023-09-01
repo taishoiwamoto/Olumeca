@@ -4,10 +4,21 @@
       <img src="<%= "/user_images/#{@user.profile_image}" %>">
       <h2><%= @user.name %></h2>
       <p>ID de Usuario: <%= @user.id %></p>
+      <% if @average_rating.nil? %>
+        <h5>Evaluaciones: -- </h5>
+      <% else %>
+        <div class="average-rating">
+          <h5>
+            Evaluaciones: <%= render_stars(@average_rating) %>
+            (<%= sprintf('%.2f', @average_rating) %>)
+          </h5>
+        </div>
+      <% end %>
       <% if @current_user && @user.id == @current_user.id %>
         <%= link_to("Editar", "/users/#{@user.id}/edit") %>
       <% end %>
     </div>
+
 
     <ul class="user-tabs">
       <li class="<%= 'active' if controller_name == 'users' && action_name == 'show' %>">

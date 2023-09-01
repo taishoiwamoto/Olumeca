@@ -31,3 +31,16 @@
 
 en:
   hello: "Hello world"
+
+es:
+  activerecord:
+    errors:
+      models:
+        user:
+          attributes:
+            password:
+              blank: "La contraseña no puede estar vacía"
+            email:
+              blank: "El correo electrónico no puede estar vacío"
+              invalid: "Formato de correo electrónico inválido"
+              taken: "El correo electrónico ya ha sido registrado"

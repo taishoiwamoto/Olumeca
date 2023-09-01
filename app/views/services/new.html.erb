@@ -44,8 +44,8 @@
                 <input type="checkbox" name="delivery_method[]" id="delivery_method_option1" value="En línea" <%= 'checked' if @service.delivery_method&.include?('En línea') %> >
             </div>
             <div class="checkbox-item">
-                <label for="delivery_method_option2">Chat</label>
-                <input type="checkbox" name="delivery_method[]" id="delivery_method_option2" value="Chat" <%= 'checked' if @service.delivery_method&.include?('Chat') %> >
+                <label for="delivery_method_option2">En persona</label>
+                <input type="checkbox" name="delivery_method[]" id="delivery_method_option2" value="En persona" <%= 'checked' if @service.delivery_method&.include?('En persona') %> >
             </div>
           </div>
           <h5>Detalles</h5>

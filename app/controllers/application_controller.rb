@@ -19,6 +19,4 @@ class ApplicationController < ActionController::Base
       redirect_to("/services/index")
     end
   end
-
-
 end

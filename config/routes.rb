@@ -27,11 +27,10 @@ Rails.application.routes.draw do
   get 'order_completed', to: 'orders#completed', as: 'order_completed'
   get '/users/:id/orders', to: 'users#orders', as: 'user_orders'
   get '/users/:id/sales', to: 'users#sales', as: 'user_sales'
- # resources :contacts, only: [:new, :create]
 
-  resources :orders, only: [:show]
   resources :service_reviews, only: [:new, :create]
 
   get "/" => "home#top"
   #get "about" => "home#about"
+  # resources :contacts, only: [:new, :create]
 end
