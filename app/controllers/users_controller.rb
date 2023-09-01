@@ -10,6 +10,16 @@ class UsersController < ApplicationController
   def show
     @user = User.find_by(id: params[:id])
     @services = @user.services.order(created_at: :desc).page(params[:page]).per(5)
+
+    total_reviews = 0
+    total_count = 0
+
+    @user.services.each do |service|
+      total_reviews += service.service_reviews.sum(:rating)
+      total_count += service.service_reviews.count
+    end
+
+    @average_rating = total_count > 0 ? total_reviews / total_count.to_f : nil
   end
 
   def new
@@ -90,17 +100,47 @@ class UsersController < ApplicationController
   def likes
     @user = User.find_by(id: params[:id])
     @likes = Like.where(user_id: @user.id).order(created_at: :desc).page(params[:page]).per(5)
+
+    total_reviews = 0
+    total_count = 0
+
+    @user.services.each do |service|
+      total_reviews += service.service_reviews.sum(:rating)
+      total_count += service.service_reviews.count
+    end
+
+    @average_rating = total_count > 0 ? total_reviews / total_count.to_f : nil
   end
 
 
   def orders
     @user = User.find_by(id: params[:id])  # この行を修正
     @orders = Order.where(buyer_id: @user.id).order(created_at: :desc).page(params[:page]).per(5)
+
+    total_reviews = 0
+    total_count = 0
+
+    @user.services.each do |service|
+      total_reviews += service.service_reviews.sum(:rating)
+      total_count += service.service_reviews.count
+    end
+
+    @average_rating = total_count > 0 ? total_reviews / total_count.to_f : nil
   end
 
   def sales
     @user = User.find(params[:id])
     @sales = Order.where(seller_id: @user.id).order(created_at: :desc).page(params[:page]).per(5)
+
+    total_reviews = 0
+    total_count = 0
+
+    @user.services.each do |service|
+      total_reviews += service.service_reviews.sum(:rating)
+      total_count += service.service_reviews.count
+    end
+
+    @average_rating = total_count > 0 ? total_reviews / total_count.to_f : nil
   end
 
   def ensure_correct_user

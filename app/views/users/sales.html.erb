@@ -4,6 +4,16 @@
       <img src="<%= "/user_images/#{@user.profile_image}" %>">
       <h2><%= @user.name %></h2>
       <p>ID de Usuario: <%= @user.id %></p>
+      <% if @average_rating.nil? %>
+        <h5>Evaluaciones: -- </h5>
+      <% else %>
+        <div class="average-rating">
+          <h5>
+            Evaluaciones: <%= render_stars(@average_rating) %>
+            (<%= sprintf('%.2f', @average_rating) %>)
+          </h5>
+        </div>
+      <% end %>
       <% if @current_user && @user.id == @current_user.id %>
         <%= link_to("Editar", "/users/#{@user.id}/edit") %>
       <% end %>
@@ -34,40 +44,31 @@
     <% @sales.each do |sale| %>
       <div class="posts-index-item">
         <div class="post-left">
-          <% if sale.service.present? %>
+          <% if sale.service %>
             <img src="<%= "/service_images/#{sale.service.image}" %>">
           <% else %>
-            <!-- サービスが存在しない場合の表示処理 -->
             <img src="<%= "default_service.jpg" %>">
           <% end %>
         </div>
         <div class="post-right">
-          <% if sale.service.present? %>
+          <% if sale.service %>
             <%= link_to "/services/#{sale.service.id}" do %>
               <h4><%= sale.service.title %></h4>
             <% end %>
           <% else %>
-            <!-- サービスが存在しない場合の表示処理 -->
             <h4>Este registro ha sido eliminada.</h4>
           <% end %>
           <div>
             <div class="post-user-name">
-              <% if sale.service.present? %>
+              <% if sale.buyer.present? %>
                 <p>Comprador: <%= sale.buyer.name %></p>
               <% else %>
-                <!-- サービスが存在しない場合の表示処理 -->
-                <p>Comprador: -</p>
+                <p>Comprador: Usuario dado de baja</p>
               <% end %>
             </div>
             <div style="display: flex; justify-content: space-between;">
-              <% if sale.service.present? %>
-                <p>Estado: <%= sale.status %></p>
-                <p>Fecha de pedido: <%= sale.created_at.strftime("%d/%m/%Y") %></p>
-              <% else %>
-                <!-- サービスが存在しない場合の表示処理 -->
-                <p>Estado: -</p>
-                <p>Fecha de pedido: -</p>
-              <% end %>
+              <p>Estado: <%= sale.status %></p>
+              <p>Fecha de pedido: <%= sale.created_at.strftime("%d/%m/%Y") %></p>
             </div>
           </div>
         </div>

@@ -4,6 +4,16 @@
       <img src="<%= "/user_images/#{@user.profile_image}" %>">
       <h2><%= @user.name %></h2>
       <p>ID de Usuario: <%= @user.id %></p>
+      <% if @average_rating.nil? %>
+        <h5>Evaluaciones: -- </h5>
+      <% else %>
+        <div class="average-rating">
+          <h5>
+            Evaluaciones: <%= render_stars(@average_rating) %>
+            (<%= sprintf('%.2f', @average_rating) %>)
+          </h5>
+        </div>
+      <% end %>
       <% if @current_user && @user.id == @current_user.id %>
         <%= link_to("Editar", "/users/#{@user.id}/edit") %>
       <% end %>
@@ -34,49 +44,38 @@
     <% @orders.each do |order| %>
       <div class="posts-index-item">
         <div class="post-left">
-          <% if order.service.present? %>
+          <% if order.seller.present? && order.service %>
             <img src="<%= "/service_images/#{order.service.image}" %>">
           <% else %>
-            <!-- サービスが存在しない場合の表示処理 -->
             <img src="<%= "default_service.jpg" %>">
           <% end %>
         </div>
         <div class="post-right">
-          <% if order.service.present? %>
+          <% if order.seller.present? && order.service %>
             <%= link_to "/services/#{order.service.id}" do %>
               <h4><%= order.service.title %></h4>
             <% end %>
           <% else %>
-            <!-- サービスが存在しない場合の表示処理 -->
             <h4>Este registro ha sido eliminada.</h4>
           <% end %>
           <div>
             <div class="post-user-name", style="display: flex; justify-content: space-between;">
-              <% if order.service.present? %>
+              <% if order.seller.present? %>
                 <p>Vendedor: <%= order.seller.name %></p>
                 <% if @current_user.id != order.seller_id %>
-                  <% if !order.already_reviewed?(@current_user) %>
-                    <%= link_to "Evaluar", new_service_review_path(service_id: order.service.id, user_id: @current_user.id), class: "btn btn-primary" %>
-                  <% else %>
-                    <p></p>
+                  <% if order.service %>
+                    <% if !order.already_reviewed?(@current_user, order.id) %>
+                      <%= link_to "Evaluar", new_service_review_path(order_id: order.id, service_id: order.service.id, user_id: @current_user.id), class: "btn btn-primary" %>
+                    <% end %>
                   <% end %>
-                <% else %>
-                  <p></p>
                 <% end %>
               <% else %>
-                <!-- サービスが存在しない場合の表示処理 -->
-                <p>Vendedor: -</p>
+                <p>Vendedor: Usuario dado de baja</p>
               <% end %>
             </div>
             <div style="display: flex; justify-content: space-between;">
-              <% if order.service.present? %>
-                <p>Estado: <%= order.status %></p>
-                <p>Fecha de pedido: <%= order.created_at.strftime("%d/%m/%Y") %></p>
-              <% else %>
-                <!-- サービスが存在しない場合の表示処理 -->
-                <p>Estado: -</p>
-                <p>Fecha de pedido: -</p>
-              <% end %>
+              <p>Estado: <%= order.status %></p>
+              <p>Fecha de pedido: <%= order.created_at.strftime("%d/%m/%Y") %></p>
             </div>
           </div>
         </div>

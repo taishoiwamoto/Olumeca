@@ -1,8 +1,8 @@
 class Service < ApplicationRecord
   has_many :likes, dependent: :destroy
   belongs_to :user
-  has_many :orders
-  has_many :service_reviews
+  has_many :orders, dependent: :nullify
+  has_many :service_reviews, dependent: :nullify
 
 
   validates :title,

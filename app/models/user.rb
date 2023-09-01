@@ -4,9 +4,9 @@ class User < ApplicationRecord
   has_secure_password
   has_many :services, dependent: :destroy
   has_many :likes, dependent: :destroy
-  has_many :purchased_orders, class_name: 'Order', foreign_key: 'buyer_id'
-  has_many :sold_orders, class_name: 'Order', foreign_key: 'seller_id'
-  has_many :service_reviews
+  has_many :purchased_orders, class_name: 'Order', foreign_key: 'buyer_id', dependent: :nullify
+  has_many :sold_orders, class_name: 'Order', foreign_key: 'seller_id', dependent: :nullify
+  has_many :service_reviews, dependent: :nullify
 
   validates :name,
     presence: { message: ':El nombre del usuario no puede estar vacío.' },
