@@ -95,7 +95,7 @@
       </p>
     </div>
     <h1 class="form-heading">Evaluación</h1>
-    <% @service.service_reviews.each do |review| %>
+    <% @reviews.each do |review| %>
       <div class="posts-index-item">
         <div class="post-left">
           <% user = review.user %>
@@ -112,13 +112,17 @@
             </h4>
           <% end %>
           <p><%= review.comment %></p>
-          <% if user.present? && user.name.present? %>
-            <p><%= user.name %></p>
-          <% else %>
-            <p>Usuario dado de baja</p>
-          <% end %>
+          <div style="display: flex; justify-content: space-between;">
+            <% if user.present? && user.name.present? %>
+              <p><%= user.name %></p>
+            <% else %>
+              <p>Usuario dado de baja</p>
+            <% end %>
+            <p>Fecha: <%= review.created_at.strftime("%d/%m/%Y") %></p>
+          </div>
         </div>
       </div>
     <% end %>
+    <%= paginate @reviews %>
   </div>
 </div>

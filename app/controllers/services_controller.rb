@@ -11,6 +11,7 @@ class ServicesController < ApplicationController
 
     @user = @service.user
     @likes_count = Like.where(service_id: @service.id).count
+    @reviews = @service.service_reviews.order(created_at: :desc).page(params[:page]).per(10)
   end
 
   def new
