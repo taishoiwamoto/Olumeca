@@ -4,24 +4,19 @@ class ServiceReviewsController < ApplicationController
   before_action :find_order, only: [:new, :create]
 
   def new
-    if already_reviewed?(@order.id)
-      flash[:notice] = 'Este servicio ya ha sido evaluado.'
-      redirect_to("/users/#{@current_user.id}/orders")
-    else
       @review = ServiceReview.new
       @review.service_id = @service_id
       @review.user_id = @current_user.id if @current_user
       @review.order_id = @order.id
-    end
   end
 
   def create
-    if already_reviewed?(@order_id)
-      flash[:error] = 'Este servicio ya ha sido evaluado.'
+    @review = ServiceReview.new(review_params)
+
+    if ServiceReview.exists?(order_id: @review.order_id, user_id: @current_user.id)
+      flash[:notice] = 'Este orden ya ha sido evaluado.'
       redirect_to("/users/#{@current_user.id}/orders") and return
     end
-
-    @review = ServiceReview.new(review_params)
 
     if @review.save
       flash[:notice] = 'La evaluación ha sido registrada.'
@@ -48,11 +43,8 @@ class ServiceReviewsController < ApplicationController
     @service_id = params[:service_id]
   end
 
-  def already_reviewed?(order_id)
-    ServiceReview.where(order_id: order_id).exists?
-  end
-
   def find_order
-    @order = Order.find_by(service_id: @service_id, buyer_id: @current_user.id)
+    @order_id = params[:order_id]
+    @order = Order.find_by(id: @order_id, buyer_id: @current_user.id)
   end
 end
