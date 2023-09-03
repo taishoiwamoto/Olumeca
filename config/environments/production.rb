@@ -92,4 +92,5 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   config.hosts << ENV["ALLOWED_HOST"]
+  config.hosts << ENV["ALLOWED_OLD_HOST"]
 end
