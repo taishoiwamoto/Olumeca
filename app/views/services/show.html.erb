@@ -78,18 +78,6 @@
         <%= @service.category %>
       </p>
       <p>
-        <h5>Tiempo de servicio</h5>
-        <%= @service.service_time %> minuto(s)
-      </p>
-      <p>
-        <h5>Precio</h5>
-        $<%= number_with_delimiter(@service.price) %> MXN
-      </p>
-      <p>
-        <h5>Método de provisión</h5>
-        <%= JSON.parse(@service.delivery_method).join(", ") %>
-      <p>
-      <p>
         <h5>Detalles</h5>
         <%= @service.detail %>
       </p>
