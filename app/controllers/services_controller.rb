@@ -24,9 +24,6 @@ class ServicesController < ApplicationController
       user_id: @current_user.id,
       detail: params[:detail],
       category: params[:category],
-      service_time: params[:service_time],
-      price: params[:price],
-      delivery_method: params[:delivery_method],
       image: params[:image]
     )
 
@@ -55,9 +52,6 @@ class ServicesController < ApplicationController
     @service.title = params[:title]
     @service.detail = params[:detail]
     @service.category = params[:category]
-    @service.service_time = params[:service_time]
-    @service.price = params[:price]
-    @service.delivery_method = params[:delivery_method]
     if params[:image]
       @service.image = "#{@service.id}.jpg"
       image = params[:image]

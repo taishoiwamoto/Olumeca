@@ -15,6 +15,9 @@ class OrdersController < ApplicationController
 
   def create
     @order = Order.new(order_params)
+    @order.buyer_id = @current_user.id
+    @order.seller_id = Service.find(@order.service_id).user_id
+    @order.status = "pendiente"
     if @order.save
       redirect_to order_completed_path # ここでorder_completedは購入後のページを指す仮のルートです
     else
@@ -31,7 +34,7 @@ class OrdersController < ApplicationController
   private
 
   def order_params
-    params.require(:order).permit(:buyer_id, :seller_id, :service_id, :status)
+    params.require(:order).permit(:service_id)
   end
 
   def authenticate_user
