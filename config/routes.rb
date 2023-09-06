@@ -1,19 +1,20 @@
 Rails.application.routes.draw do
+  devise_for :users
   get 'contacts/new'
   get 'contacts/create'
   get "likes/:service_id/create" => "likes#create"
   get "likes/:service_id/destroy" => "likes#destroy"
 
-  post "users/:id/update" => "users#update"
-  get "users/:id/edit" => "users#edit"
-  post "users/create" => "users#create"
-  get "signup" => "users#new"
-  get "users/:id" => "users#show"
-  post "login" => "users#login"
-  get "logout" => "users#logout"
-  get "login" => "users#login_form"
-  get "users/:id/likes" => "users#likes"
-  get "users/:id/destroy" => "users#destroy"
+  #post "users/:id/update" => "users#update"
+  #get "users/:id/edit" => "users#edit"
+  #post "users/create" => "users#create"
+  #get "signup" => "users#new"
+  #get "users/:id" => "users#show"
+  #post "login" => "users#login"
+  #get "logout" => "users#logout"
+  #get "login" => "users#login_form"
+  #get "users/:id/likes" => "users#likes"
+  #get "users/:id/destroy" => "users#destroy"
 
   get "services/index" => "services#index"
   get "services/new" =>  "services#new"
