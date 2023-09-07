@@ -1,9 +1,9 @@
 <div class="main user-show">
   <div class="container">
     <div class="user">
-      <img src="<%= "/user_images/#{@user.profile_image}" %>">
-      <h2><%= @user.name %></h2>
-      <p>ID de Usuario: <%= @user.id %></p>
+      <%# <img src="<%= "/user_images/#{@user.profile_image}" %>
+      <h2><%= current_user.name %></h2>
+      <p>ID de Usuario: <%= current_user.id %></p>
       <% if @average_rating.nil? %>
         <h5>Evaluaciones: -- </h5>
       <% else %>
@@ -14,29 +14,29 @@
           </h5>
         </div>
       <% end %>
-      <% if @current_user && @user.id == @current_user.id %>
-        <%= link_to("Editar", "/users/#{@user.id}/edit") %>
+      <% if @current_user && current_user.id == @current_user.id %>
+        <%= link_to("Editar", "/users/#{current_user.id}/edit") %>
       <% end %>
     </div>
 
     <ul class="user-tabs">
       <li class="<%= 'active' if controller_name == 'users' && action_name == 'show' %>">
-        <%= link_to("Servicios", "/users/#{@user.id}") %>
+        <%= link_to("Servicios", "/users/#{current_user.id}") %>
       </li>
 
-      <% if @current_user && @user.id == @current_user.id %>
+      <% if @current_user && current_user.id == @current_user.id %>
         <li class="<%= 'active' if controller_name == 'users' && action_name == 'likes' %>">
-          <%= link_to("Likes!", "/users/#{@user.id}/likes") %>
+          <%= link_to("Likes!", "/users/#{current_user.id}/likes") %>
         </li>
       <% end %>
-      <% if @current_user && @user.id == @current_user.id %>
+      <% if @current_user && current_user.id == @current_user.id %>
         <li class="<%= 'active' if controller_name == 'users' && action_name == 'orders' %>">
-          <%= link_to("Tus pedidos", user_orders_path(@user.id)) %>
+          <%= link_to("Tus pedidos", user_orders_path(current_user.id)) %>
         </li>
       <% end %>
-      <% if @current_user && @user.id == @current_user.id %>
+      <% if @current_user && current_user.id == @current_user.id %>
         <li class="<%= 'active' if controller_name == 'users' && action_name == 'sales' %>">
-          <%= link_to("Tus ventas", user_sales_path(@user.id)) %>
+          <%= link_to("Tus ventas", user_sales_path(current_user.id)) %>
         </li>
       <% end %>
     </ul>

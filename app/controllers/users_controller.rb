@@ -9,12 +9,12 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find_by(id: params[:id])
-    @services = @user.services.order(created_at: :desc).page(params[:page]).per(5)
+    @services = current_user.services.order(created_at: :desc).page(params[:page]).per(5)
 
     total_reviews = 0
     total_count = 0
 
-    @user.services.each do |service|
+    current_user.services.each do |service|
       total_reviews += service.service_reviews.sum(:rating)
       total_count += service.service_reviews.count
     end
@@ -94,7 +94,7 @@ class UsersController < ApplicationController
   def logout
     session[:user_id] = nil
     flash[:notice] = "Has cerrado sesión"
-    redirect_to("/login")
+    redirect_to("/users/sign_in")
   end
 
   def likes
@@ -144,7 +144,7 @@ class UsersController < ApplicationController
   end
 
   def ensure_correct_user
-    if @current_user.id != params[:id].to_i
+    if current_user.id != params[:id].to_i
       flash[:notice] = "No tienes autorización"
       redirect_to("/")
     end

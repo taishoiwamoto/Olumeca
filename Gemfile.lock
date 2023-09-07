@@ -192,6 +192,7 @@ GEM
       thor (~> 1.0)
       zeitwerk (~> 2.5)
     rake (13.0.6)
+    recaptcha (5.15.0)
     regexp_parser (2.8.1)
     reline (0.3.7)
       io-console (~> 0.5)
@@ -254,7 +255,6 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
-  bcrypt (~> 3.1.7)
   bootsnap
   capybara
   debug
@@ -265,6 +265,7 @@ DEPENDENCIES
   kaminari
   puma (~> 5.0)
   rails (~> 7.0.4)
+  recaptcha
   selenium-webdriver
   sprockets-rails
   sqlite3 (~> 1.4)

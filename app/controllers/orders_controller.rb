@@ -4,7 +4,7 @@ class OrdersController < ApplicationController
   def new
     @order = Order.new
     @service = Service.find_by(id: params[:service_id]) # IDをservice_idから取得
-    @buyer = @current_user # current_userから@current_userへ変更
+    @buyer = current_user # current_userから@current_userへ変更
     @seller = User.find(@service.user_id)
 
     if @seller.id == @buyer.id
@@ -15,7 +15,7 @@ class OrdersController < ApplicationController
 
   def create
     @order = Order.new(order_params)
-    @order.buyer_id = @current_user.id
+    @order.buyer_id = current_user.id
     @order.seller_id = Service.find(@order.service_id).user_id
     @order.status = "pendiente"
     if @order.save
@@ -38,7 +38,7 @@ class OrdersController < ApplicationController
   end
 
   def authenticate_user
-    if @current_user.nil?
+    if current_user.nil?
       redirect_to login_path, notice: 'Por favor, inicia sesión'
     end
   end

@@ -5,7 +5,7 @@
       <h2>Sign up</h2>
 
       <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-        <%= render "devise/shared/error_messages", resource: resource %>
+        <%= render "users/shared/error_messages", resource: resource %>
 
         <div class="field">
           <%= f.label :email %><br />
@@ -35,14 +35,14 @@
           <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
         </div>
 
-        <%= recaptcha_tags %>
+      <%= recaptcha_tags %>
 
         <div class="actions">
           <%= f.submit "Sign up", class: "button-001" %>
         </div>
       <% end %>
 
-      <%= render "devise/shared/links" %>
+      <%= render "users/shared/links" %>
     </div>
   </div>
 </div>

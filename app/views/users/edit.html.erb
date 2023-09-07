@@ -10,12 +10,14 @@
         <% end %>
 
         <%= form_tag("/users/#{@user.id}/update", {multipart: true}) do %>
-          <h5>Nombre de usuario</h5>
+          <h5>Nickname</h5>
           <input name="name" value="<%= @user.name %>">
-          <h5>Imagen de profile</h5>
-          <input name="image" type="file">
+          <%# <h5>Imagen de profile</h5>
+          <input name="image" type="file"> #%>
           <h5>Correo electrónico</h5>
           <input name="email" value="<%= @user.email %>">
+          <h5>Número de teléfono</h5>
+          <input name="Número de teléfono" value="<%= @user.phone_number %>">
           <h5>Nueva contraseña</h5>
           <p class="small-text">Mínimo 8 caracteres, con una minúscula, una mayúscula, un número y un símbolo.</p>
           <input name="password" type="password">
@@ -23,7 +25,7 @@
         <% end %>
       </div>
       <div class="destroy">
-        <% if @user.id == @current_user.id %>
+        <% if @user.id == current_user.id %>
           <%= link_to("Para eliminar la cuenta, haga clic aquí por favor. ", "/users/#{@user.id}/destroy") %>
         <% end %>
       </div>

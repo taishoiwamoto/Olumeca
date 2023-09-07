@@ -76,3 +76,5 @@ gem 'webpacker'
 gem 'kaminari'
 
 gem 'devise'
+
+gem 'recaptcha', require: 'recaptcha/rails'

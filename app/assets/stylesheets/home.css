@@ -393,3 +393,22 @@ header {
 .whatsapp-button:hover {
   background-color: #128C53; /* この色はおおよそ原色より暗い値です。必要に応じて調整してください */
 }
+
+/* Buttun ================================ */
+.button-001 {
+  margin: 10px 0px;
+  display: inline-flex;  /* 'flex'を'inline-flex'に変更 */
+  align-items: center;
+  width: auto;  /* '150px'を'auto'に変更 */
+  padding: .9em 2em;
+  border: none;
+  border-radius: 5px;
+  background-color:  #13b1c0;
+  color: #fff;
+  font-weight: 600;
+  font-size: 1em;
+}
+
+.button-001:hover {
+  background-color: #10a0ad;
+}
