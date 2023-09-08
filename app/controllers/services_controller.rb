@@ -21,7 +21,7 @@ class ServicesController < ApplicationController
   def create
     @service = Service.new(
       title: params[:title],
-      user_id: @current_user.id,
+      user_id: current_user.id,
       detail: params[:detail],
       category: params[:category],
       image: params[:image]
@@ -71,12 +71,12 @@ class ServicesController < ApplicationController
     @service = Service.find_by(id: params[:id])
     @service.destroy
     flash[:notice] = "Has eliminado un servicio"
-    redirect_to("/users/#{@current_user.id}")
+    redirect_to("/users/#{current_user.id}")
   end
 
   def ensure_correct_user
     @service = Service.find_by(id: params[:id])
-    if @service.user_id != @current_user.id
+    if @service.user_id != current_user.id
       flash[:notice] = "No tienes autorización"
       redirect_to("/services/index")
     end

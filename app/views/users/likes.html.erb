@@ -1,7 +1,7 @@
 <div class="main user-show">
   <div class="container">
     <div class="user">
-      <img src="<%= "/user_images/#{@user.profile_image}" %>">
+      <%#<img src="<%= "/user_images/#{@user.profile_image}" %>
       <h2><%= @user.name %></h2>
       <p>ID de Usuario: <%= @user.id %></p>
       <% if @average_rating.nil? %>
@@ -14,7 +14,7 @@
           </h5>
         </div>
       <% end %>
-      <% if @current_user && @user.id == @current_user.id %>
+      <% if current_user && @user.id == current_user.id %>
         <%= link_to("Editar", "/users/#{@user.id}/edit") %>
       <% end %>
     </div>
@@ -25,17 +25,17 @@
         <%= link_to("Servicios", "/users/#{@user.id}") %>
       </li>
 
-      <% if @current_user && @user.id == @current_user.id %>
+      <% if current_user && @user.id == current_user.id %>
         <li class="<%= 'active' if controller_name == 'users' && action_name == 'likes' %>">
           <%= link_to("Likes!", "/users/#{@user.id}/likes") %>
         </li>
       <% end %>
-      <% if @current_user && @user.id == @current_user.id %>
+      <% if current_user && @user.id == current_user.id %>
         <li class="<%= 'active' if controller_name == 'users' && action_name == 'orders' %>">
           <%= link_to("Tus pedidos", user_orders_path(@user.id)) %>
         </li>
       <% end %>
-      <% if @current_user && @user.id == @current_user.id %>
+      <% if current_user && @user.id == current_user.id %>
         <li class="<%= 'active' if controller_name == 'users' && action_name == 'sales' %>">
           <%= link_to("Tus ventas", user_sales_path(@user.id)) %>
         </li>

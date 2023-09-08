@@ -17,7 +17,7 @@
         <%= link_to("Olumeca", "/") %>
       </div>
       <ul class="header-menus">
-        <% if @current_user %>
+        <% if user_signed_in?  %>
           <li class="contact-item" style="margin-left: 15px;">
               <a href="https://wa.me/4423831033" target="_blank" style="color: black; display: flex; align-items: center;">
                   <i class="fab fa-whatsapp fa-2x" style="margin-right: 5px;"></i>
@@ -31,10 +31,10 @@
             <%= link_to("Publicar", "/services/new") %>
           </li>
           <li>
-            <%= link_to("Mi página", "/users/#{@current_user.id}") %>
+            <%= link_to("Mi página", "/users/#{current_user.id}") %>
           </li>
           <li>
-            <%= link_to("Salir", "/logout", {method: "post"}) %>
+            <%= link_to "Salir", destroy_user_session_path, method: :delete %>
           </li>
         <% else %>
           <li class="contact-item" style="margin-left: 15px;">
@@ -50,16 +50,11 @@
             <%= link_to("Publicar", "/services/new") %>
           </li>
           <li>
-            <%= link_to("Registar", "/signup") %>
+            <%= link_to("Registar", "/users/sign_up") %>
           </li>
           <li>
-            <%= link_to("Iniciar", "/login") %>
+            <%= link_to("Iniciar", "/users/sign_in") %>
           </li>
-          <!--
-          <li>
-            <%= link_to("TweetAppとは", "/about") %>
-          </li>
-        -->
         <% end %>
       </ul>
     </header>

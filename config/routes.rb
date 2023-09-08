@@ -1,19 +1,16 @@
 Rails.application.routes.draw do
-  get 'contacts/new'
-  get 'contacts/create'
-  get "likes/:service_id/create" => "likes#create"
-  get "likes/:service_id/destroy" => "likes#destroy"
+  devise_for :users, controllers: { sessions: 'users/sessions', registrations: 'users/registrations' }
 
-  post "users/:id/update" => "users#update"
+  #post "users/:id/update" => "users#update"
   get "users/:id/edit" => "users#edit"
-  post "users/create" => "users#create"
-  get "signup" => "users#new"
+  #post "users/create" => "users#create"
+  #get "signup" => "users#new"
   get "users/:id" => "users#show"
-  post "login" => "users#login"
-  get "logout" => "users#logout"
-  get "login" => "users#login_form"
+  #post "login" => "users#login"
+  #get "logout" => "users#logout"
+  #get "login" => "users#login_form"
   get "users/:id/likes" => "users#likes"
-  get "users/:id/destroy" => "users#destroy"
+  #get "users/:id/destroy" => "users#destroy"
 
   get "services/index" => "services#index"
   get "services/new" =>  "services#new"
@@ -33,4 +30,9 @@ Rails.application.routes.draw do
   get "/" => "home#top"
   #get "about" => "home#about"
   # resources :contacts, only: [:new, :create]
+
+  get 'contacts/new'
+  get 'contacts/create'
+  get "likes/:service_id/create" => "likes#create"
+  get "likes/:service_id/destroy" => "likes#destroy"
 end

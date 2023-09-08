@@ -2,25 +2,25 @@
   <div class="container">
     <div class="posts-show-item">
       <div class="post-user-name">
-        <img src="<%= "/user_images/#{@user.profile_image}" %>">
+        <%# <img src="<%= "/user_images/#{@user.profile_image}" %>
         <%= link_to(@user.name, "/users/#{@user.id}") %>
       </div>
       <br>
 
       <li style="margin-left: 15px;">
-        <% if @current_user && @service.user_id != @current_user.id %>
+        <% if current_user && @service.user_id != current_user.id %>
         <a href="https://wa.me/4423831033" target="_blank" class="whatsapp-button">
           <i class="fab fa-whatsapp fa-2x" style="margin-right: 5px;"></i>
           Consultar / Preguntar / Reportar
         </a>
-          <%= link_to "Hacer el pedido", new_order_path(service_id: @service.id, buyer_id: @current_user.id, seller_id: @service.user_id), class: "buttons__main" %>
-        <% elsif @current_user && @service.user_id == @current_user.id %>
+          <%= link_to "Hacer el pedido", new_order_path(service_id: @service.id, buyer_id: current_user.id, seller_id: @service.user_id), class: "buttons__main" %>
+        <% elsif current_user && @service.user_id == current_user.id %>
           <!-- No puedes comprar tu propio servicio. -->
         <% else %>
           <%= link_to "Hacer el pedido", login_path(flash_alert: 'Por favor, inicia sesión'), class: "buttons__main" %>
         <% end %>
 
-        <% if @current_user && @service.user_id == @current_user.id %>
+        <% if current_user && @service.user_id == current_user.id %>
           <div class="post-menus">
             <%= link_to("Editar", "/services/#{@service.id}/edit") %>
             <%= link_to("Eliminar", "/services/#{@service.id}/destroy", method: "post", data: { confirm: "¿Estás seguro de que deseas eliminar este servicio?" }) %>
@@ -47,8 +47,8 @@
           <% end %>
         </div>
         <div class="like-button">
-          <% if @current_user %>
-              <% if Like.find_by(user_id: @current_user.id, service_id: @service.id) %>
+          <% if current_user %>
+              <% if Like.find_by(user_id: current_user.id, service_id: @service.id) %>
                   <%= link_to("/likes/#{@service.id}/destroy", {method: "post"}) do %>
                       <span class="fa fa-heart liked-btn"></span>
                   <% end %>
@@ -88,7 +88,7 @@
         <div class="post-left">
           <% user = review.user %>
           <% if user.present? && user.profile_image.present? %>
-            <img src="<%= "/user_images/#{user.profile_image}" %>">
+            <%# <img src="<%= "/user_images/#{user.profile_image}" %>
           <% else %>
             <img src="<%= "default_user.jpg" %>">
           <% end %>
