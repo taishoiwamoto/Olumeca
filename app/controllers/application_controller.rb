@@ -27,20 +27,18 @@ class ApplicationController < ActionController::Base
   protected
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :phone_number])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :phone_number, :profile_image])
   end
   def ensure_domain
     return unless /\.herokuapp.com/ =~ request.host
-    
-    # 主にlocalテスト用の対策80と443以外でアクセスされた場合ポート番号をURLに含める 
+
     port = ":#{request.port}" unless [80, 443].include?(request.port)
     redirect_url = "#{request.protocol}#{FQDN}#{port}#{request.path}"
     redirect_host = URI.parse(redirect_url).host
-    
+
     if ALLOWED_HOSTS.include?(redirect_host)
       redirect_to redirect_url, status: :moved_permanently, allow_other_host: true
     else
-      # リダイレクト先のホストが許可されていない場合の処理をここに書く
       render plain: 'Not Allowed', status: :forbidden
     end
   end

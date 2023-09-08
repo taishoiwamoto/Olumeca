@@ -9,6 +9,7 @@ class User < ApplicationRecord
   has_many :purchased_orders, class_name: 'Order', foreign_key: 'buyer_id', dependent: :nullify
   has_many :sold_orders, class_name: 'Order', foreign_key: 'seller_id', dependent: :nullify
   has_many :service_reviews, dependent: :nullify
+  has_one_attached :profile_image
 
   validates :name,
     presence: { message: ':El nombre del usuario no puede estar vacío.' },

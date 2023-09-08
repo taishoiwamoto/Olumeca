@@ -1,30 +1,31 @@
+<!-- Used -->
 <div class="main posts-show">
   <div class="container">
+    <h1 class="form-heading">Iniciar sesión</h1>
     <div class="posts-show-item">
-      <h2>Log in</h2>
 
       <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
         <div class="field">
-          <%= f.label :email %><br />
+          <%= f.label :correo_electrónico %><br />
           <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
         </div>
 
         <div class="field">
-          <%= f.label :password %><br />
+          <%= f.label :contraseña %><br />
           <%= f.password_field :password, autocomplete: "current-password" %>
         </div>
 
         <% if devise_mapping.rememberable? %>
           <div class="field">
             <%= f.check_box :remember_me %>
-            <%= f.label :remember_me %>
+            <%= f.label :recuérdame %>
           </div>
         <% end %>
 
         <%= recaptcha_tags %>
 
         <div class="actions">
-          <%= f.submit "Log in", class: "button-001" %>
+          <%= f.submit "Iniciar sesión", class: "button-001" %>
         </div>
       <% end %>
 

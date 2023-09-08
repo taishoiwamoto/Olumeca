@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :users, controllers: { sessions: 'users/sessions', registrations: 'users/registrations' }
+ devise_for :users, controllers: { sessions: 'users/sessions', registrations: 'users/registrations' }
 
   #post "users/:id/update" => "users#update"
   get "users/:id/edit" => "users#edit"
