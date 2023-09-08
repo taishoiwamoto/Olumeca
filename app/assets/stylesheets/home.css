@@ -326,6 +326,14 @@ header {
   color: #ff4d75;
 }
 
+
+.form textarea {
+  width: 100%;
+  min-height: 110px;
+  font-size: 16px;
+  letter-spacing: 2px;
+}
+
 .form input {
   width: 100%;
   border: 1px solid #d8dadf;
@@ -334,13 +342,6 @@ header {
   font-size: 16px;
   letter-spacing: 2px;
   border-radius: 2px;
-}
-
-.form textarea {
-  width: 100%;
-  min-height: 110px;
-  font-size: 16px;
-  letter-spacing: 2px;
 }
 
 .form input[type="submit"] {
@@ -411,4 +412,15 @@ header {
 
 .button-001:hover {
   background-color: #10a0ad;
+}
+
+/* form ================================ */
+
+
+.field {
+  margin-bottom: 20px;  /* フィールドの下部に20pxのマージンを追加 */
+}
+
+.actions {
+  margin-top: 20px;  /* actionsの上部に20pxのマージンを追加 */
 }

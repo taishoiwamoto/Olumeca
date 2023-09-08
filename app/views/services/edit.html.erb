@@ -10,34 +10,42 @@
             </div>
           <% end %>
 
-          <h5>Nombre del servicio</h5>
-          <%= f.text_field :title, value: @service.title, class: "question-space" %>
+          <div class="field">
+            <%= f.label :nombre_del_servicio %><br/>
+            <%= f.text_field :title, value: @service.title, class: "question-space" %>
+          </div>
 
-          <h5>Imagen (Opcional)</h5>
-          <%= f.file_field :image, class: "question-space" %>
+          <div class="field">
+            <%= f.label :imagen %><br/>
+            <%= f.file_field :image, class: "question-space" %>
+          </div>
 
-          <h5>Categoría</h5>
-          <%= f.select :category, options_for_select([
-            ['Por favor, elija de la siguiente lista', '', {disabled: true, selected: true}],
-            ['Ilustración & Cómics', 'Ilustración & Cómics'],
-            ['Diseño', 'Diseño'],
-            ['Creación de sitios web & Diseño web', 'Creación de sitios web & Diseño web'],
-            ['Video, Animación & Filmación', 'Video, Animación & Filmación'],
-            ['Marketing & Atracción web', 'Marketing & Atracción web'],
-            ['Música & Narración', 'Música & Narración'],
-            ['Escritura & Traducción', 'Escritura & Traducción'],
-            ['Representación de negocios, Consultoría & Servicios profesionales', 'Representación de negocios, Consultoría & Servicios profesionales'],
-            ['IT, Programación & Desarrollo', 'IT, Programación & Desarrollo'],
-            ['Adivinación', 'Adivinación'],
-            ['Consejería, Consejos de amor & Compañía', 'Consejería, Consejos de amor & Compañía'],
-            ['Aprendizaje, Búsqueda de empleo, Certificación & Coaching', 'Aprendizaje, Búsqueda de empleo, Certificación & Coaching'],
-            ['Vivienda, Belleza, Estilo de vida & Pasatiempos', 'Vivienda, Belleza, Estilo de vida & Pasatiempos'],
-            ['Lecciones en línea & Consejos', 'Lecciones en línea & Consejos'],
-            ['Dinero, Trabajos secundarios & Marketing de afiliados', 'Dinero, Trabajos secundarios & Marketing de afiliados']
-          ], selected: @service.category), {}, class: "question-space" %>
+          <div class="field">
+            <%= f.label :categoría %><br/>
+            <%= f.select :category, options_for_select([
+              ['Por favor, elija de la siguiente lista', '', {disabled: true, selected: true}],
+              ['Ilustración & Cómics', 'Ilustración & Cómics'],
+              ['Diseño', 'Diseño'],
+              ['Creación de sitios web & Diseño web', 'Creación de sitios web & Diseño web'],
+              ['Video, Animación & Filmación', 'Video, Animación & Filmación'],
+              ['Marketing & Atracción web', 'Marketing & Atracción web'],
+              ['Música & Narración', 'Música & Narración'],
+              ['Escritura & Traducción', 'Escritura & Traducción'],
+              ['Representación de negocios, Consultoría & Servicios profesionales', 'Representación de negocios, Consultoría & Servicios profesionales'],
+              ['IT, Programación & Desarrollo', 'IT, Programación & Desarrollo'],
+              ['Adivinación', 'Adivinación'],
+              ['Consejería, Consejos de amor & Compañía', 'Consejería, Consejos de amor & Compañía'],
+              ['Aprendizaje, Búsqueda de empleo, Certificación & Coaching', 'Aprendizaje, Búsqueda de empleo, Certificación & Coaching'],
+              ['Vivienda, Belleza, Estilo de vida & Pasatiempos', 'Vivienda, Belleza, Estilo de vida & Pasatiempos'],
+              ['Lecciones en línea & Consejos', 'Lecciones en línea & Consejos'],
+              ['Dinero, Trabajos secundarios & Marketing de afiliados', 'Dinero, Trabajos secundarios & Marketing de afiliados']
+            ], selected: @service.category), {}, class: "question-space" %>
+          </div>
 
-          <h5>Detalles</h5>
-          <%= f.text_area :detail, value: @service.detail %>
+          <div class="field">
+            <%= f.label :detalles %><br/>
+            <%= f.text_area :detail, value: @service.detail %>
+          </div>
 
           <%= f.submit "Guardar" %>
         </div>
