@@ -7,10 +7,6 @@
   display: block;    /* イメージをブロック要素として扱い、margin: autoを効かせる */
 }
 
-.question-space {
-  margin-bottom: 20px;
-}
-
 /* posts/index ================================ */
 .posts-index-item {
   padding: 20px 30px;
