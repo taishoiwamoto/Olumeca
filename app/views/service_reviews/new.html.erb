@@ -4,7 +4,7 @@
       <div class="form-body">
         <h1>Crear una nueva evaluación</h1>
 
-        <%= form_with(model: @review, url: service_reviews_path, local: true) do |form| %>
+        <%= form_for @review, url: service_reviews_path, html: { multipart: true } do |form| %>
           <div class="field">
             <%= form.label :rating, 'Evaluación (obligatorio)' %>
             <%= form.select :rating, options_for_select([1, 2, 3, 4, 5]), prompt: "Seleccione un valor numérico", required: true %>

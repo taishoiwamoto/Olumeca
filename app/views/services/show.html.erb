@@ -2,8 +2,8 @@
   <div class="container">
     <div class="posts-show-item">
       <div class="post-user-name">
-        <%# <img src="<%= "/user_images/#{@user.profile_image}" %>
-        <%= link_to(@user.name, "/users/#{@user.id}") %>
+        <%# <img src="<%= "/user_images/#{current_user.profile_image}" %>
+        <%= link_to(current_user.name, "/users/#{current_user.id}") %>
       </div>
       <br>
 
@@ -87,11 +87,11 @@
       <div class="posts-index-item">
         <div class="post-left">
           <% user = review.user %>
-          <% if user.present? && user.profile_image.present? %>
+          <%# <% if user.present? && user.profile_image.present? %>
             <%# <img src="<%= "/user_images/#{user.profile_image}" %>
-          <% else %>
-            <img src="<%= "default_user.jpg" %>">
-          <% end %>
+           <%#<% else %>
+            <%# <img src="<%= "default_user.jpg" %>
+          <%# <% end %>
         </div>
         <div class="post-right">
           <% if review.rating.present? %>

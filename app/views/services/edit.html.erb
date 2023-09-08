@@ -1,7 +1,7 @@
 <div class="main posts-new">
   <div class="container">
     <h1 class="form-heading">Editar</h1>
-    <%= form_tag("/services/#{@service.id}/update", {multipart: true}) do %>
+    <%= form_for(@service, url: "/services/#{@service.id}/update", html: {multipart: true}) do |f| %>
       <div class="form">
         <div class="form-body">
           <% @service.errors.full_messages.each do |message| %>
@@ -11,31 +11,35 @@
           <% end %>
 
           <h5>Nombre del servicio</h5>
-          <input name="title" value="<%= @service.title %>" class="question-space">
+          <%= f.text_field :title, value: @service.title, class: "question-space" %>
+
           <h5>Imagen (Opcional)</h5>
-          <input name="image" type="file" class="question-space">
+          <%= f.file_field :image, class: "question-space" %>
+
           <h5>Categoría</h5>
-          <select name="category" class="question-space">
-            <option selected disabled>Por favor, elija de la siguiente lista</option>
-            <option value="Ilustración & Cómics" <%= @service.category == 'Ilustración & Cómics' ? 'selected' : '' %>>Ilustración & Cómics</option>
-            <option value="Diseño" <%= @service.category == 'Diseño' ? 'selected' : '' %>>Diseño</option>
-            <option value="Creación de sitios web & Diseño web" <%= @service.category == 'Creación de sitios web & Diseño web' ? 'selected' : '' %>>Creación de sitios web & Diseño web</option>
-            <option value="Video, Animación & Filmación" <%= @service.category == 'Video, Animación & Filmación' ? 'selected' : '' %>>Video, Animación & Filmación</option>
-            <option value="Marketing & Atracción web" <%= @service.category == 'Marketing & Atracción web' ? 'selected' : '' %>>Marketing & Atracción web</option>
-            <option value="Música & Narración" <%= @service.category == 'Música & Narración' ? 'selected' : '' %>>Música & Narración</option>
-            <option value="Escritura & Traducción" <%= @service.category == 'Escritura & Traducción' ? 'selected' : '' %>>Escritura & Traducción</option>
-            <option value="Representación de negocios, Consultoría & Servicios profesionales" <%= @service.category == 'Representación de negocios, Consultoría & Servicios profesionales' ? 'selected' : '' %>>Representación de negocios, Consultoría & Servicios profesionales</option>
-            <option value="IT, Programación & Desarrollo" <%= @service.category == 'IT, Programación & Desarrollo' ? 'selected' : '' %>>IT, Programación & Desarrollo</option>
-            <option value="Adivinación" <%= @service.category == 'Adivinación' ? 'selected' : '' %>>Adivinación</option>
-            <option value="Consejería, Consejos de amor & Compañía" <%= @service.category == 'Consejería, Consejos de amor & Compañía' ? 'selected' : '' %>>Consejería, Consejos de amor & Compañía</option>
-            <option value="Aprendizaje, Búsqueda de empleo, Certificación & Coaching" <%= @service.category == 'Aprendizaje, Búsqueda de empleo, Certificación & Coaching' ? 'selected' : '' %>>Aprendizaje, Búsqueda de empleo, Certificación & Coaching</option>
-            <option value="Vivienda, Belleza, Estilo de vida & Pasatiempos" <%= @service.category == 'Vivienda, Belleza, Estilo de vida & Pasatiempos' ? 'selected' : '' %>>Vivienda, Belleza, Estilo de vida & Pasatiempos</option>
-            <option value="Lecciones en línea & Consejos" <%= @service.category == 'Lecciones en línea & Consejos' ? 'selected' : '' %>>Lecciones en línea & Consejos</option>
-            <option value="Dinero, Trabajos secundarios & Marketing de afiliados" <%= @service.category == 'Dinero, Trabajos secundarios & Marketing de afiliados' ? 'selected' : '' %>>Dinero, Trabajos secundarios & Marketing de afiliados</option>
-          </select>
+          <%= f.select :category, options_for_select([
+            ['Por favor, elija de la siguiente lista', '', {disabled: true, selected: true}],
+            ['Ilustración & Cómics', 'Ilustración & Cómics'],
+            ['Diseño', 'Diseño'],
+            ['Creación de sitios web & Diseño web', 'Creación de sitios web & Diseño web'],
+            ['Video, Animación & Filmación', 'Video, Animación & Filmación'],
+            ['Marketing & Atracción web', 'Marketing & Atracción web'],
+            ['Música & Narración', 'Música & Narración'],
+            ['Escritura & Traducción', 'Escritura & Traducción'],
+            ['Representación de negocios, Consultoría & Servicios profesionales', 'Representación de negocios, Consultoría & Servicios profesionales'],
+            ['IT, Programación & Desarrollo', 'IT, Programación & Desarrollo'],
+            ['Adivinación', 'Adivinación'],
+            ['Consejería, Consejos de amor & Compañía', 'Consejería, Consejos de amor & Compañía'],
+            ['Aprendizaje, Búsqueda de empleo, Certificación & Coaching', 'Aprendizaje, Búsqueda de empleo, Certificación & Coaching'],
+            ['Vivienda, Belleza, Estilo de vida & Pasatiempos', 'Vivienda, Belleza, Estilo de vida & Pasatiempos'],
+            ['Lecciones en línea & Consejos', 'Lecciones en línea & Consejos'],
+            ['Dinero, Trabajos secundarios & Marketing de afiliados', 'Dinero, Trabajos secundarios & Marketing de afiliados']
+          ], selected: @service.category), {}, class: "question-space" %>
+
           <h5>Detalles</h5>
-          <textarea name="detail"><%= @service.detail %></textarea>
-          <input type="submit" value="Guardar">
+          <%= f.text_area :detail, value: @service.detail %>
+
+          <%= f.submit "Guardar" %>
         </div>
       </div>
     <% end %>

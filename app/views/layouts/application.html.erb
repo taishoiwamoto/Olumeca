@@ -25,16 +25,16 @@
               </a>
           </li>
           <li>
-            <%= link_to("Servicios", "/services/index") %>
+            <%= link_to("Servicios", services_index_path) %>
           </li>
           <li>
-            <%= link_to("Publicar", "/services/new") %>
+            <%= link_to("Publicar", services_new_path) %>
           </li>
           <li>
             <%= link_to("Mi página", "/users/#{current_user.id}") %>
           </li>
           <li>
-            <%= link_to "Salir", destroy_user_session_path, method: :delete %>
+            <%= button_to 'Salir', destroy_user_session_path, method: :delete %>
           </li>
         <% else %>
           <li class="contact-item" style="margin-left: 15px;">
