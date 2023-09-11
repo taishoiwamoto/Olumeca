@@ -4,7 +4,4 @@ class HomeController < ApplicationController
   def top
     @services = Service.order(created_at: :desc).limit(4)
   end
-
-  def about
-  end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_08_011504) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_11_174707) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -39,15 +39,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_08_011504) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
-  create_table "contacts", force: :cascade do |t|
-    t.string "name"
-    t.string "email"
-    t.string "phone"
-    t.text "message"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "likes", force: :cascade do |t|
     t.integer "user_id"
     t.datetime "created_at", null: false
@@ -58,21 +49,32 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_08_011504) do
   create_table "orders", force: :cascade do |t|
     t.integer "buyer_id"
     t.integer "seller_id"
-    t.integer "service_id"
     t.string "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "plan_id"
+    t.index ["plan_id"], name: "index_orders_on_plan_id"
+  end
+
+  create_table "plans", force: :cascade do |t|
+    t.integer "service_id"
+    t.string "title"
+    t.text "detail"
+    t.decimal "price"
+    t.string "delivery_method"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "service_reviews", force: :cascade do |t|
     t.integer "user_id"
-    t.integer "service_id"
     t.integer "rating"
     t.text "comment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "order_id"
-    t.index ["service_id"], name: "index_service_reviews_on_service_id"
+    t.integer "plan_id"
+    t.index ["plan_id"], name: "index_service_reviews_on_plan_id"
     t.index ["user_id"], name: "index_service_reviews_on_user_id"
   end
 

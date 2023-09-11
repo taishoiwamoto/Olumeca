@@ -1,9 +1,12 @@
 class ServiceReview < ApplicationRecord
-  validates :rating, numericality: {
+  belongs_to :user
+  belongs_to :plan
+  belongs_to :order
+  has_one :service, through: :plan
+
+  validates :rating, presence: true, numericality: {
     only_integer: true,
     greater_than_or_equal_to: 1,
     less_than_or_equal_to: 5,
   }
-  belongs_to :user
-  belongs_to :service
 end

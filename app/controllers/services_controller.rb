@@ -8,40 +8,40 @@ class ServicesController < ApplicationController
 
   def show
     @service = Service.find_by(id: params[:id])
-
     @user = @service.user
     @likes_count = Like.where(service_id: @service.id).count
-    @reviews = @service.service_reviews.order(created_at: :desc).page(params[:page]).per(10)
+    @service_reviews = @service.service_reviews
+    #service_reviews_through_plans = @service.plans.includes(:service_reviews).map(&:service_reviews).flatten
+    #service_reviews = Kaminari.paginate_array(service_reviews_through_plans).page(params[:page]).per(10)
   end
+
 
   def new
     @service = Service.new
+    1.times { @service.plans.build }
   end
 
   def create
-    @service = Service.new(
-      title: params[:title],
-      user_id: current_user.id,
-      detail: params[:detail],
-      category: params[:category],
-      image: params[:image]
-    )
-
-    if params[:image] && params[:image].respond_to?(:read)
-      @service.image = "#{@service.id}.jpg"
-      image = params[:image]
-      File.binwrite("public/service_images/#{@service.image}", image.read)
-    else
-      @service.image = "default_service.jpg"
-    end
+    @service = Service.new(service_params.merge(user_id: current_user.id))
 
     if @service.save
+      if params[:service][:image] && params[:service][:image].respond_to?(:read)
+        @service.image = "#{@service.id}.jpg"
+        image = params[:service][:image]
+        File.binwrite("public/service_images/#{@service.image}", image.read)
+        @service.save
+      elsif @service.image.blank?
+        @service.update(image: "default_service.jpg")
+      end
+
       flash[:notice] = "Has creado un servicio"
-      redirect_to("/services/index")
+      redirect_to service_path(@service)
     else
-      render("services/new")
+      @service.plans.build if @service.plans.blank?
+      render :new
     end
   end
+
 
   def edit
     @service = Service.find_by(id: params[:id])
@@ -49,36 +49,42 @@ class ServicesController < ApplicationController
 
   def update
     @service = Service.find_by(id: params[:id])
-    @service.title = params[:title]
-    @service.detail = params[:detail]
-    @service.category = params[:category]
-    if params[:image]
-      @service.image = "#{@service.id}.jpg"
-      image = params[:image]
-      File.binwrite("public/service_images/#{@service.image}", image.read)
-    end
-
-    @service.save
-    if @service.save
+    if @service.update(service_params)
+      if params[:service][:image] && params[:service][:image].respond_to?(:read)
+        @service.image = "#{@service.id}.jpg"
+        image = params[:service][:image]
+        File.binwrite("public/service_images/#{@service.image}", image.read)
+        @service.save
+      elsif @service.image.blank?
+        @service.update(image: "default_service.jpg")
+      end
       flash[:notice] = "Has editado un servicio"
-      redirect_to("/services/index")
+      redirect_to service_path(@service)
     else
-      render("services/edit")
+      render :edit
     end
   end
+
 
   def destroy
     @service = Service.find_by(id: params[:id])
     @service.destroy
     flash[:notice] = "Has eliminado un servicio"
-    redirect_to("/users/#{current_user.id}")
+    redirect_to user_path(current_user)
   end
 
   def ensure_correct_user
     @service = Service.find_by(id: params[:id])
     if @service.user_id != current_user.id
       flash[:notice] = "No tienes autorización"
-      redirect_to("/services/index")
+      redirect_to service_path(@service)
     end
+  end
+
+  private
+
+  def service_params
+    params.require(:service).permit(:title, :detail, :category, :image,
+                                    plans_attributes: [:id, :title, :detail, :price, :delivery_method, :_destroy])
   end
 end

@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 class Users::RegistrationsController < Devise::RegistrationsController
+  before_action :configure_sign_up_params, only: [:create]
+  before_action :configure_account_update_params, only: [:update]
+
   def create
     if verify_recaptcha
       super
@@ -8,11 +11,24 @@ class Users::RegistrationsController < Devise::RegistrationsController
       self.resource = resource_class.new sign_up_params
       resource.validate
       set_minimum_password_length
-      respond_with resource
+      respond_with resource, location: new_user_registration_path
     end
   end
-  # before_action :configure_sign_up_params, only: [:create]
-  # before_action :configure_account_update_params, only: [:update]
+
+
+  protected
+
+  def after_update_path_for(resource)
+    user_path(current_user)
+  end
+
+  def configure_sign_up_params
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :phone_number])
+  end
+
+  def configure_account_update_params
+    devise_parameter_sanitizer.permit(:account_update, keys: [:name, :phone_number])
+  end
 
   # GET /resource/sign_up
   # def new

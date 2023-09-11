@@ -13,21 +13,21 @@ class ApplicationController < ActionController::Base
   def authenticate_user
     if current_user == nil
       flash[:notice] = "Es necesario iniciar sesión"
-      redirect_to("/users/sign_in")
+      redirect_to new_user_session_path
     end
   end
 
   def forbid_login_user
     if current_user
       flash[:notice] = "Ya has iniciado sesión"
-      redirect_to("/services/index")
+      redirect_to services_path
     end
   end
 
   protected
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :phone_number, :profile_image])
+    #devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :phone_number, :profile_image])
   end
   def ensure_domain
     return unless /\.herokuapp.com/ =~ request.host

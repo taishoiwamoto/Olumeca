@@ -1,7 +1,7 @@
 <div class="main posts-new">
   <div class="container">
     <h1 class="form-heading">Publicar</h1>
-    <%= form_for(@service, url: "/services/create", html: {multipart: true}) do |f| %>
+    <%= form_for(@service, url: services_path, html: {multipart: true}) do |f| %>
       <div class="form">
         <div class="form-body">
           <% @service.errors.full_messages.each do |message| %>
@@ -10,18 +10,19 @@
             </div>
           <% end %>
 
+          <h2>Servicio</h2>
           <div class="field">
-            <%= f.label :nombre_del_servicio %><br/>
+            <%= f.label :title %><br/>
             <%= f.text_field :title, value: @service.title %>
           </div>
 
           <div class="field">
-            <%= f.label :imagen %><br/>
+            <%= f.label :image %><br/>
             <%= f.file_field :image %>
           </div>
 
           <div class="field">
-            <%= f.label :categoría %><br/>
+            <%= f.label :category %><br/>
             <%= f.select :category, options_for_select([
               ['Por favor, elija de la siguiente lista', '', {disabled: true, selected: true}],
               ['Ilustración & Cómics', 'Ilustración & Cómics'],
@@ -43,10 +44,52 @@
           </div>
 
           <div class="field">
-            <%= f.label :detalles %><br/>
+            <%= f.label :detail %><br/>
             <%= f.text_area :detail, value: @service.detail %>
           </div>
+        </div>
+      </div>
+<br>
+      <div class="form">
+        <div class="form-body">
+          <h2>Plans</h2>
+          <%= f.fields_for :plans do |plan_form| %>
+            <% plan = plan_form.object %>
+            <% plan.errors.full_messages.each do |message| %>
+              <div class="form-error">
+                <%= message %>
+              </div>
+            <% end %>
 
+            <div class="field">
+              <%= plan_form.label :title, "Plan Title" %><br/>
+              <%= plan_form.text_field :title %>
+            </div>
+
+            <div class="field">
+              <%= plan_form.label :delivery_method, "Delivery Method" %><br/>
+              <%= plan_form.select :delivery_method, [
+                ['Por favor, elija de la siguiente lista', '', {disabled: true, selected: true}],
+                ['Videollamada', 'Videollamada'],
+                ['Chat', 'Chat']
+              ] %>
+            </div>
+
+            <div class="field">
+              <%= plan_form.label :price, "Plan Price" %><br/>
+              <%= plan_form.number_field :price, step: "0.01" %>
+            </div>
+
+            <div class="field">
+              <%= plan_form.label :detail, "Plan Detail" %><br/>
+              <%= plan_form.text_area :detail %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+<br>
+      <div class="form">
+        <div class="form-body">
           <%= f.submit "Publicar" %>
         </div>
       </div>

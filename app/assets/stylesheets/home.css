@@ -395,24 +395,62 @@ header {
   background-color: #128C53; /* この色はおおよそ原色より暗い値です。必要に応じて調整してください */
 }
 
+.small-whatsapp-button {
+  color: white;
+  display: inline-block;
+  background-color: #25D366;
+  padding: 10px;
+  border-radius: 5px;
+  width: auto;
+}
+
+.small-whatsapp-button:hover {
+  background-color: #128C53; /* この色はおおよそ原色より暗い値です。必要に応じて調整してください */
+}
+
 /* Buttun ================================ */
 .button-001 {
   margin: 10px 0px;
   display: inline-flex;  /* 'flex'を'inline-flex'に変更 */
   align-items: center;
   width: auto;  /* '150px'を'auto'に変更 */
-  padding: .9em 2em;
+  padding: 10px;
   border: none;
   border-radius: 5px;
   background-color:  #13b1c0;
   color: #fff;
-  font-weight: 600;
-  font-size: 1em;
 }
 
 .button-001:hover {
   background-color: #10a0ad;
 }
+
+.button-002 {
+  width: auto;  /* '150px'を'auto'に変更 */
+  padding: 3px 15px;
+  border: none;
+  border-radius: 5px;
+  background-color:  #13b1c0;
+  color: #fff;
+}
+
+.button-002:hover {
+  background-color: #10a0ad;
+}
+
+.salir-button {
+  background-color: transparent; /* 背景色を透明に */
+  color: rgb(0, 0, 0); /* 文字色を黒に設定 */
+  border: none; /* 枠線をなくす */
+  font-size: 13px; /* 他のメニューアイテムと同じサイズに設定 */
+  padding: 0; /* 余白をなくす */
+  line-height: 64px; /* 他のメニューアイテムと同じ行の高さに設定 */
+  margin: 0; /* 余白をなくす */
+  cursor: pointer; /* ホバー時のカーソルを指マークにする */
+  text-align: center; /* 文字を中央揃えに */
+  font: 100%/1.5 'Avenir Next', 'Hiragino Sans', sans-serif;
+}
+
 
 /* form ================================ */
 
@@ -423,4 +461,16 @@ header {
 
 .actions {
   margin-top: 20px;  /* actionsの上部に20pxのマージンを追加 */
+}
+
+.form-001 {
+  padding: 30px;
+  background-color: white;
+  box-shadow: 0 2px 6px #c1ced7;
+  overflow: hidden;
+}
+
+.form-001 p {
+  padding-bottom: 10px;
+
 }

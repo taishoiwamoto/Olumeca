@@ -5,7 +5,7 @@ class ServiceReviewsController < ApplicationController
 
   def new
     @review = ServiceReview.new
-    @review.service_id = @service_id
+    @review.plan_id = @plan_id  # <-- 変更した部分
     @review.user_id = current_user.id if current_user
     @review.order_id = @order.id
   end
@@ -15,12 +15,12 @@ class ServiceReviewsController < ApplicationController
 
     if ServiceReview.exists?(order_id: @review.order_id, user_id: current_user.id)
       flash[:notice] = 'Este orden ya ha sido evaluado.'
-      redirect_to("/users/#{current_user.id}/orders") and return
+      redirect_to orders_user_path(current_user) and return
     end
 
     if @review.save
       flash[:notice] = 'La evaluación ha sido registrada.'
-      redirect_to("/users/#{current_user.id}/orders")
+      redirect_to orders_user_path(current_user)
     else
       render 'new'
     end
@@ -31,16 +31,16 @@ class ServiceReviewsController < ApplicationController
   def require_login
     unless current_user
       flash[:error] = 'Se requiere iniciar sesión.'
-      redirect_to login_path
+      redirect_to new_user_session_path
     end
   end
 
   def review_params
-    params.require(:service_review).permit(:user_id, :service_id, :rating, :comment, :order_id)  # :order_idを追加
+    params.require(:service_review).permit(:user_id, :plan_id, :rating, :comment, :order_id)  # <-- 変更した部分
   end
 
   def set_review_params
-    @service_id = params[:service_id]
+    @plan_id = params[:plan_id]  # <-- 変更した部分
   end
 
   def find_order

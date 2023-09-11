@@ -1,29 +1,29 @@
 <!-- Used -->
 <div class="main posts-show">
   <div class="container">
-    <h1 class="form-heading">Registrarse</h1>
+    <h1 class="form-heading">Sign up</h1>
     <div class="posts-show-item">
       <div class="form-body">
         <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
           <%= render "users/shared/error_messages", resource: resource %>
 
           <div class="field">
-            <%= f.label :apodo %><br />
-            <%= f.text_field :name, autofocus: true %>
+            <%= f.label :name %><br />
+            <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
           </div>
 
           <div class="field">
-            <%= f.label :correo_electrónico %><br />
+            <%= f.label :email, 'Correo' %><br />
             <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
           </div>
 
           <div class="field">
-            <%= f.label :número_de_teléfono %><br />
-            <%= f.telephone_field :phone_number %>
+            <%= f.label :phone_number %><br />
+            <%= f.text_field :phone_number, autofocus: true, autocomplete: "tel" %>
           </div>
 
           <div class="field">
-            <%= f.label :contraseña %>
+            <%= f.label :password %>
             <% if @minimum_password_length %>
             <em>(<%= @minimum_password_length %> characters minimum)</em>
             <% end %><br />
@@ -31,14 +31,14 @@
           </div>
 
           <div class="field">
-            <%= f.label :confirmación_de_contraseña %><br />
+            <%= f.label :password_confirmation %><br />
             <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
           </div>
 
         <%= recaptcha_tags %>
 
           <div class="actions">
-            <%= f.submit "Registrarse", class: "button-001" %>
+            <%= f.submit "Sign up", class: "button-001" %>
           </div>
         <% end %>
 

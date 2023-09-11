@@ -1,15 +1,14 @@
 <div class="main posts-show">
   <div class="container">
-    <div class="posts-show-item">
-        <%= form_for @order do |f| %>
-          <h2>Detalles del Pedido</h2>
-          <p>Comprador(a): <%= @buyer.name %></p>
-          <p>Vendedor(a): <%= @seller.name %></p>
-          <p>Servicio: <%= @service.title %></p>
-          <%= f.hidden_field :service_id, value: @service.id %>
-          <%= f.submit 'Realizar Pedido', class: "buttons__main" %>
-        <% end %>
-        <p>※Con respecto al método de pago, le informaremos a través de WhatsApp. Agradeceríamos que nos contacte por WhatsApp para comunicarse con el administrador.</p>
+    <h1 class="form-heading">Detalles del Pedido</h1>
+    <div class="form-001">
+      <%= form_for @order do |f| %>
+        <p>Vendedor(a): <%= @seller.name %></p>
+        <p>Servicio: <%= @service.title %></p>
+        <p>Plan: <%= @plan.title %></p>
+        <%= f.hidden_field :plan_id, value: @plan.id %>
+        <%= f.submit 'Realizar Pedido', class: "buttons__main" %>
+      <% end %>
     </div>
   </div>
 </div>
