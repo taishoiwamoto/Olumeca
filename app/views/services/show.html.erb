@@ -3,27 +3,22 @@
     <div class="posts-show-item">
       <div class="post-user-name">
         <%# <img src="<%= "/user_images/#{current_user.profile_image}" %>
-        <%= link_to(current_user.name, "/users/#{current_user.id}") %>
+        <%= link_to(@service.user.name, user_path(@service.user)) %>
       </div>
       <br>
 
       <li style="margin-left: 15px;">
-        <% if current_user && @service.user_id != current_user.id %>
-        <a href="https://wa.me/4423831033" target="_blank" class="whatsapp-button">
-          <i class="fab fa-whatsapp fa-2x" style="margin-right: 5px;"></i>
-          Consultar / Preguntar / Reportar
+        <% if current_user && @service.title != "no encontrado" && @service.user_id != current_user.id %>
+        <a href="https://wa.me/4423831033" target="_blank" class="small-whatsapp-button">
+          <i class="fab fa-whatsapp fa-1x" style="margin-right: 5px;"></i>
+          Contactar
         </a>
-          <%= link_to "Hacer el pedido", new_order_path(service_id: @service.id, buyer_id: current_user.id, seller_id: @service.user_id), class: "buttons__main" %>
-        <% elsif current_user && @service.user_id == current_user.id %>
-          <!-- No puedes comprar tu propio servicio. -->
-        <% else %>
-          <%= link_to "Hacer el pedido", login_path(flash_alert: 'Por favor, inicia sesión'), class: "buttons__main" %>
         <% end %>
 
         <% if current_user && @service.user_id == current_user.id %>
           <div class="post-menus">
-            <%= link_to("Editar", "/services/#{@service.id}/edit") %>
-            <%= link_to("Eliminar", "/services/#{@service.id}/destroy", method: "post", data: { confirm: "¿Estás seguro de que deseas eliminar este servicio?" }) %>
+            <%= link_to("Editar", edit_service_path(@service)) %>
+            <%= button_to "Eliminar", service_path(@service), method: :delete, data: { confirm: "¿Estás seguro de que deseas eliminar este servicio?" } %>
           </div>
         <% end %>
       </li>
@@ -35,32 +30,32 @@
       </div>
       <div class="flex-container" >
         <div class="star">
-          <% if @service.service_reviews.present? %>
+          <% if @service_reviews.present? %>
             <div class="average-rating">
               <h5>
-                Evaluaciones:<%= render_stars(calculate_average_rating(@service.service_reviews)) %>
-                (<%= sprintf('%.2f', calculate_average_rating(@service.service_reviews)) %>)
+                <% average_rating = (calculate_average_rating(@service_reviews) * 10).ceil / 10.0 %>
+                <%= "⭐️" * average_rating.round %> (<%= average_rating %>)
               </h5>
             </div>
           <% else %>
-            <h5>Evaluaciones: -- </h5>
+            <h5> -- </h5>
           <% end %>
         </div>
         <div class="like-button">
           <% if current_user %>
-              <% if Like.find_by(user_id: current_user.id, service_id: @service.id) %>
-                  <%= link_to("/likes/#{@service.id}/destroy", {method: "post"}) do %>
-                      <span class="fa fa-heart liked-btn"></span>
-                  <% end %>
-              <% else %>
-                  <%= link_to("/likes/#{@service.id}/create", {method: "post"}) do %>
-                      <span class="fa fa-heart unliked-btn"></span>
-                  <% end %>
+            <% existing_like = Like.find_by(user_id: current_user.id, service_id: @service.id) %>
+            <% if existing_like %>
+              <%= button_to like_path(service_id: @service.id), method: :delete do %>
+                <span class="fa fa-heart liked-btn"></span>
               <% end %>
+            <% else %>
+              <%= button_to likes_path(service_id: @service.id), method: :post do %>
+                <span class="fa fa-heart unliked-btn"></span>
+              <% end %>
+            <% end %>
           <% else %>
             <span class="fa fa-heart liked-btn"></span>
           <% end %>
-          <%= @likes_count %>
         </div>
       </div>
       <p>
@@ -82,11 +77,34 @@
         <%= @service.detail %>
       </p>
     </div>
+<br>
+    <div class="posts-show-item">
+      <div class="post-user-name">
+        <h5>Planes asociados:</h5>
+        <% @service.plans.each do |plan| %>
+          <div class="plan-details">
+            <p>Plan Title: <%= plan.title %></p>
+            <p>Delivery Method: <%= plan.delivery_method %></p>
+            <p>Price: <%= plan.price %> MXN</p>
+            <p>Detail: <%= plan.detail %></p>
+
+            <% if current_user && @service.title != "no encontrado" && @service.user_id != current_user.id %>
+              <%= link_to "Seleccionar y Hacer el pedido", new_order_path(plan_id: plan.id, buyer_id: current_user.id, seller_id: @service.user_id), class: "button-001" %>
+            <% elsif current_user && @service.user_id == current_user.id %>
+              <!-- No puedes comprar tu propio servicio. -->
+            <% else %>
+              <%= link_to "Hacer el pedido", new_user_session_path(flash_alert: 'Por favor, inicia sesión'), class: "buttons__main" %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+<br>
     <h1 class="form-heading">Evaluación</h1>
-    <% @reviews.each do |review| %>
+    <% @service_reviews.each do |review| %>
       <div class="posts-index-item">
         <div class="post-left">
-          <% user = review.user %>
           <%# <% if user.present? && user.profile_image.present? %>
             <%# <img src="<%= "/user_images/#{user.profile_image}" %>
            <%#<% else %>
@@ -101,8 +119,8 @@
           <% end %>
           <p><%= review.comment %></p>
           <div style="display: flex; justify-content: space-between;">
-            <% if user.present? && user.name.present? %>
-              <p><%= user.name %></p>
+            <% if review.user.present? && review.user.name.present? %>
+              <p><%= review.user.name %></p>
             <% else %>
               <p>Usuario dado de baja</p>
             <% end %>
@@ -111,6 +129,5 @@
         </div>
       </div>
     <% end %>
-    <%= paginate @reviews %>
   </div>
 </div>

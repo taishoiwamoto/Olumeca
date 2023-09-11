@@ -1,19 +1,37 @@
 <div class="main posts-new">
   <div class="container">
+    <h1 class="form-heading">Crear una nueva evaluación</h1>
     <div class="form">
       <div class="form-body">
-        <h1>Crear una nueva evaluación</h1>
-
         <%= form_for @review, url: service_reviews_path, html: { multipart: true } do |form| %>
+
+          <% if @review.errors.any? %>
+            <div id="error_explanation">
+              <ul>
+              <% @review.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+              </ul>
+            </div>
+          <% end %>
+
           <div class="field">
-            <%= form.label :rating, 'Evaluación (obligatorio)' %>
-            <%= form.select :rating, options_for_select([1, 2, 3, 4, 5]), prompt: "Seleccione un valor numérico", required: true %>
+            <%= form.label :rating, 'Evaluación' %>
+            <%= form.select :rating, options_for_select([
+              ['⭐️⭐️⭐️⭐️⭐️', 5],
+              ['⭐️⭐️⭐️⭐️', 4],
+              ['⭐️⭐️⭐️', 3],
+              ['⭐️⭐️', 2],
+              ['⭐️', 1]
+            ]), prompt: "Seleccione un valor numérico", required: true %>
           </div>
+
           <div class="field">
-            <%= form.label :comment, 'Comentar' %>
+            <%= form.label :comment, 'Comentario' %>
             <%= form.text_area :comment %>
           </div>
-          <%= form.hidden_field :service_id, value: @review.service_id %>
+
+          <%= form.hidden_field :plan_id, value: @review.plan_id %>
           <%= form.hidden_field :user_id, value: @review.user_id %>
           <%= form.hidden_field :order_id, value: @review.order_id %>
           <%= form.submit 'Evaluar',  class: "buttons__main"%>

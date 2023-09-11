@@ -5,38 +5,38 @@
       <h2><%= current_user.name %></h2>
       <p>ID de Usuario: <%= current_user.id %></p>
       <% if @average_rating.nil? %>
-        <h5>Evaluaciones: -- </h5>
+        <h5>-- </h5>
       <% else %>
         <div class="average-rating">
           <h5>
-            Evaluaciones: <%= render_stars(@average_rating) %>
+            <%= render_stars(@average_rating) %>
             (<%= sprintf('%.2f', @average_rating) %>)
           </h5>
         </div>
       <% end %>
-      <% if current_user && current_user.id == current_user.id %>
-        <%= link_to("Editar", "/users/#{current_user.id}/edit") %>
+      <% if current_user %>
+        <%= link_to "Editar tu cuenta",  edit_user_registration_path %>
       <% end %>
     </div>
 
     <ul class="user-tabs">
       <li class="<%= 'active' if controller_name == 'users' && action_name == 'show' %>">
-        <%= link_to("Servicios", "/users/#{current_user.id}") %>
+        <%= link_to("Servicios", user_path(current_user)) %>
       </li>
 
-      <% if current_user && current_user.id == current_user.id %>
+      <% if current_user  %>
         <li class="<%= 'active' if controller_name == 'users' && action_name == 'likes' %>">
-          <%= link_to("Likes!", "/users/#{current_user.id}/likes") %>
+          <%= link_to("Likes!", likes_user_path(current_user.id)) %>
         </li>
       <% end %>
-      <% if current_user && current_user.id == current_user.id %>
+      <% if current_user %>
         <li class="<%= 'active' if controller_name == 'users' && action_name == 'orders' %>">
-          <%= link_to("Tus pedidos", user_orders_path(current_user.id)) %>
+          <%= link_to("Tus pedidos", orders_user_path(current_user.id)) %>
         </li>
       <% end %>
-      <% if current_user && current_user.id == current_user.id %>
+      <% if current_user %>
         <li class="<%= 'active' if controller_name == 'users' && action_name == 'sales' %>">
-          <%= link_to("Tus ventas", user_sales_path(current_user.id)) %>
+          <%= link_to("Tus ventas", sales_user_path(current_user.id)) %>
         </li>
       <% end %>
     </ul>
@@ -52,7 +52,7 @@
         </div>
         <div class="post-right">
           <% if order.seller.present? && order.service %>
-            <%= link_to "/services/#{order.service.id}" do %>
+            <%= link_to service_path(order.service) do %>
               <h4><%= order.service.title %></h4>
             <% end %>
           <% else %>
@@ -65,7 +65,7 @@
                 <% if current_user.id != order.seller_id %>
                   <% if order.service %>
                     <% if !order.already_reviewed?(current_user, order.id) %>
-                      <%= link_to "Evaluar", new_service_review_path(order_id: order.id, service_id: order.service.id, user_id: current_user.id), class: "btn btn-primary" %>
+                      <%= link_to "Evaluar", new_service_review_path(order_id: order.id, service_id: order.service.id, user_id: current_user.id, plan_id: order.plan.id), class: "button-002" %>
                     <% end %>
                   <% end %>
                 <% end %>

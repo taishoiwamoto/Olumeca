@@ -5,13 +5,13 @@
         <h1>Mercado de Servicios</h1>
       </div>
         <p>Es posible comprar y vender habilidades y servicios.</p>
-        <%= link_to "Registrar", "/users/sign_up", class: "buttons__main" %>
+        <%= link_to "Registrar", new_user_registration_path, class: "buttons__main" %>
     </div>
   </div>
   <div class="top-newServices__container">
     <h2 class="top-title">Servicios Nuevos</h2>
       <% @services.each do |service| %>
-        <%= link_to "/services/#{service.id}" do %>
+        <%= link_to service_path(service) do %>
           <div class="posts-index-item">
             <div class="post-left">
               <img src="<%= "/service_images/#{service.image}" %>">
@@ -20,7 +20,7 @@
               <h4><%= service.title %></h4>
               <div>
                 <div class="post-user-name">
-                  <p>El vendedor: <%= service.user.name %></p>
+                  <p>El vendedor: <%= service.user.name%></p>
                 </div>
                 <div style="display: flex; justify-content: space-between;">
                 </div>
@@ -30,7 +30,7 @@
         <% end %>
       <% end %>
       <div class="top-main-button">
-        <%= link_to "Ver más servicios", "services/index", class: "buttons__main" %>
+        <%= link_to "Ver más servicios", services_path, class: "buttons__main" %>
       </div>
     </div>
   </div>
@@ -49,7 +49,7 @@
         <li>3.Compra: Confirme el contenido del servicio previamente por WhatsApp y compre mediante transferencia bancaria.</li>
         <li>4.Comunicación: Después de la compra, comunique a través de WhatsApp o videoconferencia.</li>
       </ol>
-      <%= link_to "Buscar un servicio", "services/index", class: "buttons__main" %>
+      <%= link_to "Buscar un servicio", services_path, class: "buttons__main" %>
     </div>
   </div>
   <div class="top-main-service">
@@ -65,7 +65,7 @@
         <li>2.Recepción de pedidos: Las consultas o compras del servicio se notificarán a través de WhatsApp.</li>
         <li>3.Comunicación y entrega: Después de recibir el pedido, proporciona el servicio a través de WhatsApp o videoconferencia.</li>
       </ol>
-      <%= link_to "Publicar un servicio", "services/new", class: "buttons__main" %>
+      <%= link_to "Publicar un servicio", new_service_path, class: "buttons__main" %>
     </div>
   </div>
   <div class="top-whatsapp">
