@@ -37,8 +37,8 @@ class UsersController < ApplicationController
 
     user.services.each do |service|
       service.plans.each do |plan|
-        total_reviews += plan.service_reviews.sum(:rating)
-        total_count += plan.service_reviews.count
+        total_reviews += plan.reviews.sum(:rating)
+        total_count += plan.reviews.count
       end
     end
 

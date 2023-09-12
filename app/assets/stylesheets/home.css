@@ -451,6 +451,10 @@ header {
   font: 100%/1.5 'Avenir Next', 'Hiragino Sans', sans-serif;
 }
 
+#btn-delete {
+  background-color: transparent; /* 背景色を透明に */
+  border: none; /* 枠線をなくす */
+}
 
 /* form ================================ */
 

@@ -5,15 +5,13 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :services, dependent: :destroy
-  has_many :likes, dependent: :destroy
+  has_many :plans, through: :services
   has_many :purchased_orders, class_name: 'Order', foreign_key: 'buyer_id', dependent: :nullify
   has_many :sold_orders, class_name: 'Order', foreign_key: 'seller_id', dependent: :nullify
+  has_many :reviews, dependent: :nullify
+  #has_many :indirect_reviews, through: :plans, source: :reviews
+  has_many :likes, dependent: :destroy
 
-  # Direct association
-  has_many :service_reviews, dependent: :nullify
-  # Through associations
-  has_many :plans, through: :services
-  has_many :indirect_service_reviews, through: :plans, source: :service_reviews
 
   validates :name,
     presence: { message: ':El nombre del usuario no puede estar vacío.' },
@@ -25,6 +23,6 @@ class User < ApplicationRecord
   validates :phone_number, presence: true
 
   def average_service_rating
-    self.services.joins(:service_reviews).average('service_reviews.rating')
+    self.services.joins(:reviews).average('reviews.rating')
   end
 end

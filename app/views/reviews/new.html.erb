@@ -3,7 +3,7 @@
     <h1 class="form-heading">Crear una nueva evaluación</h1>
     <div class="form">
       <div class="form-body">
-        <%= form_for @review, url: service_reviews_path, html: { multipart: true } do |form| %>
+        <%= form_for @review, url: reviews_path, html: { multipart: true } do |form| %>
 
           <% if @review.errors.any? %>
             <div id="error_explanation">

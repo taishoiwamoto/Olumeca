@@ -1,13 +1,14 @@
 class Service < ApplicationRecord
-  has_many :likes, dependent: :destroy
-  has_many :orders, dependent: :nullify
-  has_many :plans, dependent: :destroy
-  has_many :direct_service_reviews, class_name: 'ServiceReview', dependent: :nullify
-  has_many :service_reviews, dependent: :nullify
-  has_many :service_reviews, through: :plans
   belongs_to :user
 
-  accepts_nested_attributes_for :plans, allow_destroy: true, reject_if: :all_blank
+  has_many :plans, dependent: :destroy, foreign_key: "service_id", inverse_of: :service, autosave: true
+  has_many :reviews, through: :plans
+  #has_many :reviews, dependent: :nullify
+  #has_many :indirect_reviews, through: :plans, source: :reviews
+  #has_many :direct_reviews, class_name: 'ServiceReview', dependent: :nullify
+  has_many :likes, dependent: :destroy
+
+  accepts_nested_attributes_for :plans, allow_destroy: true#, reject_if: :all_blank
 
   validates :title,
     presence: { message: ':El nombre del servicio no puede estar vacío.' },

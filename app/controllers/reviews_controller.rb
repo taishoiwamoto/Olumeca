@@ -1,4 +1,4 @@
-class ServiceReviewsController < ApplicationController
+class ReviewsController < ApplicationController
   before_action :require_login
   before_action :set_review_params, only: [:new, :create]
   before_action :find_order, only: [:new, :create]
