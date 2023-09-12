@@ -1,8 +1,8 @@
-class ServiceReview < ApplicationRecord
+class Review < ApplicationRecord
   belongs_to :user
-  belongs_to :plan
+  #belongs_to :plan
   belongs_to :order
-  has_one :service, through: :plan
+  #has_one :service, through: :plan
 
   validates :rating, presence: true, numericality: {
     only_integer: true,

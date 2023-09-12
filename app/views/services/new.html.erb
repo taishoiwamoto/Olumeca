@@ -4,6 +4,7 @@
     <%= form_for(@service, url: services_path, html: {multipart: true}) do |f| %>
       <div class="form">
         <div class="form-body">
+        <%= debug @service.plans.length %>
           <% @service.errors.full_messages.each do |message| %>
             <div class="form-error">
               <%= message %>

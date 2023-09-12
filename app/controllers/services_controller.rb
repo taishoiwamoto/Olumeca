@@ -10,9 +10,9 @@ class ServicesController < ApplicationController
     @service = Service.find_by(id: params[:id])
     @user = @service.user
     @likes_count = Like.where(service_id: @service.id).count
-    @service_reviews = @service.service_reviews
-    #service_reviews_through_plans = @service.plans.includes(:service_reviews).map(&:service_reviews).flatten
-    #service_reviews = Kaminari.paginate_array(service_reviews_through_plans).page(params[:page]).per(10)
+    @reviews = @service.reviews
+    #reviews_through_plans = @service.plans.includes(:reviews).map(&:reviews).flatten
+    #reviews = Kaminari.paginate_array(reviews_through_plans).page(params[:page]).per(10)
   end
 
 
@@ -23,7 +23,7 @@ class ServicesController < ApplicationController
 
   def create
     @service = Service.new(service_params.merge(user_id: current_user.id))
-
+    logger.debug "plans list content " + @service.plans.inspect
     if @service.save
       if params[:service][:image] && params[:service][:image].respond_to?(:read)
         @service.image = "#{@service.id}.jpg"
@@ -86,5 +86,6 @@ class ServicesController < ApplicationController
   def service_params
     params.require(:service).permit(:title, :detail, :category, :image,
                                     plans_attributes: [:id, :title, :detail, :price, :delivery_method, :_destroy])
+   #params.require(:service).permit(:title, :detail, :category, :image)
   end
 end

@@ -20,5 +20,5 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :service_reviews, only: [:new, :create]
+  resources :reviews, only: [:new, :create]
 end

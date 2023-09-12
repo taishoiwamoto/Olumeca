@@ -30,10 +30,10 @@
       </div>
       <div class="flex-container" >
         <div class="star">
-          <% if @service_reviews.present? %>
+          <% if @reviews.present? %>
             <div class="average-rating">
               <h5>
-                <% average_rating = (calculate_average_rating(@service_reviews) * 10).ceil / 10.0 %>
+                <% average_rating = (calculate_average_rating(@reviews) * 10).ceil / 10.0 %>
                 <%= "⭐️" * average_rating.round %> (<%= average_rating %>)
               </h5>
             </div>
@@ -46,15 +46,15 @@
             <% existing_like = Like.find_by(user_id: current_user.id, service_id: @service.id) %>
             <% if existing_like %>
               <%= button_to like_path(service_id: @service.id), method: :delete do %>
-                <span class="fa fa-heart liked-btn"></span>
+                <span id="btn-delete" class="fa fa-heart liked-btn"></span>
               <% end %>
             <% else %>
               <%= button_to likes_path(service_id: @service.id), method: :post do %>
-                <span class="fa fa-heart unliked-btn"></span>
+                <span id="btn-delete" class="fa fa-heart unliked-btn"></span>
               <% end %>
             <% end %>
           <% else %>
-            <span class="fa fa-heart liked-btn"></span>
+            <span id="btn-delete" class="fa fa-heart unliked-btn"></span>
           <% end %>
         </div>
       </div>
@@ -102,7 +102,7 @@
 
 <br>
     <h1 class="form-heading">Evaluación</h1>
-    <% @service_reviews.each do |review| %>
+    <% @reviews.each do |review| %>
       <div class="posts-index-item">
         <div class="post-left">
           <%# <% if user.present? && user.profile_image.present? %>
