@@ -5,10 +5,10 @@ class Service < ApplicationRecord
   has_many :reviews, through: :plans
   #has_many :reviews, dependent: :nullify
   #has_many :indirect_reviews, through: :plans, source: :reviews
-  #has_many :direct_reviews, class_name: 'ServiceReview', dependent: :nullify
+  #has_many :direct_reviews, class_name: 'Review', dependent: :nullify
   has_many :likes, dependent: :destroy
 
-  accepts_nested_attributes_for :plans, allow_destroy: true#, reject_if: :all_blank
+  accepts_nested_attributes_for :plans, allow_destroy: true, reject_if: :all_blank
 
   validates :title,
     presence: { message: ':El nombre del servicio no puede estar vacío.' },

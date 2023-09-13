@@ -5,15 +5,17 @@
         <%# <img src="<%= "/user_images/#{current_user.profile_image}" %>
         <%= link_to(@service.user.name, user_path(@service.user)) %>
       </div>
-      <br>
-
-      <li style="margin-left: 15px;">
         <% if current_user && @service.title != "no encontrado" && @service.user_id != current_user.id %>
         <a href="https://wa.me/4423831033" target="_blank" class="small-whatsapp-button">
-          <i class="fab fa-whatsapp fa-1x" style="margin-right: 5px;"></i>
+          <i class="fab fa-whatsapp fa-1x" ></i>
           Contactar
         </a>
         <% end %>
+    </div>
+      <br>
+
+    <div class="posts-show-item">
+      <li style="margin-left: 15px;">
 
         <% if current_user && @service.user_id == current_user.id %>
           <div class="post-menus">
@@ -46,15 +48,15 @@
             <% existing_like = Like.find_by(user_id: current_user.id, service_id: @service.id) %>
             <% if existing_like %>
               <%= button_to like_path(service_id: @service.id), method: :delete do %>
-                <span id="btn-delete" class="fa fa-heart liked-btn"></span>
+                <span class="fa fa-heart liked-btn"></span>
               <% end %>
             <% else %>
               <%= button_to likes_path(service_id: @service.id), method: :post do %>
-                <span id="btn-delete" class="fa fa-heart unliked-btn"></span>
+                <span class="fa fa-heart unliked-btn"></span>
               <% end %>
             <% end %>
           <% else %>
-            <span id="btn-delete" class="fa fa-heart unliked-btn"></span>
+            <span class="fa fa-heart unliked-btn"></span>
           <% end %>
         </div>
       </div>
@@ -78,10 +80,9 @@
       </p>
     </div>
 <br>
-    <div class="posts-show-item">
-      <div class="post-user-name">
-        <h5>Planes asociados:</h5>
-        <% @service.plans.each do |plan| %>
+      <h5>Planes asociados:</h5>
+      <% @service.plans.each do |plan| %>
+        <div class="posts-show-item">
           <div class="plan-details">
             <p>Plan Title: <%= plan.title %></p>
             <p>Delivery Method: <%= plan.delivery_method %></p>
@@ -96,10 +97,8 @@
               <%= link_to "Hacer el pedido", new_user_session_path(flash_alert: 'Por favor, inicia sesión'), class: "buttons__main" %>
             <% end %>
           </div>
-        <% end %>
-      </div>
-    </div>
-
+        </div>
+      <% end %>
 <br>
     <h1 class="form-heading">Evaluación</h1>
     <% @reviews.each do |review| %>

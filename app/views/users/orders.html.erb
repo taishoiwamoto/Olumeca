@@ -44,28 +44,28 @@
     <% @orders.each do |order| %>
       <div class="posts-index-item">
         <div class="post-left">
-          <% if order.seller.present? && order.service %>
-            <img src="<%= "/service_images/#{order.service.image}" %>">
+          <% if order.seller.present? && order.plan && order.plan.service %>
+              <img src="<%= "/service_images/#{order.plan.service.image}" %>">
           <% else %>
-            <img src="<%= "default_service.jpg" %>">
+              <img src="<%= "default_service.jpg" %>">
           <% end %>
         </div>
         <div class="post-right">
-          <% if order.seller.present? && order.service %>
-            <%= link_to service_path(order.service) do %>
-              <h4><%= order.service.title %></h4>
-            <% end %>
+          <% if order.seller.present? && order.plan && order.plan.service %>
+              <%= link_to service_path(order.plan.service) do %>
+                  <h4><%= order.plan.service.title %></h4>
+              <% end %>
           <% else %>
-            <h4>Este registro ha sido eliminada.</h4>
+              <h4>Este registro ha sido eliminada.</h4>
           <% end %>
           <div>
             <div class="post-user-name", style="display: flex; justify-content: space-between;">
               <% if order.seller.present? %>
                 <p>Vendedor: <%= order.seller.name %></p>
                 <% if current_user.id != order.seller_id %>
-                  <% if order.service %>
+                  <% if order.plan && order.plan.service %>
                     <% if !order.already_reviewed?(current_user, order.id) %>
-                      <%= link_to "Evaluar", new_service_review_path(order_id: order.id, service_id: order.service.id, user_id: current_user.id, plan_id: order.plan.id), class: "button-002" %>
+                      <%= link_to "Evaluar", new_review_path(order_id: order.id, service_id: order.plan.service.id, user_id: current_user.id, plan_id: order.plan.id), class: "button-002" %>
                     <% end %>
                   <% end %>
                 <% end %>

@@ -4,16 +4,16 @@ class ReviewsController < ApplicationController
   before_action :find_order, only: [:new, :create]
 
   def new
-    @review = ServiceReview.new
+    @review = Review.new
     @review.plan_id = @plan_id  # <-- 変更した部分
     @review.user_id = current_user.id if current_user
     @review.order_id = @order.id
   end
 
   def create
-    @review = ServiceReview.new(review_params)
+    @review = Review.new(review_params)
 
-    if ServiceReview.exists?(order_id: @review.order_id, user_id: current_user.id)
+    if Review.exists?(order_id: @review.order_id, user_id: current_user.id)
       flash[:notice] = 'Este orden ya ha sido evaluado.'
       redirect_to orders_user_path(current_user) and return
     end
@@ -36,7 +36,7 @@ class ReviewsController < ApplicationController
   end
 
   def review_params
-    params.require(:service_review).permit(:user_id, :plan_id, :rating, :comment, :order_id)  # <-- 変更した部分
+    params.require(:review).permit(:user_id, :plan_id, :rating, :comment, :order_id)  # <-- 変更した部分
   end
 
   def set_review_params
