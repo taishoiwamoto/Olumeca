@@ -10,7 +10,7 @@ class ServicesController < ApplicationController
     @service = Service.find_by(id: params[:id])
     @user = @service.user
     @likes_count = Like.where(service_id: @service.id).count
-    @reviews = @service.reviews
+    @reviews = @service.reviews.order(created_at: :desc).page(params[:page]).per(5)
     #reviews_through_plans = @service.plans.includes(:reviews).map(&:reviews).flatten
     #reviews = Kaminari.paginate_array(reviews_through_plans).page(params[:page]).per(10)
   end

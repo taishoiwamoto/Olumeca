@@ -34,10 +34,10 @@
         <div class="star">
           <% if @reviews.present? %>
             <div class="average-rating">
-              <h5>
-                <% average_rating = (calculate_average_rating(@reviews) * 10).ceil / 10.0 %>
-                <%= "⭐️" * average_rating.round %> (<%= average_rating %>)
-              </h5>
+            <h5>
+              <% average_rating = calculate_average_rating(@reviews) %>
+              <%= "⭐️" * average_rating.round %> (<%= sprintf('%.2f', average_rating) %>)
+            </h5>
             </div>
           <% else %>
             <h5> -- </h5>
@@ -128,5 +128,6 @@
         </div>
       </div>
     <% end %>
+    <%= paginate @reviews %>
   </div>
 </div>

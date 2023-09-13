@@ -7,9 +7,9 @@ Rails.application.routes.draw do
       get :likes
       get :orders
       get :sales
+      get :reviews # この行を追加
     end
   end
-
   resources :services
 
   resources :likes, only: [:create, :destroy]

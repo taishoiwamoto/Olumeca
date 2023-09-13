@@ -9,6 +9,7 @@ class User < ApplicationRecord
   has_many :purchased_orders, class_name: 'Order', foreign_key: 'buyer_id', dependent: :nullify
   has_many :sold_orders, class_name: 'Order', foreign_key: 'seller_id', dependent: :nullify
   has_many :reviews, dependent: :nullify
+  has_many :sold_reviews, through: :sold_orders, source: :review
   #has_many :indirect_reviews, through: :plans, source: :reviews
   has_many :likes, dependent: :destroy
 
@@ -23,6 +24,6 @@ class User < ApplicationRecord
   validates :phone_number, presence: true
 
   def average_service_rating
-    self.services.joins(:reviews).average('reviews.rating')
+    sold_reviews.average(:rating)
   end
 end

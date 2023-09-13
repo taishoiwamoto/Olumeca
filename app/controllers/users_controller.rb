@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :authenticate_user, except: %i[show]
-  before_action :set_user, only: [:likes, :orders, :sales]
+  before_action :set_user, only: [:likes, :orders, :sales, :reviews]
   #before_action :forbid_login_user, {only: [:new, :create, :login_form, :login]}
 
   def show
@@ -9,19 +9,25 @@ class UsersController < ApplicationController
     @average_rating = @user.average_service_rating
   end
 
+  def reviews
+    @user = User.find(params[:id])
+    order_ids = Order.where(seller_id: @user.id).pluck(:id)
+    @reviews = Review.where(order_id: order_ids).order(created_at: :desc).page(params[:page]).per(5)
+  end
+
   def likes
-    set_services_and_rating_for(@user)
+    set_services_and_rating_for
     @likes = Like.where(user_id: current_user.id).order(created_at: :desc).page(params[:page]).per(5)
   end
 
 
   def orders
-    set_services_and_rating_for(@user)
+    set_services_and_rating_for
     @orders = Order.where(buyer_id: current_user.id).order(created_at: :desc).page(params[:page]).per(5)
   end
 
   def sales
-    set_services_and_rating_for(@user)
+    set_services_and_rating_for
     @sales = Order.where(seller_id: current_user.id).order(created_at: :desc).page(params[:page]).per(5)
   end
 
@@ -31,11 +37,11 @@ class UsersController < ApplicationController
     @user = current_user
   end
 
-  def set_services_and_rating_for(user)
+  def set_services_and_rating_for
     total_reviews = 0
     total_count = 0
 
-    user.services.each do |service|
+    @user.services.each do |service|
       service.plans.each do |plan|
         total_reviews += plan.reviews.sum(:rating)
         total_count += plan.reviews.count
