@@ -9,8 +9,8 @@
       <% else %>
         <div class="average-rating">
           <h5>
-            <%= render_stars(@average_rating) %>
-            (<%= sprintf('%.2f', @average_rating) %>)
+            <%= render_stars(@average_rating.round(2)) %>
+            (<%= sprintf('%.2f', @average_rating.round(2)) %>)
           </h5>
         </div>
       <% end %>

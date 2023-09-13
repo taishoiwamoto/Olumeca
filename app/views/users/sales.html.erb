@@ -44,16 +44,16 @@
     <% @sales.each do |sale| %>
       <div class="posts-index-item">
         <div class="post-left">
-          <% if sale.service %>
-            <img src="<%= "/service_images/#{sale.service.image}" %>">
-          <% else %>
+        <% if sale.plan && sale.plan.service %>
+            <img src="<%= "/service_images/#{sale.plan.service.image}" %>">
+        <% else %>
             <img src="<%= "default_service.jpg" %>">
-          <% end %>
+        <% end %>
         </div>
         <div class="post-right">
-          <% if sale.service %>
-            <%= link_to service_path(sale.service) do %>
-              <h4><%= sale.service.title %></h4>
+          <% if sale.plan && sale.plan.service %>
+            <%= link_to service_path(sale.plan.service) do %>
+              <h4><%= sale.plan.service.title %></h4>
             <% end %>
           <% else %>
             <h4>Este registro ha sido eliminada.</h4>
