@@ -1,7 +1,7 @@
 <div class="main user-show">
   <div class="container">
     <div class="user">
-      <%#<%= image_tag(@user.image) %>
+     <%#<%= image_tag(@user.image) %>
       <h2><%= @user.name %></h2>
       <p>ID de Usuario: <%= @user.id %></p>
 
@@ -16,11 +16,10 @@
         <h5> -- </h5>
       <% end %>
 
-      <% if current_user %>
-        <%= link_to "Editar tu cuenta",  edit_user_registration_path %>
+      <% if @user == current_user %>
+        <%= link_to "Editar tu cuenta", edit_user_registration_path %>
       <% end %>
     </div>
-
 
     <ul class="user-tabs">
       <li class="<%= 'active' if controller_name == 'users' && action_name == 'show' %>">
@@ -48,26 +47,33 @@
       <% end %>
     </ul>
 
-    <% @likes.order(created_at: :desc).each do |like| %>
-      <% service = Service.find_by(id: like.service_id) %>
-        <%= link_to service_path(service.id) do %>
-          <div class="posts-index-item">
-            <div class="post-left">
-              <img src="<%= "/service_images/#{service.image}" %>">
-            </div>
-            <div class="post-right">
-              <h4><%= service.title %></h4>
-              <div>
-                <div class="post-user-name">
-                  <p>El vendedor: <%= service.user.name %></p>
-                </div>
-                <div style="display: flex; justify-content: space-between;">
-                </div>
-              </div>
-            </div>
+    <% @reviews.each do |review| %>
+      <div class="posts-index-item">
+        <div class="post-left">
+          <%# <% if user.present? && user.profile_image.present? %>
+            <%# <img src="<%= "/user_images/#{user.profile_image}" %>
+           <%#<% else %>
+            <%# <img src="<%= "default_user.jpg" %>
+          <%# <% end %>
+        </div>
+        <div class="post-right">
+          <% if review.rating.present? %>
+            <h4>
+              <%= "⭐️" * review.rating %>
+            </h4>
+          <% end %>
+          <p><%= review.comment %></p>
+          <div style="display: flex; justify-content: space-between;">
+            <% if review.user.present? && review.user.name.present? %>
+              <p><%= review.user.name %></p>
+            <% else %>
+              <p>Usuario dado de baja</p>
+            <% end %>
+            <p>Fecha: <%= review.created_at.strftime("%d/%m/%Y") %></p>
           </div>
-        <% end %>
+        </div>
+      </div>
     <% end %>
-    <%= paginate @likes %>
+    <%= paginate @reviews %>
   </div>
 </div>

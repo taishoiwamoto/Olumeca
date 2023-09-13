@@ -1,6 +1,6 @@
 class Review < ApplicationRecord
   belongs_to :user
-  #belongs_to :plan
+  belongs_to :plan, optional: true
   belongs_to :order
   #has_one :service, through: :plan
 
