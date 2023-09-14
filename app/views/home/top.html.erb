@@ -14,7 +14,11 @@
         <%= link_to service_path(service) do %>
           <div class="posts-index-item">
             <div class="post-left">
-              <img src="<%= "/service_images/#{service.image}" %>">
+            <% if service.image.attached? %>
+              <%= image_tag(service.image) %>
+            <% else %>
+              <%= image_tag('default_service.jpg') %>
+            <% end %>
             </div>
             <div class="post-right">
               <h4><%= service.title %></h4>

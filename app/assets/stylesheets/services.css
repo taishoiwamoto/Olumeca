@@ -1,10 +1,20 @@
-#service-image {
-  max-width: 500px;  /* 希望の最大幅に変更 */
+.service-image {
   width: 100%;       /* コンテナの幅に合わせる */
   height: auto;      /* アスペクト比を維持 */
+  object-fit: cover; /* 画像のアスペクト比を維持しつつ、コンテナに合わせて表示 */
   border-radius: 0%;
-  margin: 0 auto;    /* 左右のマージンを自動にして中央に配置 */
-  display: block;    /* イメージをブロック要素として扱い、margin: autoを効かせる */
+  box-shadow: 0 2px 6px #c1ced7; /* オプション: 影を追加 */
+}
+
+.service-image img {
+  width: 100%;       /* コンテナの幅に合わせる */
+  max-width: 600px;  /* 最大の幅を600pxに設定 */
+  height: auto;      /* アスペクト比を維持 */
+  object-fit: cover; /* 画像のアスペクト比を維持しつつ、コンテナに合わせて表示 */
+  border-radius: 0%;
+  box-shadow: 0 2px 6px #c1ced7; /* オプション: 影を追加 */
+  margin: 0 auto;    /* 中央揃え */
+  display: block;    /* ブロック要素として配置 */
 }
 
 /* posts/index ================================ */
@@ -50,6 +60,34 @@
   display: inline;
 }
 
+.posts-user-item {
+  padding: 30px;
+  background-color: white;
+  box-shadow: 0 2px 6px #c1ced7;
+  overflow: hidden;
+  display: flex; /* 追加 */
+  align-items: center; /* アイテムを縦方向の中央に配置 */
+  flex: 1; /* 使えるスペースを全て使うように設定 */
+  vertical-align: middle;
+  font-size: 24px;
+}
+
+.posts-user-item p {
+  font-size: 24px;
+  margin: 20px 0;
+}
+
+.posts-user-item .fa {
+  font-size: 16px;
+  margin-right: 3px;
+}
+
+.whatsapp {
+  display: flex;
+  align-items: center;
+  padding-left: 20px; /* 必要に応じて調整 */
+}
+
 .posts-show-item {
   padding: 30px;
   background-color: white;
@@ -57,7 +95,7 @@
   overflow: hidden;
 }
 
-.posts-show-item img {
+.post-user-name img {
   width: 60px;
   height: 60px;
   border-radius: 40%;
@@ -75,6 +113,11 @@
 .posts-show-item p {
   font-size: 24px;
   margin: 20px 0;
+}
+
+.posts-show-item .fa {
+  font-size: 16px;
+  margin-right: 3px;
 }
 
 .post-time {
@@ -97,11 +140,6 @@
 
 .liked-btn {
   color: #ff2581;
-}
-
-.posts-show-item .fa {
-  font-size: 16px;
-  margin-right: 3px;
 }
 
 .post-menus {
