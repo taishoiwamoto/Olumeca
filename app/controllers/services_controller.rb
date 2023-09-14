@@ -23,19 +23,9 @@ class ServicesController < ApplicationController
 
   def create
     @service = Service.new(service_params.merge(user_id: current_user.id))
-    logger.debug "plans list content " + @service.plans.inspect
-    if @service.save
-      if params[:service][:image] && params[:service][:image].respond_to?(:read)
-        @service.image = "#{@service.id}.jpg"
-        image = params[:service][:image]
-        File.binwrite("public/service_images/#{@service.image}", image.read)
-        @service.save
-      elsif @service.image.blank?
-        @service.update(image: "default_service.jpg")
-      end
 
-      flash[:notice] = "Has creado un servicio"
-      redirect_to service_path(@service)
+    if @service.save
+      redirect_to service_path(@service), notice: "Has creado un servicio"
     else
       @service.plans.build if @service.plans.blank?
       render :new

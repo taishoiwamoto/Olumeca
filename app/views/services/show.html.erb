@@ -2,25 +2,33 @@
   <div class="container">
     <div class="posts-show-item">
       <div class="post-user-name">
-        <%# <img src="<%= "/user_images/#{current_user.profile_image}" %>
-        <%= link_to(@service.user.name, user_path(@service.user)) %>
+        <% if @user.image.attached? %>
+          <%= image_tag(@user.image) %>
+        <% else %>
+          <%= image_tag('default_user.jpg') %>
+        <% end %>
+          <%= link_to(@service.user.name, user_path(@service.user)) %>
       </div>
+      <div class="whatsapp" %>
         <% if current_user && @service.title != "no encontrado" && @service.user_id != current_user.id %>
         <a href="https://wa.me/4423831033" target="_blank" class="small-whatsapp-button">
           <i class="fab fa-whatsapp fa-1x" ></i>
           Contactar
         </a>
         <% end %>
+      </div>
     </div>
-      <br>
 
+      <br>
     <div class="posts-show-item">
       <li style="margin-left: 15px;">
 
         <% if current_user && @service.user_id == current_user.id %>
           <div class="post-menus">
             <%= link_to("Editar", edit_service_path(@service)) %>
-            <%= button_to "Eliminar", service_path(@service), method: :delete, data: { confirm: "¿Estás seguro de que deseas eliminar este servicio?" } %>
+            <%= button_to service_path(@service), method: :delete, data: { confirm: "¿Estás seguro de que deseas eliminar este servicio?" } do %>
+              Eliminar <i class="fa-solid fa-trash"></i>
+            <% end %>
           </div>
         <% end %>
       </li>
@@ -66,8 +74,13 @@
       </p>
 
       <p>
+      <%#https://apidock.com/rails/ActionView/Helpers/AssetTagHelper/image_tag %>
       <div class="service-image">
-        <img id="service-image" src="<%= "/service_images/#{@service.image}" %> ">
+      <% if @service.image.attached? %>
+        <%= image_tag(@service.image)%>
+      <% else %>
+        <%= image_tag('default_service.jpg') %>
+      <% end %>
       </div>
       </p>
       <p>

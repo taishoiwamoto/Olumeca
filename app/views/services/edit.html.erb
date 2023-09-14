@@ -2,6 +2,7 @@
   <div class="container">
     <h1 class="form-heading">Editar</h1>
     <%= form_for(@service, url: service_path(@service), html: {multipart: true}, method: :patch) do |f| %>
+      <h2>Servicio</h2>
       <div class="form">
         <div class="form-body">
           <% @service.errors.full_messages.each do |message| %>
@@ -10,7 +11,6 @@
             </div>
           <% end %>
 
-          <h2>Servicio</h2>
           <div class="field">
             <%= f.label :title %><br/>
             <%= f.text_field :title, value: @service.title %>
@@ -50,9 +50,9 @@
         </div>
       </div>
 <br>
+      <h2>Plans</h2>
       <div class="form">
         <div class="form-body">
-          <h2>Plans</h2>
           <%= f.fields_for :plans do |plan_form| %>
             <% plan = plan_form.object %>
             <% plan.errors.full_messages.each do |message| %>

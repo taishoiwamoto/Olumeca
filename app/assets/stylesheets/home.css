@@ -399,9 +399,10 @@ header {
   color: white;
   display: inline-block;
   background-color: #25D366;
-  padding: 10px;
+  padding: 5px;
   border-radius: 5px;
   width: auto;
+  margin-left: auto;
 }
 
 .small-whatsapp-button:hover {

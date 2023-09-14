@@ -50,4 +50,6 @@ class UsersController < ApplicationController
 
     @average_rating = total_count > 0 ? total_reviews / total_count.to_f : nil
   end
+
+
 end
