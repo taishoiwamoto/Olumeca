@@ -7,6 +7,7 @@ class Service < ApplicationRecord
   #has_many :indirect_reviews, through: :plans, source: :reviews
   #has_many :direct_reviews, class_name: 'Review', dependent: :nullify
   has_many :likes, dependent: :destroy
+  has_one_attached :image
 
   accepts_nested_attributes_for :plans, allow_destroy: true, reject_if: :all_blank
 
