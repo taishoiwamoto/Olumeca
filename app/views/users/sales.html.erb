@@ -59,7 +59,7 @@
 
         <div class="post-left">
 
-        <% if sale.plan.service.image.attached? %>
+        <% if sale.plan && sale.plan.service && sale.plan.service.image.attached? %>
           <%= image_tag(sale.plan.service.image) %>
         <% else %>
           <%= image_tag('default_service.jpg') %>

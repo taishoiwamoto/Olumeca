@@ -5,14 +5,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
   before_action :configure_account_update_params, only: [:update]
 
   def create
-    if verify_recaptcha
+    #if verify_recaptcha
       super
-    else
-      self.resource = resource_class.new sign_up_params
-      resource.validate
-      set_minimum_password_length
-      respond_with resource, location: new_user_registration_path
-    end
+    #else
+      #self.resource = resource_class.new sign_up_params
+      #resource.validate
+      #set_minimum_password_length
+      #respond_with resource, location: new_user_registration_path
+    #end
   end
 
 

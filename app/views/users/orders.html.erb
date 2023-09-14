@@ -9,7 +9,6 @@
       <% end %>
 
       <h2><%= current_user.name %></h2>
-
       <p>ID de Usuario: <%= current_user.id %></p>
 
       <% average_rating = @user.average_service_rating %>
@@ -57,43 +56,42 @@
     <% @orders.each do |order| %>
       <div class="posts-index-item">
         <div class="post-left">
-        <% if order.plan.service.image.attached? %>
-          <%= image_tag(order.plan.service.image) %>
-        <% else %>
-          <%= image_tag('default_service.jpg') %>
-        <% end %>
-
+          <% if order.plan && order.plan.service && order.plan.service.image.attached? %>
+            <%= image_tag(order.plan.service.image) %>
+          <% else %>
+            <%= image_tag('default_service.jpg') %>
+          <% end %>
         </div>
+
         <div class="post-right">
           <% if order.seller.present? && order.plan && order.plan.service %>
-              <%= link_to service_path(order.plan.service) do %>
-                  <h4><%= order.plan.service.title %></h4>
-              <% end %>
-          <% else %>
-              <h4>Este registro ha sido eliminada.</h4>
-          <% end %>
-          <div>
-            <div class="post-user-name", style="display: flex; justify-content: space-between;">
-              <% if order.seller.present? %>
-                <p>Vendedor: <%= order.seller.name %></p>
-                <% if current_user.id != order.seller_id %>
-                  <% if order.plan && order.plan.service %>
-                    <% if !order.already_reviewed?(current_user, order.id) %>
-                      <%= link_to "Evaluar", new_review_path(order_id: order.id, service_id: order.plan.service.id, user_id: current_user.id, plan_id: order.plan.id), class: "button-002" %>
-                    <% end %>
-                  <% end %>
-                <% end %>
+            <%= link_to service_path(order.plan.service) do %>
+              <h4><%= order.plan.service.title %></h4>
+            <% end %>
+
+            <div class="post-user-name" style="display: flex; justify-content: space-between;">
+              <p>Vendedor: <%= order.seller.name %></p>
+
+              <% if order.previously_reviewed_by_user?(current_user) && order.reviewed_by_user?(current_user) && order.review.present? %>
+                <%= link_to "Editar", edit_review_path(order.review), class: "button-002" %>
+              <% elsif order.previously_reviewed_by_user?(current_user) %>
+                <%= link_to "Evaluar", new_review_path(order_id: order.id, plan_id: order.plan.id, service_id: order.plan.service.id), class: "button-002" %>
               <% else %>
-                <p>Vendedor: Usuario dado de baja</p>
+                <%= link_to "Evaluar", new_review_path(order_id: order.id, plan_id: order.plan.id, service_id: order.plan.service.id), class: "button-002" %>
               <% end %>
             </div>
-            <div style="display: flex; justify-content: space-between;">
-              <p>Estado: <%= order.status %></p>
-              <p>Fecha: <%= order.created_at.strftime("%d/%m/%Y") %></p>
-            </div>
+          <% else %>
+            <h4>Este registro ha sido eliminada.</h4>
+            <p>Vendedor: Usuario dado de baja</p>
+          <% end %>
+
+
+          <div style="display: flex; justify-content: space-between;">
+            <p>Estado: <%= order.status %></p>
+            <p>Fecha: <%= order.created_at.strftime("%d/%m/%Y") %></p>
           </div>
-        </div>
-      </div>
+        </div> <!-- この行を追加してpost-rightを閉じました -->
+      </div> <!-- この行を追加してposts-index-itemを閉じました -->
     <% end %>
     <%= paginate @orders %>
   </div>

@@ -11,14 +11,12 @@ class ServicesController < ApplicationController
     @user = @service.user
     @likes_count = Like.where(service_id: @service.id).count
     @reviews = @service.reviews.order(created_at: :desc).page(params[:page]).per(5)
-    #reviews_through_plans = @service.plans.includes(:reviews).map(&:reviews).flatten
-    #reviews = Kaminari.paginate_array(reviews_through_plans).page(params[:page]).per(10)
   end
 
 
   def new
     @service = Service.new
-    1.times { @service.plans.build }
+    2.times { @service.plans.build }
   end
 
   def create
@@ -65,7 +63,7 @@ class ServicesController < ApplicationController
 
   def ensure_correct_user
     @service = Service.find_by(id: params[:id])
-    if @service.user_id != current_user.id
+    unless @service.user == current_user
       flash[:notice] = "No tienes autorización"
       redirect_to service_path(@service)
     end

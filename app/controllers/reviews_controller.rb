@@ -4,25 +4,49 @@ class ReviewsController < ApplicationController
   before_action :find_order, only: [:new, :create]
 
   def new
-    @review = Review.new
-    @review.plan_id = @plan_id  # <-- 変更した部分
-    @review.user_id = current_user.id if current_user
-    @review.order_id = @order.id
+    plan = Plan.find(@plan_id)
+    existing_reviews = Review.where(user_id: current_user.id, plan: Plan.where(service: plan.service))
+
+    if existing_reviews.any?
+      redirect_to edit_review_path(existing_reviews.first)
+    else
+      @review = Review.new
+      @review.plan_id = @plan_id
+      @review.user_id = current_user.id if current_user
+      @review.order_id = @order.id
+    end
   end
+
 
   def create
     @review = Review.new(review_params)
-
-    if Review.exists?(order_id: @review.order_id, user_id: current_user.id)
-      flash[:notice] = 'Este orden ya ha sido evaluado.'
-      redirect_to orders_user_path(current_user) and return
-    end
 
     if @review.save
       flash[:notice] = 'La evaluación ha sido registrada.'
       redirect_to orders_user_path(current_user)
     else
       render 'new'
+    end
+  end
+
+  def edit
+    @review = Review.find(params[:id])
+  end
+
+  def update
+    @review = Review.find(params[:id])
+
+    # このレビューが現在のユーザーに属していることを確認（セキュリティのため）
+    unless @review.user_id == current_user.id
+      flash[:error] = 'No tiene permiso para editar esta evaluación.'
+      redirect_to root_path and return
+    end
+
+    if @review.update(review_params)
+      flash[:notice] = 'La evaluación ha sido actualizada.'
+      redirect_to orders_user_path(current_user)
+    else
+      render 'edit'
     end
   end
 
