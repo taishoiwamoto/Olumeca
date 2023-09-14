@@ -44,4 +44,8 @@ class OrdersController < ApplicationController
       redirect_to new_user_session_path, notice: 'Por favor, inicia sesión'
     end
   end
+
+  def service_id
+    self.plan.service_id
+  end
 end

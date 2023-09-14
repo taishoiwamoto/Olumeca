@@ -2,12 +2,12 @@
 
 class Users::SessionsController < Devise::SessionsController
   def create
-    if verify_recaptcha
+    #if verify_recaptcha
       super
-    else
-      flash.now[:alert] = 'Recaptcha verification failed'
-      render :new
-    end
+    #else
+      #flash.now[:alert] = 'Recaptcha verification failed'
+      #render :new
+    #end
   end
   # before_action :configure_sign_in_params, only: [:create]
 

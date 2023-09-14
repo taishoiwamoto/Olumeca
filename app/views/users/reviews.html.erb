@@ -58,11 +58,11 @@
       <div class="posts-index-item">
         <div class="post-left">
 
-          <% if review.plan.service.image.attached? %>
-            <%= image_tag(review.plan.service.image) %>
-          <% else %>
-            <%= image_tag('default_service.jpg') %>
-          <% end %>
+        <% if review.user.image.attached? %>
+          <%= image_tag(review.user.image) %>
+        <% else %>
+          <%= image_tag('default_user.jpg') %>
+        <% end %>
 
         </div>
         <div class="post-right">

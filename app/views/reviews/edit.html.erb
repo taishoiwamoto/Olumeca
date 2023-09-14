@@ -1,0 +1,42 @@
+<div class="main posts-new">
+  <div class="container">
+    <h1 class="form-heading">Editar Evaluación</h1>
+    <div class="form">
+      <div class="form-body">
+        <%= form_for @review do |form| %>
+
+          <% if @review.errors.any? %>
+            <div id="error_explanation">
+              <ul>
+              <% @review.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+              </ul>
+            </div>
+          <% end %>
+
+          <div class="field">
+            <%= form.label :rating, 'Evaluación' %>
+            <%= form.select :rating, options_for_select([
+              ['⭐️⭐️⭐️⭐️⭐️', 5],
+              ['⭐️⭐️⭐️⭐️', 4],
+              ['⭐️⭐️⭐️', 3],
+              ['⭐️⭐️', 2],
+              ['⭐️', 1]
+            ], @review.rating), prompt: "Seleccione un valor numérico", required: true %>
+          </div>
+
+          <div class="field">
+            <%= form.label :comment, 'Comentario' %>
+            <%= form.text_area :comment %>
+          </div>
+
+          <%= form.hidden_field :plan_id %>
+          <%= form.hidden_field :user_id %>
+          <%= form.hidden_field :order_id %>
+          <%= form.submit 'Actualizar',  class: "buttons__main"%>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
