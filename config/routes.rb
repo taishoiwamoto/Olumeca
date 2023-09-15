@@ -12,6 +12,8 @@ Rails.application.routes.draw do
   end
   resources :services
 
+  resources :plans
+
   resources :likes, only: [:create, :destroy]
 
   resources :orders do
