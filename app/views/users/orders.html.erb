@@ -9,7 +9,6 @@
       <% end %>
 
       <h2><%= current_user.name %></h2>
-      <p>ID de Usuario: <%= current_user.id %></p>
 
       <% average_rating = @user.average_service_rating %>
       <% if average_rating.present? %>
@@ -66,32 +65,31 @@
         <div class="post-right">
           <% if order.seller.present? && order.plan && order.plan.service %>
             <%= link_to service_path(order.plan.service) do %>
-              <h4><%= order.plan.service.title %></h4>
+              <h4><%= order.plan.service.title %>(<%= order.plan.title %>)</h4>
             <% end %>
 
             <div class="post-user-name" style="display: flex; justify-content: space-between;">
-              <p>Vendedor: <%= order.seller.name %></p>
-
+              <p><%= order.seller.name %></p>
               <% if order.reviewed_by_user?(current_user) || order.previously_reviewed_by_user?(current_user) %>
-                <%= link_to "Editar", order.review.present? ? edit_review_path(order.review) : new_review_path(order_id: order.id, plan_id: order.plan.id, service_id: order.plan.service.id), class: "button-002" %>
+                <%= link_to "Editar evaluación", order.review.present? ? edit_review_path(order.review) : new_review_path(order_id: order.id, plan_id: order.plan.id, service_id: order.plan.service.id), class: "button-002", style: "font-size: 12px;" %>
               <% else %>
-                <%= link_to "Evaluar", new_review_path(order_id: order.id, plan_id: order.plan.id, service_id: order.plan.service.id), class: "button-002" %>
+                <%= link_to "Evaluar", new_review_path(order_id: order.id, plan_id: order.plan.id, service_id: order.plan.service.id), class: "button-002", style: "font-size: 12px;" %>
               <% end %>
 
             </div>
 
           <% else %>
-            <h4>Este registro ha sido eliminada.</h4>
-            <p>Vendedor: Usuario dado de baja</p>
+            <h5>Este registro ha sido eliminada.</h5>
+            <p>Usuario dado de baja</p>
           <% end %>
 
 
-          <div style="display: flex; justify-content: space-between;">
-            <p>Estado: <%= order.status %></p>
-            <p>Fecha: <%= order.created_at.strftime("%d/%m/%Y") %></p>
+          <div style="display: flex">
+            <p style="font-size: 12px;">ID del pedido:<%= order.id %>,</p>
+            <p style="font-size: 12px; margin-left: 10px;">Fecha del pedido: <%= order.created_at.strftime("%d/%m/%Y %H:%M") %></p>
           </div>
-        </div> <!-- この行を追加してpost-rightを閉じました -->
-      </div> <!-- この行を追加してposts-index-itemを閉じました -->
+        </div>
+      </div>
     <% end %>
     <%= paginate @orders %>
   </div>

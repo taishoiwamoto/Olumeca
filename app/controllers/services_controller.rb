@@ -38,14 +38,6 @@ class ServicesController < ApplicationController
   def update
     @service = Service.find_by(id: params[:id])
     if @service.update(service_params)
-      if params[:service][:image] && params[:service][:image].respond_to?(:read)
-        @service.image = "#{@service.id}.jpg"
-        image = params[:service][:image]
-        File.binwrite("public/service_images/#{@service.image}", image.read)
-        @service.save
-      elsif @service.image.blank?
-        @service.update(image: "default_service.jpg")
-      end
       flash[:notice] = "Has editado un servicio"
       redirect_to service_path(@service)
     else

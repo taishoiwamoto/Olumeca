@@ -10,8 +10,6 @@
 
       <h2><%= @user.name %></h2>
 
-      <p>ID de Usuario: <%= @user.id %></p>
-
       <% average_rating = @user.average_service_rating %>
       <% if average_rating.present? %>
         <div class="average-rating">
@@ -58,28 +56,33 @@
       <div class="posts-index-item">
         <div class="post-left">
 
-      <% if review.user && review.user.image.attached? %>
-        <%= image_tag(review.user.image) %>
-      <% else %>
-        <%= image_tag('default_user.jpg') %>
-      <% end %>
+          <% if review.user && review.user.image.attached? %>
+            <%= image_tag(review.user.image) %>
+          <% else %>
+            <%= image_tag('default_user.jpg') %>
+          <% end %>
 
         </div>
+
         <div class="post-right">
+          <div style="display: flex; justify-content: space-between;">
+            <h4>Servicio: <%= review.plan.service.title %></h4>
+          </div>
           <% if review.rating.present? %>
-            <h4>
-              <%= "⭐️" * review.rating %>
-            </h4>
+            <h4><%= "⭐️" * review.rating %></h4>
           <% end %>
-          <p><%= review.comment %></p>
           <div style="display: flex; justify-content: space-between;">
             <% if review.user.present? && review.user.name.present? %>
-              <p><%= review.user.name %></p>
+              <h5><%= review.user.name %></h5>
             <% else %>
-              <p>Usuario dado de baja</p>
+              <h5>Usuario dado de baja</h5>
             <% end %>
-            <p>Fecha: <%= review.created_at.strftime("%d/%m/%Y") %></p>
           </div>
+          <div style="display: flex;">
+            <p style="font-size: 12px;">Creación: <%= review.created_at.strftime("%d/%m/%Y %H:%M") %>,</p>
+            <p style="font-size: 12px; margin-left: 10px;">Actualización: <%= review.updated_at.strftime("%d/%m/%Y %H:%M") %></p>
+          </div>
+          <p><%= review.comment %></p>
         </div>
       </div>
     <% end %>
