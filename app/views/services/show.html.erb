@@ -30,6 +30,7 @@
     </div>
     <br>
     <h3>Servicio</h3>
+
     <div class="posts-show-item">
       <% if current_user && @service.user_id == current_user.id %>
         <div class="post-menus">
@@ -41,7 +42,7 @@
       <% end %>
 
       <div class="flex-container">
-        <h2><%= @service.title %></h2>
+        <h3><%= @service.title %></h3>
       </div>
       <br>
       <div style="display: flex; justify-content: space-between;">
@@ -55,7 +56,6 @@
             <h5> -- </h5>
           <% end %>
         </div>
-        <%= @service.category %>
         <div class="like-button">
           <% if current_user %>
             <% existing_like = Like.find_by(user_id: current_user.id, service_id: @service.id) %>
@@ -72,6 +72,9 @@
             <span class="fa fa-heart unliked-btn"></span>
           <% end %>
         </div>
+      </div>
+      <div style="display: flex; justify-content: space-between;">
+        <%= @service.category %>
       </div>
       <br>
       <div class="service-image">

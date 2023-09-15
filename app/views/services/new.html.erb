@@ -3,7 +3,7 @@
     <h1 class="form-heading">Publicar</h1>
     <%= form_for(@service, url: services_path, html: {multipart: true}) do |f| %>
 
-      <h2>Servicio</h2>
+      <h3>Servicio</h3>
       <div class="form">
         <div class="form-body">
           <% @service.errors.full_messages.each do |message| %>
@@ -51,7 +51,7 @@
         </div>
       </div>
 <br>
-      <h2>Plans</h2>
+      <h3>Plans</h3>
       <div class="form">
         <div class="form-body">
           <%= f.fields_for :plans do |plan_form| %>
@@ -88,12 +88,12 @@
           <% end %>
         </div>
       </div>
-<br>
+      <br>
       <div class="form">
-        <div class="form-body">
-          <%= f.submit "Publicar" %>
-        </div>
+        <%= f.submit "Publicar" %>
       </div>
     <% end %>
+    <br>
+    <br>
   </div>
 </div>

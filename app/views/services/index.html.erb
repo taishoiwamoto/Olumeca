@@ -20,6 +20,9 @@
                         <span><%= service.user.name %></span>
                     </div>
                     <div style="display: flex; justify-content: space-between;">
+                      <span><%= service.category %></span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between;">
                       <div class="star">
                         <% reviews = service.reviews %>
                         <% if reviews.present? %>
@@ -29,7 +32,6 @@
                           <h5> -- </h5>
                         <% end %>
                       </div>
-                      <span><%= service.category %></span>
                     </div>
                   </div>
               </div>
