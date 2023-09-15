@@ -1,29 +1,41 @@
 <div class="main posts-index">
-  <div class="container">
-  <h1 class="form-heading">Servicios</h1>
-    <% @services.each do |service| %>
-      <%= link_to service_path(service) do %>
-        <div class="posts-index-item">
-          <div class="post-left">
-          <% if service.image.attached? %>
-            <%= image_tag(service.image) %>
-          <% else %>
-            <%= image_tag('default_service.jpg') %>
-          <% end %>
-          </div>
-          <div class="post-right">
-            <h4><%= service.title %></h4>
-            <div>
-              <div class="post-user-name">
-                <p>El vendedor: <%= service.user.name %></p>
+    <div class="container">
+        <h1 class="form-heading">Servicios</h1>
+
+        <% @services.each do |service| %>
+            <%= link_to service_path(service) do %>
+              <div class="posts-index-item">
+                  <div class="post-left">
+                      <% if service.image.attached? %>
+                          <%= image_tag(service.image) %>
+                      <% else %>
+                          <%= image_tag('default_service.jpg') %>
+                      <% end %>
+                  </div>
+                  <div class="post-right">
+                    <div style="display: flex; justify-content: space-between;">
+                      <h4><%= service.title.truncate(40) %></h4>
+                    </div>
+                    <div style="display: flex; justify-content: space-between;">
+                        <span><%= service.user.name.truncate(15) %></span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between;">
+                      <div class="star">
+                        <% reviews = service.reviews %>
+                        <% if reviews.present? %>
+                          <% average_rating = calculate_average_rating(reviews) %>
+                          <%= "⭐️" * average_rating.round %> (<%= sprintf('%.2f', average_rating) %>)
+                        <% else %>
+                          <h5> -- </h5>
+                        <% end %>
+                      </div>
+                      <span><%= service.category %></span>
+                    </div>
+                  </div>
               </div>
-              <div style="display: flex; justify-content: space-between;">
-              </div>
-            </div>
-          </div>
-        </div>
-      <% end %>
-    <% end %>
-    <%= paginate @services %>
-  </div>
+            <% end %>
+        <% end %>
+
+        <%= paginate @services %>
+    </div>
 </div>

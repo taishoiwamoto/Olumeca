@@ -37,6 +37,8 @@
 
 .post-user-name a {
   font-weight: 600;
+  font-size: 20px;
+  padding-left: 10px;
 }
 
 .post-user-name a:hover {
@@ -75,11 +77,6 @@
 .posts-user-item p {
   font-size: 24px;
   margin: 20px 0;
-}
-
-.posts-user-item .fa {
-  font-size: 16px;
-  margin-right: 3px;
 }
 
 .whatsapp {

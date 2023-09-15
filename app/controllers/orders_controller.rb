@@ -19,7 +19,7 @@ class OrdersController < ApplicationController
     @order.buyer_id = current_user.id
     service = Plan.find(@order.plan_id).service
     @order.seller_id = service.user_id
-    @order.status = "pendiente"
+    @order.status = "Pendiente"
     if @order.save
       redirect_to completed_orders_path # ここでorder_completedは購入後のページを指す仮のルートです
     else
