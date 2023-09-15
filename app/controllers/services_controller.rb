@@ -16,7 +16,7 @@ class ServicesController < ApplicationController
 
   def new
     @service = Service.new
-    2.times { @service.plans.build }
+    1.times { @service.plans.build }
   end
 
   def create
