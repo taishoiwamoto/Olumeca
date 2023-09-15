@@ -65,7 +65,7 @@
         <div class="post-right">
           <% if order.seller.present? && order.plan && order.plan.service %>
             <%= link_to service_path(order.plan.service) do %>
-              <h4><%= order.plan.service.title %>(<%= order.plan.title %>)</h4>
+              <h4><%= order.plan.service.title.truncate(20) %>(<%= order.plan.title.truncate(20) %>)</h4>
             <% end %>
 
             <div class="post-user-name" style="display: flex; justify-content: space-between;">

@@ -202,3 +202,28 @@
 .star {
   margin-right: 20px;
 }
+
+
+/* plans/new ================================ */
+
+.plans-container {
+  display: flex;
+  flex-wrap: wrap; /* If items exceed the container width, wrap to the next line */
+  gap: 10px; /* Space between buttons */
+}
+
+.plan-card-btn {
+  width: 200px;  /* 幅を200pxに固定 */
+  height: 150px; /* 高さを300pxに固定 */
+  padding: 12px;
+  background-color: white;
+  border: none;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+  text-align: left;
+  box-shadow: 0 2px 6px #c1ced7;
+}
+
+.plan-card-btn:hover {
+  background-color: #ddd;
+}

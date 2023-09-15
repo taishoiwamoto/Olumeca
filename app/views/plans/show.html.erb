@@ -1,10 +1,13 @@
 <%= turbo_frame_tag 'plan_detail' do %>
   <div class="posts-show-item">
     <div class="plan-details">
-      <p>Plan Title: <%= @plan.title %></p>
-      <p>Delivery Method: <%= @plan.delivery_method %></p>
-      <p>Price: <%= @plan.price %> MXN</p>
-      <p>Detail: <%= @plan.detail %></p>
+      <h3><%= @plan.title %></h3>
+      <div style="display: flex; justify-content: space-between;">
+        <%= @plan.delivery_method %> /
+        <%= @plan.price %> MXN
+      </div>
+      <%= @plan.detail %>
+      <br>
 
       <% if current_user && @service.title != "no encontrado" && @service.user_id != current_user.id %>
         <%= link_to "Hacer el pedido", new_order_path(plan_id: @plan.id, buyer_id: current_user.id, seller_id: @service.user_id), class: "button-001", data: { turbo_frame: '_top'} %>

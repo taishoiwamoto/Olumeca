@@ -67,7 +67,7 @@
         <div class="post-right">
           <% if sale.plan && sale.plan.service %>
             <%= link_to service_path(sale.plan.service) do %>
-              <h4><%= sale.plan.service.title %>(<%= sale.plan.title %>)</h4>
+              <h4><%= sale.plan.service.title.truncate(20) %>(<%= sale.plan.title.truncate(20) %>)</h4>
             <% end %>
           <% else %>
             <h4>Este registro ha sido eliminada.</h4>
