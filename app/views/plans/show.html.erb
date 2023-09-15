@@ -1,0 +1,18 @@
+<%= turbo_frame_tag 'plan_detail' do %>
+  <div class="posts-show-item">
+    <div class="plan-details">
+      <p>Plan Title: <%= @plan.title %></p>
+      <p>Delivery Method: <%= @plan.delivery_method %></p>
+      <p>Price: <%= @plan.price %> MXN</p>
+      <p>Detail: <%= @plan.detail %></p>
+
+      <% if current_user && @service.title != "no encontrado" && @service.user_id != current_user.id %>
+        <%= link_to "Hacer el pedido", new_order_path(plan_id: @plan.id, buyer_id: current_user.id, seller_id: @service.user_id), class: "button-001", data: { turbo_frame: '_top'} %>
+      <% elsif current_user && @service.user_id == current_user.id %>
+        <!-- No puedes comprar tu propio servicio. -->
+      <% else %>
+        <%= link_to "Hacer el pedido", new_user_session_path(flash_alert: 'Por favor, inicia sesión'), class: "buttons__main", data: { turbo_frame: '_top'} %>
+      <% end %>
+    </div>
+  </div>
+<% end %>

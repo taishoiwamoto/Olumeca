@@ -30,7 +30,7 @@
         <% if current_user && @service.user_id == current_user.id %>
           <div class="post-menus">
             <%= link_to("Editar", edit_service_path(@service)) %>
-            <%= button_to service_path(@service), method: :delete, data: { confirm: "¿Estás seguro de que deseas eliminar este servicio?" } do %>
+            <%= button_to service_path(@service), method: :delete, form: {data: { turbo_confirm: "¿Estás seguro de que deseas eliminar este servicio?" }} do %>
               Eliminar <i class="fa-solid fa-trash"></i>
             <% end %>
           </div>
@@ -90,30 +90,22 @@
       </p>
     </div>
 <br>
-      <h5>Planes asociados:</h5>
-      <% @service.plans.each do |plan| %>
-        <div class="posts-show-item">
-          <div class="plan-details">
-            <p>Plan Title: <%= plan.title %></p>
-            <p>Delivery Method: <%= plan.delivery_method %></p>
-            <p>Price: <%= plan.price %> MXN</p>
-            <p>Detail: <%= plan.detail %></p>
 
-            <% if current_user && @service.title != "no encontrado" && @service.user_id != current_user.id %>
-              <%= link_to "Seleccionar y Hacer el pedido", new_order_path(plan_id: plan.id, buyer_id: current_user.id, seller_id: @service.user_id), class: "button-001" %>
-            <% elsif current_user && @service.user_id == current_user.id %>
-              <!-- No puedes comprar tu propio servicio. -->
-            <% else %>
-              <%= link_to "Hacer el pedido", new_user_session_path(flash_alert: 'Por favor, inicia sesión'), class: "buttons__main" %>
-            <% end %>
-          </div>
-        </div>
+
+      <h5>Planes</h5>
+      <% @service.plans.each do |plan| %>
+        <%= button_to plan_path(plan), method: :get, data: { turbo_frame: 'plan_detail' } do %>
+          <%= plan.title %>
+          <%= plan.price %> MXN
+        <% end %>
       <% end %>
+      <%= turbo_frame_tag 'plan_detail' %>
+
 <br>
     <h1 class="form-heading">Evaluación</h1>
     <% @reviews.each do |review| %>
       <div class="posts-index-item">
-        <div class="post-left">
+        <div clasEs="post-left">
           <% if review.user.image.attached? %>
             <%= image_tag(review.user.image) %>
           <% else %>
