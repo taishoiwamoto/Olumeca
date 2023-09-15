@@ -43,12 +43,12 @@
       <% end %>
       <% if @user == current_user %>
         <li class="<%= 'active' if controller_name == 'users' && action_name == 'orders' %>">
-          <%= link_to("Tus pedidos", orders_user_path(current_user.id)) %>
+          <%= link_to("Pedidos", orders_user_path(current_user.id)) %>
         </li>
       <% end %>
       <% if @user == current_user %>
         <li class="<%= 'active' if controller_name == 'users' && action_name == 'sales' %>">
-          <%= link_to("Tus ventas", sales_user_path(current_user.id)) %>
+          <%= link_to("Ventas", sales_user_path(current_user.id)) %>
         </li>
       <% end %>
     </ul>
@@ -72,14 +72,14 @@
             <div class="post-user-name" style="display: flex; justify-content: space-between;">
               <p>Vendedor: <%= order.seller.name %></p>
 
-              <% if order.previously_reviewed_by_user?(current_user) && order.reviewed_by_user?(current_user) && order.review.present? %>
-                <%= link_to "Editar", edit_review_path(order.review), class: "button-002" %>
-              <% elsif order.previously_reviewed_by_user?(current_user) %>
-                <%= link_to "Evaluar", new_review_path(order_id: order.id, plan_id: order.plan.id, service_id: order.plan.service.id), class: "button-002" %>
+              <% if order.reviewed_by_user?(current_user) || order.previously_reviewed_by_user?(current_user) %>
+                <%= link_to "Editar", order.review.present? ? edit_review_path(order.review) : new_review_path(order_id: order.id, plan_id: order.plan.id, service_id: order.plan.service.id), class: "button-002" %>
               <% else %>
                 <%= link_to "Evaluar", new_review_path(order_id: order.id, plan_id: order.plan.id, service_id: order.plan.service.id), class: "button-002" %>
               <% end %>
+
             </div>
+
           <% else %>
             <h4>Este registro ha sido eliminada.</h4>
             <p>Vendedor: Usuario dado de baja</p>

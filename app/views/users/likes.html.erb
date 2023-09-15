@@ -45,12 +45,12 @@
       <% end %>
       <% if @user == current_user %>
         <li class="<%= 'active' if controller_name == 'users' && action_name == 'orders' %>">
-          <%= link_to("Tus pedidos", orders_user_path(current_user.id)) %>
+          <%= link_to("Pedidos", orders_user_path(current_user.id)) %>
         </li>
       <% end %>
       <% if @user == current_user %>
         <li class="<%= 'active' if controller_name == 'users' && action_name == 'sales' %>">
-          <%= link_to("Tus ventas", sales_user_path(current_user.id)) %>
+          <%= link_to("Ventas", sales_user_path(current_user.id)) %>
         </li>
       <% end %>
     </ul>
