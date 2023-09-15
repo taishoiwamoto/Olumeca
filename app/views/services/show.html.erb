@@ -1,59 +1,61 @@
 <div class="main posts-show">
   <div class="container">
-
-    <div class="posts-user-item">
+    <h3>Vendedor/a</h3>
+    <div class="posts-index-item">
+      <div style="display: flex; justify-content: flex-end;">
+        <% average_rating = @user.average_service_rating %>
+        <% if average_rating.present? %>
+          <div class="average-rating">
+            <h5><%= "⭐️" * average_rating.round %> (<%= sprintf('%.2f', average_rating) %>)</h5>
+          </div>
+        <% else %>
+          <h5> -- </h5>
+        <% end %>
+        <div class="whatsapp">
+          <% if current_user && @service.title != "no encontrado" && @service.user_id != current_user.id %>
+            <a href="https://wa.me/4423831033" target="_blank" class="small-whatsapp-button">
+              <i class="fab fa-whatsapp fa-1x"></i> Contactar
+            </a>
+          <% end %>
+        </div>
+      </div>
       <div class="post-user-name">
         <% if @user.image.attached? %>
           <%= image_tag(@user.image) %>
         <% else %>
           <%= image_tag('default_user.jpg') %>
         <% end %>
-          <%= link_to(@service.user.name, user_path(@service.user)) %>
+        <%= link_to(@service.user.name, user_path(@service.user)) %>
       </div>
-
-      <div class="whatsapp" %>
-        <% if current_user && @service.title != "no encontrado" && @service.user_id != current_user.id %>
-        <a href="https://wa.me/4423831033" target="_blank" class="small-whatsapp-button">
-          <i class="fab fa-whatsapp fa-1x" ></i>
-          Contactar
-        </a>
-        <% end %>
-      </div>
-
     </div>
-
-      <br>
+    <br>
+    <h3>Servicio</h3>
     <div class="posts-show-item">
-      <li style="margin-left: 15px;">
-
-        <% if current_user && @service.user_id == current_user.id %>
-          <div class="post-menus">
-            <%= link_to("Editar", edit_service_path(@service)) %>
-            <%= button_to service_path(@service), method: :delete, form: {data: { turbo_confirm: "¿Estás seguro de que deseas eliminar este servicio?" }} do %>
-              Eliminar <i class="fa-solid fa-trash"></i>
-            <% end %>
-          </div>
-        <% end %>
-      </li>
-
-      <br>
+      <% if current_user && @service.user_id == current_user.id %>
+        <div class="post-menus">
+          <%= link_to("Editar", edit_service_path(@service)) %>
+          <%= button_to service_path(@service), method: :delete, form: { data: { turbo_confirm: "¿Estás seguro de que deseas eliminar este servicio?" }} do %>
+            Eliminar <i class="fa-solid fa-trash"></i>
+          <% end %>
+        </div>
+      <% end %>
 
       <div class="flex-container">
         <h2><%= @service.title %></h2>
       </div>
-      <div class="flex-container" >
+      <br>
+      <div style="display: flex; justify-content: space-between;">
         <div class="star">
           <% if @reviews.present? %>
             <div class="average-rating">
-            <h5>
               <% average_rating = calculate_average_rating(@reviews) %>
-              <%= "⭐️" * average_rating.round %> (<%= sprintf('%.2f', average_rating) %>)
-            </h5>
+              <h5><%= "⭐️" * average_rating.round %> (<%= sprintf('%.2f', average_rating) %>)</h5>
             </div>
           <% else %>
             <h5> -- </h5>
           <% end %>
         </div>
+        <%= @service.category %>
         <div class="like-button">
           <% if current_user %>
             <% existing_like = Like.find_by(user_id: current_user.id, service_id: @service.id) %>
@@ -71,47 +73,61 @@
           <% end %>
         </div>
       </div>
-      <p>
+      <br>
       <div class="service-image">
         <% if @service.image.attached? %>
           <%= image_tag(@service.image, class: "service-image") %>
         <% else %>
           <%= image_tag('default_service.jpg', class: "service-image") %>
         <% end %>
-        </div>
-      <p>
-        <h5>Categoría</h5>
-         <%= @service.category %>
-      </p>
-      <p>
-        <h5>Detalles</h5>
-        <%= @service.detail %>
-      </p>
+      </div>
+      <p><%= @service.detail %></p>
     </div>
-<br>
+    <br>
 
+    <% first_plan = @service.plans.first %>
 
-      <h5>Planes</h5>
+    <h3>Planes</h3>
+    <div class="plans-container">
       <% @service.plans.each do |plan| %>
-        <%= button_to plan_path(plan), method: :get, data: { turbo_frame: 'plan_detail' } do %>
-          <%= plan.title %>
-          <%= plan.price %> MXN
+        <%= button_to plan_path(plan), method: :get, data: { turbo_frame: 'plan_detail' }, class: "plan-card-btn" do %>
+          <h4><%= plan.title.truncate(40)  %></h4>
+          <p><%= plan.price %> MXN</p>
         <% end %>
       <% end %>
-      <%= turbo_frame_tag 'plan_detail' %>
+    </div>
 
-<br>
-    <h1 class="form-heading">Evaluación</h1>
+    <br>
+    <%= turbo_frame_tag 'plan_detail' do %>
+      <div class="posts-show-item">
+        <div class="plan-details">
+          <h3><%= first_plan.title %></h3>
+          <div style="display: flex; justify-content: space-between;">
+            <%= first_plan.delivery_method %> / <%= first_plan.price %> MXN
+          </div>
+          <%= first_plan.detail %>
+          <br>
+          <% if current_user && @service.title != "no encontrado" && @service.user_id != current_user.id %>
+            <%= link_to "Hacer el pedido", new_order_path(plan_id: first_plan.id, buyer_id: current_user.id, seller_id: @service.user_id), class: "button-001", data: { turbo_frame: '_top'} %>
+          <% elsif current_user && @service.user_id == current_user.id %>
+            <!-- No puedes comprar tu propio servicio. -->
+          <% else %>
+            <%= link_to "Hacer el pedido", new_user_session_path(flash_alert: 'Por favor, inicia sesión'), class: "buttons__main", data: { turbo_frame: '_top'} %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+
+    <br>
+    <h3>Evaluación</h3>
     <% @reviews.each do |review| %>
       <div class="posts-index-item">
         <div class="post-left">
-
           <% if review.user && review.user.image.attached? %>
             <%= image_tag(review.user.image) %>
           <% else %>
             <%= image_tag('default_user.jpg') %>
           <% end %>
-
         </div>
 
         <div class="post-right">

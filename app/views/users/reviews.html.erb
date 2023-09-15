@@ -66,14 +66,14 @@
 
         <div class="post-right">
           <div style="display: flex; justify-content: space-between;">
-            <h4>Servicio: <%= review.plan.service.title %></h4>
+            <h4>Servicio: <%= review.plan.service.title.truncate(25) %></h4>
           </div>
           <% if review.rating.present? %>
             <h4><%= "⭐️" * review.rating %></h4>
           <% end %>
           <div style="display: flex; justify-content: space-between;">
             <% if review.user.present? && review.user.name.present? %>
-              <h5><%= review.user.name %></h5>
+              <p><%= review.user.name %></p>
             <% else %>
               <h5>Usuario dado de baja</h5>
             <% end %>
