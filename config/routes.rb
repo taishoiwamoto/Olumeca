@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   root "home#top"
-  devise_for :users, controllers: { sessions: 'users/sessions', registrations: 'users/registrations' }
+  devise_for :users, controllers: { sessions: 'users/sessions', registrations: 'users/registrations', passwords: 'users/passwords' }
 
   resources :users, only: [:edit, :show] do
     member do

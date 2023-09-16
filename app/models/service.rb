@@ -12,11 +12,11 @@ class Service < ApplicationRecord
   accepts_nested_attributes_for :plans, allow_destroy: true, reject_if: :all_blank
 
   validates :title,
-    presence: { message: ':El nombre del servicio no puede estar vacío.' },
+    presence: true,
     length: {
       maximum: 65,
       too_long: ':El nombre del servicio debe tener menos de %{count} caracteres.'
     }
-  validates :category, presence: { message: ':La categoría no puede estar vacía.' }
-  validates :detail, presence: { message: ':Los detalles no pueden estar vacíos.' }
+  validates :category, presence: true
+  validates :detail, presence: true
 end

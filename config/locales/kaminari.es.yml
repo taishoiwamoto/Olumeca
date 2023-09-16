@@ -15,3 +15,14 @@ es:
           other: "Mostrando <b>todos los %{count}</b> %{entry_name}"
       more_pages:
         display_entries: "Mostrando %{entry_name} <b>%{first}&nbsp;-&nbsp;%{last}</b> de <b>%{total}</b> en total"
+
+  activerecord:
+    attributes:
+      service:
+        title: Título
+        image: Imagen
+        category: Categoría
+
+    errors:
+      messages:
+        blank: 'no debe estar en blanco'

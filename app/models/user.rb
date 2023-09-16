@@ -16,7 +16,7 @@ class User < ApplicationRecord
 
 
   validates :name,
-    presence: { message: ':El nombre del usuario no puede estar vacío.' },
+    presence: true,
     length: {
     maximum: 30,
     too_long: ':El nombre del usuario debe tener menos de %{count} caracteres.'
