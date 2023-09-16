@@ -1,7 +1,7 @@
 <div class="main posts-new">
   <div class="container">
     <h1 class="form-heading">Publicar</h1>
-    <%= form_for(@service, url: services_path, html: {multipart: true}) do |f| %>
+    <%= form_with(model: @service, url: services_path, html: {multipart: true}) do |f| %>
 
       <h3>Servicio</h3>
       <div class="form">

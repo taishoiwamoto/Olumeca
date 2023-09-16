@@ -10,5 +10,5 @@ class Review < ApplicationRecord
     less_than_or_equal_to: 5,
   }
 
-  validates :user_id, uniqueness: { scope: :plan_id, message: 'このプランに対しては既にレビューされています。' }
+  validates :user_id, uniqueness: { scope: :plan_id, message: 'Ya se ha realizado una evaluación de este plan.' }
 end

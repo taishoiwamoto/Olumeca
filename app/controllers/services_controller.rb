@@ -26,7 +26,8 @@ class ServicesController < ApplicationController
       redirect_to service_path(@service), notice: "Has creado un servicio"
     else
       @service.plans.build if @service.plans.blank?
-      render :new
+      #debugger
+      render :new, status: :unprocessable_entity
     end
   end
 
