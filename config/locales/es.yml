@@ -1,0 +1,17 @@
+es:
+  activerecord:
+    attributes:
+      user:
+        name: "Nombre"
+        email: "Correo electrónico"
+        phone_number: "Número de teléfono"
+        password: "Contraseña"
+      service:
+        title: Título
+        image: Imagen
+        category: Categoría
+        detail: Detalle
+
+    errors:
+      messages:
+        blank: 'no debe estar en blanco'
