@@ -1,8 +1,7 @@
 <div class="main posts-new">
   <div class="container">
     <h1 class="form-heading">Publicar</h1>
-    <%= form_with(model: @service, url: services_path, html: {multipart: true}) do |f| %>
-
+    <%= form_for(@service, url: services_path, html: {multipart: true}) do |f| %>
       <h3>Servicio</h3>
       <div class="form">
         <div class="form-body">
@@ -13,12 +12,12 @@
           <% end %>
 
           <div class="field">
-            <%= f.label :title %><br/>
+            <%= f.label :title, 'Título'  %><br/>
             <%= f.text_field :title, value: @service.title %>
           </div>
 
           <div class="field">
-            <%= f.label :image %><br/>
+            <%= f.label :image, 'Imagen' %><br/>
             <%= f.file_field :image %>
           </div>
 
@@ -45,13 +44,13 @@
           </div>
 
           <div class="field">
-            <%= f.label :detail %><br/>
+            <%= f.label :detail, 'Detalle' %><br/>
             <%= f.text_area :detail, value: @service.detail %>
           </div>
         </div>
       </div>
 <br>
-      <h3>Plans</h3>
+      <h3>Planes</h3>
       <div class="form">
         <div class="form-body">
           <%= f.fields_for :plans do |plan_form| %>
@@ -63,12 +62,12 @@
             <% end %>
 
             <div class="field">
-              <%= plan_form.label :title, "Plan Title" %><br/>
+              <%= plan_form.label :title, 'Título' %><br/>
               <%= plan_form.text_field :title %>
             </div>
 
             <div class="field">
-              <%= plan_form.label :delivery_method, "Delivery Method" %><br/>
+              <%= plan_form.label :delivery_method, "Método de entrega" %><br/>
               <%= plan_form.select :delivery_method, [
                 ['Por favor, elija de la siguiente lista', '', {disabled: true, selected: true}],
                 ['Videollamada', 'Videollamada'],
@@ -77,12 +76,12 @@
             </div>
 
             <div class="field">
-              <%= plan_form.label :price, "Plan Price" %><br/>
+              <%= plan_form.label :price, "Precio" %><br/>
               <%= plan_form.number_field :price, step: "0.01" %>
             </div>
 
             <div class="field">
-              <%= plan_form.label :detail, "Plan Detail" %><br/>
+              <%= plan_form.label :detail, "Detalle" %><br/>
               <%= plan_form.text_area :detail %>
             </div>
           <% end %>

@@ -30,7 +30,7 @@ class ReviewsController < ApplicationController
       return
     end
 
-    if @review.save!
+    if @review.save
       flash[:notice] = 'La evaluación ha sido registrada.'
       redirect_to orders_user_path(current_user)
     else
