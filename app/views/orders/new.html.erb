@@ -4,6 +4,7 @@
     <div class="form-001">
       <%= form_for @order do |f| %>
         <p>Vendedor(a): <%= @seller.name %></p>
+        <p>Comprador(a): <%= @buyer.name %></p>
         <p>Servicio: <%= @service.title %></p>
         <p>Plan: <%= @plan.title %></p>
         <%= f.hidden_field :plan_id, value: @plan.id %>

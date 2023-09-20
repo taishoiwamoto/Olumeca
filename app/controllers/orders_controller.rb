@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-  before_action :authenticate_user, only: [:new, :create]
+  before_action :authenticate_user!, only: [:new, :create]
 
   def new
     @order = Order.new
@@ -21,9 +21,8 @@ class OrdersController < ApplicationController
     @order.seller_id = service.user_id
     @order.status = "Pendiente"
     if @order.save
-      redirect_to completed_orders_path # ここでorder_completedは購入後のページを指す仮のルートです
+      redirect_to completed_orders_path
     else
-      # 失敗した場合の処理
     end
   end
 
@@ -37,12 +36,6 @@ class OrdersController < ApplicationController
 
   def order_params
     params.require(:order).permit(:plan_id)
-  end
-
-  def authenticate_user
-    if current_user.nil?
-      redirect_to new_user_session_path, notice: 'Por favor, inicia sesión'
-    end
   end
 
   def service_id

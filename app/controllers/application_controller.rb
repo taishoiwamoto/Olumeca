@@ -3,15 +3,10 @@ class ApplicationController < ActionController::Base
   FQDN = ENV["ALLOWED_HOST"]
   ALLOWED_HOSTS = [ENV["ALLOWED_HOST"], ENV["ALLOWED_OLD_HOST"]]
   before_action :ensure_domain
-  before_action :set_current_user
   before_action :configure_permitted_parameters, if: :devise_controller?
 
-  def set_current_user
-    current_user = User.find_by(id: session[:user_id])
-  end
-
   def authenticate_user
-    if current_user == nil
+    unless user_signed_in?
       flash[:notice] = "Es necesario iniciar sesión"
       redirect_to new_user_session_path
     end
