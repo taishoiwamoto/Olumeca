@@ -12,7 +12,7 @@ Rails.application.routes.draw do
       get :likes
       get :orders
       get :sales
-      get :reviews # この行を追加
+      get :reviews
     end
   end
   resources :services

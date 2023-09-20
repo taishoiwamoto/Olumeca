@@ -73,7 +73,7 @@ class ReviewsController < ApplicationController
   end
 
   def review_params
-    params.require(:review).permit(:user_id, :plan_id, :rating, :comment, :order_id)  # <-- 変更した部分
+    params.require(:review).permit(:user_id, :plan_id, :rating, :comment, :order_id)
   end
 
   def set_review_params
