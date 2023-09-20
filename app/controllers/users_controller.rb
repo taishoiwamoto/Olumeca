@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user, except: %i[show]
+  before_action :authenticate_user, except: [:show, :reviews]
   before_action :set_user, only: [:likes, :orders, :sales, :reviews]
-  #before_action :forbid_login_user, {only: [:new, :create, :login_form, :login]}
 
   def show
     @user = User.find(params[:id])
