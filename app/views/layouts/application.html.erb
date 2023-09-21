@@ -74,5 +74,20 @@
     <%= yield %>
 
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload', type: 'module' %>
+
+    <footer class="footer">
+      <div class="footer-wrapper">
+        <div class="footer-container">
+          <p class="footer-item">©Olumeca</p>
+        </div>
+        <div class="footer-container">
+          <p class="footer-item"><%= link_to 'Términos y condiciones', static_pages_terms_of_service_path %></p>
+          <p class="footer-item"><%= link_to 'Política de privacidad', static_pages_privacy_policy_path %></p>
+          <p class="footer-item"><%= link_to 'Perfil Empresa', 'https://miraie-mexico.com/%e4%bc%9a%e7%a4%be%e6%a6%82%e8%a6%81/' %></p>
+          <p class="footer-item"><%= link_to '<i class="fab fa-twitter"></i>'.html_safe, 'https://twitter.com/olumeca' %></p>
+        </div>
+      </div>
+    </footer>
+
   </body>
 </html>
