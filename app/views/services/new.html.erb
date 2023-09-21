@@ -51,44 +51,19 @@
       </div>
 <br>
       <h3>Planes</h3>
-      <div class="form">
-        <div class="form-body">
+      <div class="form" id="plans">
+
           <%= f.fields_for :plans do |plan_form| %>
-            <% plan = plan_form.object %>
-            <% plan.errors.full_messages.each do |message| %>
-              <div class="form-error">
-                <%= message %>
-              </div>
-            <% end %>
-
-            <div class="field">
-              <%= plan_form.label :title, 'Título' %><br/>
-              <%= plan_form.text_field :title %>
-            </div>
-
-            <div class="field">
-              <%= plan_form.label :delivery_method, "Método de entrega" %><br/>
-              <%= plan_form.select :delivery_method, [
-                ['Por favor, elija de la siguiente lista', '', {disabled: true, selected: true}],
-                ['Videollamada', 'Videollamada'],
-                ['Chat', 'Chat']
-              ] %>
-            </div>
-
-            <div class="field">
-              <%= plan_form.label :price, "Precio (MXN)" %><br/>
-              <%= plan_form.number_field :price, step: "0.01" %>
-            </div>
-
-            <div class="field">
-              <%= plan_form.label :detail, "Detalle" %><br/>
-              <%= plan_form.text_area :detail %>
-            </div>
+            <%= render "plans/form", {form: plan_form} %>
           <% end %>
-        </div>
       </div>
       <br>
       <div class="form">
+        <%= f.submit "Add plan",
+              formaction: plan_path(@service.plans.size),
+              formmethod: :post,
+              formnovalidate: true,
+              id: "add-plan" %>
         <%= f.submit "Publicar" %>
       </div>
     <% end %>

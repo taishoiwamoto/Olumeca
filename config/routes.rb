@@ -20,7 +20,12 @@ Rails.application.routes.draw do
   end
   resources :services
 
-  resources :plans
+  resources :plans, only: [], param: :index do
+    member do
+      delete '(:id)' => "plans#destroy", as: ""
+      post '/' => "plans#create"
+    end
+  end
 
   resources :likes, only: [:create, :destroy]
 

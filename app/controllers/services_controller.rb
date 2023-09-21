@@ -36,6 +36,7 @@ class ServicesController < ApplicationController
   end
 
   def update
+    debugger
     @service = Service.find_by(id: params[:id])
     if @service.update(service_params)
       flash[:notice] = "Has editado un servicio"
