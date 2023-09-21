@@ -30,6 +30,13 @@ class UsersController < ApplicationController
     @sales = Order.where(seller_id: current_user.id).order(created_at: :desc).page(params[:page]).per(5)
   end
 
+  def destroy
+    user_id = params[:id]
+    @user = User.find(user_id)
+    @user.deletion_at = DateTime.now
+    @user.save
+  end
+
   private
 
   def set_user
@@ -49,6 +56,4 @@ class UsersController < ApplicationController
 
     @average_rating = total_count > 0 ? total_reviews / total_count.to_f : nil
   end
-
-
 end

@@ -57,10 +57,8 @@
       </div>
     </div>
     <br>
-      <h3>Cancelar mi cuenta</h3>
-            <%= button_to "Cancelar", registration_path(resource_name), form: { data: { turbo_confirm: "¿Realmente quieres eliminar tu cuenta?" }}, method: :delete %>
-          </div>
-        </div>
+    <h3>Cancelar mi cuenta</h3>
+    <%= link_to "Cancelar", destroy_user_path(resource), method: :delete, data: { "turbo-method": :delete, confirm: "Estas seguro que quieres cancelar?" } %>
     <br>
   </div>
 </div>
