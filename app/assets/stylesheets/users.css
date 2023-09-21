@@ -89,6 +89,7 @@
 
 .user-tabs li {
   float: left;
+  list-style-type: none;
 }
 
 .user-tabs li.active {
