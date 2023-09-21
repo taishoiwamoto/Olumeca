@@ -35,7 +35,14 @@
             <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
           </div>
 
-        <%#= recaptcha_tags %>
+          <%#= recaptcha_tags %>
+
+          <div class="field">
+            <%= f.check_box :agreement %>
+            <%= f.label :agreement do %>
+              Aceptar <%= link_to 'los términos y condiciones', static_pages_terms_of_service_path, target: '_blank', style: 'color: blue;' %> y <%= link_to 'la política de privacidad', static_pages_privacy_policy_path, target: '_blank', style: 'color: blue;' %>
+            <% end %>
+          </div>
 
           <div class="actions">
             <%= f.submit "Registrarse", class: "button-001" %>

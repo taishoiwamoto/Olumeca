@@ -6,12 +6,17 @@ es:
         email: "Correo electrónico"
         phone_number: "Número de teléfono"
         password: "Contraseña"
-      service:
-        title: Título
-        image: Imagen
-        category: Categoría
-        detail: Detalle
-
+        agreement: "Acuerdo"
     errors:
+      models:
+        user:
+          attributes:
+            agreement:
+              accepted: "Debe aceptar los términos y condiciones y la política de privacidad."
       messages:
         blank: 'no debe estar en blanco'
+    service:
+      title: Título
+      image: Imagen
+      category: Categoría
+      detail: Detalle

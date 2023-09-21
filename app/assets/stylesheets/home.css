@@ -10,7 +10,6 @@ html {
 }
 
 ul, li {
-  list-style-type: none;
   padding: 0;
   margin: 0;
 }
@@ -97,6 +96,7 @@ header {
   font-size: 13px;
   color: rgb(255, 255, 255);
   padding-left: 15px;
+  list-style-type: none;
 }
 
 .header-menus a {
@@ -477,4 +477,9 @@ header {
 
 .form-001 p {
   padding-bottom: 10px;
+}
+
+/* privacy policy ================================ */
+.right-align {
+  text-align: right;
 }
