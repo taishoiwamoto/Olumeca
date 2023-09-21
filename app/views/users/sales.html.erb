@@ -64,26 +64,26 @@
         <% end %>
 
         </div>
+
         <div class="post-right">
-          <% if sale.plan && sale.plan.service %>
+          <% if sale.buyer.present? && sale.plan && sale.plan.service %>
             <%= link_to service_path(sale.plan.service) do %>
-              <h4><%= sale.plan.service.title.truncate(20) %>(<%= sale.plan.title.truncate(20) %>)</h4>
+              <h4>Servicio: <%= sale.plan.service.title %></h4>
+              <h4>Plan: <%= sale.plan.title %></h4>
             <% end %>
+
+            <div style="display: flex; justify-content: space-between;">
+              <p style="font-size: 14px;"><%= sale.buyer.name %></p>
+            </div>
+
           <% else %>
-            <h5>Este registro ha sido eliminada.</h5>
+            <p style="font-size: 14px;">Este registro ha sido eliminada.</p>
+            <p style="font-size: 14px;">Usuario dado de baja</p>
           <% end %>
-          <div>
-            <div class="post-user-name">
-              <% if sale.buyer.present? %>
-                <p><%= sale.buyer.name %></p>
-              <% else %>
-                <p>Usuario dado de baja</p>
-              <% end %>
-            </div>
-            <div style="display: flex">
-              <p style="font-size: 12px;">ID del pedido:<%= sale.id %>,</p>
-              <p style="font-size: 12px; margin-left: 10px;">Fecha: <%= sale.created_at.strftime("%d/%m/%Y %H:%M") %></p>
-            </div>
+
+          <div style="display: flex">
+            <p style="font-size: 12px;">ID del pedido:<%= sale.id %>,</p>
+            <p style="font-size: 12px; margin-left: 10px;">Fecha: <%= sale.created_at.strftime("%d/%m/%Y %H:%M") %></p>
           </div>
         </div>
       </div>

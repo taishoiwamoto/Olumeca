@@ -65,17 +65,17 @@
         </div>
 
         <div class="post-right">
-          <div style="display: flex; justify-content: space-between;">
-            <h5>Servicio: <%= review.plan&.service&.title&.truncate(25) || 'Este registro ha sido eliminada.' %></h5>
-          </div>
           <% if review.rating.present? %>
-            <h4><%= "⭐️" * review.rating %></h4>
+            <%= "⭐️" * review.rating %>
           <% end %>
           <div style="display: flex; justify-content: space-between;">
+            <h5><%= review.plan&.service&.title&.truncate(25) || 'Este registro ha sido eliminada.' %></h5>
+          </div>
+          <div style="display: flex; justify-content: space-between;">
             <% if review.user.present? && review.user.name.present? %>
-              <p><%= review.user.name %></p>
+              <p style="font-size: 14px;"><%= review.user.name %></p>
             <% else %>
-              <h5>Usuario dado de baja</h5>
+              <p style="font-size: 14px;">Usuario dado de baja</p>
             <% end %>
           </div>
           <div style="display: flex;">

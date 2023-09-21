@@ -73,11 +73,6 @@
   font-size: 24px;
 }
 
-.posts-user-item p {
-  font-size: 24px;
-  margin: 20px 0;
-}
-
 .whatsapp {
   display: flex;
   align-items: center;
@@ -104,11 +99,6 @@
   vertical-align: middle;
   font-size: 24px;
   margin-left: 15px;
-}
-
-.posts-show-item p {
-  font-size: 24px;
-  margin: 20px 0;
 }
 
 .posts-show-item .fa {
