@@ -84,6 +84,7 @@
           <%= image_tag('default_service.jpg', class: "service-image") %>
         <% end %>
       </div>
+      <br>
       <p><%= @service.detail %></p>
     </div>
     <br>
@@ -139,9 +140,9 @@
           <% end %>
           <div style="display: flex; justify-content: space-between;">
             <% if review.user.present? && review.user.name.present? %>
-              <h5><%= review.user.name %></h5>
+              <p style="font-size: 14px;"><%= review.user.name %></p>
             <% else %>
-              <h5>Usuario dado de baja</h5>
+              <p style="font-size: 14px;">Usuario dado de baja</p>
             <% end %>
           </div>
           <div style="display: flex;">
