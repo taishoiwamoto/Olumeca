@@ -89,37 +89,41 @@
     </div>
     <br>
 
-    <% first_plan = @service.plans.first %>
-
     <h3>Planes</h3>
-    <div class="plans-container">
-      <% @service.plans.each do |plan| %>
-        <%= button_to plan_path(plan), method: :get, data: { turbo_frame: 'plan_detail' }, class: "plan-card-btn" do %>
-          <h4><%= plan.title.truncate(40)  %></h4>
-          <p><%= plan.price %> MXN</p>
-        <% end %>
-      <% end %>
-    </div>
+    <% if @service.plans.any? %>
+      <% first_plan = @service.plans.first %>
 
-    <br>
-    <%= turbo_frame_tag 'plan_detail' do %>
-      <div class="posts-show-item">
-        <div class="plan-details">
-          <h3><%= first_plan.title %></h3>
-          <div style="display: flex; justify-content: space-between;">
-            <%= first_plan.delivery_method %> / <%= first_plan.price %> MXN
-          </div>
-          <%= first_plan.detail %>
-          <br>
-          <% if current_user && @service.title != "no encontrado" && @service.user_id != current_user.id %>
-            <%= link_to "Hacer el pedido", new_order_path(plan_id: first_plan.id, buyer_id: current_user.id, seller_id: @service.user_id), class: "button-001", data: { turbo_frame: '_top'} %>
-          <% elsif current_user && @service.user_id == current_user.id %>
-            <%= link_to "Hacer el pedido", new_order_path(plan_id: first_plan.id, buyer_id: current_user.id, seller_id: @service.user_id), class: "button-001", data: { turbo_frame: '_top'} %>
-          <% else %>
-            <%= link_to "Hacer el pedido", new_user_session_path(flash_alert: 'Por favor, inicia sesión'), class: "buttons__main", data: { turbo_frame: '_top'} %>
+      <div class="plans-container">
+        <% @service.plans.each do |plan| %>
+          <%= button_to plan_path(plan), method: :get, data: { turbo_frame: 'plan_detail' }, class: "plan-card-btn" do %>
+            <h4><%= plan.title.truncate(40)  %></h4>
+            <p><%= plan.price %> MXN</p>
           <% end %>
-        </div>
+        <% end %>
       </div>
+
+      <br>
+      <%= turbo_frame_tag 'plan_detail' do %>
+        <div class="posts-show-item">
+          <div class="plan-details">
+            <h3><%= first_plan.title %></h3>
+            <div style="display: flex; justify-content: space-between;">
+              <%= first_plan.delivery_method %> / <%= first_plan.price %> MXN
+            </div>
+            <%= first_plan.detail %>
+            <br>
+            <% if current_user && @service.title != "no encontrado" && @service.user_id != current_user.id %>
+              <%= link_to "Hacer el pedido", new_order_path(plan_id: first_plan.id, buyer_id: current_user.id, seller_id: @service.user_id), class: "button-001", data: { turbo_frame: '_top'} %>
+            <% elsif current_user && @service.user_id == current_user.id %>
+              <%= link_to "Hacer el pedido", new_order_path(plan_id: first_plan.id, buyer_id: current_user.id, seller_id: @service.user_id), class: "button-001", data: { turbo_frame: '_top'} %>
+            <% else %>
+              <%= link_to "Hacer el pedido", new_user_session_path(flash_alert: 'Por favor, inicia sesión'), class: "buttons__main", data: { turbo_frame: '_top'} %>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+      <% else %>
+        <p>No hay planes agregados actualmente</p>
     <% end %>
 
     <br>

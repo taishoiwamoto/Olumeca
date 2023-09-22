@@ -37,11 +37,12 @@ class ServicesController < ApplicationController
 
   def update
     @service = Service.find_by(id: params[:id])
+
     if @service.update(service_params)
-      flash[:notice] = "Has editado un servicio"
-      redirect_to service_path(@service)
+      @service.update_plans(service_params[:plans_attributes].to_h)
+      redirect_to service_path(@service), notice: 'Has editado un servicio'
     else
-      render :edit
+      render :edit, status: :unprocessable_entity
     end
   end
 
@@ -65,6 +66,6 @@ class ServicesController < ApplicationController
 
   def service_params
     params.require(:service).permit(:title, :detail, :category, :image,
-                                    plans_attributes: [:id, :title, :detail, :price, :delivery_method, :_destroy])
+                                    plans_attributes: [:title, :detail, :price, :delivery_method, :_destroy])
   end
 end
