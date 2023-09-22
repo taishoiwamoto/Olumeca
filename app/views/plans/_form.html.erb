@@ -1,0 +1,40 @@
+          <%= turbo_frame_tag "plan_#{form.index}" do %>
+          <%= form.hidden_field :id %>
+            <div class="form-body">
+              <%# plan = plan_form.object %>
+              <%# plan.errors.full_messages.each do |message| %>
+                <%#<div class="form-error">
+                  <%#= message %>
+                <%#</div>
+              <%# end %>
+
+              <div class="field">
+                <%= form.label :title, 'Título' %><br/>
+                <%= form.text_field :title %>
+              </div>
+
+              <div class="field">
+                <%= form.label :delivery_method, "Método de entrega" %><br/>
+                <%= form.select :delivery_method, [
+                  ['Por favor, elija de la siguiente lista', '', {disabled: true, selected: true}],
+                  ['Videollamada', 'Videollamada'],
+                  ['Chat', 'Chat']
+                ] %>
+              </div>
+
+              <div class="field">
+                <%= form.label :price, "Precio (MXN)" %><br/>
+                <%= form.number_field :price, step: "0.01" %>
+              </div>
+
+              <div class="field">
+                <%= form.label :detail, "Detalle" %><br/>
+                <%= form.text_area :detail %>
+              </div>
+            </div>
+            <%= form.submit "destroy plan",
+                    formaction: plan_path(form.index, form.object.id),
+                    formmethod: :delete,
+                    formnovalidate: true,
+                    data: { turbo_frame: "plan_#{form.index}" } %>
+          <% end %>

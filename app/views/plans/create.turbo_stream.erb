@@ -1,0 +1,16 @@
+<%# app/views/plans/create.turbo_stream.erb %>
+<%= fields model: @service do |form| %>
+  <%= form.fields_for :plans, child_index: params[:index] do |plan_form| %>
+    <%= turbo_stream.replace "add-plan" do %>
+      <%= form.submit "Add plan",
+            formaction: plan_path(plan_form.index.to_i + 1),
+            formmethod: :post,
+            formnovalidate: true,
+            id: "add-plan" %>
+    <% end %>
+
+    <%= turbo_stream.append "plans" do %>
+      <%= render "form", form: plan_form %>
+    <% end %>
+  <% end %>
+<% end %>
