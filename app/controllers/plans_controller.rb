@@ -9,9 +9,9 @@ class PlansController < ApplicationController
   def new
   end
 
-  def update
-    debugger
-  end
+  # def update
+  #   debugger
+  # end
 
   def destroy
     respond_to do |format|
