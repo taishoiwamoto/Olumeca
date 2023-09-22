@@ -202,8 +202,8 @@
 }
 
 .plan-card-btn {
-  width: 200px;  /* 幅を200pxに固定 */
-  height: 150px; /* 高さを300pxに固定 */
+  width: 183px;  /* 幅を200pxに固定 */
+  height: 100px; /* 高さを300pxに固定 */
   padding: 12px;
   background-color: white;
   border: none;
