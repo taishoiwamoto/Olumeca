@@ -6,12 +6,7 @@ class PlansController < ApplicationController
     @service = @plan.service
   end
 
-  def new
-  end
-
-  def update
-    debugger
-  end
+  def new; end
 
   def destroy
     respond_to do |format|

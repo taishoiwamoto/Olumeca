@@ -19,4 +19,19 @@ class Service < ApplicationRecord
     }
   validates :category, presence: true
   validates :detail, presence: true
+
+  def update_plans(plans_params)
+    self.plans.delete_all
+
+    plans_params.each do |plan_param|
+      title = plan_param[1]['title']
+      detail = plan_param[1]['detail']
+      price = plan_param[1]['price']
+      delivery_method = plan_param[1]['delivery_method']
+
+      new_plan = self.plans.new(title: title, detail: detail, price: price, delivery_method: delivery_method)
+
+      new_plan.save
+    end
+  end
 end
