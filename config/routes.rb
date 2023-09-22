@@ -29,6 +29,8 @@ Rails.application.routes.draw do
     end
   end
 
+  get 'plans/:id' => 'plans#show'
+
   resources :likes, only: [:create, :destroy]
 
   resources :orders do
