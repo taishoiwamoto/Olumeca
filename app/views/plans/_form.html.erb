@@ -1,13 +1,6 @@
           <%= turbo_frame_tag "plan_#{form.index}" do %>
           <%= form.hidden_field :id %>
-            <div class="form-body">
-              <%# plan = plan_form.object %>
-              <%# plan.errors.full_messages.each do |message| %>
-                <%#<div class="form-error">
-                  <%#= message %>
-                <%#</div>
-              <%# end %>
-
+            <div style="border-bottom: 0.1px solid black;" class="form-body">
               <div class="field">
                 <%= form.label :title, 'Título' %><br/>
                 <%= form.text_field :title %>
@@ -35,6 +28,6 @@
                 formaction: plan_path(form.index, form.object.id),
                 formmethod: :delete,
                 formnovalidate: true,
-                data: { turbo_frame: "plan_#{form.index}" } %>
+                data: { turbo_frame: "plan_#{form.index}" } if form.index.to_i > 0 %>
             </div>
           <% end %>

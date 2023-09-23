@@ -16,6 +16,7 @@ class ServicesController < ApplicationController
 
   def new
     @service = Service.new
+    @service.plans.build
   end
 
   def create
@@ -24,6 +25,7 @@ class ServicesController < ApplicationController
     if @service.save
       redirect_to service_path(@service), notice: "Has creado un servicio"
     else
+      @service.plans.build unless @service.plans.present?
       render :new, status: :unprocessable_entity
     end
   end
