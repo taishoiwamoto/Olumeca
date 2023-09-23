@@ -5,7 +5,17 @@
       <h3>Servicio</h3>
       <div class="form">
         <div class="form-body">
-          <% @service.errors.full_messages.each do |message| %>
+          <% @service.errors.full_messages_for(:title).each do |message| %>
+            <div class="form-error">
+              <%= message %>
+            </div>
+          <% end %>
+          <% @service.errors.full_messages_for(:detail).each do |message| %>
+            <div class="form-error">
+              <%= message %>
+            </div>
+          <% end %>
+          <% @service.errors.full_messages_for(:category).each do |message| %>
             <div class="form-error">
               <%= message %>
             </div>
@@ -52,6 +62,13 @@
       <br>
       <h3>Planes</h3>
       <div class="form" id="plans">
+        <div class="form-body">
+          <% @service.errors.full_messages_for(:plans).each do |message| %>
+            <div class="form-error">
+              <%= message %>
+            </div>
+          <% end %>
+        </div>
           <%= f.fields_for :plans do |plan_form| %>
             <%= render "plans/form", {form: plan_form} %>
           <% end %>

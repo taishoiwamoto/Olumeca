@@ -20,6 +20,7 @@ class Service < ApplicationRecord
   validates :category, presence: true
   validates :detail, presence: true
   validate :plans_present?
+  validates_associated :plans
 
   def update_plans(plans_params)
     self.plans.delete_all
