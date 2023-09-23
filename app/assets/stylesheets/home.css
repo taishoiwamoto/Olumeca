@@ -190,13 +190,14 @@ header {
   color: #fff;
   width: 350px;
   padding: 12px 16px;
-  display: flex;
   justify-content: center;
   align-items: center;
   height: 50px;
   cursor: pointer;
   text-align: center;
   margin-top: 10px;
+  display: block;
+  margin: 0 auto;
 }
 
 .buttons__main:hover {
@@ -218,6 +219,7 @@ header {
 }
 
 .top-main-button {
+  margin-top: 30px;
   display: flex;
   justify-content: center; /* 水平方向の中央揃え */
   padding-bottom: 20px;
@@ -282,27 +284,6 @@ header {
   align-items: center;
 }
 
-/* about ================================ */
-.about-main {
-  padding: 180px 8% 0;
-  color: white;
-}
-
-.about-main h2 {
-  font-size: 64px;
-  font-weight: 500;
-  line-height: 1.4;
-}
-
-.about-main p {
-  font-weight: 200;
-  font-size: 20px;
-}
-
-.about-img {
-  width: 84%;
-}
-
 /* フォーム================================ */
 .form {
   max-width: 600px;
@@ -361,6 +342,26 @@ header {
   display: table;
   clear: both;
 }
+
+.field {
+  margin-bottom: 20px;  /* フィールドの下部に20pxのマージンを追加 */
+}
+
+.actions {
+  margin-top: 20px;  /* actionsの上部に20pxのマージンを追加 */
+}
+
+.form-001 {
+  padding: 30px;
+  background-color: white;
+  box-shadow: 0 2px 6px #c1ced7;
+  overflow: hidden;
+}
+
+.form-001 p {
+  padding-bottom: 10px;
+}
+
 
 /* フラッシュ ================================ */
 .flash {
@@ -439,6 +440,12 @@ header {
   background-color: #10a0ad;
 }
 
+.center-button {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .salir-button {
   background-color: transparent; /* 背景色を透明に */
   color: rgb(0, 0, 0); /* 文字色を黒に設定 */
@@ -455,28 +462,6 @@ header {
 #btn-delete {
   background-color: transparent; /* 背景色を透明に */
   font-size: 24px;
-}
-
-/* form ================================ */
-
-
-.field {
-  margin-bottom: 20px;  /* フィールドの下部に20pxのマージンを追加 */
-}
-
-.actions {
-  margin-top: 20px;  /* actionsの上部に20pxのマージンを追加 */
-}
-
-.form-001 {
-  padding: 30px;
-  background-color: white;
-  box-shadow: 0 2px 6px #c1ced7;
-  overflow: hidden;
-}
-
-.form-001 p {
-  padding-bottom: 10px;
 }
 
 /* privacy policy ================================ */

@@ -31,10 +31,10 @@
                 <%= form.label :detail, "Detalle" %><br/>
                 <%= form.text_area :detail %>
               </div>
+              <%= form.submit "destroy plan",
+                formaction: plan_path(form.index, form.object.id),
+                formmethod: :delete,
+                formnovalidate: true,
+                data: { turbo_frame: "plan_#{form.index}" } %>
             </div>
-            <%= form.submit "destroy plan",
-                    formaction: plan_path(form.index, form.object.id),
-                    formmethod: :delete,
-                    formnovalidate: true,
-                    data: { turbo_frame: "plan_#{form.index}" } %>
           <% end %>
