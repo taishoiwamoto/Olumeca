@@ -49,22 +49,24 @@
           </div>
         </div>
       </div>
-<br>
+      <br>
       <h3>Planes</h3>
       <div class="form" id="plans">
           <%= f.fields_for :plans do |plan_form| %>
             <%= render "plans/form", {form: plan_form} %>
           <% end %>
       </div>
-      <br>
       <div class="form">
         <%= f.submit "Add plan",
-              formaction: plan_path(@service.plans.size),
-              formmethod: :post,
-              formnovalidate: true,
-              id: "add-plan" %>
-        <%= f.submit "Publicar" %>
+          formaction: plan_path(@service.plans.size),
+          formmethod: :post,
+          formnovalidate: true,
+          id: "add-plan" %>
       </div>
+      <br>
+      <br>
+      <br>
+      <%= f.submit "Publicar", class: "buttons__main" %>
     <% end %>
     <br>
     <br>
