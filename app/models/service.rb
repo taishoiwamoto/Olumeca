@@ -19,6 +19,7 @@ class Service < ApplicationRecord
     }
   validates :category, presence: true
   validates :detail, presence: true
+  validate :plans_present?
 
   def update_plans(plans_params)
     self.plans.delete_all
@@ -33,5 +34,13 @@ class Service < ApplicationRecord
 
       new_plan.save
     end
+  end
+
+  private
+
+  def plans_present?
+    return if plans.present?
+
+    errors.add(:plans, "El servicio debe tener al menos un plan.")
   end
 end
