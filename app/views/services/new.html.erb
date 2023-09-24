@@ -63,7 +63,7 @@
       <h3>Planes</h3>
       <div class="form" id="plans">
         <% if @service.errors.full_messages_for(:plans).any? %>
-          <div class="form-body">
+          <div class="form-error-body">
             <% @service.errors.full_messages_for(:plans).each do |message| %>
               <div class="form-error">
                 <%= message %>
@@ -75,15 +75,13 @@
             <%= render "plans/form", {form: plan_form} %>
           <% end %>
       </div>
-      <div class="form">
+      <br>
         <%= f.submit "Add plan",
           formaction: plan_path(@service.plans.size),
           formmethod: :post,
           formnovalidate: true,
-          id: "add-plan" %>
-      </div>
-      <br>
-      <br>
+          id: "add-plan",
+          class: "button-003" %>
       <br>
       <%= f.submit "Publicar", class: "buttons__main" %>
     <% end %>
