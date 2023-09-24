@@ -7,6 +7,7 @@
     <%= stylesheet_link_tag 'application', media: 'all' %>
     <%= javascript_importmap_tags %>
     <%= javascript_include_tag "turbo", type: "module" %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload', type: 'module' %>
     <link rel="preload" href="http://localhost:3000/assets/es-module-shims.min-606ae9c3279013fe751cee30f719a592f759e705edb66496812f3d9dbce3d850.js" as="script">
     <link rel="manifest" href="/path_to_manifest/manifest.json">
   </head>
@@ -73,9 +74,8 @@
 
     <%= yield %>
 
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload', type: 'module' %>
-
     <footer class="footer">
+      <div class="footer-space">
       <div class="footer-wrapper">
         <div class="footer-container">
           <p class="footer-item">©Olumeca</p>

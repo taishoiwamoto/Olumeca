@@ -43,20 +43,21 @@ body {
 }
 
 .main {
-  position: absolute;
+  /*position: absolute;*/
+  padding-top: 30px;
   top: 64px;
   width: 100%;
   height: auto;
   min-height: 100%;
   background-color: #f5f8fa;
-  box-shadow: 0 0.5px 4px #c1ced7;
 }
 
 .container {
   max-width: 600px;
-  margin: 60px auto;
+  margin: 60px auto 0px auto;
   padding-left: 15px;
   padding-right: 15px;
+  padding-bottom: 60px;
   clear: both;
 }
 
