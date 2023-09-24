@@ -3,13 +3,6 @@
     <h3>Vendedor/a</h3>
     <div class="posts-index-item">
       <div style="display: flex; justify-content: flex-end;">
-        <div class="whatsapp" style="margin-right: 10px;">
-          <% if current_user && @service.title != "no encontrado" && @service.user_id != current_user.id %>
-            <a href="https://wa.me/4423831033" target="_blank" class="small-whatsapp-button">
-              <i class="fab fa-whatsapp fa-1x"></i> Contactar
-            </a>
-          <% end %>
-        </div>
         <% average_rating = @user.average_service_rating %>
         <% if average_rating.present? %>
           <div class="average-rating">

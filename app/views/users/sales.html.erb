@@ -37,7 +37,7 @@
 
       <% if @user == current_user %>
         <li class="<%= 'active' if controller_name == 'users' && action_name == 'likes' %>">
-          <%= link_to("Favorito", likes_user_path(current_user.id)) %>
+          <%= link_to("Favoritos", likes_user_path(current_user.id)) %>
         </li>
       <% end %>
       <% if @user == current_user %>

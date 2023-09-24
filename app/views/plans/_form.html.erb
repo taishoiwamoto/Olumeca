@@ -24,7 +24,7 @@
                 <%= form.label :detail, "Detalle" %><br/>
                 <%= form.text_area :detail %>
               </div>
-              <%= form.submit "destroy plan",
+              <%= form.submit "Eliminar",
                 formaction: plan_path(form.index, form.object.id),
                 formmethod: :delete,
                 formnovalidate: true,

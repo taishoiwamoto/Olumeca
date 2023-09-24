@@ -57,7 +57,7 @@ body {
   margin: 60px auto 0px auto;
   padding-left: 15px;
   padding-right: 15px;
-  padding-bottom: 60px;
+  padding-bottom: 100px;
   clear: both;
 }
 
@@ -308,6 +308,10 @@ header {
   color: #ff4d75;
 }
 
+.form-error-body {
+  padding: 30px 30px 0px 30px;
+}
+
 
 .form textarea {
   width: 100%;
@@ -328,6 +332,7 @@ header {
 
 .form input[type="submit"] {
   background-color: #13b1c0;
+  font-size: 12px;
   color: white;
   cursor: pointer;
   font-weight: 300;
@@ -441,10 +446,23 @@ header {
   background-color: #10a0ad;
 }
 
-.center-button {
+.button-003 {
+  background-color: #13b1c0;
+  color: #fff;
+  width: 200px;
+  padding: 12px 16px;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  cursor: pointer;
+  text-align: center;
+  margin-top: 10px;
   display: block;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 0 auto;
+}
+
+.button-003:hover {
+  background-color: #10a0ad;
 }
 
 .salir-button {
