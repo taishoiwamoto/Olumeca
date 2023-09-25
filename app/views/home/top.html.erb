@@ -35,7 +35,7 @@
                   <% reviews = service.reviews %>
                   <% if reviews.present? %>
                     <% average_rating = calculate_average_rating(reviews) %>
-                    <%= "⭐️" %> <%= sprintf('%.2f', average_rating) %> (<%= reviews.size %> evaluaciones)
+                    <%= "⭐️" %> <%= sprintf('%.2f', average_rating) %>
                   <% else %>
                     <h5> -- </h5>
                   <% end %>

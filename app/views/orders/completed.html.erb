@@ -1,13 +1,9 @@
 <div class="main posts-show">
   <div class="container">
-    <h1 class="form-heading">Orden Completada</h1>
+    <h1 class="form-heading">Pedido Completada</h1>
     <div class="form-001">
       <p>Su pedido ha sido procesado exitosamente.</p>
-      <p>En cuanto al pago, no dude en ponerse en contacto con nosotros aquí.</p>
-      <a href="https://wa.me/4423831033" target="_blank" class="whatsapp-button">
-        <i class="fab fa-whatsapp fa-2x" style="margin-right: 5px;"></i>
-        Contactar
-      </a>
+      <%= link_to "Ver tus pedidos", orders_user_path(current_user), class: "buttons__main" %>
     </div>
   </div>
 </div>

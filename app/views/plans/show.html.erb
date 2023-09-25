@@ -6,13 +6,13 @@
         <%= @plan.delivery_method %> /
         <%= @plan.price %> MXN
       </div>
-      <%= @plan.detail %>
+      <%= simple_format(@plan.detail) %>
       <br>
 
       <% if current_user && @service.title != "no encontrado" && @service.user_id != current_user.id %>
-        <%= link_to "Hacer el pedido", new_order_path(plan_id: @plan.id, buyer_id: current_user.id, seller_id: @service.user_id), class: "button-001", data: { turbo_frame: '_top'} %>
+        <%= link_to "Hacer el pedido", new_order_path(plan_id: @plan.id, buyer_id: current_user.id, seller_id: @service.user_id), class: "buttons__main", data: { turbo_frame: '_top'} %>
       <% elsif current_user && @service.user_id == current_user.id %>
-        <%= link_to "Hacer el pedido", new_order_path(plan_id: @plan.id, buyer_id: current_user.id, seller_id: @service.user_id), class: "button-001", data: { turbo_frame: '_top'} %>
+        <%= link_to "Hacer el pedido", new_order_path(plan_id: @plan.id, buyer_id: current_user.id, seller_id: @service.user_id), class: "buttons__main", data: { turbo_frame: '_top'} %>
       <% else %>
         <%= link_to "Hacer el pedido", new_user_session_path(flash_alert: 'Por favor, inicia sesión'), class: "buttons__main", data: { turbo_frame: '_top'} %>
       <% end %>
