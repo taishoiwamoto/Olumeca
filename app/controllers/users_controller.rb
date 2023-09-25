@@ -6,28 +6,33 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @services = @user.services.order(created_at: :desc).page(params[:page]).per(5)
     @average_rating = @user.average_service_rating
+    @total_reviews_count = Review.joins(plan: :service).where(services: { user_id: @user.id }).count
   end
 
   def reviews
     @user = User.find(params[:id])
     order_ids = Order.where(seller_id: @user.id).pluck(:id)
     @reviews = Review.where(order_id: order_ids).order(created_at: :desc).page(params[:page]).per(5)
+    @total_reviews_count = Review.joins(plan: :service).where(services: { user_id: @user.id }).count
   end
 
   def likes
     set_services_and_rating_for
     @likes = Like.where(user_id: current_user.id).order(created_at: :desc).page(params[:page]).per(5)
+    @total_reviews_count = Review.joins(plan: :service).where(services: { user_id: @user.id }).count
   end
 
 
   def orders
     set_services_and_rating_for
     @orders = Order.where(buyer_id: current_user.id).order(created_at: :desc).page(params[:page]).per(5)
+    @total_reviews_count = Review.joins(plan: :service).where(services: { user_id: @user.id }).count
   end
 
   def sales
     set_services_and_rating_for
     @sales = Order.where(seller_id: current_user.id).order(created_at: :desc).page(params[:page]).per(5)
+    @total_reviews_count = Review.joins(plan: :service).where(services: { user_id: @user.id }).count
   end
 
   def destroy
