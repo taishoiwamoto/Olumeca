@@ -67,9 +67,9 @@
           <% if sale.buyer.present? && sale.plan && sale.plan.service %>
 
             <div style="display: flex; justify-content: flex-end;">
-              <i class="fa-regular fa-address-card" style="font-size: 1.5em;"></i>
-              <p style="margin-left: 10px; font-size: 12px;">[Aceptar]</p>
-              <p style="margin-left: 10px; font-size: 12px;">[Rechazar]</p>
+              <a href="https://wa.me/4423831033" target="_blank">
+                <i class="fab fa-whatsapp" style="font-size: 1.5em;"></i>
+              </a>
               <span style="padding: 0.1rem 0.5rem; border: 1px solid #000; font-size: 12px; margin-left: 10px;"><%= sale.status %></span>
             </div>
 
@@ -84,7 +84,9 @@
 
           <% else %>
             <div style="display: flex; justify-content: flex-end;">
-              <i class="fa-regular fa-address-card" style="font-size: 1.5em;"></i>
+              <a href="https://wa.me/4423831033" target="_blank">
+                <i class="fab fa-whatsapp" style="font-size: 1.5em;"></i>
+              </a>
               <span style="padding: 0.1rem 0.5rem; border: 1px solid #000; font-size: 12px; margin-left: 10px;"><%= sale.status %></span>
             </div>
 
