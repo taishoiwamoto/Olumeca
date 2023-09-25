@@ -65,16 +65,29 @@
 
         <div class="post-right">
           <% if sale.buyer.present? && sale.plan && sale.plan.service %>
+
+            <div style="display: flex; justify-content: flex-end;">
+              <i class="fa-regular fa-address-card" style="font-size: 1.5em;"></i>
+              <p style="margin-left: 10px; font-size: 12px;">[Aceptar]</p>
+              <p style="margin-left: 10px; font-size: 12px;">[Rechazar]</p>
+              <span style="padding: 0.1rem 0.5rem; border: 1px solid #000; font-size: 12px; margin-left: 10px;"><%= sale.status %></span>
+            </div>
+
             <%= link_to service_path(sale.plan.service) do %>
               <h4>Servicio: <%= sale.plan.service.title %></h4>
               <h4>Plan: <%= sale.plan.title %></h4>
             <% end %>
 
             <div style="display: flex; justify-content: space-between;">
-              <p style="font-size: 14px;"><%= sale.buyer.name %></p>
+              <p style="font-size: 14px;"><%= link_to sale.buyer.name, user_path(sale.buyer) %></p>
             </div>
 
           <% else %>
+            <div style="display: flex; justify-content: flex-end;">
+              <i class="fa-regular fa-address-card" style="font-size: 1.5em;"></i>
+              <span style="padding: 0.1rem 0.5rem; border: 1px solid #000; font-size: 12px; margin-left: 10px;"><%= sale.status %></span>
+            </div>
+
             <h5>Este registro ha sido eliminada.</h5>
             <p style="font-size: 14px;">Usuario dado de baja</p>
           <% end %>
