@@ -434,7 +434,7 @@ header {
 
 .button-002 {
   width: auto;  /* '150px'を'auto'に変更 */
-  padding: 5px 15px;
+  padding: 2px 10px;
   border: none;
   border-radius: 5px;
   background-color:  #13b1c0;
