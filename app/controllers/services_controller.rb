@@ -18,16 +18,16 @@ class ServicesController < ApplicationController
 
   def new
     @service = Service.new
-    1.times { @service.plans.build }
+    @service.plans.build
   end
 
   def create
-    @service = Service.new(service_params.merge(user_id: current_user.id))
+    @service = current_user.services.build(service_params)
 
     if @service.save
       redirect_to service_path(@service), notice: "Has creado un servicio"
     else
-      @service.plans.build if @service.plans.blank?
+      @service.plans.build unless @service.plans.present?
       render :new, status: :unprocessable_entity
     end
   end
@@ -76,4 +76,9 @@ class ServicesController < ApplicationController
     params.require(:service).permit(:title, :detail, :category, :image,
                                     plans_attributes: [:title, :detail, :price, :delivery_method, :_destroy])
   end
+
+  #def service_form_params
+    #params.require(:service_form).permit(:title, :detail, :category, :image,
+      #plans_attributes: [:title, :detail, :price, :delivery_method, :_destroy])
+  #end
 end

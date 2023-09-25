@@ -13,12 +13,10 @@
       <% average_rating = @user.average_service_rating %>
       <% if average_rating.present? %>
         <div class="average-rating">
-          <h5>
-            <%= "⭐️" * average_rating.round %> (<%= sprintf('%.2f', average_rating) %>)
-          </h5>
+          <p><%= "⭐️" %> <%= sprintf('%.2f', average_rating) %></p>
         </div>
       <% else %>
-        <h5> -- </h5>
+        <p> -- </p>
       <% end %>
 
       <% if current_user %>
@@ -37,7 +35,7 @@
 
       <% if @user == current_user %>
         <li class="<%= 'active' if controller_name == 'users' && action_name == 'likes' %>">
-          <%= link_to("Favorito", likes_user_path(current_user.id)) %>
+          <%= link_to("Favoritos", likes_user_path(current_user.id)) %>
         </li>
       <% end %>
       <% if @user == current_user %>
@@ -64,13 +62,26 @@
 
         <div class="post-right">
           <% if order.seller.present? && order.plan && order.plan.service %>
+            <div style="display: flex; justify-content: flex-end;">
+              <a href="https://wa.me/4423831033" target="_blank">
+                <i class="fab fa-whatsapp" style="font-size: 1.5em;"></i>
+              </a>
+              <% if order.reviewed_by_user?(current_user) || order.previously_reviewed_by_user?(current_user) %>
+                <%= link_to "Editar evaluación", order.review.present? ? edit_review_path(order.review) : new_review_path(order_id: order.id, plan_id: order.plan.id, service_id: order.plan.service.id), class: "button-002", style: "font-size: 12px; margin-left: 10px;" %>
+              <% else %>
+                <%= link_to "Evaluar", new_review_path(order_id: order.id, plan_id: order.plan.id, service_id: order.plan.service.id), class: "button-002", style: "font-size: 12px; margin-left: 10px;" %>
+              <% end %>
+              <span style="padding: 0.1rem 0.5rem; border: 1px solid #000; font-size: 12px; margin-left: 10px;"><%= order.status %></span>
+            </div>
+
+
             <%= link_to service_path(order.plan.service) do %>
               <h4>Servicio: <%= order.service_title %></h4>
               <h4>Plan: <%= order.plan_title %></h4>
             <% end %>
 
             <div style="display: flex; justify-content: space-between;">
-              <p style="font-size: 14px;"><%= order.seller_name %></p>
+              <p style="font-size: 14px;"><%= link_to order.seller_name, user_path(order.seller) %></p>
 
               <% if order.reviewed_by_user?(current_user) || order.previously_reviewed_by_user?(current_user) %>
                 <%= link_to "Editar evaluación", order.review.present? ? edit_review_path(order.review) : new_review_path(order_id: order.id, plan_id: order.plan.id, service_id: order.plan.service.id), class: "button-002", style: "font-size: 12px;" %>
@@ -80,6 +91,12 @@
             </div>
 
           <% else %>
+            <div style="display: flex; justify-content: flex-end;">
+              <a href="https://wa.me/4423831033" target="_blank">
+                <i class="fab fa-whatsapp" style="font-size: 1.5em;"></i>
+              </a>
+              <span style="padding: 0.1rem 0.5rem; border: 1px solid #000; font-size: 12px; margin-left: 10px;"><%= order.status %></span>
+            </div>
             <h5>Este registro ha sido eliminada.</h5>
             <p style="font-size: 14px;">Usuario dado de baja</p>
           <% end %>
