@@ -36,6 +36,7 @@ class OrdersController < ApplicationController
     service = plan.service
     @order.seller_id = service.user_id
     @order.seller_name = User.find(service.user_id).name
+    @order.service_title = service.title
     @order.plan_title = plan.title
     @order.price = plan.price
     @order.status = "Pendiente"
