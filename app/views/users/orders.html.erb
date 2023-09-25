@@ -76,12 +76,18 @@
 
 
             <%= link_to service_path(order.plan.service) do %>
-              <h4>Servicio: <%= order.plan.service.title %></h4>
-              <h4>Plan: <%= order.plan.title %></h4>
+              <h4>Servicio: <%= order.service_title %></h4>
+              <h4>Plan: <%= order.plan_title %></h4>
             <% end %>
 
             <div style="display: flex; justify-content: space-between;">
-              <p style="font-size: 14px;"><%= link_to order.seller.name, user_path(order.seller) %></p>
+              <p style="font-size: 14px;"><%= link_to order.seller_name, user_path(order.seller) %></p>
+
+              <% if order.reviewed_by_user?(current_user) || order.previously_reviewed_by_user?(current_user) %>
+                <%= link_to "Editar evaluación", order.review.present? ? edit_review_path(order.review) : new_review_path(order_id: order.id, plan_id: order.plan.id, service_id: order.plan.service.id), class: "button-002", style: "font-size: 12px;" %>
+              <% else %>
+                <%= link_to "Evaluar", new_review_path(order_id: order.id, plan_id: order.plan.id, service_id: order.plan.service.id), class: "button-002", style: "font-size: 12px;" %>
+              <% end %>
             </div>
 
           <% else %>

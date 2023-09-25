@@ -74,12 +74,12 @@
             </div>
 
             <%= link_to service_path(sale.plan.service) do %>
-              <h4>Servicio: <%= sale.plan.service.title %></h4>
-              <h4>Plan: <%= sale.plan.title %></h4>
+              <h4>Servicio: <%= sale.service_title %></h4>
+              <h4>Plan: <%= sale.plan_title %></h4>
             <% end %>
 
             <div style="display: flex; justify-content: space-between;">
-              <p style="font-size: 14px;"><%= link_to sale.buyer.name, user_path(sale.buyer) %></p>
+              <p style="font-size: 14px;"><%= link_to sale.buyer_name, user_path(sale.buyer) %></p>
             </div>
 
           <% else %>
