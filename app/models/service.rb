@@ -20,6 +20,8 @@ class Service < ApplicationRecord
   validates :category, presence: true
   validates :detail, presence: true
 
+  scope :active, -> { where(deletion_at: nil) }
+
   def update_plans(plans_params)
     self.plans.delete_all
 
@@ -33,5 +35,15 @@ class Service < ApplicationRecord
 
       new_plan.save
     end
+  end
+
+  def soft_delete
+    update_attribute(:deletion_at, Time.now)
+
+    plans.each(&:soft_delete)
+  end
+
+  def reactivate
+    update_attribute(:deletion_at, nil)
   end
 end

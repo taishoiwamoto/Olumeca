@@ -24,7 +24,27 @@ class User < ApplicationRecord
 
   validates :phone_number, presence: true
 
+  scope :active, -> { where(deletion_at: nil) }
+
   def average_service_rating
     sold_reviews.average(:rating)
+  end
+
+  def soft_delete
+    update_attribute(:deletion_at, Time.now)
+
+    services.each(&:soft_delete)
+  end
+
+  def reactivate
+    update_attribute(:deletion_at, nil)
+  end
+
+  def active_for_authentication?
+    super && !deletion_at
+  end
+
+  def inactive_message
+    !deletion_at ? super : :deleted_account
   end
 end

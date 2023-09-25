@@ -3,7 +3,10 @@ class ServicesController < ApplicationController
   before_action :ensure_correct_user, {only: [:edit, :update, :destroy]}
 
   def index
-    @services = Service.all.order(created_at: :desc).page(params[:page]).per(10)
+    ## TODO: Check that paging works correctly by testing with a larger list
+
+    @services = Service.where(['user_id = :user_id or (user_id != :user_id AND deletion_at is null)', { user_id: current_user.id }]).order(created_at: :desc).page(params[:page]).per(10)
+    puts "@service object class: #{@services.class}"
   end
 
   def show
@@ -12,7 +15,6 @@ class ServicesController < ApplicationController
     @likes_count = Like.where(service_id: @service.id).count
     @reviews = @service.reviews.order(created_at: :desc).page(params[:page]).per(5)
   end
-
 
   def new
     @service = Service.new
@@ -30,9 +32,15 @@ class ServicesController < ApplicationController
     end
   end
 
-
   def edit
     @service = Service.find_by(id: params[:id])
+  end
+
+  def reactivate
+    @service = Service.find_by(id: params[:id])
+    @service.reactivate
+
+    redirect_to service_path(@service)
   end
 
   def update
@@ -49,7 +57,7 @@ class ServicesController < ApplicationController
 
   def destroy
     @service = Service.find_by(id: params[:id])
-    @service.destroy
+    @service.soft_delete
     flash[:notice] = "Has eliminado un servicio"
     redirect_to user_path(current_user)
   end

@@ -16,9 +16,28 @@ class OrdersController < ApplicationController
 
   def create
     @order = Order.new(order_params)
+
+    if Plan.find(@order.plan_id).deletion_at
+      redirect_to Plan.find(@order.plan_id).service, notice: 'No se puede realizar el pedido ya que el plan se encuentra cancelado.'
+      return
+    end
+
+    if Plan.find(@order.plan_id).service.deletion_at
+      redirect_to Plan.find(@order.plan_id).service, notice: 'No se puede realizar el pedido ya que el servicio se encuentra cancelado.'
+      return
+    end
+
+
     @order.buyer_id = current_user.id
-    service = Plan.find(@order.plan_id).service
+    @order.buyer_name = current_user.name
+
+    plan = Plan.find(@order.plan_id)
+
+    service = plan.service
     @order.seller_id = service.user_id
+    @order.seller_name = User.find(service.user_id).name
+    @order.plan_title = plan.title
+    @order.price = plan.price
     @order.status = "Pendiente"
     if @order.save
       redirect_to completed_orders_path
