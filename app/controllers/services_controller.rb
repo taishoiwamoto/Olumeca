@@ -11,7 +11,6 @@ class ServicesController < ApplicationController
     @user = @service.user
     @likes_count = Like.where(service_id: @service.id).count
     @reviews = @service.reviews.order(created_at: :desc).page(params[:page]).per(5)
-    @total_reviews_count_for_user = Review.joins(:service).where(services: { user_id: @user.id }).count
   end
 
 
@@ -70,8 +69,8 @@ class ServicesController < ApplicationController
                                     plans_attributes: [:title, :detail, :price, :delivery_method, :_destroy])
   end
 
-  def service_form_params
-    params.require(:service_form).permit(:title, :detail, :category, :image,
-      plans_attributes: [:title, :detail, :price, :delivery_method, :_destroy])
-  end
+  #def service_form_params
+    #params.require(:service_form).permit(:title, :detail, :category, :image,
+      #plans_attributes: [:title, :detail, :price, :delivery_method, :_destroy])
+  #end
 end

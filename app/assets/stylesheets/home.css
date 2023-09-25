@@ -416,7 +416,6 @@ header {
   background-color: #128C53; /* この色はおおよそ原色より暗い値です。必要に応じて調整してください */
 }
 
-/* Buttun ================================ */
 .button-001 {
   margin: 10px 0px;
   display: inline-flex;  /* 'flex'を'inline-flex'に変更 */

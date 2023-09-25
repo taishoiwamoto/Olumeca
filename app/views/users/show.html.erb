@@ -13,7 +13,7 @@
       <% average_rating = @user.average_service_rating %>
       <% if average_rating.present? %>
         <div class="average-rating">
-          <p><%= "⭐️" %> <%= sprintf('%.2f', average_rating) %> (<%= @total_reviews_count %> evaluaciones)</p>
+          <p><%= "⭐️" %> <%= sprintf('%.2f', average_rating) %></p>
         </div>
       <% else %>
         <p> -- </p>
@@ -77,7 +77,7 @@
                 <% reviews = service.reviews %>
                 <% if reviews.present? %>
                   <% average_rating = calculate_average_rating(reviews) %>
-                  <%= "⭐️" %> <%= sprintf('%.2f', average_rating) %> (<%= reviews.size %> evaluaciones)
+                  <%= "⭐️" %> <%= sprintf('%.2f', average_rating) %>
                 <% else %>
                   <h5> -- </h5>
                 <% end %>
