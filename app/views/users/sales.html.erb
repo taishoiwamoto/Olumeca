@@ -68,12 +68,12 @@
         <div class="post-right">
           <% if sale.buyer.present? && sale.plan && sale.plan.service %>
             <%= link_to service_path(sale.plan.service) do %>
-              <h4>Servicio: <%= sale.plan.service.title %></h4>
-              <h4>Plan: <%= sale.plan.title %></h4>
+              <h4>Servicio: <%= sale.service_title %></h4>
+              <h4>Plan: <%= sale.plan_title %></h4>
             <% end %>
 
             <div style="display: flex; justify-content: space-between;">
-              <p style="font-size: 14px;"><%= sale.buyer.name %></p>
+              <p style="font-size: 14px;"><%= sale.buyer_name %></p>
             </div>
 
           <% else %>

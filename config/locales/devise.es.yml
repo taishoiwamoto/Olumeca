@@ -46,6 +46,7 @@ es:
       timeout: Tu sesión expiró. Por favor, inicia sesión nuevamente para continuar.
       unauthenticated: Tienes que iniciar sesión o registrarte para poder continuar.
       unconfirmed: Tienes que confirmar tu cuenta para poder continuar.
+      deleted_account: La cuenta ha sido cancelada.
     mailer:
       confirmation_instructions:
         action: Confirmar mi cuenta

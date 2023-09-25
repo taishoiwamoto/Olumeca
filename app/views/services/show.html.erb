@@ -35,8 +35,14 @@
       <% if current_user && @service.user_id == current_user.id %>
         <div class="post-menus">
           <%= link_to("Editar", edit_service_path(@service)) %>
-          <%= button_to service_path(@service), method: :delete, form: { data: { turbo_confirm: "¿Estás seguro de que deseas eliminar este servicio?" }} do %>
-            Eliminar <i class="fa-solid fa-trash"></i>
+          <% if !@service.deletion_at %>
+            <%= button_to service_path(@service), method: :delete, form: { data: { turbo_confirm: "¿Estás seguro de que deseas eliminar este servicio?" }} do %>
+              Eliminar <i class="fa-solid fa-trash"></i>
+            <% end %>
+          <% else %>
+            <%= button_to reactivate_service_path(@service), method: :post, form: { data: { turbo_confirm: "¿Estás seguro de que deseas reactivar este servicio?" }} do %>
+              Reactivar <i class="fa-solid fa-toggle-on"></i>
+            <% end %>
           <% end %>
         </div>
       <% end %>

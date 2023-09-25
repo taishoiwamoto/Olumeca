@@ -10,7 +10,7 @@ Rails.application.routes.draw do
     sessions: 'users/sessions',
     unlocks: 'users/unlocks'}
 
-  match 'users/:id' => 'users#destroy', :via => :delete, :as => :destroy_user
+  match 'users.:id' => 'registrations#destroy', :via => :delete, :as => :destroy_user
 
   resources :users, only: [:edit, :show] do
     member do
@@ -21,6 +21,8 @@ Rails.application.routes.draw do
     end
   end
   resources :services
+
+  match 'services/:id' => 'services#reactivate', :via => :post, :as => :reactivate_service
 
   resources :plans, only: [], param: :index do
     member do

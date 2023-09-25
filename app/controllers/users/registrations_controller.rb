@@ -4,17 +4,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
   before_action :configure_sign_up_params, only: [:create]
   before_action :configure_account_update_params, only: [:update]
 
-  def create
-    #if verify_recaptcha
-      super
-    #else
-      #self.resource = resource_class.new sign_up_params
-      #resource.validate
-      #set_minimum_password_length
-      #respond_with resource, location: new_user_registration_path
-    #end
-  end
+  # DELETE /resource
+  def destroy
+    resource.soft_delete
 
+    sign_out resource
+    redirect_to root_path, notice: 'La cuenta de usuario fue cancelada'
+  end
 
   protected
 
@@ -41,21 +37,15 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # GET /resource/edit
-  def edit
-    redirect_to root
-    super
-  end
+  # def edit
+  #   redirect_to root
+  #   super
+  # end
 
   # PUT /resource
   # def update
   #   super
   # end
-
-  # DELETE /resource
-  def destroy
-    redirect_to root
-    super
-  end
 
   # GET /resource/cancel
   # Forces the session data which is usually expired after sign
@@ -69,9 +59,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # protected
 
   # If you have extra params to permit, append them to the sanitizer.
-  def configure_sign_up_params
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:agreement, :name, :phone_number, :email, :password, :password_confirmation])
-  end
+  # def configure_sign_up_params
+  #   devise_parameter_sanitizer.permit(:sign_up, keys: [:agreement, :name, :phone_number, :email, :password, :password_confirmation])
+  # end
 
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_account_update_params
