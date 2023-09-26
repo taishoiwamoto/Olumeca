@@ -3,8 +3,6 @@ class ServicesController < ApplicationController
   before_action :ensure_correct_user, {only: [:edit, :update, :destroy]}
 
   def index
-    ## TODO: Check that paging works correctly by testing with a larger list
-
     @services = Service.active.order(created_at: :desc).page(params[:page]).per(10)
     puts "@service object class: #{@services.class}"
   end

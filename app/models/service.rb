@@ -24,6 +24,8 @@ class Service < ApplicationRecord
 
   scope :active, -> { where(deletion_at: nil) }
 
+  scope :active, -> { where(deletion_at: nil) }
+
   def update_plans(plans_params)
     self.plans.delete_all
 
@@ -48,6 +50,8 @@ class Service < ApplicationRecord
   def reactivate
     update_attribute(:deletion_at, nil)
   end
+<<<<<<< HEAD
+=======
 
   private
 
@@ -56,4 +60,5 @@ class Service < ApplicationRecord
 
     errors.add(:plans, "El servicio debe tener al menos un plan.")
   end
+>>>>>>> 89373ace771f2a9ffd6a8a4bb2bd36a5c734648f
 end
