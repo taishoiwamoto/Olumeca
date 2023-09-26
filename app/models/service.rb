@@ -19,6 +19,10 @@ class Service < ApplicationRecord
     }
   validates :category, presence: true
   validates :detail, presence: true
+  validate :plans_present?
+  validates_associated :plans
+
+  scope :active, -> { where(deletion_at: nil) }
 
   scope :active, -> { where(deletion_at: nil) }
 
@@ -46,4 +50,15 @@ class Service < ApplicationRecord
   def reactivate
     update_attribute(:deletion_at, nil)
   end
+<<<<<<< HEAD
+=======
+
+  private
+
+  def plans_present?
+    return if plans.present?
+
+    errors.add(:plans, "El servicio debe tener al menos un plan.")
+  end
+>>>>>>> 89373ace771f2a9ffd6a8a4bb2bd36a5c734648f
 end

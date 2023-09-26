@@ -2,11 +2,12 @@
 <%= fields model: @service do |form| %>
   <%= form.fields_for :plans, child_index: params[:index] do |plan_form| %>
     <%= turbo_stream.replace "add-plan" do %>
-      <%= form.submit "Add plan",
+      <%= form.submit "Añadir plan",
             formaction: plan_path(plan_form.index.to_i + 1),
             formmethod: :post,
             formnovalidate: true,
-            id: "add-plan" %>
+            id: "add-plan",
+            class: "button-003" %>
     <% end %>
 
     <%= turbo_stream.append "plans" do %>

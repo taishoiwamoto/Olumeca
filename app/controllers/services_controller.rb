@@ -3,9 +3,7 @@ class ServicesController < ApplicationController
   before_action :ensure_correct_user, {only: [:edit, :update, :destroy]}
 
   def index
-    ## TODO: Check that paging works correctly by testing with a larger list
-
-    @services = Service.where(['user_id = :user_id or (user_id != :user_id AND deletion_at is null)', { user_id: current_user.id }]).order(created_at: :desc).page(params[:page]).per(10)
+    @services = Service.active.order(created_at: :desc).page(params[:page]).per(10)
     puts "@service object class: #{@services.class}"
   end
 
@@ -18,16 +16,16 @@ class ServicesController < ApplicationController
 
   def new
     @service = Service.new
-    1.times { @service.plans.build }
+    @service.plans.build
   end
 
   def create
-    @service = Service.new(service_params.merge(user_id: current_user.id))
+    @service = current_user.services.build(service_params)
 
     if @service.save
       redirect_to service_path(@service), notice: "Has creado un servicio"
     else
-      @service.plans.build if @service.plans.blank?
+      @service.plans.build unless @service.plans.present?
       render :new, status: :unprocessable_entity
     end
   end
@@ -76,4 +74,9 @@ class ServicesController < ApplicationController
     params.require(:service).permit(:title, :detail, :category, :image,
                                     plans_attributes: [:title, :detail, :price, :delivery_method, :_destroy])
   end
+
+  #def service_form_params
+    #params.require(:service_form).permit(:title, :detail, :category, :image,
+      #plans_attributes: [:title, :detail, :price, :delivery_method, :_destroy])
+  #end
 end

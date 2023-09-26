@@ -61,18 +61,6 @@
   display: inline;
 }
 
-.posts-user-item {
-  padding: 30px;
-  background-color: white;
-  box-shadow: 0 2px 6px #c1ced7;
-  overflow: hidden;
-  display: flex; /* 追加 */
-  align-items: center; /* アイテムを縦方向の中央に配置 */
-  flex: 1; /* 使えるスペースを全て使うように設定 */
-  vertical-align: middle;
-  font-size: 24px;
-}
-
 .whatsapp {
   display: flex;
   align-items: center;
@@ -106,9 +94,9 @@
   margin-right: 3px;
 }
 
-.post-time {
-  color: #8899a6;
-  margin-bottom: 10px;
+.like-button {
+  display: flex;
+  align-items: center; /* いいねボタンとカウントも縦方向の中央に配置 */
 }
 
 .like-button button {
@@ -182,17 +170,6 @@
   margin-right: 20px; /* タイトルといいねボタンの間にスペースを追加 */
 }
 
-.like-button {
-  display: flex;
-  align-items: center; /* いいねボタンとカウントも縦方向の中央に配置 */
-}
-
-/* satr ================================ */
-.star {
-  margin-right: 20px;
-}
-
-
 /* plans/new ================================ */
 
 .plans-container {
@@ -215,4 +192,9 @@
 
 .plan-card-btn:hover {
   background-color: #ddd;
+}
+
+/* star ================================ */
+.star {
+  margin-right: 20px;
 }
