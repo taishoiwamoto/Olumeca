@@ -5,7 +5,7 @@ class ServicesController < ApplicationController
   def index
     ## TODO: Check that paging works correctly by testing with a larger list
 
-    @services = Service.where(['user_id = :user_id or (user_id != :user_id AND deletion_at is null)', { user_id: current_user.id }]).order(created_at: :desc).page(params[:page]).per(10)
+    @services = Service.active.order(created_at: :desc).page(params[:page]).per(10)
     puts "@service object class: #{@services.class}"
   end
 

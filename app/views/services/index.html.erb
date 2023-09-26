@@ -1,15 +1,16 @@
 <div class="main posts-index">
   <div class="container">
     <h1 class="form-heading">Servicios</h1>
+
     <% @services.each do |service| %>
         <%= link_to service_path(service) do %>
           <div class="posts-index-item">
-              <div class="post-left">
-                  <% if service.image.attached? %>
-                      <%= image_tag(service.image) %>
-                  <% else %>
-                      <%= image_tag('default_service.jpg') %>
-                  <% end %>
+            <div class="post-left">
+              <% if service.image.attached? %>
+                <%= image_tag(service.image) %>
+              <% else %>
+                <%= image_tag('default_service.jpg') %>
+              <% end %>
               </div>
               <div class="post-right">
                 <div style="display: flex; justify-content: space-between;">
