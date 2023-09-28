@@ -47,10 +47,6 @@ class Service < ApplicationRecord
     plans.each(&:soft_delete)
   end
 
-  def reactivate
-    update_attribute(:deletion_at, nil)
-  end
-
   private
 
   def plans_present?

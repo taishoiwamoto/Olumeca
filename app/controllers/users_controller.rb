@@ -1,24 +1,22 @@
 class UsersController < ApplicationController
   before_action :authenticate_user, except: [:show, :reviews]
   before_action :set_user, only: [:likes, :orders, :sales, :reviews]
+  before_action :find_active_user, only: [:show, :reviews]
 
   def show
-    @user = User.find(params[:id])
-    @services = @user.services.order(created_at: :desc).page(params[:page]).per(5)
+    @services = @user.services.active.order(created_at: :desc).page(params[:page]).per(5)
     @average_rating = @user.average_service_rating
   end
 
   def reviews
-    @user = User.find(params[:id])
     order_ids = Order.where(seller_id: @user.id).pluck(:id)
     @reviews = Review.where(order_id: order_ids).order(created_at: :desc).page(params[:page]).per(5)
   end
 
   def likes
     set_services_and_rating_for
-    @likes = Like.where(user_id: current_user.id).order(created_at: :desc).page(params[:page]).per(5)
+    @likes = Like.joins(:service).merge(Service.active).where(user_id: current_user.id).order(created_at: :desc).page(params[:page]).per(5)
   end
-
 
   def orders
     set_services_and_rating_for
@@ -33,8 +31,7 @@ class UsersController < ApplicationController
   def destroy
     user_id = params[:id]
     @user = User.find(user_id)
-    @user.deletion_at = DateTime.now
-    @user.save
+    @user.soft_delete
   end
 
   private
@@ -55,5 +52,13 @@ class UsersController < ApplicationController
     end
 
     @average_rating = total_count > 0 ? total_reviews / total_count.to_f : nil
+  end
+
+  def find_active_user
+    @user = User.active.find_by(id: params[:id])
+
+    if @user.nil?
+      render file: "#{Rails.root}/public/404.html"
+    end
   end
 end
