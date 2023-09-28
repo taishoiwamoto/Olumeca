@@ -3,9 +3,6 @@ class Service < ApplicationRecord
 
   has_many :plans, dependent: :destroy, foreign_key: "service_id", inverse_of: :service, autosave: true
   has_many :reviews, through: :plans
-  #has_many :reviews, dependent: :nullify
-  #has_many :indirect_reviews, through: :plans, source: :reviews
-  #has_many :direct_reviews, class_name: 'Review', dependent: :nullify
   has_many :likes, dependent: :destroy
   has_one_attached :image
 

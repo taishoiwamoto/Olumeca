@@ -10,7 +10,6 @@ class User < ApplicationRecord
   has_many :sold_orders, class_name: 'Order', foreign_key: 'seller_id', dependent: :nullify
   has_many :reviews, dependent: :nullify
   has_many :sold_reviews, through: :sold_orders, source: :review
-  #has_many :indirect_reviews, through: :plans, source: :reviews
   has_many :likes, dependent: :destroy
   has_one_attached :image
 
