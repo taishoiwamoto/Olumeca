@@ -14,8 +14,4 @@ class Plan < ApplicationRecord
   def soft_delete
     update_attribute(:deletion_at, Time.now)
   end
-
-  def reactivate
-    update_attribute(:deletion_at, nil)
-  end
 end

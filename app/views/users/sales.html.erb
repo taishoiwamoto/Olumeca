@@ -64,21 +64,6 @@
         </div>
 
         <div class="post-right">
-<<<<<<< HEAD
-          <% if sale.buyer.present? && sale.plan && sale.plan.service %>
-            <%= link_to service_path(sale.plan.service) do %>
-              <h4>Servicio: <%= sale.service_title %></h4>
-              <h4>Plan: <%= sale.plan_title %></h4>
-            <% end %>
-
-            <div style="display: flex; justify-content: space-between;">
-              <p style="font-size: 14px;"><%= sale.buyer_name %></p>
-            </div>
-
-          <% else %>
-            <h5>Este registro ha sido eliminada.</h5>
-            <p style="font-size: 14px;">Usuario dado de baja</p>
-=======
           <div style="display: flex; justify-content: flex-end;">
             <a href="https://wa.me/4423831033" target="_blank">
               <i class="fab fa-whatsapp" style="font-size: 1.5em;"></i>
@@ -89,16 +74,19 @@
           <%= link_to service_path(sale.plan.service) do %>
             <h4>Servicio: <%= sale.service_title %></h4>
             <h4>Plan: <%= sale.plan_title %></h4>
->>>>>>> 89373ace771f2a9ffd6a8a4bb2bd36a5c734648f
+          <% end %>
+
+          <%= link_to user_path(sale.buyer)  do %>
+            <p style="font-size: 14px;">Comprador/a: <%= sale.buyer_name %></p>
           <% end %>
 
           <div style="display: flex; justify-content: space-between;">
-            <p style="font-size: 14px;">Comprador/a: <%= link_to sale.buyer_name, user_path(sale.buyer) %></p>
+            <p style="font-size: 14px;">Precio del pedido: <%= sale.price %> MXN</p>
           </div>
 
           <div style="display: flex">
             <p style="font-size: 12px;">ID del pedido:<%= sale.id %>,</p>
-            <p style="font-size: 12px; margin-left: 10px;">Fecha del pedido: <%= sale.created_at.strftime("%d/%m/%Y %H:%M") %></p>
+            <p style="font-size: 12px; margin-left: 10px;">Fecha: <%= sale.created_at.strftime("%d/%m/%Y %H:%M") %></p>
           </div>
         </div>
       </div>
