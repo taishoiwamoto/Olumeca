@@ -36,10 +36,6 @@ class User < ApplicationRecord
     services.each(&:soft_delete)
   end
 
-  def reactivate
-    update_attribute(:deletion_at, nil)
-  end
-
   def active_for_authentication?
     super && !deletion_at
   end

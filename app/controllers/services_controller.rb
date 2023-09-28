@@ -8,10 +8,14 @@ class ServicesController < ApplicationController
   end
 
   def show
-    @service = Service.find_by(id: params[:id])
-    @user = @service.user
-    @likes_count = Like.where(service_id: @service.id).count
-    @reviews = @service.reviews.order(created_at: :desc).page(params[:page]).per(5)
+    @service = Service.active.find_by(id: params[:id])
+    if @service.nil?
+      render file: "#{Rails.root}/public/404.html"
+    else
+      @user = @service.user
+      @likes_count = Like.where(service_id: @service.id).count
+      @reviews = @service.reviews.order(created_at: :desc).page(params[:page]).per(5)
+    end
   end
 
   def new
@@ -32,13 +36,6 @@ class ServicesController < ApplicationController
 
   def edit
     @service = Service.find_by(id: params[:id])
-  end
-
-  def reactivate
-    @service = Service.find_by(id: params[:id])
-    @service.reactivate
-
-    redirect_to service_path(@service)
   end
 
   def update

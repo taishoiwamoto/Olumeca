@@ -22,8 +22,6 @@ Rails.application.routes.draw do
   end
   resources :services
 
-  match 'services/:id' => 'services#reactivate', :via => :post, :as => :reactivate_service
-
   resources :plans, only: [], param: :index do
     member do
       delete '(:id)' => "plans#destroy", as: ""

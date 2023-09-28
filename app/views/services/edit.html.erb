@@ -62,18 +62,18 @@
 <br>
       <h3>Planes</h3>
       <div class="form" id="plans">
-        <% if @service.errors.full_messages_for(:plans).any? %>
-          <div class="form-error-body">
-            <% @service.errors.full_messages_for(:plans).each do |message| %>
-              <div class="form-error">
-                <%= message %>
-              </div>
-            <% end %>
-          </div>
-        <% end %>
-          <%= f.fields_for :plans do |plan_form| %>
-            <%= render "plans/form", {form: plan_form} %>
+        <%= f.fields_for :plans do |plan_form| %>
+          <% if @service.errors.full_messages_for(:plans).any? %>
+            <div class="form-error-body">
+              <% @service.errors.full_messages_for(:plans).each do |message| %>
+                <div class="form-error">
+                  <%= message %>
+                </div>
+              <% end %>
+            </div>
           <% end %>
+          <%= render "plans/form", {form: plan_form} %>
+        <% end %>
       </div>
         <br>
         <%= f.submit "Añadir plan",
