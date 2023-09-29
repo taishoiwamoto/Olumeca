@@ -31,7 +31,6 @@ class User < ApplicationRecord
 
   def soft_delete
     update_attribute(:deletion_at, Time.now)
-
     services.each(&:soft_delete)
   end
 
