@@ -1,0 +1,18 @@
+<html>
+<head>
+  <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+</head>
+<body>
+<p>Estimado/a <%= @buyer.name %>,</p>
+<% if @order.status == "Aceptado" %>
+  <p>Su pedido ha sido aceptado.</p>
+<% else %>
+  <p>Lamentablemente, su pedido ha sido rechazado.</p>
+<% end %>
+<p>Detalles del pedido:</p>
+<p>Nombre del producto: <%= @order.service_title %></p>
+<p>Plan: <%= @order.plan_title %></p>
+<p>Vendedor: <%= @seller.name %></p>
+<p>Puede ver sus pedidos en el siguiente <a href="<%= Rails.application.routes.url_helpers.user_orders_url(@buyer) %>">enlace</a>.</p>
+</body>
+</html>

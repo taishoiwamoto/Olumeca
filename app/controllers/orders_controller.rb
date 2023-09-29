@@ -41,6 +41,7 @@ class OrdersController < ApplicationController
     @order.price = plan.price
     @order.status = "Pendiente"
     if @order.save
+      OrderMailer.order_notification(@order).deliver_now
       redirect_to completed_orders_path
     else
     end
@@ -55,12 +56,14 @@ class OrdersController < ApplicationController
   def accept
     @order = Order.find(params[:id])
     @order.update(status: "Aceptado")
+    OrderMailer.order_status_notification(@order).deliver_now
     redirect_to sales_user_path(current_user.id), notice: 'Pedido aceptado.'
   end
 
   def reject
     @order = Order.find(params[:id])
     @order.update(status: "Rechazado")
+    OrderMailer.order_status_notification(@order).deliver_now
     redirect_to sales_user_path(current_user.id), notice: 'Pedido rechazado.'
   end
 
