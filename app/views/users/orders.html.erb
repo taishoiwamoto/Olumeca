@@ -64,9 +64,7 @@
           <div style="display: flex; justify-content: flex-end;">
 
             <% if order.status == "Aceptado" %>
-
-              <a href="https://wa.me/4423831033" target="_blank">
-                <i class="fab fa-whatsapp" style="font-size: 1.5em;"></i>
+                <i class="fa-regular fa-address-card" style="font-size: 1.5em;"></i>
               </a>
 
               <% if order.reviewed_by_user?(current_user) || order.previously_reviewed_by_user?(current_user) %>
