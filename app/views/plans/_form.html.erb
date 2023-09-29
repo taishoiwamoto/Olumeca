@@ -8,11 +8,12 @@
 
               <div class="field">
                 <%= form.label :delivery_method, "Método de entrega" %><br/>
-                <%= form.select :delivery_method, [
-                  ['Por favor, elija de la siguiente lista', '', {disabled: true, selected: true}],
-                  ['Videollamada', 'Videollamada'],
-                  ['Chat', 'Chat']
-                ] %>
+                <%= form.select :delivery_method,
+                      options_for_select(
+                        [['Por favor, elija de la siguiente lista', '', {disabled: true, selected: true}]] +
+                        DeliveryMethod.pluck(:name), form.object.delivery_method
+                      )
+                %>
               </div>
 
               <div class="field">
