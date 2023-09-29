@@ -52,6 +52,18 @@ class OrdersController < ApplicationController
   def show
   end
 
+  def accept
+    @order = Order.find(params[:id])
+    @order.update(status: "Aceptado")
+    redirect_to sales_user_path(current_user.id), notice: 'Pedido aceptado.'
+  end
+
+  def reject
+    @order = Order.find(params[:id])
+    @order.update(status: "Rechazado")
+    redirect_to sales_user_path(current_user.id), notice: 'Pedido rechazado.'
+  end
+
   private
 
   def order_params

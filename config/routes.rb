@@ -37,6 +37,10 @@ Rails.application.routes.draw do
     collection do
       get :completed
     end
+    member do
+      put :accept
+      put :reject
+    end
   end
 
   resources :reviews, only: [:new, :create, :edit, :update]
