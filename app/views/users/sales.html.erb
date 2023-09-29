@@ -66,8 +66,7 @@
         <div class="post-right">
           <div style="display: flex; justify-content: flex-end;">
             <% if sale.status == "Aceptado" %>
-              <a href="https://wa.me/4423831033" target="_blank">
-                <i class="fab fa-whatsapp" style="font-size: 1.5em;"></i>
+                <i class="fa-regular fa-address-card" style="font-size: 1.5em;"></i>
               </a>
             <% elsif sale.status == "Pendiente" %>
               <%= button_to "Aceptar", accept_order_path(sale), method: :put, class: "button-002", style: "font-size: 13px; margin-left: 10px;" %>
