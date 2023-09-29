@@ -20,7 +20,9 @@ Rails.application.routes.draw do
       get :reviews
     end
   end
-  resources :services
+  resources :services do
+    post '/send_email', to: 'services#send_email', on: :collection
+  end
 
   resources :plans, only: [], param: :index do
     member do
