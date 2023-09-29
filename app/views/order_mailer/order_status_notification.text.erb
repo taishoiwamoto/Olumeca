@@ -1,0 +1,14 @@
+Estimado/a <%= @buyer.name %>,
+
+<% if @order.status == "Aceptado" %>
+Su pedido ha sido aceptado.
+<% else %>
+Lamentablemente, su pedido ha sido rechazado.
+<% end %>
+
+Detalles del pedido:
+Nombre del producto: <%= @order.service_title %>
+Plan: <%= @order.plan_title %>
+Vendedor: <%= @seller.name %>
+
+Puede ver sus pedidos en el siguiente enlace: <%= Rails.application.routes.url_helpers.user_orders_url(@buyer) %>

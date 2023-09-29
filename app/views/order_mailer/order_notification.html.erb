@@ -1,0 +1,13 @@
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <p>Estimado/a <%= @seller.name %>,</p>
+    <p>Se ha realizado un nuevo pedido.</p>
+    <p>Nombre del producto: <%= @order.service_title %></p>
+    <p>Plan: <%= @order.plan_title %></p>
+    <p>Comprador: <%= @order.buyer_name %></p>
+    <p>Puede ver sus ventas en el siguiente <a href="<%= Rails.application.routes.url_helpers.user_sales_url(@seller) %>">enlace</a>.</p>
+  </body>
+</html>
