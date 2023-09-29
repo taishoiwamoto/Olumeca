@@ -62,14 +62,17 @@
 
         <div class="post-right">
           <div style="display: flex; justify-content: flex-end;">
-            <a href="https://wa.me/4423831033" target="_blank">
-              <i class="fab fa-whatsapp" style="font-size: 1.5em;"></i>
-            </a>
-            <% if order.reviewed_by_user?(current_user) || order.previously_reviewed_by_user?(current_user) %>
-              <%= link_to "Editar evaluación", order.review.present? ? edit_review_path(order.review) : new_review_path(order_id: order.id, plan_id: order.plan.id, service_id: order.plan.service.id), class: "button-002", style: "font-size: 12px; margin-left: 10px;" %>
-            <% else %>
-              <%= link_to "Evaluar", new_review_path(order_id: order.id, plan_id: order.plan.id, service_id: order.plan.service.id), class: "button-002", style: "font-size: 12px; margin-left: 10px;" %>
+
+            <% if order.status == "Aceptado" %>
+              <i class="fa-regular fa-address-card" style="font-size: 1.5em;"></i>
+
+              <% if order.reviewed_by_user?(current_user) || order.previously_reviewed_by_user?(current_user) %>
+                <%= link_to "Editar evaluación", order.review.present? ? edit_review_path(order.review) : new_review_path(order_id: order.id, plan_id: order.plan.id, service_id: order.plan.service.id), class: "button-002", style: "font-size: 12px; margin-left: 10px;" %>
+              <% else %>
+                <%= link_to "Evaluar", new_review_path(order_id: order.id, plan_id: order.plan.id, service_id: order.plan.service.id), class: "button-002", style: "font-size: 12px; margin-left: 10px;" %>
+              <% end %>
             <% end %>
+
             <span style="padding: 0.1rem 0.5rem; border: 1px solid #000; font-size: 12px; margin-left: 10px;"><%= order.status %></span>
           </div>
 

@@ -41,4 +41,14 @@ class User < ApplicationRecord
   def inactive_message
     !deletion_at ? super : :deleted_account
   end
+
+  after_update :reject_pending_orders, if: -> { saved_change_to_attribute?(:deletion_at) && !deletion_at.nil? }
+
+  private
+
+  def reject_pending_orders
+    Order.where(buyer_id: id, status: 'Pendiente').or(Order.where(seller_id: id, status: 'Pendiente')).each do |order|
+      order.update(status: 'Rechazado')
+    end
+  end
 end
