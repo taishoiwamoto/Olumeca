@@ -41,7 +41,7 @@ class OrdersController < ApplicationController
     @order.price = plan.price
     #@order.status = "pending"
     if @order.save
-      OrderMailer.order_notification(@order).deliver_now
+      OrderMailer.with(order: @order).order_notification.deliver_later
       redirect_to completed_orders_path
     else
     end

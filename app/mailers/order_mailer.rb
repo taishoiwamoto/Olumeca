@@ -1,6 +1,6 @@
 class OrderMailer < ApplicationMailer
-  def order_notification(order)
-    @order = order
+  def order_notification
+    @order = params[:order]
     @seller = User.find(@order.seller_id)
     mail(to: @seller.email, subject: 'Se ha realizado un nuevo pedido.')
   end

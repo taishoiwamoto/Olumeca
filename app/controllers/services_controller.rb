@@ -65,11 +65,6 @@ class ServicesController < ApplicationController
     end
   end
 
-  def send_email
-    @user = {name: 'Taisho'}
-    ArticleMailer.with(user: @user).welcome_email.deliver_later
-  end
-
   private
 
   def service_params
