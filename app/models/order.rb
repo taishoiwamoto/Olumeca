@@ -3,6 +3,7 @@ class Order < ApplicationRecord
   belongs_to :seller, class_name: 'User', foreign_key: 'seller_id'
   belongs_to :plan
   has_one :review
+  enum status: ['pending', 'accepted', 'rejected']
 
   def reviewed_by_user?(user)
     Review.where(user_id: user.id, plan_id: self.plan_id).exists?

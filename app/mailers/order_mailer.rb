@@ -9,7 +9,7 @@ class OrderMailer < ApplicationMailer
     @order = order
     @buyer = User.find(@order.buyer_id)
     @seller = User.find(@order.seller_id)
-    subject = if @order.status == "Aceptado"
+    subject = if @order.accepted?
                 'Tu pedido ha sido aceptado.'
               else
                 'Tu pedido ha sido rechazado.'

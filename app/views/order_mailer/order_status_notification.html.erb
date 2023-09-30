@@ -4,7 +4,7 @@
 </head>
 <body>
 <p>Estimado/a <%= @buyer.name %>,</p>
-<% if @order.status == "Aceptado" %>
+<% if @order.accepted? %>
   <p>Su pedido ha sido aceptado.</p>
 <% else %>
   <p>Lamentablemente, su pedido ha sido rechazado.</p>

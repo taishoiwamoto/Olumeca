@@ -1,6 +1,6 @@
 Estimado/a <%= @buyer.name %>,
 
-<% if @order.status == "Aceptado" %>
+<% if @order.accepted? %>
 Su pedido ha sido aceptado.
 <% else %>
 Lamentablemente, su pedido ha sido rechazado.

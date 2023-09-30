@@ -63,7 +63,7 @@
         <div class="post-right">
           <div style="display: flex; justify-content: flex-end;">
 
-            <% if order.status == "Aceptado" %>
+            <% if order.accepted? %>
               <i class="fa-regular fa-address-card" style="font-size: 1.5em;"></i>
 
               <% if order.reviewed_by_user?(current_user) || order.previously_reviewed_by_user?(current_user) %>
@@ -73,7 +73,7 @@
               <% end %>
             <% end %>
 
-            <span style="padding: 0.1rem 0.5rem; border: 1px solid #000; font-size: 12px; margin-left: 10px;"><%= order.status %></span>
+            <span style="padding: 0.1rem 0.5rem; border: 1px solid #000; font-size: 12px; margin-left: 10px;"><%= get_order_status(order.status) %></span>
           </div>
 
 
