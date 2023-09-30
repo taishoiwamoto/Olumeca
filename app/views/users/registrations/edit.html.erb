@@ -2,7 +2,7 @@
 <div class="main users-edit">
   <div class="container">
     <h1 class="form-heading">Edit</h1>
-    <div class="form">
+    <div class="forms">
       <div class="form-body">
         <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
           <%= render "users/shared/error_messages", resource: resource %>
@@ -58,7 +58,13 @@
     </div>
     <br>
     <h3>Cancelar mi cuenta</h3>
-    <%= button_to "Cancelar", destroy_user_path(resource), form: { data: { turbo_confirm: "¿Realmente quieres eliminar tu cuenta?" }}, method: :delete %>
+    <%= button_to "Cancelar", destroy_user_path(resource), form: { data: { turbo_confirm: "¿Realmente quieres eliminar tu cuenta?" }}, method: :delete, id: "frmDestroy" %>
+
+    <%= button_to 'Destroy', destroy_user_path(resource), method: :delete, form: { data: { 'turbo-confirm': 'Are you sure?' } } %>
+
+    <%= button_to service_path(3), method: :delete, form: { data: { turbo_confirm: "¿Estás seguro de que deseas eliminar este servicio?" }} do %>
+              <i class="fa-solid fa-trash"></i>
+            <% end %>
     <br>
   </div>
 </div>

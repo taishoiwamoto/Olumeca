@@ -20,5 +20,7 @@ module TweetApp
     # config.eager_load_paths << Rails.root.join("extras")
     config.i18n.default_locale = :es
     config.time_zone = "America/Belize"
+    #config.assets.enabled = true
+    #Rails.application.config.assets.precompile += %w( index.js )
   end
 end
