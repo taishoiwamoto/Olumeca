@@ -7,7 +7,6 @@ class Plan < ApplicationRecord
   validates :detail, presence: true
   validates :price, presence: true, numericality: { greater_than_or_equal_to: 0 }
   validates :delivery_method, presence: true
-  #validates :service_id, {presence: true}
 
   scope :active, -> { where(deletion_at: nil) }
 

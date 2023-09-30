@@ -24,15 +24,19 @@ class Service < ApplicationRecord
   scope :active, -> { where(deletion_at: nil) }
 
   def update_plans(plans_params)
-    self.plans.delete_all
+    #self.plans.delete_all
 
     plans_params.each do |plan_param|
       title = plan_param[1]['title']
       detail = plan_param[1]['detail']
       price = plan_param[1]['price']
       delivery_method = plan_param[1]['delivery_method']
-
-      new_plan = self.plans.new(title: title, detail: detail, price: price, delivery_method: delivery_method)
+      new_plan = Plan.find_by(id: plan_param[1]['id'], service_id: self.id)
+      if new_plan
+        new_plan.assign_attributes(title: title, detail: detail, price: price, delivery_method: delivery_method)
+      else
+        new_plan = self.plans.new(title: title, detail: detail, price: price, delivery_method: delivery_method)
+      end
 
       new_plan.save
     end
