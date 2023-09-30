@@ -12,4 +12,6 @@ class Order < ApplicationRecord
     return false unless self.plan && self.plan.service
     Review.joins(:order).where("orders.plan_id IN (?)", self.plan.service.plans.ids).where(user_id: user.id).exists?
   end
+
+  enum status: { pending: 0, accepted: 1, rejected: 2 }
 end

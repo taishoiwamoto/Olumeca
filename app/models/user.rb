@@ -45,8 +45,8 @@ class User < ApplicationRecord
   private
 
   def reject_pending_orders
-    Order.where(buyer_id: id, status: 'Pendiente').or(Order.where(seller_id: id, status: 'Pendiente')).each do |order|
-      order.update(status: 'Rechazado')
+    Order.where(buyer_id: id, status: :pending).or(Order.where(seller_id: id, status: :pending)).each do |order|
+      order.update(status: :rejected)
     end
   end
 end

@@ -22,6 +22,11 @@ es:
         detail: "Detalle"
         price: "Precio"
         delivery_method: "Método de entrega"
+      order:
+        status:
+          pending: "Pendiente"
+          accepted: "Aceptado"
+          rejected: "Rechazado"
     errors:
       models:
         user:
