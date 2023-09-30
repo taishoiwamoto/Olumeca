@@ -11,4 +11,8 @@ Nombre del producto: <%= @order.service_title %>
 Plan: <%= @order.plan_title %>
 Vendedor: <%= @seller.name %>
 
-Puede ver sus pedidos en el siguiente enlace: <%= Rails.application.routes.url_helpers.user_orders_url(@buyer) %>
+<% if Rails.env.development? %>
+  Puede ver sus pedidos en el siguiente enlace: http://localhost:3000/users/<%= @buyer.id %>/orders.
+<% else %>
+  Puede ver sus pedidos en el siguiente enlace: https://olumeca.com/users/<%= @buyer.id %>/orders.
+<% end %>
