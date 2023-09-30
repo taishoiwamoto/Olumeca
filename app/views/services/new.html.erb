@@ -34,7 +34,7 @@
           <div class="field">
             <%= f.label :category %><br/>
             <%#= f.select :category, options_for_select(Category.pluck(:name).prepend(['Por favor, elija de la siguiente lista', '', {disabled: true, selected: true}]), selected: @service.category), {} %>
-            <%= f.select :category_id, options_for_select(Category.all.map{|category| [category.name, category.id]}), { include_blank: 'Elige la categoría'}, required: true %>
+            <%= f.select :category_id, options_for_select(Category.all.map{|category| [category.name, category.id]}), { prompt: 'Por favor, elija de la siguiente lista' }, required: true %>
           </div>
 
           <div class="field">
