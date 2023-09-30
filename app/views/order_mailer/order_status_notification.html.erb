@@ -13,6 +13,10 @@
 <p>Nombre del producto: <%= @order.service_title %></p>
 <p>Plan: <%= @order.plan_title %></p>
 <p>Vendedor: <%= @seller.name %></p>
-<p>Puede ver sus pedidos en el siguiente <a href="<%= Rails.application.routes.url_helpers.user_orders_url(@buyer) %>">enlace</a>.</p>
+<% if Rails.env.development? %>
+  <p>Puede ver sus pedidos en el siguiente <a href="http://localhost:3000/users/<%= @buyer.id %>/orders">enlace</a>.</p>
+<% else %>
+  <p>Puede ver sus pedidos en el siguiente <a href="https://olumeca.com/users/<%= @buyer.id %>/orders">enlace</a>.</p>
+<% end %>
 </body>
 </html>

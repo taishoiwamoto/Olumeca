@@ -56,14 +56,14 @@ class OrdersController < ApplicationController
   def accept
     @order = Order.find(params[:id])
     @order.accepted!
-    OrderMailer.order_status_notification(@order).deliver_now
+    OrderMailer.with(order: @order).order_status_notification.deliver_later
     redirect_to sales_user_path(current_user.id), notice: 'Pedido aceptado.'
   end
 
   def reject
     @order = Order.find(params[:id])
     @order.rejected!
-    OrderMailer.order_status_notification(@order).deliver_now
+    OrderMailer.with(order: @order).order_status_notification.deliver_later
     redirect_to sales_user_path(current_user.id), notice: 'Pedido rechazado.'
   end
 
