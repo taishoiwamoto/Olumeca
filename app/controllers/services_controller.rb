@@ -24,7 +24,7 @@ class ServicesController < ApplicationController
   end
 
   def create
-    @service = current_user.services.build(service_params)
+    @service = current_user.services.create(service_params)
 
     if @service.save
       redirect_to service_path(@service), notice: "Has creado un servicio"
@@ -73,7 +73,7 @@ class ServicesController < ApplicationController
   private
 
   def service_params
-    params.require(:service).permit(:title, :detail, :category, :image,
+    params.require(:service).permit(:title, :detail,:category_id, :image,
                                     plans_attributes: [:title, :detail, :price, :delivery_method, :_destroy, :id])
   end
 

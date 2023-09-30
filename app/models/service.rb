@@ -1,6 +1,6 @@
 class Service < ApplicationRecord
   belongs_to :user
-
+  belongs_to :category
   has_many :plans, dependent: :destroy, foreign_key: "service_id", inverse_of: :service, autosave: true
   has_many :reviews, through: :plans
   has_many :likes, dependent: :destroy
@@ -14,7 +14,7 @@ class Service < ApplicationRecord
       maximum: 65,
       too_long: ':El nombre del servicio debe tener menos de %{count} caracteres.'
     }
-  validates :category, presence: true
+  # validates :category, presence: true
   validates :detail, presence: true
   validate :plans_present?
   validates_associated :plans
@@ -25,7 +25,10 @@ class Service < ApplicationRecord
 
   def update_plans(plans_params)
     #self.plans.delete_all
-
+    puts 'planes'
+    puts plans_params.count
+    puts plans_params
+    #plans_params.delete_all
     plans_params.each do |plan_param|
       title = plan_param[1]['title']
       detail = plan_param[1]['detail']
