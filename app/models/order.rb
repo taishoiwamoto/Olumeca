@@ -3,6 +3,7 @@ class Order < ApplicationRecord
   belongs_to :seller, class_name: 'User', foreign_key: 'seller_id'
   belongs_to :plan
   has_one :review
+  enum status: ['pending', 'accepted', 'rejected']
 
   def reviewed_by_user?(user)
     Review.where(user_id: user.id, plan_id: self.plan_id).exists?
@@ -12,6 +13,4 @@ class Order < ApplicationRecord
     return false unless self.plan && self.plan.service
     Review.joins(:order).where("orders.plan_id IN (?)", self.plan.service.plans.ids).where(user_id: user.id).exists?
   end
-
-  enum status: { pending: 0, accepted: 1, rejected: 2 }
 end

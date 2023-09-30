@@ -68,10 +68,10 @@
             <% if sale.accepted? %>
               <i class="fa-regular fa-address-card" style="font-size: 1.5em;"></i>
             <% elsif sale.pending? %>
-              <%= button_to "Aceptar", accept_order_path(sale), method: :put, class: "button-002", style: "font-size: 13px; margin-left: 10px;" %>
-              <%= button_to "Rechazar", reject_order_path(sale), method: :put, class: "button-002", style: "font-size: 13px; margin-left: 10px;" %>
+              <%= button_to "Aceptar", accept_order_path(sale), method: :put, class: "button-002", style: "font-size: 13px;color:#000; margin-left: 10px;" %>
+              <%= button_to "Rechazar", reject_order_path(sale), method: :put, class: "button-002", style: "font-size: 13px;color:#000; margin-left: 10px;" %>
             <% end %>
-            <span style="padding: 0.1rem 0.5rem; border: 1px solid #000; font-size: 12px; margin-left: 10px;"><%= t("sale.status.#{sale.status}") %></span>
+            <span style="padding: 0.1rem 0.5rem; border: 1px solid #000; font-size: 12px; margin-left: 10px;"><%= get_order_status(sale.status) %></span>
           </div>
 
           <%= link_to service_path(sale.plan.service) do %>
@@ -97,3 +97,4 @@
     <%= paginate @sales %>
   </div>
 </div>
+

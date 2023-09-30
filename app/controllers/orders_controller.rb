@@ -39,7 +39,7 @@ class OrdersController < ApplicationController
     @order.service_title = service.title
     @order.plan_title = plan.title
     @order.price = plan.price
-    @order.status = :pending
+    #@order.status = "pending"
     if @order.save
       OrderMailer.order_notification(@order).deliver_now
       redirect_to completed_orders_path
