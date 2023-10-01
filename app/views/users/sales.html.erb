@@ -65,9 +65,7 @@
 
         <div class="post-right">
           <div style="display: flex; justify-content: flex-end;">
-            <% if sale.accepted? %>
-              <i class="fa-regular fa-address-card" style="font-size: 1.5em;"></i>
-            <% elsif sale.pending? %>
+            <% if sale.pending? %>
               <%= button_to "Aceptar", accept_order_path(sale), method: :put, class: "button-002", style: "font-size: 13px;color:#000; margin-left: 10px;" %>
               <%= button_to "Rechazar", reject_order_path(sale), method: :put, class: "button-002", style: "font-size: 13px;color:#000; margin-left: 10px;" %>
             <% end %>
@@ -90,6 +88,13 @@
           <div style="display: flex">
             <p style="font-size: 12px;">ID del pedido:<%= sale.id %>,</p>
             <p style="font-size: 12px; margin-left: 10px;">Fecha: <%= sale.created_at.strftime("%d/%m/%Y %H:%M") %></p>
+            <% if sale.accepted? %>
+              <%= turbo_frame_tag 'user' do %>
+                <%= link_to user_info_order_path(sale, user_id: sale.buyer_id ) do %>
+                  <i class="fa-regular fa-address-card" style="font-size: 1.5em;"></i>
+                <% end %>
+              <% end %>
+            <% end %>
           </div>
         </div>
       </div>

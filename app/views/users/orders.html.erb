@@ -92,7 +92,11 @@
           <p style="font-size: 12px;">ID del pedido:<%= order.id %>,</p>
           <p style="font-size: 12px; margin-left: 10px;">Fecha: <%= order.created_at.strftime("%d/%m/%Y %H:%M") %></p>
           <% if order.accepted? %>
-            <i class="fa-regular fa-address-card" style="font-size: 1.5em;"></i>
+            <%= turbo_frame_tag 'user' do %>
+              <%= link_to user_info_order_path(order, user_id: order.seller_id ) do %>
+                <i class="fa-regular fa-address-card" style="font-size: 1.5em;"></i>
+              <% end %>
+            <% end %>
           <% end %>
         </div>
 
