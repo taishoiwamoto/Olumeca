@@ -6,7 +6,13 @@
         <%= f.label :category_id, "Categoría" %><br/>
         <%= f.select :category_id, options_for_select(Category.all.map{|category| [category.name, category.id]}), { prompt: 'Por favor, elija de la siguiente lista' } %>
       </div>
-        <%= f.submit 'Buscar', class: 'button-002' %><br/>
+
+      <div class="field">
+        <%= f.label :keyword, "Palabra clave" %><br/>
+        <%= f.text_field :keyword, placeholder: "Introduce una palabra clave" %>
+      </div>
+
+      <%= f.submit 'Buscar', class: 'button-002' %><br/>
     <% end %>
     <br>
     <%= render 'services' , services: @services %>
