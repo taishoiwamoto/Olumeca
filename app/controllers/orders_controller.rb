@@ -67,6 +67,10 @@ class OrdersController < ApplicationController
     redirect_to sales_user_path(current_user.id), notice: 'Pedido rechazado.'
   end
 
+  def user_info
+    @user = User.find(params[:user_id])
+  end
+
   private
 
   def order_params

@@ -5,7 +5,7 @@ module OrdersHelper
 		elsif status === "accepted"
 			'Aceptado'
 		else
-			'Rechazado'			
+			'Rechazado'
 		end
 	end
 end

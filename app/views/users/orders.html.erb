@@ -64,8 +64,6 @@
           <div style="display: flex; justify-content: flex-end;">
 
             <% if order.accepted? %>
-              <i class="fa-regular fa-address-card" style="font-size: 1.5em;"></i>
-
               <% if order.reviewed_by_user?(current_user) || order.previously_reviewed_by_user?(current_user) %>
                 <%= link_to "Editar evaluación", order.review.present? ? edit_review_path(order.review) : new_review_path(order_id: order.id, plan_id: order.plan.id, service_id: order.plan.service.id), class: "button-002", style: "font-size: 12px; margin-left: 10px;" %>
               <% else %>
@@ -93,6 +91,13 @@
         <div style="display: flex">
           <p style="font-size: 12px;">ID del pedido:<%= order.id %>,</p>
           <p style="font-size: 12px; margin-left: 10px;">Fecha: <%= order.created_at.strftime("%d/%m/%Y %H:%M") %></p>
+          <% if order.accepted? %>
+            <%= turbo_frame_tag 'user' do %>
+              <%= link_to user_info_order_path(order, user_id: order.seller_id ) do %>
+                <i class="fa-regular fa-address-card" style="font-size: 1.5em;"></i>
+              <% end %>
+            <% end %>
+          <% end %>
         </div>
 
         </div>

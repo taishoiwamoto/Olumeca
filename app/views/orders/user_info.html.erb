@@ -1,0 +1,5 @@
+<%= turbo_frame_tag 'user' do %>
+  <%= @user.email %>
+  <%= @user.phone_number %>
+  <%= link_to 'Regresar', :back %>
+<% end %>
