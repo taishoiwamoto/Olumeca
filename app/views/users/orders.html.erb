@@ -74,6 +74,16 @@
             <span style="padding: 0.1rem 0.5rem; border: 1px solid #000; font-size: 12px; margin-left: 10px;"><%= get_order_status(order.status) %></span>
           </div>
 
+          <div style="display: flex; justify-content: flex-end; padding-top: 10px; ">
+            <% if order.accepted? %>
+              <%= turbo_frame_tag 'user' do %>
+                <%= link_to user_info_order_path(order, user_id: order.seller_id ) do %>
+                  <i class="fa-regular fa-address-card" style="font-size: 1.5em;"></i>
+                <% end %>
+              <% end %>
+            <% end %>
+          </div>
+
 
           <%= link_to service_path(order.plan.service) do %>
             <h4>Servicio: <%= order.service_title %></h4>
@@ -91,13 +101,6 @@
         <div style="display: flex">
           <p style="font-size: 12px;">ID del pedido:<%= order.id %>,</p>
           <p style="font-size: 12px; margin-left: 10px;">Fecha: <%= order.created_at.strftime("%d/%m/%Y %H:%M") %></p>
-          <% if order.accepted? %>
-            <%= turbo_frame_tag 'user' do %>
-              <%= link_to user_info_order_path(order, user_id: order.seller_id ) do %>
-                <i class="fa-regular fa-address-card" style="font-size: 1.5em;"></i>
-              <% end %>
-            <% end %>
-          <% end %>
         </div>
 
         </div>
