@@ -18,7 +18,7 @@ categories = [
   'IT, Programación & Desarrollo',
   'Adivinación',
   'Consejería, Consejos de amor & Compañía',
-  'Aprendizaje, Búsqueda de empleo, Certificación & Coaching',
+  'Aprendizaje, Idioma, Búsqueda de empleo, Certificación & Coaching',
   'Vivienda, Belleza, Estilo de vida & Pasatiempos',
   'Lecciones en línea & Consejos',
   'Dinero, Trabajos secundarios & Marketing de afiliados',
