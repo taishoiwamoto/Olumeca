@@ -8,9 +8,9 @@ class Plan < ApplicationRecord
   validates :price, presence: true, numericality: { greater_than_or_equal_to: 0 }
   validates :delivery_method, presence: true
 
-  scope :active, -> { where(deletion_at: nil) }
+  scope :active, -> { where(deleted_at: nil) }
 
   def soft_delete
-    update_attribute(:deletion_at, Time.now)
+    update_attribute(:deleted_at, Time.now)
   end
 end
