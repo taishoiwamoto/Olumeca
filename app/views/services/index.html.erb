@@ -1,7 +1,6 @@
 <div class="main posts-index">
   <div class="container">
     <h1 class="form-heading">Servicios</h1>
-
     <%= form_with(scope: :services, url: filter_services_path, method: :post ) do |f| %>
       <div class="field">
         <%= f.label :category_id %><br/>
@@ -9,7 +8,7 @@
       </div>
       <%= f.submit 'Buscar' %><br/>
     <% end %>
-
+    <br>
     <%= render 'services' , services: @services %>
   </div>
 </div>
