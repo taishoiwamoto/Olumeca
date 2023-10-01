@@ -21,26 +21,26 @@ class User < ApplicationRecord
 
   validates :phone_number, presence: true
 
-  scope :active, -> { where(deletion_at: nil) }
+  scope :active, -> { where(deleted_at: nil) }
 
   def average_service_rating
     sold_reviews.average(:rating)
   end
 
   def soft_delete
-    update_attribute(:deletion_at, Time.now)
+    update_attribute(:deleted_at, Time.now)
     services.each(&:soft_delete)
   end
 
   def active_for_authentication?
-    super && !deletion_at
+    super && !deleted_at
   end
 
   def inactive_message
-    !deletion_at ? super : :deleted_account
+    !deleted_at ? super : :deleted_account
   end
 
-  after_update :reject_pending_orders, if: -> { saved_change_to_attribute?(:deletion_at) && !deletion_at.nil? }
+  after_update :reject_pending_orders, if: -> { saved_change_to_attribute?(:deleted_at) && !deleted_at.nil? }
 
   private
 

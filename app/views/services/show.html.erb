@@ -29,7 +29,7 @@
           <%= button_to edit_service_path(@service), method: :get do %>
             <i class="fa-solid fa-pen-to-square"></i>
           <% end %>
-          <% if !@service.deletion_at %>
+          <% if !@service.deleted_at %>
             <%= button_to service_path(@service), method: :delete, form: { data: { turbo_confirm: "¿Estás seguro de que deseas eliminar este servicio?" }} do %>
               <i class="fa-solid fa-trash"></i>
             <% end %>

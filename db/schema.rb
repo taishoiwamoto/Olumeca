@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_30_200643) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_01_182332) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -81,7 +81,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_30_200643) do
     t.string "delivery_method"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.datetime "deletion_at"
+    t.datetime "deleted_at"
   end
 
   create_table "reviews", force: :cascade do |t|
@@ -102,7 +102,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_30_200643) do
     t.datetime "updated_at", null: false
     t.integer "user_id"
     t.text "detail"
-    t.datetime "deletion_at"
+    t.datetime "deleted_at"
     t.integer "category_id"
     t.index ["category_id"], name: "index_services_on_category_id"
   end
@@ -117,7 +117,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_30_200643) do
     t.datetime "updated_at", null: false
     t.string "phone_number"
     t.string "name"
-    t.datetime "deletion_at"
+    t.datetime "deleted_at"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
