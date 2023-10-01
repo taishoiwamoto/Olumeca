@@ -65,6 +65,14 @@ class ServicesController < ApplicationController
     end
   end
 
+  def filter
+    @category = Category.find(params[:services][:category_id])
+
+    respond_to do |format|
+      format.turbo_stream { render turbo_stream: turbo_stream.replace('services', partial: 'services/services', locals: { services: @category.services.active.order(created_at: :desc).page(params[:page]).per(10) })}
+    end
+  end
+
   private
 
   def service_params

@@ -27,7 +27,7 @@
           </div>
 
           <div class="field">
-            <%= f.label :category %><br/>
+            <%= f.label :category_id %><br/>
             <%= f.select :category_id, options_for_select(Category.all.map{|category| [category.name, category.id]}), { prompt: 'Por favor, elija de la siguiente lista' }, required: true %>
           </div>
 
