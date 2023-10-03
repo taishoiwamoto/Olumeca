@@ -37,6 +37,7 @@
       </div>
     </div>
   </div>
+
   <div class="top-newServices">
     <div class="top-newServices__container">
       <h2 class="top-title">Servicios Nuevos</h2>
@@ -84,37 +85,130 @@
         <% end %>
     </div>
   </div>
+
   <div class="top-main-buyer">
     <div class="top-main-buyer__container">
-      <h2 class="top-title">Lo que puede hacer el(la) comprador(a)</h2>
-      <ul>
-        <li>Compra de servicios publicado</li>
-        <li>Solicitud de presupuesto</li>
-      </ul>
+      <div class="inner noflex">
+        <h2 class="top-title">Lo que puede hacer comprador/a</h2>
+        <div class="about_service__list flexbox">
+          <div class="about_service__list_item">
+            <%= image_tag 'default_service.jpg', alt: '自分のペースで学べる。だから挫折しない。', class: 'normal-size-image' %>
+            <p class="about_service__list_item_head">約3,000名のメンターから選べる</p>
+            <p class="about_service__list_item_body">プログラミング、デザイン、起業など学びたいスキルでピンポイントに探せます。見つからない場合は、メンターを募集することも可能です。
+            </p>
+          </div>
+          <div class="about_service__list_item">
+            <%= image_tag 'default_service.jpg', alt: '自分のペースで学べる。だから挫折しない。', class: 'normal-size-image' %>
+            <p class="about_service__list_item_head">個別に教えてもらえる</p>
+            <p class="about_service__list_item_body">あなたが悩んでいることをダイレクトに相談して、マンツーマンで解決までたどり着くことができます。</p>
+          </div>
+          <div class="about_service__list_item">
+            <%= image_tag 'default_service.jpg', alt: '自分のペースで学べる。だから挫折しない。', class: 'normal-size-image' %>
+            <p class="about_service__list_item_head">リーズナブル</p>
+            <p class="about_service__list_item_body">スクールなどの企業ではなく、個人のメンターと直契約するため比較的リーズナブルに教えてもらうことができます。</p>
+          </div>
+        </div>
+      </div>
+      <br>
+      <br>
       <br>
       <h2 class="top-title">Pasos para comprar un servicio</h2>
-      <ol>
-        <li>Búsqueda: Elija un servicio de la lista de servicios.</li>
-        <li>Comparación: Verifique los detalles del servicio y considere las opciones.</li>
-        <li>Compra: Confirme el contenido del servicio previamente por WhatsApp y compre mediante transferencia bancaria.</li>
-        <li>Comunicación: Después de la compra, comunique a través de WhatsApp o videoconferencia.</li>
-      </ol>
+      <div class="c-serviceStep_flow">
+        <div class="c-serviceFlow">
+          <div class="about_service__list_item_head">
+            1. 検索
+          </div>
+          <div class="c-serviceFlow_text">
+            カテゴリ絞り込みやキーワード検索をもとに、サービスを絞り込みます。
+          </div>
+        </div>
+
+        <div class="c-serviceFlow">
+          <div class="about_service__list_item_head">
+            2. 比較
+          </div>
+          <div class="c-serviceFlow_text">
+            金額・納期・サービスの提供形式など豊富な情報をもとに、比較検討します。
+          </div>
+        </div>
+
+        <div class="c-serviceFlow">
+          <div class="about_service__list_item_head">
+            3. 購入
+          </div>
+          <div class="c-serviceFlow_text">
+            自分にあった決済手段で、気に入ったサービスを購入します。
+          </div>
+        </div>
+
+        <div class="c-serviceFlow">
+          <div class="about_service__list_item_head">
+            4. やりとり
+          </div>
+          <div class="c-serviceFlow_text">
+            購入後はトークルーム内で出品者とチャット形式でやりとりします。
+          </div>
+        </div>
+      </div>
       <%= link_to "Buscar un servicio", services_path, class: "buttons__main" %>
     </div>
   </div>
+
   <div class="top-main-seller">
     <div class="top-main-seller__container">
-      <h2 class="top-title">Lo que puede hacer el(la) proveedor(a)</h2>
-      <ul>
-        <li>Oferta de servicios</li>
-      </ul>
+      <div class="inner noflex">
+        <h2 class="top-title">Lo que puede hacer vendedor/a</h2>
+        <div class="about_service__list flexbox">
+          <div class="about_service__list_item">
+            <%= image_tag 'default_service.jpg', alt: '自分のペースで学べる。だから挫折しない。', class: 'normal-size-image' %>
+            <p class="about_service__list_item_head">内容・料金を自由に設定</p>
+            <p class="about_service__list_item_body">平均契約価格は14,000円。内容や金額は自由に設定できます。MENTAはメンティーによりそいながら、1人前になるまで継続的にサポートするサービスです。そのため、スポットよりも月額でのプラン作成が主流となっています。
+            </p>
+          </div>
+          <div class="about_service__list_item">
+            <%= image_tag 'default_service.jpg', alt: '自分のペースで学べる。だから挫折しない。', class: 'normal-size-image' %>
+            <p class="about_service__list_item_head">スキマ時間を有効活用</p>
+            <p class="about_service__list_item_body">スキマ時間でいつでもどこでもスマホでも対応できます。空いた時間を無駄にすることなく収入アップが見込めます。</p>
+          </div>
+          <div class="about_service__list_item">
+            <%= image_tag 'default_service.jpg', alt: '自分のペースで学べる。だから挫折しない。', class: 'normal-size-image' %>
+            <p class="about_service__list_item_head">定期収入を得よう</p>
+            <p class="about_service__list_item_body">MENTAではサブスク型（月額）のプランの作成が可能です。あなたのスキルを教えることで定期収入をつくりましょう。</p>
+          </div>
+        </div>
+      </div>
+      <br>
+      <br>
       <br>
       <h2 class="top-title">Pasos para ofrecer un servicio</h2>
-      <ol>
-        <li>Publicación: Introduce el contenido del servicio según los ítems.</li>
-        <li>Recepción de pedidos: Las consultas o compras del servicio se notificarán a través de WhatsApp.</li>
-        <li>Comunicación y entrega: Después de recibir el pedido, proporciona el servicio a través de WhatsApp o videoconferencia.</li>
-      </ol>
+      <div class="c-serviceStep_flow">
+        <div class="c-serviceFlow">
+          <div class="about_service__list_item_head">
+            1. 出品
+          </div>
+          <div class="c-serviceFlow_text">
+            項目に沿ってサービス内容を入力していきます。可能な提供手法は、テキスト・電話・ビデオチャット・コンテンツがあります。
+          </div>
+        </div>
+
+        <div class="c-serviceFlow">
+          <div class="about_service__list_item_head">
+            2. 受注
+          </div>
+          <div class="c-serviceFlow_text">
+            サービスが購入されると、通知でお知らせが届きます。見積もり依頼が来た場合は、好みの条件が提案ができます。
+          </div>
+        </div>
+
+        <div class="c-serviceFlow">
+          <div class="about_service__list_item_head">
+            3. やり取り
+          </div>
+          <div class="c-serviceFlow_text">
+            受注後はチャット形式などでサービスを提供します。必要に応じて添付ファイルなども用いて納品しましょう。
+          </div>
+        </div>
+      </div>
       <%= link_to "Publicar un servicio", new_service_path, class: "buttons__main" %>
     </div>
   </div>
