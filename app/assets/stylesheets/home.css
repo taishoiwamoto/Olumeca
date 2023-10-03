@@ -649,6 +649,26 @@ a.btn--shadow {
   background-color: #10a0ad;
 }
 
+.button-004 {
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #13b1c0;
+  color: #fff;
+  width: 350px;
+  padding: 12px 16px;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  cursor: pointer;
+  text-align: center;
+  margin-top: 10px;
+  display: block;
+}
+
+.button-004:hover {
+  background-color: #10a0ad;
+}
+
 .salir-button {
   background-color: transparent; /* 背景色を透明に */
   color: rgb(0, 0, 0); /* 文字色を黒に設定 */
