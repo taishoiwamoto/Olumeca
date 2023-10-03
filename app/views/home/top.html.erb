@@ -1,13 +1,19 @@
 <div class="top-main">
   <div class="top-mainVisual">
     <div class="top-mainVisual__container">
-      <div class="top-message">
-        <h1>Mercado de Servicios</h1>
+      <div class="left">
+        <div class="top-message">
+          <h1>Mercado de Servicios</h1>
+        </div>
+          <p>Es posible comprar y vender habilidades y servicios.</p>
+          <%= link_to "Registrar", new_user_registration_path, class: "buttons__main" %>
       </div>
-        <p>Es posible comprar y vender habilidades y servicios.</p>
-        <%= link_to "Registrar", new_user_registration_path, class: "buttons__main" %>
+      <div class="right">
+          <%= image_tag 'default_service.jpg', alt: '自分のペースで学べる。だから挫折しない。', class: 'normal-size-image' %>
+      </div>
     </div>
   </div>
+
   <div class="top-main-about-service">
     <div class="inner noflex">
       <h2 class="top-title">Las razones por las que Olumeca ha sido elegido</h2>
