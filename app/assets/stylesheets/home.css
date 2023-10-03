@@ -34,6 +34,11 @@ form input[type="submit"] {
   cursor: pointer;
 }
 
+dd, dl, dt {
+  margin: 0;
+  padding: 0x;
+}
+
 /* 共通レイアウト ================================ */
 body {
   color: #2d3133;
@@ -285,7 +290,7 @@ header {
   width: 30%;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 600px) {
   .about_service__list {
     flex-direction: column; /* 画面サイズが768px以下になると、アイテムを縦に並べ替え */
     align-items: center; /* 中央揃え */
@@ -330,6 +335,47 @@ header {
   padding-bottom: 60px;
   background-color: #f4f9e9;
   height: auto;
+}
+
+.c-serviceStep_flow {
+  display: flex;
+  justify-content: center;
+  padding: 0 20px;
+}
+
+@media only screen and (max-width: 600px) {
+  .c-serviceStep_flow {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+.c-serviceFlow-exhibitor {
+  width: 340px;
+  padding-right: 30px;
+}
+
+.c-serviceFlow {
+  width: auto;
+  position: relative;
+  margin-bottom: 60px;
+}
+
+.c-serviceFlow_title {
+  color: #333;
+  font-size: 34px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.c-serviceFlow_text {
+  padding-right: 20px;
+}
+
+.c-serviceFlow_icon {
+  margin-right: 8px;
 }
 
 .top-main-buyer__container {
