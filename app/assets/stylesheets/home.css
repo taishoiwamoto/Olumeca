@@ -178,12 +178,12 @@ header {
 .top-mainVisual__container {
   padding: 20px 30px; /* こちらにpaddingを追加 */
   max-width: 960px;
-  margin: 60px auto;
+  margin: auto;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  padding-top: 80px;
+  padding-top: 120px;
   padding-bottom: 80px;
 }
 
@@ -215,8 +215,7 @@ header {
 }
 
 .top-title {
-  display: flex;
-  justify-content: center; /* 水平方向の中央揃え */
+  text-align: center;
   padding-bottom: 20px;
 }
 
@@ -227,17 +226,28 @@ header {
   padding-bottom: 20px;
 }
 
-.top-main-user {
+.top-main-about-service {
   position: relative;
   padding-left: 30px;
   padding-right: 30px;
-  padding-top: 30px;
+  padding-top: 50px;
   padding-bottom: 60px;
   background-color: #f4f9e9;
   height: auto;
 }
 
-.top-main-user__container {
+.inner, .inner_small, .mainview {
+  display: flex;
+  max-width: 1200px;
+  margin: 0 auto;
+  flex-wrap: wrap;
+}
+
+.noflex {
+  display: block!important;
+}
+
+.top-main-about-service__container {
   max-width: 960px;
   margin: 0px auto;
   padding-top: 0px;
@@ -248,19 +258,89 @@ header {
   align-items: center;
 }
 
-.top-main-service {
+.about_service__list {
+  margin-top: 30px;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.about_service__list_item {
+  width: 30%;
+}
+
+@media (max-width: 768px) {
+  .about_service__list {
+    flex-direction: column; /* 画面サイズが768px以下になると、アイテムを縦に並べ替え */
+    align-items: center; /* 中央揃え */
+  }
+
+  .about_service__list_item {
+    width: 80%; /* 各アイテムはコンテナの80%の幅を占める */
+    margin-bottom: 20px; /* アイテムの下にスペースを追加 */
+  }
+}
+
+.flexbox {
+  display: flex;
+}
+
+.normal-size-image {
+  width: 100%;  /* 画像をコンテナの幅に合わせます。 */
+  max-width: 300px;  /* 最大幅を300pxに制限します。 */
+  height: auto;  /* 画像のアスペクト比を保持します。 */
+  display: block;  /* 画像をブロック要素として扱います。 */
+  margin: 0 auto;  /* 上下の余白は0、左右の余白はautoで画像を中央に配置します。 */
+}
+
+.about_service__list_item_head {
+  margin-top: 32px;
+  color: #13b1c0;
+  font-size: 22px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.about_service__list_item_body {
+  margin-top: 24px;
+}
+
+
+.top-main-buyer {
   position: relative;
   padding-left: 30px;
   padding-right: 30px;
+  padding-top: 50px;
+  padding-bottom: 60px;
+  background-color: #f4f9e9;
+  height: auto;
+}
+
+.top-main-buyer__container {
+  max-width: 960px;
+  margin: 0px auto;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.top-main-seller {
+  position: relative;
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-top: 50px;
+  padding-bottom: 60px;
   background-color: #e9f6fc;
   height: auto;
 }
 
-.top-main-service__container {
+.top-main-seller__container {
   max-width: 960px;
   margin: 0px auto;
-  padding-top: 30px;
-  padding-bottom: 60px;
+  padding-top: 0px;
+  padding-bottom: 0px;
   display: flex;
   flex-direction: column;
   justify-content: center;

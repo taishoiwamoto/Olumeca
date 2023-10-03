@@ -8,6 +8,29 @@
         <%= link_to "Registrar", new_user_registration_path, class: "buttons__main" %>
     </div>
   </div>
+  <div class="top-main-about-service">
+    <div class="inner noflex">
+      <h2 class="top-title">Las razones por las que Olumeca ha sido elegido</h2>
+      <div class="about_service__list flexbox">
+        <div class="about_service__list_item">
+          <%= image_tag 'default_service.jpg', alt: '自分のペースで学べる。だから挫折しない。', class: 'normal-size-image' %>
+          <p class="about_service__list_item_head">自分のペースで学べる。<br>だから挫折しない。</p>
+          <p class="about_service__list_item_body">マンツーマンかつオーダーメイド。スクールのように型や期限がないから、自分のペースで学習プランを組み立てることができます。
+          </p>
+        </div>
+        <div class="about_service__list_item">
+          <%= image_tag 'default_service.jpg', alt: '自分のペースで学べる。だから挫折しない。', class: 'normal-size-image' %>
+          <p class="about_service__list_item_head">現場のプロに聞ける。<br>実践で通用するスキルが身につく。</p>
+          <p class="about_service__list_item_body">約3,500名の現場で働くプロに直接相談。だから教科書にはない実践的なスキル、学ぶべきことがわかります。</p>
+        </div>
+        <div class="about_service__list_item">
+          <%= image_tag 'default_service.jpg', alt: '自分のペースで学べる。だから挫折しない。', class: 'normal-size-image' %>
+          <p class="about_service__list_item_head">リーズナブル。<br>だから学びが続く。</p>
+          <p class="about_service__list_item_body">MENTAは個人に直接教えてもらえるためリーズナブル（平均契約価格帯1.4万円）。オーダーメイドだからこそ、予算に応じた相談ができます。</p>
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="top-newServices__container">
     <h2 class="top-title">Servicios Nuevos</h2>
       <% if @services.empty? %>
@@ -53,8 +76,8 @@
         </div>
       <% end %>
   </div>
-  <div class="top-main-user">
-    <div class="top-main-user__container">
+  <div class="top-main-buyer">
+    <div class="top-main-buyer__container">
       <h2 class="top-title">Lo que puede hacer el(la) comprador(a)</h2>
       <ul>
         <li>Compra de servicios publicado</li>
@@ -71,8 +94,8 @@
       <%= link_to "Buscar un servicio", services_path, class: "buttons__main" %>
     </div>
   </div>
-  <div class="top-main-service">
-    <div class="top-main-service__container">
+  <div class="top-main-seller">
+    <div class="top-main-seller__container">
       <h2 class="top-title">Lo que puede hacer el(la) proveedor(a)</h2>
       <ul>
         <li>Oferta de servicios</li>

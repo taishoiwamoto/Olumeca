@@ -21,7 +21,7 @@ categories = [
   'Aprendizaje, Idioma, Búsqueda de empleo, Certificación & Coaching',
   'Vivienda, Belleza, Estilo de vida & Pasatiempos',
   'Lecciones en línea & Consejos',
-  'Dinero, Trabajos secundarios & Marketing de afiliados',
+  'Dinero, Trabajos secundarios & Marketing de afiliados'
 ]
 
 categories.each do |category|
