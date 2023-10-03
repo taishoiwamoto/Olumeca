@@ -5,7 +5,7 @@ class OrderMailer < ApplicationMailer
     mail(to: @seller.email, subject: '¡Se ha realizado un nuevo pedido!', from: 'Olumeca <contact@lecmarket.com>')
   end
 
-  def order_status_notificatgition
+  def order_status_notification
     @order = params[:order]
     @buyer = User.find(@order.buyer_id)
     @seller = User.find(@order.seller_id)
