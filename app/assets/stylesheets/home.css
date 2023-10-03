@@ -206,6 +206,16 @@ header {
   background-color: #10a0ad;
 }
 
+.top-newServices {
+  position: relative;
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-top: 50px;
+  padding-bottom: 60px;
+  background-color: #f5f8fa;
+  height: auto;
+}
+
 .top-newServices__container {
   max-width: 600px;
   margin: 60px auto;
@@ -232,7 +242,7 @@ header {
   padding-right: 30px;
   padding-top: 50px;
   padding-bottom: 60px;
-  background-color: #f4f9e9;
+  background-color: white;
   height: auto;
 }
 
