@@ -213,24 +213,6 @@ header {
   padding-bottom: 80px;
 }
 
-.buttons__main {
-  background-color: #13b1c0;
-  color: #fff;
-  width: 350px;
-  padding: 12px 16px;
-  justify-content: center;
-  align-items: center;
-  height: 50px;
-  cursor: pointer;
-  text-align: center;
-  margin-top: 10px;
-  display: block;
-}
-
-.buttons__main:hover {
-  background-color: #10a0ad;
-}
-
 .top-newServices {
   position: relative;
   padding-left: 30px;
@@ -382,15 +364,17 @@ header {
   align-items: center;
 }
 
-.top-whatsapp {
+.top-registar {
   position: relative;
   padding-left: 30px;
   padding-right: 30px;
+  padding-top: 50px;
+  padding-bottom: 50px;
   background-color: #f5f8fa;
   height: auto;
 }
 
-.top-whatsapp__container {
+.top-registar__container {
   max-width: 960px;
   margin: 0px auto;
   padding-top: 30px;
@@ -499,7 +483,7 @@ header {
   font-size: 14px;
 }
 
-/* WhatsApp ================================ */
+/* Button ================================ */
 
 .whatsapp-button {
   color: white;
@@ -531,6 +515,43 @@ header {
 .small-whatsapp-button:hover {
   background-color: #128C53; /* この色はおおよそ原色より暗い値です。必要に応じて調整してください */
 }
+
+.buttons__main {
+  background-color: #13b1c0;
+  color: #fff;
+  width: 350px;
+  padding: 12px 16px;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  cursor: pointer;
+  text-align: center;
+  margin-top: 10px;
+  display: block;
+}
+
+.buttons__main:hover {
+  background-color: #10a0ad;
+}
+
+/* Orange button ===== */
+a.btn--orange {
+  color: #fff;
+  background-color: #eb6100;
+  border-bottom: 5px solid #b84c00;
+  padding: 15px 150px
+}
+a.btn--orange:hover {
+  margin-top: 3px;
+  color: #fff;
+  background: #f56500;
+  border-bottom: 2px solid #b84c00;
+}
+a.btn--shadow {
+  -webkit-box-shadow: 0 3px 5px rgba(0, 0, 0, .3);
+  box-shadow: 0 3px 5px rgba(0, 0, 0, .3);
+}
+/*  ===== */
 
 .button-001 {
   margin: 10px 0px;
