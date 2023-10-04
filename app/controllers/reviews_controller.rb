@@ -7,26 +7,28 @@ class ReviewsController < ApplicationController
 
   def new
     plan = Plan.find(@plan_id)
-    existing_reviews = Review.where(user_id: current_user.id, plan: Plan.where(service: plan.service))
+    #existing_reviews = Review.where(user_id: current_user.id, plan: Plan.where(service: plan.service))
+    existing_reviews = Review.where(user_id: current_user.id, service_id: plan.service.id)
 
     if existing_reviews.any?
       redirect_to edit_review_path(existing_reviews.first)
     else
       @review = Review.new
-      @review.plan_id = @plan_id
+      #@review.plan_id = @plan_id
       @review.user_id = current_user.id if current_user
       @review.order_id = @order.id
+      @review.service_id = @order.plan.service.id
     end
   end
 
   def create
     @review = Review.new(review_params)
     order = Order.find_by!(buyer_id: current_user.id, id: @review.order_id)
-    @review.plan_id = order.plan_id
+    #@review.plan_id = order.plan_id
     @review.user_id = order.buyer_id
 
-    existing_reviews = Review.where(user_id: current_user.id, plan: Plan.where(service: order.plan.service))
-
+    #existing_reviews = Review.where(user_id: current_user.id, plan: Plan.where(service: order.plan.service))
+    existing_reviews = Review.where(user_id: current_user.id, service_id: order.plan.service.id)
     if existing_reviews.any?
       redirect_to edit_review_path(existing_reviews.first)
       return
@@ -73,7 +75,7 @@ class ReviewsController < ApplicationController
   end
 
   def review_params
-    params.require(:review).permit(:plan_id, :rating, :comment, :order_id)
+    params.require(:review).permit(:user_id, :rating, :comment, :order_id, :service_id) #:plan_id
   end
 
   def set_review_params

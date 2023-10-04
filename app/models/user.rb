@@ -7,7 +7,7 @@ class User < ApplicationRecord
   has_many :purchased_orders, class_name: 'Order', foreign_key: 'buyer_id', dependent: :nullify
   has_many :sold_orders, class_name: 'Order', foreign_key: 'seller_id', dependent: :nullify
   has_many :reviews, dependent: :nullify
-  has_many :sold_reviews, through: :sold_orders, source: :review
+  # has_many :sold_reviews, through: :sold_orders, source: :review
   has_many :likes, dependent: :destroy
   has_one_attached :image
 
@@ -24,7 +24,19 @@ class User < ApplicationRecord
   scope :active, -> { where(deleted_at: nil) }
 
   def average_service_rating
-    sold_reviews.average(:rating)
+    sum = 0
+    #service = Service.where(user_id: id).all
+    service = Service.joins(:reviews).where(user_id: id).distinct.all
+    service.each do|s|
+      r = Review&.joins(:service).where(service:{id: s.id})
+      if r.count > 0
+        sum += r.sum(&:rating) / r.count
+      end
+    end
+
+    #reviews = Review&.joins(:service).where(service:{user_id: id})
+    #average = !reviews.blank? ? (sum.to_f / reviews.count)&.to_f : 0
+    service.count > 0 ? (sum.to_f / service&.count).to_f : 0
   end
 
   def soft_delete

@@ -1,8 +1,9 @@
 class Service < ApplicationRecord
   belongs_to :user
   belongs_to :category
-  has_many :plans, dependent: :nullify, foreign_key: "service_id", inverse_of: :service, autosave: true
-  has_many :reviews, through: :plans
+  has_many :plans, dependent: :destroy, foreign_key: "service_id", inverse_of: :service, autosave: true
+  # has_many :reviews, through: :plans
+  has_many :reviews
   has_many :likes, dependent: :destroy
   has_one_attached :image
 

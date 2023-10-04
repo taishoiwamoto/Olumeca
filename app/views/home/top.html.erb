@@ -53,26 +53,15 @@
                     <%= image_tag('default_service.jpg') %>
                   <% end %>
                 </div>
-                <div class="post-right">
-                  <div style="display: flex; justify-content: space-between;">
-                    <h4><%= service.title.truncate(40) %></h4>
-                  </div>
-                  <div style="display: flex; justify-content: space-between;">
-                      <span><%= service.user.name %></span>
-                  </div>
-                  <div style="display: flex; justify-content: space-between;">
-                    <span><%= service.category&.name || "" %></span>
-                  </div>
-                  <div style="display: flex; justify-content: space-between;">
-                    <div class="star">
-                      <% reviews = service.reviews %>
-                      <% if reviews.present? %>
-                        <% average_rating = calculate_average_rating(reviews) %>
-                        <%= "⭐️" %> <%= sprintf('%.2f', average_rating) %>
-                      <% else %>
-                        <h5> -- </h5>
-                      <% end %>
-                    </div>
+                <div style="display: flex; justify-content: space-between;">
+                  <div class="star">
+                    <% reviews = service.reviews %> 
+                    <% if reviews.present? %>
+                      <% average_rating = calculate_average_rating(reviews) %>
+                      <%= "⭐️" %> <%= sprintf('%.2f', average_rating) %>
+                    <% else %>
+                      <h5> -- </h5>
+                    <% end %>
                   </div>
                 </div>
               </div>
