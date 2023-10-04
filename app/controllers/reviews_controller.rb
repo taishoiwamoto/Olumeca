@@ -2,6 +2,8 @@ class ReviewsController < ApplicationController
   before_action :require_login
   before_action :set_review_params, only: [:new]
   before_action :find_order, only: [:new]
+  before_action :set_review, only: [:edit, :update]
+  before_action :authorized_user, only: [:edit, :update]
 
   def new
     plan = Plan.find(@plan_id)
@@ -39,27 +41,14 @@ class ReviewsController < ApplicationController
   end
 
   def edit
-    @review = Review.find(params[:id])
-
-    unless @review.user_id == current_user.id
-      flash[:error] = 'No tiene permiso para editar esta evaluación.'
-      redirect_to root_path and return
-    end
   end
 
   def update
-    @review = Review.find(params[:id])
-
-    unless @review.user_id == current_user.id
-      flash[:error] = 'No tiene permiso para editar esta evaluación.'
-      redirect_to root_path and return
-    end
-
     if @review.update(review_params)
       flash[:notice] = 'La evaluación ha sido actualizada.'
       redirect_to orders_user_path(current_user)
     else
-      render 'edit'
+      render 'edit', status: :unprocessable_entity
     end
   end
 
@@ -72,8 +61,19 @@ class ReviewsController < ApplicationController
     end
   end
 
+  def set_review
+    @review = Review.find(params[:id])
+  end
+
+  def authorized_user
+    return if @review.user_id == current_user.id
+
+    flash[:error] = 'No tiene permiso para editar esta evaluación.'
+    redirect_to root_path
+  end
+
   def review_params
-    params.require(:review).permit(:user_id, :plan_id, :rating, :comment, :order_id)
+    params.require(:review).permit(:plan_id, :rating, :comment, :order_id)
   end
 
   def set_review_params
