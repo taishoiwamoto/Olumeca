@@ -28,7 +28,7 @@ categories.each do |category|
   Category.create!(name: category)
 end
 
-delivery_methods = ['Videollamada', 'Chat']
+delivery_methods = ['Videollamada', 'Teléfono', 'Chat',]
 
 delivery_methods.each do |method|
   DeliveryMethod.create!(name: method)
