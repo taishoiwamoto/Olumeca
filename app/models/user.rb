@@ -24,19 +24,17 @@ class User < ApplicationRecord
   scope :active, -> { where(deleted_at: nil) }
 
   def average_service_rating
-    sum = 0
-    #service = Service.where(user_id: id).all
-    service = Service.joins(:reviews).where(user_id: id).distinct.all
-    service.each do|s|
-      r = Review&.joins(:service).where(service:{id: s.id})
-      if r.count > 0
-        sum += r.sum(&:rating) / r.count
-      end
-    end
+    # 出品者のサービスに紐づく全てのレビューを取得
+    reviews = Review.joins(service: :user).where(services: { user_id: id })
 
-    #reviews = Review&.joins(:service).where(service:{user_id: id})
-    #average = !reviews.blank? ? (sum.to_f / reviews.count)&.to_f : 0
-    service.count > 0 ? (sum.to_f / service&.count).to_f : 0
+    # 全てのレビューの評価の合計を計算
+    total_rating = reviews.sum(:rating)
+
+    # レビューの数を計算
+    count = reviews.count
+
+    # 評価の平均を計算（レビューが存在する場合）
+    count > 0 ? total_rating.to_f / count : 0
   end
 
   def soft_delete
