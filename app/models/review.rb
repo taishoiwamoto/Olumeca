@@ -1,8 +1,9 @@
 class Review < ApplicationRecord
   belongs_to :user
-  belongs_to :plan, optional: true
-  belongs_to :order
-  has_one :service, through: :plan
+  # belongs_to :plan, optional: true
+  # belongs_to :order
+  belongs_to :service
+  # has_one :service, through: :plan
 
   validates :rating, presence: true, numericality: {
     only_integer: true,
@@ -10,5 +11,5 @@ class Review < ApplicationRecord
     less_than_or_equal_to: 5,
   }
 
-  validates :user_id, uniqueness: { scope: :plan_id, message: 'Ya se ha realizado una evaluación de este plan.' }
+  # validates :user_id, uniqueness: { scope: :plan_id, message: 'Ya se ha realizado una evaluación de este plan.' }
 end

@@ -52,8 +52,8 @@
 
     <% @reviews.each do |review| %>
     <% Rails.logger.debug "Review: #{review.inspect}" %>
-    <% Rails.logger.debug "Plan: #{review.plan.inspect}" %>
-    <% Rails.logger.debug "Service: #{review.plan&.service.inspect}" %>
+    <%# Rails.logger.debug "Plan: #{review.plan.inspect}" %>
+    <% Rails.logger.debug "Service: #{review&.service.inspect}" %>
 
       <div class="posts-index-item">
         <div class="post-left">
@@ -71,7 +71,7 @@
             <%= "⭐️" * review.rating %>
           <% end %>
           <div style="display: flex; justify-content: space-between;">
-            <h5><%= review.plan&.service&.title&.truncate(25) || 'Este registro ha sido eliminada.' %></h5>
+            <h5><%= review&.service&.title&.truncate(25) || 'Este registro ha sido eliminada.' %></h5>
           </div>
           <div style="display: flex; justify-content: space-between;">
             <% if review.user.present? && review.user.name.present? %>

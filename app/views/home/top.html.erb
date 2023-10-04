@@ -35,7 +35,7 @@
                 </div>
                 <div style="display: flex; justify-content: space-between;">
                   <div class="star">
-                    <% reviews = service.reviews %>
+                    <% reviews = service.reviews %> 
                     <% if reviews.present? %>
                       <% average_rating = calculate_average_rating(reviews) %>
                       <%= "⭐️" %> <%= sprintf('%.2f', average_rating) %>
