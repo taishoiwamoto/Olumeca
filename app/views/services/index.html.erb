@@ -3,10 +3,12 @@
     <h1 class="form-heading">Servicios</h1>
     <%= form_with(scope: :services, url: filter_services_path, method: :post ) do |f| %>
       <div class="field">
-        <%= f.label :category_id %><br/>
-        <%= f.select :category_id, options_for_select(Category.all.map{|category| [category.name, category.id]}), { prompt: 'Por favor, elija de la siguiente lista' } %>
+        <%= f.select :category_id, options_for_select(Category.all.map{|category| [category.name, category.id]}), { prompt: 'Todas categorías' } %>
       </div>
-      <%= f.submit 'Buscar' %><br/>
+      <div class="field">
+        <%= f.text_field :keyword, placeholder: "Palabra clave" %>
+      </div>
+      <%= f.submit 'Buscar', class: 'buttons__main' %><br/>
     <% end %>
     <br>
     <%= render 'services' , services: @services %>

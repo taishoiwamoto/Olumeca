@@ -2,7 +2,7 @@ class OrderMailer < ApplicationMailer
   def order_notification
     @order = params[:order]
     @seller = User.find(@order.seller_id)
-    mail(to: @seller.email, subject: 'Se ha realizado un nuevo pedido.')
+    mail(to: @seller.email, subject: '¡Se ha realizado un nuevo pedido!', from: 'Olumeca <contact@lecmarket.com>')
   end
 
   def order_status_notification
@@ -10,10 +10,10 @@ class OrderMailer < ApplicationMailer
     @buyer = User.find(@order.buyer_id)
     @seller = User.find(@order.seller_id)
     subject = if @order.accepted?
-                'Tu pedido ha sido aceptado.'
+                '¡Tu pedido ha sido aceptado!                '
               else
-                'Tu pedido ha sido rechazado.'
+                'Perdón, Tu pedido ha sido rechazado.'
               end
-    mail(to: @buyer.email, subject: subject)
+    mail(to: @buyer.email, subject: subject, from: 'Olumeca <contact@lecmarket.com>')
   end
 end

@@ -72,3 +72,18 @@
 .users-form input {
   margin-bottom: 15px;
 }
+
+/* users/orders, users/sales ================================ */
+.turbo_frame_content {
+  font-size: 12px;
+  display: block; /* Makes each element appear on a new line */
+}
+
+.align-right {
+  text-align: right;
+}
+
+.small-text-with-underline {
+  font-size: 12px; /* Adjust this value as per your need */
+  text-decoration: underline;
+}

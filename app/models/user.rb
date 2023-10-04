@@ -2,7 +2,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   validates_acceptance_of :agreement, allow_nil: false, on: :create
-  has_many :services, dependent: :destroy
+  has_many :services, dependent: :nullify
   has_many :plans, through: :services
   has_many :purchased_orders, class_name: 'Order', foreign_key: 'buyer_id', dependent: :nullify
   has_many :sold_orders, class_name: 'Order', foreign_key: 'seller_id', dependent: :nullify
@@ -21,7 +21,7 @@ class User < ApplicationRecord
 
   validates :phone_number, presence: true
 
-  scope :active, -> { where(deletion_at: nil) }
+  scope :active, -> { where(deleted_at: nil) }
 
   def average_service_rating
     sum = 0
@@ -40,19 +40,19 @@ class User < ApplicationRecord
   end
 
   def soft_delete
-    update_attribute(:deletion_at, Time.now)
+    update_attribute(:deleted_at, Time.now)
     services.each(&:soft_delete)
   end
 
   def active_for_authentication?
-    super && !deletion_at
+    super && !deleted_at
   end
 
   def inactive_message
-    !deletion_at ? super : :deleted_account
+    !deleted_at ? super : :deleted_account
   end
 
-  after_update :reject_pending_orders, if: -> { saved_change_to_attribute?(:deletion_at) && !deletion_at.nil? }
+  after_update :reject_pending_orders, if: -> { saved_change_to_attribute?(:deleted_at) && !deleted_at.nil? }
 
   private
 

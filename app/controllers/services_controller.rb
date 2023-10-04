@@ -67,12 +67,23 @@ class ServicesController < ApplicationController
   end
 
   def filter
-    @category = Category.find(params[:services][:category_id])
+    @services = Service.active.order(created_at: :desc).page(params[:page]).per(10)
+
+    if params[:services][:category_id].present?
+      @category = Category.find(params[:services][:category_id])
+      @services = @services.where(category_id: @category.id)
+    end
+
+    if params[:services][:keyword].present?
+      keyword = params[:services][:keyword]
+      @services = @services.where("title LIKE ? OR detail LIKE ?", "%#{keyword}%", "%#{keyword}%")
+    end
 
     respond_to do |format|
-      format.turbo_stream { render turbo_stream: turbo_stream.replace('services', partial: 'services/services', locals: { services: @category.services.active.order(created_at: :desc).page(params[:page]).per(10) })}
+      format.turbo_stream { render turbo_stream: turbo_stream.replace('services', partial: 'services/services', locals: { services: @services })}
     end
   end
+
 
   private
 

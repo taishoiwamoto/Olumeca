@@ -18,17 +18,17 @@ categories = [
   'IT, Programación & Desarrollo',
   'Adivinación',
   'Consejería, Consejos de amor & Compañía',
-  'Aprendizaje, Búsqueda de empleo, Certificación & Coaching',
+  'Aprendizaje, Idioma, Búsqueda de empleo, Certificación & Coaching',
   'Vivienda, Belleza, Estilo de vida & Pasatiempos',
   'Lecciones en línea & Consejos',
-  'Dinero, Trabajos secundarios & Marketing de afiliados',
+  'Dinero, Trabajos secundarios & Marketing de afiliados'
 ]
 
 categories.each do |category|
   Category.create!(name: category)
 end
 
-delivery_methods = ['Videollamada', 'Chat']
+delivery_methods = ['Videollamada', 'Teléfono', 'Chat',]
 
 delivery_methods.each do |method|
   DeliveryMethod.create!(name: method)

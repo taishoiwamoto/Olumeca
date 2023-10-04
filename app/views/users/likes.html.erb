@@ -72,7 +72,7 @@
                   <span><%= service.user.name %></span>
               </div>
               <div style="display: flex; justify-content: space-between;">
-                <span><%= service.category.name %></span>
+                <span><%= service.category&.name || "" %></span>
               </div>
               <div style="display: flex; justify-content: space-between;">
                 <div class="star">

@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: "contact@miraie-mexico.com"
+  default from: "contact@lecmarket.com"
   layout "mailer"
 end

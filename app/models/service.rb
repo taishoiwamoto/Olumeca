@@ -19,9 +19,9 @@ class Service < ApplicationRecord
   validate :plans_present?
   validates_associated :plans
 
-  scope :active, -> { where(deletion_at: nil) }
+  scope :active, -> { where(deleted_at: nil) }
 
-  scope :active, -> { where(deletion_at: nil) }
+  scope :active, -> { where(deleted_at: nil) }
 
   def update_plans(plans_params)
     #self.plans.delete_all
@@ -46,7 +46,7 @@ class Service < ApplicationRecord
   end
 
   def soft_delete
-    update_attribute(:deletion_at, Time.now)
+    update_attribute(:deleted_at, Time.now)
 
     plans.each(&:soft_delete)
   end

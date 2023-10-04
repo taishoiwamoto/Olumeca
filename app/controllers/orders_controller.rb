@@ -17,12 +17,12 @@ class OrdersController < ApplicationController
   def create
     @order = Order.new(order_params)
 
-    #if Plan.find(@order.plan_id).deletion_at
+    #if Plan.find(@order.plan_id).deleted_at
     #  redirect_to Plan.find(@order.plan_id).service, notice: 'No se puede realizar el pedido ya que el plan se encuentra cancelado.'
     #  return
     #end
 
-    #if Plan.find(@order.plan_id).service.deletion_at
+    #if Plan.find(@order.plan_id).service.deleted_at
     #  redirect_to Plan.find(@order.plan_id).service, notice: 'No se puede realizar el pedido ya que el servicio se encuentra cancelado.'
     #  return
     #end
