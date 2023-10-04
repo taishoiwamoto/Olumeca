@@ -23,25 +23,39 @@ class Service < ApplicationRecord
   scope :active, -> { where(deleted_at: nil) }
 
   def update_plans(plans_params)
-    #self.plans.delete_all
     puts 'planes'
     puts plans_params.count
     puts plans_params
-    #plans_params.delete_all
-    plans_params.each do |plan_param|
-      title = plan_param[1]['title']
-      detail = plan_param[1]['detail']
-      price = plan_param[1]['price']
-      delivery_method = plan_param[1]['delivery_method']
-      new_plan = Plan.find_by(id: plan_param[1]['id'], service_id: self.id)
-      if new_plan
-        new_plan.assign_attributes(title: title, detail: detail, price: price, delivery_method: delivery_method)
+    updated_plan_ids = []
+  
+    plans_params.each_pair do |_, plan_param|
+      id = plan_param['id']
+      title = plan_param['title']
+      detail = plan_param['detail']
+      price = plan_param['price']
+      delivery_method = plan_param['delivery_method']
+  
+      existing_plan = self.plans.find_by(id: id)
+  
+      if existing_plan
+        existing_plan.update(
+          title: title,
+          detail: detail,
+          price: price,
+          delivery_method: delivery_method
+        )
+        updated_plan_ids << existing_plan.id
       else
-        new_plan = self.plans.new(title: title, detail: detail, price: price, delivery_method: delivery_method)
+        new_plan = self.plans.create(
+          title: title,
+          detail: detail,
+          price: price,
+          delivery_method: delivery_method
+        )
+        updated_plan_ids << new_plan.id
       end
-
-      new_plan.save
     end
+    self.plans.where.not(id: updated_plan_ids).destroy_all
   end
 
   def soft_delete
