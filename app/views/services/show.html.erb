@@ -86,11 +86,11 @@
     <br>
 
     <h3>Planes</h3>
-    <% if @service.plans.any? %>
-      <% first_plan = @service.plans.first %>
+    <% if @service.plans.active.any? %>
+      <% first_plan = @service.plans.active.first %>
 
       <div class="plans-container">
-        <% @service.plans.each do |plan| %>
+        <% @service.plans.active.each do |plan| %>
           <%= button_to plan_path(plan), method: :get, data: { turbo_frame: 'plan_detail' }, class: "plan-card-btn" do %>
             <h4><%= plan.title.truncate(40)  %></h4>
             <p><%= plan.price %> MXN</p>
