@@ -40,7 +40,7 @@
       <br>
       <h3>Planes</h3>
       <div class="form" id="plans">
-        <%= f.fields_for :plans do |plan_form| %>  <!-- ここで plan_form を定義 -->
+        <%= f.fields_for :plans do |plan_form| %>
           <% if plan_form.object.errors.any? %>
             <div class="form-error-body">
               <% plan_form.object.errors.full_messages.each do |message| %>
@@ -51,7 +51,7 @@
             </div>
           <% end %>
           <%= render "plans/form", {form: plan_form} %>
-        <% end %>  <!-- fields_for のブロックを終了 -->
+        <% end %>
       </div>
       <br>
       <%= f.submit "Añadir plan",

@@ -6,12 +6,12 @@
         <%= form_for @review do |form| %>
 
           <% if @review.errors.any? %>
-            <div id="error_explanation">
-              <ul>
+            <div class="form-error-body">
               <% @review.errors.full_messages.each do |message| %>
-                <li><%= message %></li>
+                <div class="form-error">
+                  <%= message %>
+                </div>
               <% end %>
-              </ul>
             </div>
           <% end %>
 
@@ -32,7 +32,6 @@
           </div>
 
           <%#= form.hidden_field :plan_id %>
-          <%= form.hidden_field :user_id %>
           <%= form.hidden_field :order_id %>
           <%= form.submit 'Actualizar',  class: "buttons__main"%>
         <% end %>
