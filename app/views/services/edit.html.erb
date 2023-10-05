@@ -40,7 +40,7 @@
 <br>
       <h3>Planes</h3>
       <div class="form" id="plans">
-        <%= f.fields_for :plans do |plan_form| %>
+        <%= f.fields_for :plans, @service.plans.active do |plan_form| %>
           <% if plan_form.object.errors.any? %>
             <div class="form-error-body">
               <% plan_form.object.errors.full_messages.each do |message| %>

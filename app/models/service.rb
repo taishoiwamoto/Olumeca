@@ -20,7 +20,7 @@ class Service < ApplicationRecord
 
   scope :active, -> { where(deleted_at: nil) }
 
-  scope :active, -> { where(deleted_at: nil) }
+
 
   def update_plans(plans_params)
     puts 'planes'
@@ -55,7 +55,7 @@ class Service < ApplicationRecord
         updated_plan_ids << new_plan.id
       end
     end
-    self.plans.where.not(id: updated_plan_ids).destroy_all
+    self.plans.where.not(id: updated_plan_ids).each(&:soft_delete)
   end
 
   def soft_delete
