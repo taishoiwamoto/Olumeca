@@ -1,7 +1,7 @@
 class Plan < ApplicationRecord
   belongs_to :service
   has_many :orders, dependent: :nullify
-  has_many :reviews, dependent: :nullify
+  # has_many :reviews, dependent: :nullify
 
   validates :title, presence: true, length: { maximum: 255 }
   validates :detail, presence: true

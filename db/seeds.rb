@@ -7,28 +7,32 @@
 #   Character.create(name: "Luke", movie: movies.first)
 
 categories = [
-  'Ilustración & Cómics',
+  'Ilustración',
   'Diseño',
-  'Creación de sitios web & Diseño web',
-  'Video, Animación & Filmación',
-  'Marketing & Atracción web',
-  'Música & Narración',
-  'Escritura & Traducción',
-  'Representación de negocios, Consultoría & Servicios profesionales',
-  'IT, Programación & Desarrollo',
+  'Creación de sitios web・Diseño web',
+  'Vídeo・Animación・Grabación',
+  'Marketing',
+  'Música・Narración',
+  'Redacción・Traducción',
+  'Negocios・Consultoría・Profesiones',
+  'IT・Programación・Desarrollo',
   'Adivinación',
-  'Consejería, Consejos de amor & Compañía',
-  'Aprendizaje, Idioma, Búsqueda de empleo, Certificación & Coaching',
-  'Vivienda, Belleza, Estilo de vida & Pasatiempos',
-  'Lecciones en línea & Consejos',
-  'Dinero, Trabajos secundarios & Marketing de afiliados',
+  'Asesoramiento・Consejería de amor・Compañía para hablar',
+  'Escuela・Educación・Aprendizaje・Empleo・Certificación',
+  'Idioma・Linguística',
+  'Vivienda・Belleza・Vida・Pasatiempos',
+  'Dinero・Trabajo secundario',
+  'Otros'
 ]
+
+delivery_methods = ['Videollamada', 'Chat']
+
+Category.delete_all
+DeliveryMethod.delete_all
 
 categories.each do |category|
   Category.create!(name: category)
 end
-
-delivery_methods = ['Videollamada', 'Chat']
 
 delivery_methods.each do |method|
   DeliveryMethod.create!(name: method)

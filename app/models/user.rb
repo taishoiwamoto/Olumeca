@@ -7,7 +7,7 @@ class User < ApplicationRecord
   has_many :purchased_orders, class_name: 'Order', foreign_key: 'buyer_id', dependent: :nullify
   has_many :sold_orders, class_name: 'Order', foreign_key: 'seller_id', dependent: :nullify
   has_many :reviews, dependent: :nullify
-  has_many :sold_reviews, through: :sold_orders, source: :review
+  # has_many :sold_reviews, through: :sold_orders, source: :review
   has_many :likes, dependent: :destroy
   has_one_attached :image
 
@@ -24,7 +24,17 @@ class User < ApplicationRecord
   scope :active, -> { where(deleted_at: nil) }
 
   def average_service_rating
-    sold_reviews.average(:rating)
+    # 出品者のサービスに紐づく全てのレビューを取得
+    reviews = Review.joins(service: :user).where(services: { user_id: id })
+
+    # 全てのレビューの評価の合計を計算
+    total_rating = reviews.sum(:rating)
+
+    # レビューの数を計算
+    count = reviews.count
+
+    # 評価の平均を計算（レビューが存在する場合）
+    count > 0 ? total_rating.to_f / count : 0
   end
 
   def soft_delete

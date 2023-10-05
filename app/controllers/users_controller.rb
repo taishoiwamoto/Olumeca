@@ -44,14 +44,14 @@ class UsersController < ApplicationController
     total_reviews = 0
     total_count = 0
 
-    @user.services.each do |service|
-      service.plans.each do |plan|
-        total_reviews += plan.reviews.sum(:rating)
-        total_count += plan.reviews.count
-      end
-    end
+    #@user.services.each do |service|
+    #  service.plans.each do |plan|
+    #    total_reviews += plan.reviews.sum(:rating)
+    #    total_count += plan.reviews.count
+    #  end
+    #end
 
-    @average_rating = total_count > 0 ? total_reviews / total_count.to_f : nil
+    @average_rating = 0 # total_count > 0 ? total_reviews / total_count.to_f : nil
   end
 
   def find_active_user

@@ -1,8 +1,9 @@
 class Service < ApplicationRecord
   belongs_to :user
   belongs_to :category
-  has_many :plans, dependent: :nullify, foreign_key: "service_id", inverse_of: :service, autosave: true
-  has_many :reviews, through: :plans
+  has_many :plans, dependent: :destroy, foreign_key: "service_id", inverse_of: :service, autosave: true
+  # has_many :reviews, through: :plans
+  has_many :reviews
   has_many :likes, dependent: :destroy
   has_one_attached :image
 
@@ -27,16 +28,16 @@ class Service < ApplicationRecord
     puts plans_params.count
     puts plans_params
     updated_plan_ids = []
-  
+
     plans_params.each_pair do |_, plan_param|
       id = plan_param['id']
       title = plan_param['title']
       detail = plan_param['detail']
       price = plan_param['price']
       delivery_method = plan_param['delivery_method']
-  
+
       existing_plan = self.plans.find_by(id: id)
-  
+
       if existing_plan
         existing_plan.update(
           title: title,

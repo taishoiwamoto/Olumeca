@@ -1,101 +1,197 @@
 <div class="top-main">
   <div class="top-mainVisual">
     <div class="top-mainVisual__container">
-      <div class="top-message">
-        <h1>Mercado de Servicios</h1>
+      <div class="left">
+        <div class="top-message">
+          <h1>Servicio de mentoría con varios profesionales</h1>
+        </div>
+          <p>Es posible comprar y vender habilidades y conocimientos.</p>
+          <%= link_to "Registrar", new_user_registration_path, class: "buttons__main" %>
       </div>
-        <p>Es posible comprar y vender habilidades y servicios.</p>
-        <%= link_to "Registrar", new_user_registration_path, class: "buttons__main" %>
+      <div class="right">
+          <%= image_tag 'top-mainVisual.jpg', alt: 'Es posible comprar y vender habilidades y servicios.', class: 'normal-size-image' %>
+      </div>
     </div>
   </div>
-  <div class="top-newServices__container">
-    <h2 class="top-title">Servicios Nuevos</h2>
-      <% if @services.empty? %>
-        <p style="text-align: center">No hay servicios disponibles</p>
-      <% else %>
-        <% @services.each do |service| %>
-          <%= link_to service_path(service) do %>
-            <div class="posts-index-item">
-              <div class="post-left">
-                <% if service.image.attached? %>
-                  <%= image_tag(service.image) %>
-                <% else %>
-                  <%= image_tag('default_service.jpg') %>
-                <% end %>
-              </div>
-              <div class="post-right">
-                <div style="display: flex; justify-content: space-between;">
-                  <h4><%= service.title.truncate(40) %></h4>
+
+  <div class="top-main-about-service">
+    <div class="inner noflex">
+      <h2 class="top-title">Las razones por las que Olumeca ha sido elegido</h2>
+      <div class="about_service__list flexbox">
+        <div class="about_service__list_item">
+          <%= image_tag 'top-main-about-service-1.jpg', alt: 'Pregunta a los profesionales en el campo.', class: 'normal-size-image' %>
+          <p class="about_service__list_item_head">Pregunta a los profesionales en el campo</p>
+          <p class="about_service__list_item_body">Consulta directamente con un profesional. Por lo tanto, adquirirás habilidades y conocimientos prácticos.</p>
+        </div>
+        <div class="about_service__list_item">
+          <%= image_tag 'top-main-about-service-2.jpg', alt: 'Aprende a tu propio ritmo. Por eso no te rindes.', class: 'normal-size-image' %>
+          <p class="about_service__list_item_head">Aprende a tu propio ritmo</p>
+          <p class="about_service__list_item_body">Uno-a-uno y a medida. Puedes armar tu propio plan de estudios a tu propio ritmo.</p>
+        </div>
+        <div class="about_service__list_item">
+          <%= image_tag 'top-main-about-service-3.jpg', alt: 'Precios razonables.', class: 'normal-size-image' %>
+          <p class="about_service__list_item_head">Precios razonables</p>
+          <p class="about_service__list_item_body">Es razonable porque recibes enseñanza directa de una persona. Puedes consultar sobre el presupuesto y el contenido del currículo.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="top-newServices">
+    <div class="top-newServices__container">
+      <h2 class="top-title">Servicios Nuevos</h2>
+        <% if @services.empty? %>
+          <p style="text-align: center">No hay servicios disponibles</p>
+        <% else %>
+          <% @services.each do |service| %>
+            <%= link_to service_path(service) do %>
+
+              <div class="posts-index-item">
+                <div class="post-left">
+                  <% if service.image.attached? %>
+                    <%= image_tag(service.image) %>
+                  <% else %>
+                    <%= image_tag('default_service.jpg') %>
+                  <% end %>
                 </div>
-                <div style="display: flex; justify-content: space-between;">
-                    <span><%= service.user.name %></span>
-                </div>
-                <div style="display: flex; justify-content: space-between;">
-                  <span><%= service.category&.name || "" %></span>
-                </div>
-                <div style="display: flex; justify-content: space-between;">
-                  <div class="star">
-                    <% reviews = service.reviews %>
-                    <% if reviews.present? %>
-                      <% average_rating = calculate_average_rating(reviews) %>
-                      <%= "⭐️" %> <%= sprintf('%.2f', average_rating) %>
-                    <% else %>
-                      <h5> -- </h5>
-                    <% end %>
+                <div class="post-right">
+                  <div style="display: flex; justify-content: space-between;">
+                    <h4><%= service.title.truncate(40) %></h4>
+                  </div>
+                  <div style="display: flex; justify-content: space-between;">
+                      <span><%= service.user.name %></span>
+                  </div>
+                  <div style="display: flex; justify-content: space-between;">
+                    <span><%= service.category&.name || "" %></span>
+                  </div>
+                  <div style="display: flex; justify-content: space-between;">
+                    <div class="star">
+                      <% reviews = service.reviews %>
+                      <% if reviews.present? %>
+                        <% average_rating = calculate_average_rating(reviews) %>
+                        <%= "⭐️" %> <%= sprintf('%.2f', average_rating) %>
+                      <% else %>
+                        <h5> -- </h5>
+                      <% end %>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
+            <% end %>
           <% end %>
+          <div class="top-main-button">
+            <%= link_to "Ver más servicios", services_path, class: "buttons__main" %>
+          </div>
         <% end %>
-        <div class="top-main-button">
-          <%= link_to "Ver más servicios", services_path, class: "buttons__main" %>
-        </div>
-      <% end %>
+    </div>
   </div>
-  <div class="top-main-user">
-    <div class="top-main-user__container">
-      <h2 class="top-title">Lo que puede hacer el(la) comprador(a)</h2>
-      <ul>
-        <li>Compra de servicios publicado</li>
-        <li>Solicitud de presupuesto</li>
-      </ul>
+
+  <div class="top-main-buyer">
+    <div class="top-main-buyer__container">
+      <div class="top-message">
+        <h2 style="color: #33CC33; font-weight: bold;">PARA COMPRADOR/A</h2>
+      </div>
+      <br>
+      <div class="inner noflex">
+        <h2 class="top-title">Lo que puede hacer comprador/a</h2>
+        <div class="about_service__list flexbox">
+          <div class="about_service__list_item">
+            <%= image_tag 'top-main-buyer-1.jpg', alt: 'Compra de servicios de listado', class: 'normal-size-image' %>
+            <p class="about_service__list_item_head">Compra de servicios de listado</p>
+            <p class="about_service__list_item_body">Puedes buscar por palabra clave y categoría, facilitando así la compra.</p>
+          </div>
+          <div class="about_service__list_item">
+            <%= image_tag 'top-main-buyer-2.jpg', alt: 'Interacción directa', class: 'normal-size-image' %>
+            <p class="about_service__list_item_head">Interacción directa</p>
+            <p class="about_service__list_item_body">La interacción directa es posible, lo que permite una transacción suave.</p>
+          </div>
+          <div class="about_service__list_item">
+            <%= image_tag 'top-main-buyer-3.jpg', alt: 'Verificación de las valoraciones', class: 'normal-size-image' %>
+            <p class="about_service__list_item_head">Verificación de las valoraciones</p>
+            <p class="about_service__list_item_body">Puedes revisar las valoraciones del vendedor, así que puedes solicitar con confianza.</p>
+          </div>
+        </div>
+      </div>
+      <br>
+      <br>
       <br>
       <h2 class="top-title">Pasos para comprar un servicio</h2>
-      <ol>
-        <li>Búsqueda: Elija un servicio de la lista de servicios.</li>
-        <li>Comparación: Verifique los detalles del servicio y considere las opciones.</li>
-        <li>Compra: Confirme el contenido del servicio previamente por WhatsApp y compre mediante transferencia bancaria.</li>
-        <li>Comunicación: Después de la compra, comunique a través de WhatsApp o videoconferencia.</li>
-      </ol>
+      <div class="c-serviceStep_flow">
+        <div class="c-serviceFlow">
+          <div class="about_service__list_item_head">1. Búsqueda</div>
+          <div class="c-serviceFlow_text">Filtrarás los servicios basándote en la búsqueda por categoría y palabra clave.</div>
+        </div>
+        <div class="c-serviceFlow">
+          <div class="about_service__list_item_head">2. Comparación</div>
+          <div class="c-serviceFlow_text">Compararás basándote en precio, formato de prestación del servicio, valoraciones, etc.</div>
+        </div>
+        <div class="c-serviceFlow">
+          <div class="about_service__list_item_head">3. Pedido</div>
+          <div class="c-serviceFlow_text">Ordenarás el servicio que te haya gustado.</div>
+        </div>
+        <div class="c-serviceFlow">
+          <div class="about_service__list_item_head">4. Interacción</div>
+          <div class="c-serviceFlow_text">Después de realizar el pedido, te comunicarás con el vendedor por correo electrónico o teléfono.</div>
+        </div>
+      </div>
       <%= link_to "Buscar un servicio", services_path, class: "buttons__main" %>
     </div>
   </div>
-  <div class="top-main-service">
-    <div class="top-main-service__container">
-      <h2 class="top-title">Lo que puede hacer el(la) proveedor(a)</h2>
-      <ul>
-        <li>Oferta de servicios</li>
-      </ul>
+
+
+  <div class="top-main-seller">
+    <div class="top-main-seller__container">
+      <div class="top-message">
+        <h2 style="color: #3366FF; font-weight: bold;">PARA VENDEDOR/A</h2>
+      </div>
+      <br>
+      <div class="inner noflex">
+        <h2 class="top-title">Lo que puede hacer vendedor/a</h2>
+        <div class="about_service__list flexbox">
+          <div class="about_service__list_item">
+            <%= image_tag 'top-main-seller-1.jpg', alt: 'Oferta de servicios', class: 'normal-size-image' %>
+            <p class="about_service__list_item_head">Oferta de servicios</p>
+            <p class="about_service__list_item_body">Puedes ofrecer tus servicios fácilmente, utilizando tus habilidades y experiencia, al precio que desees.</p>
+          </div>
+          <div class="about_service__list_item">
+            <%= image_tag 'top-main-seller-2.jpg', alt: 'Interacción directa', class: 'normal-size-image' %>
+            <p class="about_service__list_item_head">Interacción directa</p>
+            <p class="about_service__list_item_body">La interacción directa es posible, lo que permite una transacción suave.</p>
+          </div>
+          <div class="about_service__list_item">
+            <%= image_tag 'top-main-seller-3.jpg', alt: 'Promocionar habilidades y experiencia', class: 'normal-size-image' %>
+            <p class="about_service__list_item_head">Promocionar habilidades y experiencia</p>
+            <p class="about_service__list_item_body">Puedes registrar tus habilidades, experiencia, portafolio y varios logros, y utilizarlos para promocionarte.</p>
+          </div>
+        </div>
+      </div>
+      <br>
+      <br>
       <br>
       <h2 class="top-title">Pasos para ofrecer un servicio</h2>
-      <ol>
-        <li>Publicación: Introduce el contenido del servicio según los ítems.</li>
-        <li>Recepción de pedidos: Las consultas o compras del servicio se notificarán a través de WhatsApp.</li>
-        <li>Comunicación y entrega: Después de recibir el pedido, proporciona el servicio a través de WhatsApp o videoconferencia.</li>
-      </ol>
+      <div class="c-serviceStep_flow">
+        <div class="c-serviceFlow">
+          <div class="about_service__list_item_head">1. Publicación</div>
+          <div class="c-serviceFlow_text">Introduce la información del servicio siguiendo los ítems.</div>
+        </div>
+        <div class="c-serviceFlow">
+          <div class="about_service__list_item_head">2. Recepción de pedido</div>
+          <div class="c-serviceFlow_text">Cuando tu servicio sea comprado, recibirás una notificación.</div>
+        </div>
+        <div class="c-serviceFlow">
+          <div class="about_service__list_item_head">3. Interacción</div>
+          <div class="c-serviceFlow_text">Después del pedido, te comunicarás con el comprador por correo electrónico o teléfono.</div>
+        </div>
+      </div>
       <%= link_to "Publicar un servicio", new_service_path, class: "buttons__main" %>
     </div>
   </div>
-  <div class="top-whatsapp">
-    <div class="top-whatsapp__container">
-      <h2 class="top-title">Contacto</h2>
-        <p>Si tiene alguna pregunta, por favor contacte <a href="https://miraie-mexico.com/%e4%bc%9a%e7%a4%be%e6%a6%82%e8%a6%81/" style="color: blue; text-decoration: underline;">al administrador(Miraie México, S.A. de C.V.)</a> a través de WhatsApp.</p>
-        <br>
-        <a href="https://wa.me/4423831033" target="_blank" class="whatsapp-button">
-            <i class="fab fa-whatsapp fa-2x" style="margin-right: 5px;"></i>
-            Contactar
-        </a>
+
+
+  <div class="top-registar">
+    <div class="top-registar__container">
+      <h2 class="top-title">Comencemos con la registración gratuita</h2>
+      <%= link_to "Registar", new_user_registration_path, class: "btn btn--orange btn--cubic btn--shadow" %>
     </div>
   </div>
 </div>
