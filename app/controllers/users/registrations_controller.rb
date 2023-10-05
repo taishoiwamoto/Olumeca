@@ -6,9 +6,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # DELETE /resource
   def destroy
-    resource.soft_delete
+    #resource.soft_delete
 
-    sign_out resource
+    #sign_out resource
     redirect_to root_path, notice: 'La cuenta de usuario fue cancelada'
   end
 

@@ -44,7 +44,19 @@ es:
             price:
               greater_than_or_equal_to: "debe ser mayor o igual a %{count}"
               not_a_number: "debe ser un número"
+        review:
+          attributes:
+            service:
+              invalid: "El servicio no es válido"
+              required: "El servicio es requerido"
+            rating:
+              invalid: "El rating no es correcto"
+              required: "El rating es requerido"
+              less_than_or_equal_to: "El rating debe ser un valor entre 1 y 5"
       messages:
         blank: "no debe estar en blanco"
         invalid: "es inválido."
+        required: 'es requerido'
         greater_than_or_equal_to: "debe ser mayor o igual a %{count}"
+        less_than_or_equal_to: "El rating debe ser un valor entre 1 y 5"
+        not_a_number: "debe ser un número"
