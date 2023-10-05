@@ -22,6 +22,11 @@ es:
         detail: "Detalle"
         price: "Precio"
         delivery_method: "Método de entrega"
+      order:
+        status:
+          pending: "Pendiente"
+          accepted: "Aceptado"
+          rejected: "Rechazado"
     errors:
       models:
         user:
@@ -42,3 +47,4 @@ es:
         blank: 'no debe estar en blanco'
         invalid: 'es inválido.'
         greater_than_or_equal_to: "debe ser mayor o igual a %{count}"
+        not_a_number: "no es un número"

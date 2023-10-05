@@ -11,7 +11,7 @@
       <h2><%= @user.name %></h2>
 
       <% average_rating = @user.average_service_rating %>
-      <% if average_rating.present? %>
+      <% if average_rating > 0 %>
         <div class="average-rating">
           <p><%= "⭐️" %> <%= sprintf('%.2f', average_rating) %></p>
         </div>
@@ -72,7 +72,7 @@
                   <span><%= service.user.name %></span>
               </div>
               <div style="display: flex; justify-content: space-between;">
-                <span><%= service.category %></span>
+                <span><%= service.category&.name || "" %></span>
               </div>
               <div style="display: flex; justify-content: space-between;">
                 <div class="star">

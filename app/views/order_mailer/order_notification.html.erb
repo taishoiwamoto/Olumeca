@@ -1,0 +1,24 @@
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <p>Estimado/a <%= @seller.name %>,</p>
+    <p>Le informamos que se ha registrado un nuevo pedido en Olumeca.</p>
+    <p>Detalle del pedido:</p>
+    <ul>
+        <li>Nombre del producto: <%= @order.service_title %></li>
+        <li>Plan: <%= @order.plan_title %></li>
+        <li>Comprador: <%= @order.buyer_name %></li>
+    </ul>
+
+    <% if Rails.env.development? %>
+        <p>Puede revisar el detalle de sus ventas en el siguiente <a href="http://localhost:3000/users/<%= @seller.id %>/sales">enlace</a>.</p>
+    <% else %>
+        <p>Puede revisar el detalle de sus ventas en el siguiente <a href="https://olumeca.com/users/<%= @seller.id %>/sales">enlace</a>.</p>
+    <% end %>
+
+    <p>Atentamente,</p>
+    <p>Equipo de Olumeca</p>
+  </body>
+</html>

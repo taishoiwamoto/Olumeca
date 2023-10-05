@@ -10,12 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_27_143727) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_03_234320) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
-    t.bigint "record_id", null: false
-    t.bigint "blob_id", null: false
+    t.integer "record_id", null: false
+    t.integer "blob_id", null: false
     t.datetime "created_at", null: false
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
@@ -34,9 +34,21 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_27_143727) do
   end
 
   create_table "active_storage_variant_records", force: :cascade do |t|
-    t.bigint "blob_id", null: false
+    t.integer "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "categories", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "delivery_methods", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "likes", force: :cascade do |t|
@@ -49,7 +61,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_27_143727) do
   create_table "orders", force: :cascade do |t|
     t.integer "buyer_id"
     t.integer "seller_id"
-    t.string "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "plan_id"
@@ -58,6 +69,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_27_143727) do
     t.string "plan_title"
     t.decimal "price"
     t.string "service_title"
+    t.integer "status", default: 0
     t.index ["plan_id"], name: "index_orders_on_plan_id"
   end
 
@@ -69,7 +81,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_27_143727) do
     t.string "delivery_method"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.datetime "deletion_at"
+    t.datetime "deleted_at"
   end
 
   create_table "reviews", force: :cascade do |t|
@@ -79,8 +91,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_27_143727) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "order_id"
-    t.integer "plan_id"
-    t.index ["plan_id"], name: "index_reviews_on_plan_id"
+    t.integer "service_id"
+    t.index ["service_id"], name: "index_reviews_on_service_id"
     t.index ["user_id"], name: "index_reviews_on_user_id"
   end
 
@@ -90,8 +102,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_27_143727) do
     t.datetime "updated_at", null: false
     t.integer "user_id"
     t.text "detail"
-    t.string "category"
-    t.datetime "deletion_at"
+    t.datetime "deleted_at"
+    t.integer "category_id"
+    t.index ["category_id"], name: "index_services_on_category_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -104,11 +117,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_27_143727) do
     t.datetime "updated_at", null: false
     t.string "phone_number"
     t.string "name"
-    t.datetime "deletion_at"
+    t.datetime "deleted_at"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "reviews", "orders"
+  add_foreign_key "reviews", "services"
+  add_foreign_key "services", "categories"
 end

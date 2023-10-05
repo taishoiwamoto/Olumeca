@@ -1,11 +1,9 @@
 class Service < ApplicationRecord
   belongs_to :user
-
+  belongs_to :category
   has_many :plans, dependent: :destroy, foreign_key: "service_id", inverse_of: :service, autosave: true
-  has_many :reviews, through: :plans
-  #has_many :reviews, dependent: :nullify
-  #has_many :indirect_reviews, through: :plans, source: :reviews
-  #has_many :direct_reviews, class_name: 'Review', dependent: :nullify
+  # has_many :reviews, through: :plans
+  has_many :reviews
   has_many :likes, dependent: :destroy
   has_one_attached :image
 
@@ -17,32 +15,52 @@ class Service < ApplicationRecord
       maximum: 65,
       too_long: ':El nombre del servicio debe tener menos de %{count} caracteres.'
     }
-  validates :category, presence: true
   validates :detail, presence: true
   validate :plans_present?
   validates_associated :plans
 
-  scope :active, -> { where(deletion_at: nil) }
+  scope :active, -> { where(deleted_at: nil) }
 
-  scope :active, -> { where(deletion_at: nil) }
+  scope :active, -> { where(deleted_at: nil) }
 
   def update_plans(plans_params)
-    self.plans.delete_all
+    puts 'planes'
+    puts plans_params.count
+    puts plans_params
+    updated_plan_ids = []
 
-    plans_params.each do |plan_param|
-      title = plan_param[1]['title']
-      detail = plan_param[1]['detail']
-      price = plan_param[1]['price']
-      delivery_method = plan_param[1]['delivery_method']
+    plans_params.each_pair do |_, plan_param|
+      id = plan_param['id']
+      title = plan_param['title']
+      detail = plan_param['detail']
+      price = plan_param['price']
+      delivery_method = plan_param['delivery_method']
 
-      new_plan = self.plans.new(title: title, detail: detail, price: price, delivery_method: delivery_method)
+      existing_plan = self.plans.find_by(id: id)
 
-      new_plan.save
+      if existing_plan
+        existing_plan.update(
+          title: title,
+          detail: detail,
+          price: price,
+          delivery_method: delivery_method
+        )
+        updated_plan_ids << existing_plan.id
+      else
+        new_plan = self.plans.create(
+          title: title,
+          detail: detail,
+          price: price,
+          delivery_method: delivery_method
+        )
+        updated_plan_ids << new_plan.id
+      end
     end
+    self.plans.where.not(id: updated_plan_ids).destroy_all
   end
 
   def soft_delete
-    update_attribute(:deletion_at, Time.now)
+    update_attribute(:deleted_at, Time.now)
 
     plans.each(&:soft_delete)
   end

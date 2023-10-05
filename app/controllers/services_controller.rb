@@ -15,6 +15,7 @@ class ServicesController < ApplicationController
       @user = @service.user
       @likes_count = Like.where(service_id: @service.id).count
       @reviews = @service.reviews.order(created_at: :desc).page(params[:page]).per(5)
+      #@reviews = Service.joins(plans: [{orders: :review}]).where(id:@service.id)
     end
   end
 
@@ -24,7 +25,7 @@ class ServicesController < ApplicationController
   end
 
   def create
-    @service = current_user.services.build(service_params)
+    @service = current_user.services.create(service_params)
 
     if @service.save
       redirect_to service_path(@service), notice: "Has creado un servicio"
@@ -65,15 +66,29 @@ class ServicesController < ApplicationController
     end
   end
 
+  def filter
+    @services = Service.active.order(created_at: :desc).page(params[:page]).per(10)
+
+    if params[:services][:category_id].present?
+      @category = Category.find(params[:services][:category_id])
+      @services = @services.where(category_id: @category.id)
+    end
+
+    if params[:services][:keyword].present?
+      keyword = params[:services][:keyword]
+      @services = @services.where("title LIKE ? OR detail LIKE ?", "%#{keyword}%", "%#{keyword}%")
+    end
+
+    respond_to do |format|
+      format.turbo_stream { render turbo_stream: turbo_stream.replace('services', partial: 'services/services', locals: { services: @services })}
+    end
+  end
+
+
   private
 
   def service_params
-    params.require(:service).permit(:title, :detail, :category, :image,
-                                    plans_attributes: [:title, :detail, :price, :delivery_method, :_destroy])
+    params.require(:service).permit(:title, :detail, :category_id, :image,
+                                    plans_attributes: [:title, :detail, :price, :delivery_method, :_destroy, :id])
   end
-
-  #def service_form_params
-    #params.require(:service_form).permit(:title, :detail, :category, :image,
-      #plans_attributes: [:title, :detail, :price, :delivery_method, :_destroy])
-  #end
 end

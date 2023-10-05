@@ -20,7 +20,11 @@ Rails.application.routes.draw do
       get :reviews
     end
   end
-  resources :services
+  resources :services do
+    collection do
+      post '/filter', to: 'services#filter'
+    end
+  end
 
   resources :plans, only: [], param: :index do
     member do
@@ -36,6 +40,11 @@ Rails.application.routes.draw do
   resources :orders do
     collection do
       get :completed
+    end
+    member do
+      put :accept
+      put :reject
+      get '/user_info', to: 'orders#user_info'
     end
   end
 

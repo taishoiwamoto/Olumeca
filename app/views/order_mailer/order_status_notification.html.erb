@@ -1,0 +1,31 @@
+<html>
+<head>
+  <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+</head>
+<body>
+<p>Estimado/a <%= @buyer.name %>,</p>
+
+  <% if @order.accepted? %>
+      <p>Nos complace informarle que su pedido en Olumeca ha sido aceptado.</p>
+  <% else %>
+      <p>Lamentablemente, su pedido en Olumeca ha sido rechazado.</p>
+  <% end %>
+
+  <p>Detalles de su pedido:</p>
+  <ul>
+      <li>Nombre del producto: <%= @order.service_title %></li>
+      <li>Plan: <%= @order.plan_title %></li>
+      <li>Vendedor: <%= @seller.name %></li>
+  </ul>
+
+  <% if Rails.env.development? %>
+      <p>Puede revisar sus pedidos en Olumeca a través del siguiente <a href="http://localhost:3000/users/<%= @buyer.id %>/orders">enlace</a>.</p>
+  <% else %>
+      <p>Puede revisar sus pedidos en Olumeca a través del siguiente <a href="https://olumeca.com/users/<%= @buyer.id %>/orders">enlace</a>.</p>
+  <% end %>
+
+  <p>Atentamente,</p>
+  <p>Equipo de Olumeca</p>
+
+</body>
+</html>

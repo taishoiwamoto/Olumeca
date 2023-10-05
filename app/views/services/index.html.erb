@@ -1,42 +1,16 @@
 <div class="main posts-index">
   <div class="container">
     <h1 class="form-heading">Servicios</h1>
-
-    <% @services.each do |service| %>
-        <%= link_to service_path(service) do %>
-          <div class="posts-index-item">
-            <div class="post-left">
-              <% if service.image.attached? %>
-                <%= image_tag(service.image) %>
-              <% else %>
-                <%= image_tag('default_service.jpg') %>
-              <% end %>
-              </div>
-              <div class="post-right">
-                <div style="display: flex; justify-content: space-between;">
-                  <h4><%= service.title.truncate(40) %></h4>
-                </div>
-                <div style="display: flex; justify-content: space-between;">
-                    <span><%= service.user.name %></span>
-                </div>
-                <div style="display: flex; justify-content: space-between;">
-                  <span><%= service.category %></span>
-                </div>
-                <div style="display: flex; justify-content: space-between;">
-                  <div class="star">
-                    <% reviews = service.reviews %>
-                    <% if reviews.present? %>
-                      <% average_rating = calculate_average_rating(reviews) %>
-                      <%= "⭐️" %> <%= sprintf('%.2f', average_rating) %>
-                    <% else %>
-                      <h5> -- </h5>
-                    <% end %>
-                  </div>
-                </div>
-              </div>
-          </div>
-        <% end %>
+    <%= form_with(scope: :services, url: filter_services_path, method: :post ) do |f| %>
+      <div class="field">
+        <%= f.select :category_id, options_for_select(Category.all.map{|category| [category.name, category.id]}), { prompt: 'Todas categorías' } %>
+      </div>
+      <div class="field">
+        <%= f.text_field :keyword, placeholder: "Palabra clave" %>
+      </div>
+      <%= f.submit 'Buscar', class: 'buttons__main' %><br/>
     <% end %>
-    <%= paginate @services %>
+    <br>
+    <%= render 'services' , services: @services %>
   </div>
 </div>
