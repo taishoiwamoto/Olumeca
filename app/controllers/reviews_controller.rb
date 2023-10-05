@@ -26,6 +26,7 @@ class ReviewsController < ApplicationController
     order = Order.find_by!(buyer_id: current_user.id, id: @review.order_id)
     #@review.plan_id = order.plan_id
     @review.user_id = order.buyer_id
+    @errores = ''
 
     #existing_reviews = Review.where(user_id: current_user.id, plan: Plan.where(service: order.plan.service))
     existing_reviews = Review.where(user_id: current_user.id, service_id: order.plan.service.id)
@@ -38,9 +39,9 @@ class ReviewsController < ApplicationController
       flash[:notice] = 'La evaluación ha sido registrada.'
       redirect_to orders_user_path(current_user)
     else
-      puts @review.errors.full_messages.join(', ')
-      flash[:notice] = @review.errors.full_messages.join(', ')
-      render 'new'
+      #flash[:notice] = @review.errors.full_messages.join(', ')
+      @errores = @review.errors.full_messages.join(', ')
+      render :new, status: :unprocessable_entity
     end
   end
 
