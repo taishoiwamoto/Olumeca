@@ -38,6 +38,8 @@ class ReviewsController < ApplicationController
       flash[:notice] = 'La evaluación ha sido registrada.'
       redirect_to orders_user_path(current_user)
     else
+      puts @review.errors.full_messages.join(', ')
+      flash[:notice] = @review.errors.full_messages.join(', ')
       render 'new'
     end
   end
