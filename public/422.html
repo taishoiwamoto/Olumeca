@@ -1,67 +1,90 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>The change you wanted was rejected (422)</title>
+  <title>l cambio que querías fue rechazado (422)</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta charset="UTF-8">
+
   <style>
-  .rails-default-error-page {
-    background-color: #EFEFEF;
-    color: #2E2F30;
-    text-align: center;
-    font-family: arial, sans-serif;
-    margin: 0;
-  }
+    .rails-default-error-page {
+        background-color: #EFEFEF;
+        color: #2E2F30;
+        font-family: arial, sans-serif;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+    }
 
-  .rails-default-error-page div.dialog {
-    width: 95%;
-    max-width: 33em;
-    margin: 4em auto 0;
-  }
+    .dialog {
+        text-align: center;
+        background-color: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        margin-left: 50px;
+        margin-right: 50px;
+    }
 
-  .rails-default-error-page div.dialog > div {
-    border: 1px solid #CCC;
-    border-right-color: #999;
-    border-left-color: #999;
-    border-bottom-color: #BBB;
-    border-top: #B00100 solid 4px;
-    border-top-left-radius: 9px;
-    border-top-right-radius: 9px;
-    background-color: white;
-    padding: 7px 12% 0;
-    box-shadow: 0 3px 8px rgba(50, 50, 50, 0.17);
-  }
+    h1 {
+        color: #730E15;
+    }
 
-  .rails-default-error-page h1 {
-    font-size: 100%;
-    color: #730E15;
-    line-height: 1.5em;
-  }
+    p, ul {
+        text-align: left;
+    }
 
-  .rails-default-error-page div.dialog > p {
-    margin: 0 0 1em;
-    padding: 1em;
-    background-color: #F7F7F7;
-    border: 1px solid #CCC;
-    border-right-color: #999;
-    border-left-color: #999;
-    border-bottom-color: #999;
-    border-bottom-left-radius: 4px;
-    border-bottom-right-radius: 4px;
-    border-top-color: #DADADA;
-    color: #666;
-    box-shadow: 0 3px 8px rgba(50, 50, 50, 0.17);
-  }
-  </style>
+    ul {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    li {
+        margin: 8px 0;
+    }
+
+    a {
+        color: blue;
+        text-decoration: underline;
+    }
+
+    .whatsapp-button {
+      margin-top: 30px;
+      margin-bottom: 30px;
+      color: white;
+      display: inline-block;
+      align-items: center;
+      background-color: #25D366;
+      padding: 10px;
+      border-radius: 5px;
+      text-decoration: none;
+      width: 350px;
+      text-align: center;
+      transition: background-color 0.3s;
+    }
+
+    .whatsapp-button:hover {
+      background-color: #128C53;
+    }
+
+</style>
 </head>
-
 <body class="rails-default-error-page">
-  <!-- This file lives in public/422.html -->
-  <div class="dialog">
-    <div>
-      <h1>The change you wanted was rejected.</h1>
-      <p>Maybe you tried to change something you didn't have access to.</p>
-    </div>
-    <p>If you are the application owner check the logs for more information.</p>
-  </div>
+<h1>Olumeca</h1>
+<div class="dialog">
+    <h2>El cambio que querías fue rechazado.</h2>
+    <p>Código de error: 422</p>
+    <p>Aquí tienes algunos enlaces útiles en su lugar:</p>
+    <ul>
+        <li><a href="/">Página Principal</a></li>
+        <li><a href="/services">Servicios</a></li>
+        <li><a href="https://miraie-mexico.com/%e4%bc%9a%e7%a4%be%e6%a6%82%e8%a6%81/">Sobre Nosotros</a></li>
+    </ul>
+    <a href="https://wa.me/4423831033" target="_blank" class="whatsapp-button">
+      <i class="fab fa-whatsapp"></i> Contactar por WhatsApp
+  </a>
+</div>
 </body>
 </html>
