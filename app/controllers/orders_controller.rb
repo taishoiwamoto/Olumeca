@@ -9,7 +9,7 @@ class OrdersController < ApplicationController
     @seller = User.find(@service.user_id)
 
     if @seller.id == @buyer.id
-      redirect_to @service, notice: 'No puedes comprar tu propio servicio.'
+      redirect_to @service, notice: 'No puedes pedir tu propio servicio.'
       return
     end
   end
