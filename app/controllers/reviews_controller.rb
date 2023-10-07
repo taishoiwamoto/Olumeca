@@ -6,30 +6,24 @@ class ReviewsController < ApplicationController
   before_action :authorized_user, only: [:edit, :update]
 
   def new
-    plan = Plan.find(@plan_id)
-    #existing_reviews = Review.where(user_id: current_user.id, plan: Plan.where(service: plan.service))
-    existing_reviews = Review.where(user_id: current_user.id, service_id: plan.service.id)
+    existing_reviews = Review.where(user_id: current_user.id, service_id: service.id)
 
     if existing_reviews.any?
       redirect_to edit_review_path(existing_reviews.first)
     else
       @review = Review.new
-      #@review.plan_id = @plan_id
       @review.user_id = current_user.id if current_user
       @review.order_id = @order.id
-      @review.service_id = @order.plan.service.id
     end
   end
 
   def create
     @review = Review.new(review_params)
     order = Order.find_by!(buyer_id: current_user.id, id: @review.order_id)
-    #@review.plan_id = order.plan_id
     @review.user_id = order.buyer_id
     @errores = ''
 
-    #existing_reviews = Review.where(user_id: current_user.id, plan: Plan.where(service: order.plan.service))
-    existing_reviews = Review.where(user_id: current_user.id, service_id: order.plan.service.id)
+    existing_reviews = Review.where(user_id: current_user.id, service_id: order.service.id)
     if existing_reviews.any?
       redirect_to edit_review_path(existing_reviews.first)
       return
@@ -39,7 +33,6 @@ class ReviewsController < ApplicationController
       flash[:notice] = 'La evaluación ha sido registrada.'
       redirect_to orders_user_path(current_user)
     else
-      #flash[:notice] = @review.errors.full_messages.join(', ')
       @errores = @review.errors.full_messages.join(', ')
       render :new, status: :unprocessable_entity
     end
@@ -78,15 +71,11 @@ class ReviewsController < ApplicationController
   end
 
   def review_params
-    params.require(:review).permit(:user_id, :rating, :comment, :order_id, :service_id) #:plan_id
-  end
-
-  def set_review_params
-    @plan_id = params[:plan_id]
+    params.require(:review).permit(:user_id, :rating, :comment, :order_id, :service_id)
   end
 
   def find_order
     @order_id = params[:order_id]
-    @order = Order.find_by!(id: @order_id, buyer_id: current_user.id, plan_id: @plan_id)
+    @order = Order.find_by!(id: @order_id, buyer_id: current_user.id)
   end
 end

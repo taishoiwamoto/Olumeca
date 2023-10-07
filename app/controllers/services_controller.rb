@@ -15,13 +15,11 @@ class ServicesController < ApplicationController
       @user = @service.user
       @likes_count = Like.where(service_id: @service.id).count
       @reviews = @service.reviews.order(created_at: :desc).page(params[:page]).per(5)
-      #@reviews = Service.joins(plans: [{orders: :review}]).where(id:@service.id)
     end
   end
 
   def new
     @service = Service.new
-    @service.plans.build
   end
 
   def create
@@ -30,7 +28,6 @@ class ServicesController < ApplicationController
     if @service.save
       redirect_to service_path(@service), notice: "Has creado un servicio"
     else
-      @service.plans.build unless @service.plans.present?
       render :new, status: :unprocessable_entity
     end
   end
@@ -43,7 +40,6 @@ class ServicesController < ApplicationController
     @service = Service.find_by(id: params[:id])
 
     if @service.update(service_params)
-      @service.update_plans(service_params[:plans_attributes].to_h)
       redirect_to service_path(@service), notice: 'Has editado un servicio'
     else
       render :edit, status: :unprocessable_entity
@@ -88,7 +84,6 @@ class ServicesController < ApplicationController
   private
 
   def service_params
-    params.require(:service).permit(:title, :detail, :category_id, :image,
-                                    plans_attributes: [:title, :detail, :price, :delivery_method, :_destroy, :id])
+    params.require(:service).permit(:title, :detail, :category_id, :image)
   end
 end

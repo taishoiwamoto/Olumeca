@@ -53,8 +53,8 @@
     <% @orders.each do |order| %>
       <div class="posts-index-item">
         <div class="post-left">
-          <% if order.plan && order.plan.service && order.plan.service.image.attached? %>
-            <%= image_tag(order.plan.service.image) %>
+          <% if order.service.image.attached? %>
+            <%= image_tag(order.service.image) %>
           <% else %>
             <%= image_tag('default_service.jpg') %>
           <% end %>
@@ -64,9 +64,9 @@
           <div style="display: flex; justify-content: flex-end;">
             <% if order.accepted? %>
               <% if order.reviewed_by_user?(current_user) || order.previously_reviewed_by_user?(current_user) %>
-                <%= link_to "Editar evaluación", order.plan.service.reviews.present? ? edit_review_path(order.plan.service.reviews.last.id) : new_review_path(order_id: order.id, service_id: order.plan.service.id), class: "button-002", style: "font-size: 12px; margin-left: 10px;" %>
+                <%= link_to "Editar evaluación", order.service.reviews.present? ? edit_review_path(order.service.reviews.last.id) : new_review_path(order_id: order.id, service_id: order.service.id), class: "button-002", style: "font-size: 12px; margin-left: 10px;" %>
               <% else %>
-                <%= link_to "Evaluar", new_review_path(order_id: order.id, plan_id: order.plan.id, service_id: order.plan.service.id), class: "button-002", style: "font-size: 12px; margin-left: 10px;" %>
+                <%= link_to "Evaluar", new_review_path(order_id: order.id, service_id: order.service.id), class: "button-002", style: "font-size: 12px; margin-left: 10px;" %>
               <% end %>
             <% end %>
 
@@ -84,9 +84,8 @@
           </div>
 
 
-          <%= link_to service_path(order.plan.service) do %>
+          <%= link_to service_path(order.service) do %>
             <h4>Servicio: <%= order.service_title %></h4>
-            <h4>Plan: <%= order.plan_title %></h4>
           <% end %>
 
           <%= link_to user_path(order.seller) do %>
