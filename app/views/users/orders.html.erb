@@ -85,21 +85,17 @@
 
 
           <%= link_to service_path(order.service) do %>
-            <h4>Servicio: <%= order.service_title %></h4>
+            <h4>Servicio: <%= order&.service_title %></h4>
           <% end %>
 
           <%= link_to user_path(order.seller) do %>
             <p style="font-size: 14px;">Provedor/a: <%= order.seller_name %></p>
           <% end %>
 
-          <div style="display: flex; justify-content: space-between;">
-            <p style="font-size: 14px;">Precio del pedido: <%= order.price %> MXN</p>
+          <div style="display: flex">
+            <p style="font-size: 12px;">ID del pedido:<%= order.id %>,</p>
+            <p style="font-size: 12px; margin-left: 10px;">Fecha: <%= order.created_at.strftime("%d/%m/%Y %H:%M") %></p>
           </div>
-
-        <div style="display: flex">
-          <p style="font-size: 12px;">ID del pedido:<%= order.id %>,</p>
-          <p style="font-size: 12px; margin-left: 10px;">Fecha: <%= order.created_at.strftime("%d/%m/%Y %H:%M") %></p>
-        </div>
 
         </div>
       </div>

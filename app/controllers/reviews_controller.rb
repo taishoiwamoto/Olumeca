@@ -1,12 +1,13 @@
 class ReviewsController < ApplicationController
   before_action :require_login
-  before_action :set_review_params, only: [:new]
+  # before_action :set_review_params, only: [:new]
   before_action :find_order, only: [:new]
   before_action :set_review, only: [:edit, :update]
   before_action :authorized_user, only: [:edit, :update]
 
   def new
-    existing_reviews = Review.where(user_id: current_user.id, service_id: service.id)
+    @service = Service.find(params["service_id"])
+    existing_reviews = Review.where(user_id: current_user.id, service_id: @service.id)
 
     if existing_reviews.any?
       redirect_to edit_review_path(existing_reviews.first)
@@ -14,6 +15,7 @@ class ReviewsController < ApplicationController
       @review = Review.new
       @review.user_id = current_user.id if current_user
       @review.order_id = @order.id
+      @review.service_id = @service.id
     end
   end
 

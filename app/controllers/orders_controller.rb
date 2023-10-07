@@ -4,6 +4,7 @@ class OrdersController < ApplicationController
   def new
     @order = Order.new
     @buyer = current_user
+    @service = Service.find(params["service_id"])
     @seller = User.find(@service.user_id)
 
     if @seller.id == @buyer.id
@@ -13,14 +14,18 @@ class OrdersController < ApplicationController
   end
 
   def create
-    @order = Order.new(order_params)
-
-    @order.buyer_id = current_user.id
-    @order.buyer_name = current_user.name
-
-    @order.seller_id = service.user_id
-    @order.seller_name = User.find(service.user_id).name
-    @order.service_title = service.title
+    begin
+      @order = Order.new(order_params)
+      @order.buyer_id = current_user.id
+      @order.buyer_name = current_user.name
+      @order.seller_id = @order.service.user_id
+      @order.seller_name = User.find(@order.service.user_id).name
+      @order.service_title = @order.service.title
+    rescue => error
+      p 'Ocurrió un error'
+      p error.message
+    end
+    
     if @order.save
       OrderMailer.with(order: @order).order_notification.deliver_later
       redirect_to completed_orders_path
@@ -51,4 +56,10 @@ class OrdersController < ApplicationController
   def user_info
     @user = User.find(params[:user_id])
   end
+
+  private
+
+  def order_params
+    params.require(:order).permit(:service_id)
+  end  
 end
