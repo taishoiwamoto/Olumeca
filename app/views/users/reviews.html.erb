@@ -52,7 +52,6 @@
 
     <% @reviews.each do |review| %>
     <% Rails.logger.debug "Review: #{review.inspect}" %>
-    <%# Rails.logger.debug "Plan: #{review.plan.inspect}" %>
     <% Rails.logger.debug "Service: #{review&.service.inspect}" %>
 
       <div class="posts-index-item">

@@ -3,11 +3,9 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   validates_acceptance_of :agreement, allow_nil: false, on: :create
   has_many :services, dependent: :nullify
-  has_many :plans, through: :services
   has_many :purchased_orders, class_name: 'Order', foreign_key: 'buyer_id', dependent: :nullify
   has_many :sold_orders, class_name: 'Order', foreign_key: 'seller_id', dependent: :nullify
   has_many :reviews, dependent: :nullify
-  # has_many :sold_reviews, through: :sold_orders, source: :review
   has_many :likes, dependent: :destroy
   has_one_attached :image
 

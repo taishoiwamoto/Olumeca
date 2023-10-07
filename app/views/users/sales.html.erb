@@ -55,8 +55,8 @@
 
         <div class="post-left">
 
-          <% if sale.plan && sale.plan.service && sale.plan.service.image.attached? %>
-            <%= image_tag(sale.plan.service.image) %>
+          <% if sale.service.image.attached? %>
+            <%= image_tag(sale.service.image) %>
           <% else %>
             <%= image_tag('default_service.jpg') %>
           <% end %>
@@ -83,18 +83,13 @@
           </div>
 
 
-          <%= link_to service_path(sale.plan.service) do %>
+          <%= link_to service_path(sale.service) do %>
             <h4>Servicio: <%= sale.service_title %></h4>
-            <h4>Plan: <%= sale.plan_title %></h4>
           <% end %>
 
           <%= link_to user_path(sale.buyer)  do %>
             <p style="font-size: 14px;">Comprador/a: <%= sale.buyer_name %></p>
           <% end %>
-
-          <div style="display: flex; justify-content: space-between;">
-            <p style="font-size: 14px;">Precio del pedido: <%= sale.price %> MXN</p>
-          </div>
 
           <div style="display: flex">
             <p style="font-size: 12px;">ID del pedido:<%= sale.id %>,</p>

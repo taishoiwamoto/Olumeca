@@ -4,9 +4,7 @@
     <div class="form-001">
       <%= form_for @order do |f| %>
         <p>Servicio: <%= @service.title %></p>
-        <p>Plan: <%= @plan.title %></p>
         <p>Vendedor(a): <%= @seller.name %></p>
-        <%= f.hidden_field :plan_id, value: @plan.id %>
         <%= f.submit 'Realizar Pedido', class: "button-004" %>
       <% end %>
     </div>

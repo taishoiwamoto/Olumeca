@@ -3,8 +3,6 @@ class OrdersController < ApplicationController
 
   def new
     @order = Order.new
-    @plan = Plan.find_by(id: params[:plan_id])
-    @service = @plan.service
     @buyer = current_user
     @seller = User.find(@service.user_id)
 
@@ -17,29 +15,12 @@ class OrdersController < ApplicationController
   def create
     @order = Order.new(order_params)
 
-    #if Plan.find(@order.plan_id).deleted_at
-    #  redirect_to Plan.find(@order.plan_id).service, notice: 'No se puede realizar el pedido ya que el plan se encuentra cancelado.'
-    #  return
-    #end
-
-    #if Plan.find(@order.plan_id).service.deleted_at
-    #  redirect_to Plan.find(@order.plan_id).service, notice: 'No se puede realizar el pedido ya que el servicio se encuentra cancelado.'
-    #  return
-    #end
-
-
     @order.buyer_id = current_user.id
     @order.buyer_name = current_user.name
 
-    plan = Plan.find(@order.plan_id)
-
-    service = plan.service
     @order.seller_id = service.user_id
     @order.seller_name = User.find(service.user_id).name
     @order.service_title = service.title
-    @order.plan_title = plan.title
-    @order.price = plan.price
-    #@order.status = "pending"
     if @order.save
       OrderMailer.with(order: @order).order_notification.deliver_later
       redirect_to completed_orders_path
@@ -69,15 +50,5 @@ class OrdersController < ApplicationController
 
   def user_info
     @user = User.find(params[:user_id])
-  end
-
-  private
-
-  def order_params
-    params.require(:order).permit(:plan_id)
-  end
-
-  def service_id
-    self.plan.service_id
   end
 end
