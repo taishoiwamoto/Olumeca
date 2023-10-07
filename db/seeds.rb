@@ -7,21 +7,21 @@
 #   Character.create(name: "Luke", movie: movies.first)
 
 categories = [
-  'Ilustración',
+  'Ilustración・Cómic',
   'Diseño',
   'Creación de sitios web・Diseño web',
-  'Vídeo・Animación・Grabación',
-  'Marketing',
+  'Video・Animación・Filmación',
+  'Marketing・Captación de clientes web',
   'Música・Narración',
   'Redacción・Traducción',
-  'Negocios・Consultoría・Profesiones',
+  'Negocios・Consultoría・Profesiones jurídicas',
   'IT・Programación・Desarrollo',
   'Adivinación',
-  'Asesoramiento・Consejería de amor・Compañía para hablar',
-  'Escuela・Educación・Aprendizaje・Empleo・Certificación',
-  'Idioma・Linguística',
-  'Vivienda・Belleza・Vida・Pasatiempos',
-  'Dinero・Trabajo secundario',
+  'Consulta de preocupaciones・Asesoramiento amoroso・Compañía para conversar',
+  'Aprendizaje・Empleo・Certificación・Coaching',
+  'Vivienda・Belleza・Vida・Hobbies',
+  'Lecciones en línea・Asesoramiento',
+  'Dinero・Trabajo secundario・Afiliados',
   'Otros'
 ]
 
