@@ -1,4 +1,6 @@
 class Service < ApplicationRecord
+  scope :by_keyword, ->(keyword) { active.where("title LIKE ? OR detail LIKE ?", "%#{keyword}%", "%#{keyword}%") }
+
   belongs_to :user
   has_many :orders
   belongs_to :category
@@ -18,5 +20,9 @@ class Service < ApplicationRecord
 
   def soft_delete
     update_attribute(:deleted_at, Time.now)
+  end
+
+  def count_likes
+    likes.length
   end
 end
