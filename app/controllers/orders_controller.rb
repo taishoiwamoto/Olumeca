@@ -2,34 +2,23 @@ class OrdersController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create]
 
   def new
-    @order = Order.new
-    @buyer = current_user
-    @service = Service.find(params["service_id"])
-    @seller = User.find(@service.user_id)
-
-    if @seller.id == @buyer.id
-      redirect_to @service, notice: 'No puedes pedir tu propio servicio.'
-      return
-    end
+    @service = Service.find(params[:service_id])
+    @order = current_user.purchased_orders.build(service_title: @service.title)
   end
 
   def create
-    begin
-      @order = Order.new(order_params)
-      @order.buyer_id = current_user.id
-      @order.buyer_name = current_user.name
-      @order.seller_id = @order.service.user_id
-      @order.seller_name = User.find(@order.service.user_id).name
-      @order.service_title = @order.service.title
-    rescue => error
-      p 'Ocurrió un error'
-      p error.message
-    end
-    
+    @service = Service.find(params[:order][:service_id])
+    @order = current_user.purchased_orders.build(
+      service_id: @service.id,
+      service_title: @service.title,
+      seller_id: @service.user.id,
+      seller_name: @service.user.name,
+      buyer_name: current_user.name,
+    )
+
     if @order.save
       OrderMailer.with(order: @order).order_notification.deliver_later
       redirect_to completed_orders_path
-    else
     end
   end
 
@@ -61,5 +50,5 @@ class OrdersController < ApplicationController
 
   def order_params
     params.require(:order).permit(:service_id)
-  end  
+  end
 end

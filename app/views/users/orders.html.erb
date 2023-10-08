@@ -53,11 +53,11 @@
     <% @orders.each do |order| %>
       <div class="posts-index-item">
         <div class="post-left">
-          <%# if order.service.image.attached? %>
-            <%#= image_tag(order.service.image) %>
-          <%# else %>
-            <%#= image_tag('default_service.jpg') %>
-          <%# end %>
+          <% if order.service.image.attached? %>
+            <%= image_tag(order.service.image) %>
+          <% else %>
+            <%= image_tag('default_service.jpg') %>
+          <% end %>
         </div>
 
         <div class="post-right">
@@ -83,10 +83,9 @@
             <% end %>
           </div>
 
-          <%= order.service %>
-          <%#= link_to service_path(order.service) do %>
+          <%= link_to service_path(order.service) do %>
             <h4>Servicio: <%= order&.service_title %></h4>
-          <%# end %>
+          <% end %>
 
           <%= link_to user_path(order.seller) do %>
             <p style="font-size: 14px;">Provedor/a: <%= order.seller_name %></p>

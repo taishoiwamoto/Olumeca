@@ -81,7 +81,7 @@
     </div>
     <br>
       <% if current_user && @service.user != current_user %>
-        <%= link_to "Hacer el pedido", new_order_path(buyer_id: current_user.id,service_id: @service.id, seller_id: @service.user_id), class: "button-004" %>
+        <%= link_to "Hacer el pedido", new_order_path(service_id: @service.id), class: "button-004" %>
       <% end %>
     <br>
     <h3>Evaluación</h3>

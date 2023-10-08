@@ -1,7 +1,7 @@
 class ServicesController < ApplicationController
   before_action :authenticate_user, except: [:index, :show]
   before_action :set_service, only: %i[show edit update destroy]
-  before_action :authorize_user, only: %i[show edit update destroy]
+  before_action :authorize_user, only: %i[edit update destroy]
 
   def index
     @services = Service.active.order(created_at: :desc).page(params[:page]).per(10)
