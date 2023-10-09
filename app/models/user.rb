@@ -35,6 +35,13 @@ class User < ApplicationRecord
     count > 0 ? total_rating.to_f / count : 0
   end
 
+  def average_rating
+    average = reviews.pluck('AVG(rating)')[0]
+    return average if average.present?
+
+    0
+  end
+
   def soft_delete
     update_attribute(:deleted_at, Time.now)
     services.each(&:soft_delete)

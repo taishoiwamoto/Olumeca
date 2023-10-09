@@ -1,52 +1,29 @@
 class ReviewsController < ApplicationController
   before_action :require_login
-  # before_action :set_review_params, only: [:new]
-  before_action :find_order, only: [:new]
+  before_action :set_service
   before_action :set_review, only: [:edit, :update]
   before_action :authorized_user, only: [:edit, :update]
 
   def new
-    @service = Service.find(params["service_id"])
-    existing_reviews = Review.where(user_id: current_user.id, service_id: @service.id)
-
-    if existing_reviews.any?
-      redirect_to edit_review_path(existing_reviews.first)
-    else
-      @review = Review.new
-      @review.user_id = current_user.id if current_user
-      @review.order_id = @order.id
-      @review.service_id = @service.id
-    end
+    @review = @service.reviews.build(user: current_user)
   end
 
   def create
-    @review = Review.new(review_params)
-    order = Order.find_by!(buyer_id: current_user.id, id: @review.order_id)
-    @review.user_id = order.buyer_id
-    @errores = ''
-
-    existing_reviews = Review.where(user_id: current_user.id, service_id: order.service.id)
-    if existing_reviews.any?
-      redirect_to edit_review_path(existing_reviews.first)
-      return
-    end
+    @review = @service.reviews.build review_params
+    @review.user = current_user
 
     if @review.save
-      flash[:notice] = 'La evaluación ha sido registrada.'
-      redirect_to orders_user_path(current_user)
+      redirect_to orders_user_path(current_user), notice: 'La evaluación ha sido creada.'
     else
-      @errores = @review.errors.full_messages.join(', ')
       render :new, status: :unprocessable_entity
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @review.update(review_params)
-      flash[:notice] = 'La evaluación ha sido actualizada.'
-      redirect_to orders_user_path(current_user)
+      redirect_to orders_user_path(current_user), notice: 'La evaluación ha sido actualizada.'
     else
       render 'edit', status: :unprocessable_entity
     end
@@ -55,10 +32,9 @@ class ReviewsController < ApplicationController
   private
 
   def require_login
-    unless current_user
-      flash[:error] = 'Se requiere iniciar sesión.'
-      redirect_to new_user_session_path
-    end
+    return if current_user
+
+    redirect_to new_user_session_path, notice: 'Se requiere iniciar sesión'
   end
 
   def set_review
@@ -66,18 +42,16 @@ class ReviewsController < ApplicationController
   end
 
   def authorized_user
-    return if @review.user_id == current_user.id
+    return if @review.user.eql?(current_user)
 
-    flash[:error] = 'No tiene permiso para editar esta evaluación.'
-    redirect_to root_path
+    redirect_to root_path, notice: 'No tiene permiso para editar esta evaluación.'
   end
 
   def review_params
-    params.require(:review).permit(:user_id, :rating, :comment, :order_id, :service_id)
+    params.require(:review).permit(:rating, :comment)
   end
 
-  def find_order
-    @order_id = params[:order_id]
-    @order = Order.find_by!(id: @order_id, buyer_id: current_user.id)
+  def set_service
+    @service = Service.find(params[:service_id])
   end
 end

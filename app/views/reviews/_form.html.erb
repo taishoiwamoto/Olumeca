@@ -1,0 +1,23 @@
+<%= form_with(model: review, url: [service, review]) do |form| %>
+  <% if review.errors.any? %>
+    <div class="form-error-body">
+      <% review.errors.full_messages.each do |message| %>
+        <div class="form-error">
+          <%= message %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :rating, 'Evaluación' %>
+    <%= form.select :rating, options_for_select(review_select_options), { :include_blank => 'Seleccione un valor numérico'}, :required => true %>
+  </div>
+
+  <div class="field">
+    <%= form.label :comment, 'Comentario' %>
+    <%= form.text_area :comment %>
+  </div>
+
+  <%= form.submit 'Guardar',  class: "buttons__main"%>
+<% end %>

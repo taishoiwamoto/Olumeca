@@ -19,9 +19,7 @@
         <p> -- </p>
       <% end %>
 
-      <% if @user == current_user %>
-        <%= link_to "Editar tu cuenta", edit_user_registration_path %>
-      <% end %>
+      <%= link_to "Editar tu cuenta", edit_user_registration_path if @user == current_user %>
     </div>
 
     <ul class="user-tabs">

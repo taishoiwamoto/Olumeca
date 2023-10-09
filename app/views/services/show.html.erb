@@ -3,18 +3,17 @@
     <h3>Vendedor/a</h3>
     <div class="posts-index-item">
       <div style="display: flex; justify-content: flex-end;">
-        <% average_rating = @user.average_service_rating %>
-        <% if average_rating > 0 %>
+        <% if @service.average_rating > 0 %>
           <div class="average-rating">
-            <p><%= "⭐️" %> <%= sprintf('%.2f', average_rating) %></p>
+            <p><%= "⭐️" %> <%= sprintf('%.2f', @service.average_rating) %></p>
           </div>
         <% else %>
           <p> -- </p>
         <% end %>
       </div>
       <div class="post-user-name">
-        <% if @user.image.attached? %>
-          <%= image_tag(@user.image) %>
+        <% if @service.user.image.attached? %>
+          <%= image_tag(@service.user.image) %>
         <% else %>
           <%= image_tag('default_user.jpg') %>
         <% end %>
@@ -24,7 +23,7 @@
     <br>
     <h3>Servicio</h3>
     <div class="posts-show-item">
-      <% if current_user && @service.user_id == current_user.id %>
+      <% if @service.user.eql? current_user %>
         <div class="post-menus">
           <%= button_to edit_service_path(@service), method: :get do %>
             <i class="fa-solid fa-pen-to-square"></i>
@@ -45,8 +44,7 @@
         <div class="star">
           <% if @reviews.present? %>
             <div class="average-rating">
-              <% average_rating = calculate_average_rating(@reviews) %>
-              <p><%= "⭐️" %> <%= sprintf('%.2f', average_rating) %></p>
+              <p><%= "⭐️" %> <%= sprintf('%.2f', calculate_average_rating(@reviews)) %></p>
             </div>
           <% else %>
             <h5> -- </h5>
@@ -54,8 +52,7 @@
         </div>
         <div class="like-button">
           <% if current_user %>
-            <% existing_like = Like.find_by(user_id: current_user.id, service_id: @service.id) %>
-            <% if existing_like %>
+            <% if Like.user_and_service(current_user.id, @service.id) %>
               <%= button_to like_path(service_id: @service.id), method: :delete do %>
                 <span class="fa fa-heart liked-btn"></span>
               <% end %>
@@ -64,8 +61,6 @@
                 <span class="fa fa-heart unliked-btn"></span>
               <% end %>
             <% end %>
-          <% else %>
-            <span class="fa fa-heart unliked-btn"></span>
           <% end %>
         </div>
       </div>
@@ -85,12 +80,8 @@
       <p><%= simple_format(@service.detail) %></p>
     </div>
     <br>
-      <% if current_user && @service.title != "no encontrado" && @service.user_id != current_user.id %>
-        <%= link_to "Hacer el pedido", new_order_path(seller_id: @service.user_id, service_id: @service.id, buyer_id: current_user.id), class: "button-004" %>
-      <% elsif current_user && @service.user_id == current_user.id %>
-        <%= link_to "Hacer el pedido", new_order_path(buyer_id: current_user.id,service_id: @service.id, seller_id: @service.user_id), class: "button-004" %>
-      <% else %>
-        <%= link_to "Hacer el pedido", new_user_session_path(flash_alert: 'Por favor, inicia sesión'), class: "button-004" %>
+      <% if current_user && @service.user != current_user %>
+        <%= link_to "Hacer el pedido", new_order_path(service_id: @service.id), class: "button-004" %>
       <% end %>
     <br>
     <h3>Evaluación</h3>
@@ -109,7 +100,7 @@
             <h4><%= "⭐️" * review.rating %></h4>
           <% end %>
           <div style="display: flex; justify-content: space-between;">
-            <% if review.user.present? && review.user.name.present? %>
+            <% if review.user.name.present? %>
               <p style="font-size: 14px;"><%= review.user.name %></p>
             <% else %>
               <p style="font-size: 14px;">Usuario dado de baja</p>
