@@ -3,37 +3,7 @@
     <h1 class="form-heading">Editar Evaluación</h1>
     <div class="form">
       <div class="form-body">
-        <%= form_for @review do |form| %>
-
-          <% if @review.errors.any? %>
-            <div class="form-error-body">
-              <% @review.errors.full_messages.each do |message| %>
-                <div class="form-error">
-                  <%= message %>
-                </div>
-              <% end %>
-            </div>
-          <% end %>
-
-          <div class="field">
-            <%= form.label :rating, 'Evaluación' %>
-            <%= form.select :rating, options_for_select([
-              ['⭐️⭐️⭐️⭐️⭐️', 5],
-              ['⭐️⭐️⭐️⭐️', 4],
-              ['⭐️⭐️⭐️', 3],
-              ['⭐️⭐️', 2],
-              ['⭐️', 1]
-            ], @review.rating), prompt: "Seleccione un valor numérico", required: true %>
-          </div>
-
-          <div class="field">
-            <%= form.label :comment, 'Comentario' %>
-            <%= form.text_area :comment %>
-          </div>
-
-          <%= form.hidden_field :order_id %>
-          <%= form.submit 'Actualizar',  class: "buttons__main"%>
-        <% end %>
+        <%= render 'form', { review: @review, service: @service } %>
       </div>
     </div>
   </div>

@@ -4,13 +4,13 @@ class Order < ApplicationRecord
   belongs_to :service
   enum status: ['pending', 'accepted', 'rejected']
 
-  def reviewed_by_user?(user)
-    Review.where(user_id: user.id, service_id: self.service.id).exists?
+  def service_reviewed_by_user?(user_id)
+    return true if Review.find_by(user_id:, service:).present?
+
+    false
   end
 
-  def previously_reviewed_by_user?(user)
-    return false unless self.service
-
-    Review.joins(:service).where(service:{id: self.service.id}).where(user_id: user.id).exists?
+  def review_by_user(user_id)
+    Review.find_by(user_id:, service:).id
   end
 end

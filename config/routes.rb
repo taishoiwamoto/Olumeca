@@ -21,6 +21,8 @@ Rails.application.routes.draw do
     end
   end
   resources :services do
+    resources :reviews, only: [:new, :create, :edit, :update]
+
     collection do
       post '/filter', to: 'services#filter'
     end
@@ -39,5 +41,4 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :reviews, only: [:new, :create, :edit, :update]
 end

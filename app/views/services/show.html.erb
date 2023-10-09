@@ -23,7 +23,7 @@
     <br>
     <h3>Servicio</h3>
     <div class="posts-show-item">
-      <% if @service.user == current_user %>
+      <% if @service.user.eql? current_user %>
         <div class="post-menus">
           <%= button_to edit_service_path(@service), method: :get do %>
             <i class="fa-solid fa-pen-to-square"></i>
