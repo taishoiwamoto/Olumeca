@@ -8,8 +8,7 @@ class UsersController < ApplicationController
   end
 
   def reviews
-    order_ids = Order.where(seller_id: @user.id).pluck(:id)
-    @reviews = Review.where(order_id: order_ids).order(created_at: :desc).page(params[:page]).per(5)
+    @reviews = @user.reviews.page(params[:page]).per(5)
   end
 
   def likes

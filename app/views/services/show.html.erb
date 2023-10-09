@@ -3,9 +3,9 @@
     <h3>Vendedor/a</h3>
     <div class="posts-index-item">
       <div style="display: flex; justify-content: flex-end;">
-        <% if @service.user.average_service_rating > 0 %>
+        <% if @service.average_rating > 0 %>
           <div class="average-rating">
-            <p><%= "⭐️" %> <%= sprintf('%.2f', @service.user.average_service_rating) %></p>
+            <p><%= "⭐️" %> <%= sprintf('%.2f', @service.average_rating) %></p>
           </div>
         <% else %>
           <p> -- </p>

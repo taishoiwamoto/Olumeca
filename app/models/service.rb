@@ -22,6 +22,13 @@ class Service < ApplicationRecord
     update_attribute(:deleted_at, Time.now)
   end
 
+  def average_rating
+    average = reviews.pluck('AVG(rating)')[0]
+    return average if average.present?
+
+    0
+  end
+
   def count_likes
     likes.length
   end

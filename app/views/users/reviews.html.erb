@@ -10,18 +10,15 @@
 
       <h2><%= @user.name %></h2>
 
-      <% average_rating = @user.average_service_rating %>
-      <% if average_rating > 0 %>
+      <% if @user.average_rating > 0 %>
         <div class="average-rating">
-          <p><%= "⭐️" %> <%= sprintf('%.2f', average_rating) %></p>
+          <p><%= "⭐️" %> <%= sprintf('%.2f', @user.average_rating) %></p>
         </div>
       <% else %>
         <p> -- </p>
       <% end %>
 
-      <% if @user == current_user %>
-        <%= link_to "Editar tu cuenta", edit_user_registration_path %>
-      <% end %>
+      <%= link_to "Editar tu cuenta", edit_user_registration_path if @user.eql?(current_user) %>
     </div>
 
     <ul class="user-tabs">
@@ -51,13 +48,10 @@
     </ul>
 
     <% @reviews.each do |review| %>
-    <% Rails.logger.debug "Review: #{review.inspect}" %>
-    <% Rails.logger.debug "Service: #{review&.service.inspect}" %>
-
       <div class="posts-index-item">
         <div class="post-left">
 
-          <% if review.user && review.user.image.attached? %>
+          <% if review.user.image.attached? %>
             <%= image_tag(review.user.image) %>
           <% else %>
             <%= image_tag('default_user.jpg') %>
@@ -73,7 +67,7 @@
             <h5><%= review&.service&.title&.truncate(25) || 'Este registro ha sido eliminada.' %></h5>
           </div>
           <div style="display: flex; justify-content: space-between;">
-            <% if review.user.present? && review.user.name.present? %>
+            <% if review.user.name.present? %>
               <p style="font-size: 14px;"><%= review.user.name %></p>
             <% else %>
               <p style="font-size: 14px;">Usuario dado de baja</p>

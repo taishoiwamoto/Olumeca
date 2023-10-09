@@ -23,7 +23,7 @@
               <div style="display: flex; justify-content: space-between;">
                 <div class="star">
                   <% if service.reviews.any? %>
-                    <%= "⭐️" %> <%= sprintf('%.2f', calculate_average_rating(reviews)) %>
+                    <%= "⭐️" %> <%= sprintf('%.2f', service.average_rating) %>
                   <% else %>
                     <h5> -- </h5>
                   <% end %>
