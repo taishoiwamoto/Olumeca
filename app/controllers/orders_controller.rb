@@ -1,5 +1,6 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create]
+  before_action :check_order_existence, only: [:new, :create]
 
   def new
     @service = Service.find(params[:service_id])
@@ -50,5 +51,12 @@ class OrdersController < ApplicationController
 
   def order_params
     params.require(:order).permit(:service_id)
+  end
+
+  def check_order_existence
+    @service = Service.find(params[:service_id] || params[:order][:service_id])
+    if Order.exists?(buyer: current_user, service: @service)
+      redirect_to @service, alert: 'Ya has pedido este servicio.'
+    end
   end
 end
