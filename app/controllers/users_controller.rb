@@ -8,7 +8,8 @@ class UsersController < ApplicationController
   end
 
   def reviews
-    @reviews = @user.reviews.page(params[:page]).per(5)
+    service_ids = Service.where(user_id: @user.id).pluck(:id)
+    @reviews = Review.where(service_id: service_ids).order(created_at: :desc).page(params[:page]).per(5)
   end
 
   def likes

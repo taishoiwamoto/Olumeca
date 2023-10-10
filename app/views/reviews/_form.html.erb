@@ -11,7 +11,11 @@
 
   <div class="field">
     <%= form.label :rating, 'Evaluación' %>
-    <%= form.select :rating, options_for_select(review_select_options), { :include_blank => 'Seleccione un valor numérico'}, :required => true %>
+    <% if review.rating.present? %>
+      <%= form.select :rating, options_for_select(review_select_options, :selected => review.rating ), :required => true %>
+    <% else %>
+      <%= form.select :rating, options_for_select(review_select_options), { :include_blank => 'Seleccione un valor numérico'}, :required => true %>
+    <% end %>
   </div>
 
   <div class="field">
