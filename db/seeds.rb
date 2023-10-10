@@ -25,15 +25,8 @@ categories = [
   'Otros'
 ]
 
-delivery_methods = ['Videollamada', 'Chat']
-
 Category.delete_all
-DeliveryMethod.delete_all
 
 categories.each do |category|
   Category.create!(name: category)
-end
-
-delivery_methods.each do |method|
-  DeliveryMethod.create!(name: method)
 end
