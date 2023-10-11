@@ -4,22 +4,24 @@ class OrdersController < ApplicationController
 
   def new
     @service = Service.find(params[:service_id])
-    @order = current_user.purchased_orders.build(service_title: @service.title)
+    @order = current_user.purchased_orders.build()
   end
 
   def create
     @service = Service.find(params[:order][:service_id])
     @order = current_user.purchased_orders.build(
       service_id: @service.id,
-      service_title: @service.title,
+      # service_title: @service.title,
       seller_id: @service.user.id,
-      seller_name: @service.user.name,
-      buyer_name: current_user.name,
+      # seller_name: @service.user.name,
+      # buyer_name: current_user.name,
     )
 
     if @order.save
       OrderMailer.with(order: @order).order_notification.deliver_later
       redirect_to completed_orders_path
+    else
+
     end
   end
 
