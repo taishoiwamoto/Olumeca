@@ -1,6 +1,7 @@
 class OrdersController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create]
+  before_action :authenticate_user, only: [:new, :create, :completed]
   before_action :check_order_existence, only: [:new, :create]
+  before_action :prevent_purchase_of_own_service, only: [:new, :create]
 
   def new
     @service = Service.find(params[:service_id])
@@ -56,6 +57,13 @@ class OrdersController < ApplicationController
     @service = Service.find(params[:service_id] || params[:order][:service_id])
     if Order.exists?(buyer: current_user, service: @service)
       redirect_to @service, alert: 'Ya has pedido este servicio.'
+    end
+  end
+
+  def prevent_purchase_of_own_service
+    @service = Service.find(params[:service_id] || params[:order][:service_id])
+    if @service.user == current_user
+      redirect_to @service, alert: 'No puedes pedir tu propio servicio.'
     end
   end
 end
