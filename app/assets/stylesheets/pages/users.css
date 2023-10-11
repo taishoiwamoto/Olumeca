@@ -1,12 +1,4 @@
 /* users/show ================================ */
-.user-name a {
-  font-weight: 600;
-}
-
-.user-name a:hover {
-  color: #3ecdc6;
-}
-
 .user-show {
   text-align: center;
 }
@@ -66,11 +58,6 @@
   display: inline-block;
   padding: 16px 13px;
   color: #afb6bf;
-}
-
-/* users/new, users/edit ================================ */
-.users-form input {
-  margin-bottom: 15px;
 }
 
 /* users/orders, users/sales ================================ */

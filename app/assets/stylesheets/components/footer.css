@@ -1,0 +1,18 @@
+.footer-wrapper {
+  display: flex;
+  justify-content: center;
+  border-top: 1px solid #e9eef1;
+}
+
+.footer-container {
+  max-width: 600px;
+  margin: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.footer-item {
+  margin-right: 15px;
+}

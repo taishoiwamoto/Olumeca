@@ -1,0 +1,116 @@
+.whatsapp-button {
+  color: white;
+  display: inline-block;
+  align-items: center;
+  background-color: #25D366;
+  padding: 10px;
+  border-radius: 5px;
+  text-decoration: none;
+  width: 350px;
+  text-align: center;
+  transition: background-color 0.3s;
+}
+
+.whatsapp-button:hover {
+  background-color: #128C53;
+}
+
+.buttons__main {
+  background-color: #13b1c0;
+  color: #fff;
+  width: 350px;
+  padding: 12px 16px;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  cursor: pointer;
+  text-align: center;
+  margin-top: 10px;
+  display: block;
+}
+
+.buttons__main:hover {
+  background-color: #10a0ad;
+}
+
+/* Orange button ===== */
+a.btn--orange {
+  color: #fff;
+  background-color: #eb6100;
+  border-bottom: 5px solid #b84c00;
+  padding: 15px 150px
+}
+a.btn--orange:hover {
+  margin-top: 3px;
+  color: #fff;
+  background: #f56500;
+  border-bottom: 2px solid #b84c00;
+}
+a.btn--shadow {
+  -webkit-box-shadow: 0 3px 5px rgba(0, 0, 0, .3);
+  box-shadow: 0 3px 5px rgba(0, 0, 0, .3);
+}
+/*  ===== */
+
+.button-001 {
+  margin: 10px 0px;
+  display: inline-flex;
+  align-items: center;
+  width: auto;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color:  #13b1c0;
+  color: #fff;
+}
+
+.button-001:hover {
+  background-color: #10a0ad;
+}
+
+.button-002 {
+  width: auto;
+  padding: 2px 10px;
+  border: none;
+  border-radius: 5px;
+  background-color:  #13b1c0;
+  color: #fff;
+  text
+}
+
+.button-002:hover {
+  background-color: #10a0ad;
+}
+
+.button-004 {
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #13b1c0;
+  color: #fff;
+  width: 350px;
+  padding: 12px 16px;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  cursor: pointer;
+  text-align: center;
+  margin-top: 10px;
+  display: block;
+}
+
+.button-004:hover {
+  background-color: #10a0ad;
+}
+
+.salir-button {
+  background-color: transparent; /* 背景色を透明に */
+  color: rgb(0, 0, 0); /* 文字色を黒に設定 */
+  border: none; /* 枠線をなくす */
+  font-size: 13px; /* 他のメニューアイテムと同じサイズに設定 */
+  padding: 0; /* 余白をなくす */
+  line-height: 64px; /* 他のメニューアイテムと同じ行の高さに設定 */
+  margin: 0; /* 余白をなくす */
+  cursor: pointer; /* ホバー時のカーソルを指マークにする */
+  text-align: center; /* 文字を中央揃えに */
+  font: 100%/1.5 'Avenir Next', 'Hiragino Sans', sans-serif;
+}
