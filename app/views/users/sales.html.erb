@@ -84,11 +84,11 @@
 
 
           <%= link_to service_path(sale.service) do %>
-            <h4>Servicio: <%= sale.service_title %></h4>
+            <h4>Servicio: <%= sale.service.title %></h4>
           <% end %>
 
           <%= link_to user_path(sale.buyer)  do %>
-            <p style="font-size: 14px;">Comprador/a: <%= sale.buyer_name %></p>
+            <p style="font-size: 14px;">Comprador/a: <%= get_name_buyer(sale.buyer_id) %></p>
           <% end %>
 
           <div style="display: flex">
