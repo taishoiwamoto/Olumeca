@@ -83,11 +83,11 @@
           </div>
 
           <%= link_to service_path(order.service) do %>
-            <h4>Servicio: <%= order&.service.title %></h4>
+            <h4>Servicio: <%= order.service.title %></h4>
           <% end %>
 
           <%= link_to user_path(order.seller) do %>
-            <p style="font-size: 14px;">Provedor/a: <%= order.service.user.name %></p>
+            <p style="font-size: 14px;">Vendedor/a: <%= order.service.user.name %></p>
           <% end %>
 
           <div style="display: flex">

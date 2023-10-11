@@ -7,8 +7,8 @@
     <p>Le informamos que se ha registrado un nuevo pedido en Olumeca.</p>
     <p>Detalle del pedido:</p>
     <ul>
-        <li>Nombre del producto: <%= @order.service_title %></li>
-        <li>Comprador: <%= @order.buyer_name %></li>
+        <li>Nombre del producto: <%= sale.service.title %></li>
+        <li>Comprador/a: <%= get_name_buyer(sale.buyer_id) %></li>
     </ul>
 
     <% if Rails.env.development? %>
