@@ -78,9 +78,7 @@
       <p><%= simple_format(@service.detail) %></p>
     </div>
     <br>
-      <% if current_user && @service.user != current_user %>
-        <%= link_to "Hacer el pedido", new_order_path(service_id: @service.id), class: "button-004" %>
-      <% end %>
+      <%= link_to "Hacer el pedido", new_order_path(seller_id: @service.user_id, service_id: @service.id, buyer_id: current_user&.id), class: "button-004" %>
     <br>
     <h3>Evaluación</h3>
     <% @reviews.each do |review| %>

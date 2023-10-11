@@ -3,9 +3,14 @@ class ReviewsController < ApplicationController
   before_action :set_service
   before_action :set_review, only: [:edit, :update]
   before_action :authorized_user, only: [:edit, :update]
+  before_action :check_review_possibility, only: [:new, :create]
 
   def new
-    @review = @service.reviews.build(user: current_user)
+    if @service.reviews.where(user: current_user).exists?
+      redirect_to service_path(@service), notice: 'Ya has evaluado este servicio.'
+    else
+      @review = @service.reviews.build(user: current_user)
+    end
   end
 
   def create
@@ -34,7 +39,7 @@ class ReviewsController < ApplicationController
   def require_login
     return if current_user
 
-    redirect_to new_user_session_path, notice: 'Se requiere iniciar sesión'
+    redirect_to new_user_session_path, notice: 'Es necesario iniciar sesión'
   end
 
   def set_review
@@ -53,5 +58,17 @@ class ReviewsController < ApplicationController
 
   def set_service
     @service = Service.find(params[:service_id])
+  end
+
+  def check_review_possibility
+    # サービスが購入されているか？
+    purchased = Order.exists?(buyer: current_user, service: @service)
+
+    # サービスがすでにレビューされているか？
+    reviewed = Order.service_reviewed_by_user?(current_user.id, @service.id)
+
+    unless purchased && !reviewed
+      redirect_to orders_user_path(current_user), notice: 'No puedes evaluar este servicio.'
+    end
   end
 end
