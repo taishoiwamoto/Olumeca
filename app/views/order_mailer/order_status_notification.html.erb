@@ -13,8 +13,8 @@
 
   <p>Detalles de su pedido:</p>
   <ul>
-      <li>Nombre del producto: <%= @order.service_title %></li>
-      <li>Vendedor: <%= @seller.name %></li>
+      <li>Nombre del producto: <%= order.service.title %></li>
+      <li>Vendedor/a: <%= @order.service.user.name %></li>
   </ul>
 
   <% if Rails.env.development? %>

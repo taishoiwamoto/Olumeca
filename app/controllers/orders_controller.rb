@@ -11,10 +11,7 @@ class OrdersController < ApplicationController
     @service = Service.find(params[:order][:service_id])
     @order = current_user.purchased_orders.build(
       service_id: @service.id,
-      # service_title: @service.title,
-      seller_id: @service.user.id,
-      # seller_name: @service.user.name,
-      # buyer_name: current_user.name,
+      seller_id: @service.user.id
     )
 
     if @order.save

@@ -2,8 +2,8 @@ Estimado/a <%= @seller.name %>,
 
 Le informamos que ha recibido un nuevo pedido en Olumeca. A continuación, le ofrecemos los detalles:
 
-- Nombre del producto: <%= @order.service_title %>
-- Comprador: <%= @order.buyer_name %>
+- Nombre del producto: <%= sale.service.title %>
+- Comprador/a: <%= get_name_buyer(sale.buyer_id) %>
 
 <% if Rails.env.development? %>
     Puede revisar el detalle de sus ventas en el siguiente <a href="http://localhost:3000/users/<%= @seller.id %>/sales">enlace</a>.
