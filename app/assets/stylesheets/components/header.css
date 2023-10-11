@@ -1,0 +1,71 @@
+header {
+  height: 64px;
+  position: fixed;  /* この行を変更 */
+  top: 0;           /* この行を追加 */
+  left: 0;          /* この行を追加 */
+  z-index: 1;
+  width: 100%;
+  background-color: #ffffff; /* この行を追加: 白色の背景を設定 */
+  border-bottom: 1px solid #e9eef1;
+}
+
+.header-logo {
+  float: left;
+  padding-left: 20px;
+  color: white;
+  font-size: 22px;
+  line-height: 64px;
+}
+
+.header-logo a{
+  color: rgb(0, 0, 0);
+  font-size: 22px;
+}
+
+.header-menus {
+  float: right;
+  padding-right: 20px;
+}
+
+.header-menus li {
+  float: left;
+  line-height: 64px;
+  font-size: 13px;
+  color: rgb(255, 255, 255);
+  padding-left: 15px;
+  list-style-type: none;
+}
+
+.header-menus a {
+  float: left;
+  font-size: 13px;
+  color: rgb(0, 0, 0);
+}
+
+.header-menus .fa {
+  padding-right: 5px;
+}
+
+.header-menus input[type="submit"] {
+  padding: 0 20px;
+  float: left;
+  line-height: 64px;
+  color: white;
+  margin: 0;
+  font-size: 13px;
+}
+
+@media (max-width: 600px) {
+  .header-menus li {
+     font-size: 10px;
+     padding-left: 10px;
+  }
+
+  .header-menus a {
+     font-size: 11px;
+  }
+
+  .header-menus input[type="submit"] {
+     font-size: 11px;
+  }
+}
