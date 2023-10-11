@@ -8,7 +8,14 @@ class ServicesController < ApplicationController
   end
 
   def show
-    @reviews = @service.reviews.order(created_at: :desc).page(params[:page]).per(5)
+    @service = Service.active.find_by(id: params[:id])
+    if @service.nil?
+      render file: "#{Rails.root}/public/404.html"
+    else
+      @user = @service.user
+      @likes_count = Like.where(service_id: @service.id).count
+      @reviews = @service.reviews.order(created_at: :desc).page(params[:page]).per(5)
+    end
   end
 
   def new

@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :authenticate_user, except: [:show, :reviews]
-  before_action :set_user, only: %i[show likes orders sales reviews destroy]
+  before_action :find_active_user, only: %i[show likes orders sales reviews]
 
   def show
     @services = @user.services.active.order(created_at: :desc).page(params[:page]).per(5)
@@ -28,6 +28,9 @@ class UsersController < ApplicationController
   end
 
   def destroy
+    debugger
+    user_id = params[:id]
+    @user = User.find(user_id)
     @user.soft_delete
   end
 
@@ -36,6 +39,16 @@ class UsersController < ApplicationController
   # def set_services_and_rating_for
   #   @average_rating = 0 # total_count > 0 ? total_reviews / total_count.to_f : nil
   # end
+
+  def find_active_user
+    @user = User.active.find_by(id: params[:id])
+
+    if @user.nil?
+      render file: "#{Rails.root}/public/404.html"
+    else
+      @user = User.active.find(params[:id])
+    end
+  end
 
   def set_user
     @user = User.active.find(params[:id])

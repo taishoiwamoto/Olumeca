@@ -23,15 +23,13 @@
     <br>
     <h3>Servicio</h3>
     <div class="posts-show-item">
-      <% if @service.user.eql? current_user %>
+      <% if current_user && @service.user_id == current_user.id %>
         <div class="post-menus">
           <%= button_to edit_service_path(@service), method: :get do %>
             <i class="fa-solid fa-pen-to-square"></i>
           <% end %>
-          <% if !@service.deleted_at %>
-            <%= button_to service_path(@service), method: :delete, form: { data: { turbo_confirm: "¿Estás seguro de que deseas eliminar este servicio?" }} do %>
-              <i class="fa-solid fa-trash"></i>
-            <% end %>
+          <%= button_to service_path(@service), method: :delete, form: { data: { turbo_confirm: "¿Estás seguro de que deseas eliminar este servicio?" }} do %>
+            <i class="fa-solid fa-trash"></i>
           <% end %>
         </div>
       <% end %>
