@@ -20,6 +20,7 @@ Rails.application.routes.draw do
       get :reviews
     end
   end
+
   resources :services do
     resources :reviews, only: [:new, :create, :edit, :update]
 
@@ -40,5 +41,4 @@ Rails.application.routes.draw do
       get '/user_info', to: 'orders#user_info'
     end
   end
-
 end

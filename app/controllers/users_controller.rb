@@ -28,7 +28,6 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    debugger
     user_id = params[:id]
     @user = User.find(user_id)
     @user.soft_delete
