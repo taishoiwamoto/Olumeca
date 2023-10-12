@@ -47,6 +47,11 @@
                   </a>
                   <ul class="dropdown-menu">
                     <li><a class="dropdown-item" href="<%= user_path(current_user) %>">Perfil</a></li>
+                    <li><a class="dropdown-item" href="<%= likes_user_path(current_user.id) %>">Favoritos</a></li>
+                    <li><a class="dropdown-item" href="<%= orders_user_path(current_user.id) %>">Pedidos realizados</a></li>
+                    <li><a class="dropdown-item" href="<%= sales_user_path(current_user.id) %>">Pedidos recibidos</a></li>
+                    <li><a class="dropdown-item" href="<%= edit_user_registration_path %>">Configración</a></li>
+                </li>
                     <li><hr class="dropdown-divider"></li>
                     <li><%= button_to 'Salir', destroy_user_session_path, method: :delete, class: "dropdown-item" %></li>
                   </ul>
