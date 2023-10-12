@@ -1,5 +1,5 @@
 .form {
-  max-width: 600px;
+  max-width: 500px;
   margin: 0 auto;
   background-color: white;
   box-shadow: 0 2px 6px #c1ced7;
@@ -11,36 +11,4 @@
 
 .form-error {
   color: #ff4d75;
-}
-
-.form textarea {
-  width: 100%;
-  min-height: 110px;
-  font-size: 16px;
-  letter-spacing: 2px;
-}
-
-.form input {
-  width: 100%;
-  border: 1px solid #d8dadf;
-  padding: 10px;
-  font-size: 16px;
-  letter-spacing: 2px;
-  border-radius: 2px;
-}
-
-.field {
-  margin-bottom: 20px;  /* フィールドの下部に20pxのマージンを追加 */
-}
-
-
-.form-001 {
-  padding: 30px;
-  background-color: white;
-  box-shadow: 0 2px 6px #c1ced7;
-  overflow: hidden;
-}
-
-.form-001 p {
-  padding-bottom: 10px;
 }

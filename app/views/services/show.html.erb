@@ -1,6 +1,7 @@
 <div class="main">
   <div class="container">
     <div class="row">
+
       <div class="col-12 d-block d-sm-block d-md-none mb-5">
         <h3>Vendedor/a</h3>
         <div class="posts-index-item">
@@ -12,7 +13,7 @@
                 <%= image_tag('default_user.jpg') %>
               <% end %>
             </div>
-            <div class="col-12 text-center post-user-name mt-3">
+            <div class="col-12 text-center mt-3">s
               <%= link_to(@service.user.name, user_path(@service.user)) %>
             </div>
             <div class="col-12 text-center mt-2">
@@ -27,24 +28,21 @@
           </div>
         </div>
       </div>
+
       <div class="col-md-7 col-12">
         <h3>Servicio</h3>
-        <div class="posts-show-item">
-          <% if current_user && @service.user_id == current_user.id %>
-            <div class="post-menus">
+        <div class="service-show-item">
+          <div style="display: flex; justify-content: flex-end;">
+            <% if current_user && @service.user_id == current_user.id %>
               <%= button_to edit_service_path(@service), method: :get do %>
                 <i class="fa-solid fa-pen-to-square"></i>
               <% end %>
               <%= button_to service_path(@service), method: :delete, form: { data: { turbo_confirm: "¿Estás seguro de que deseas eliminar este servicio?" }} do %>
                 <i class="fa-solid fa-trash"></i>
               <% end %>
-            </div>
-          <% end %>
-
-          <div class="flex-container">
-            <h3><%= @service.title %></h3>
+            <% end %>
           </div>
-          <br>
+            <h3><%= @service.title %></h3>
           <div style="display: flex; justify-content: space-between;">
             <div class="star">
               <% if @reviews.present? %>
@@ -84,17 +82,18 @@
           <h4>Detalle</h4>
           <p><%= simple_format(@service.detail) %></p>
         </div>
+        <br>
         <div class="d-grid gap-2 col-12 mx-auto">
-          <%= link_to "Hacer el pedido", new_order_path(seller_id: @service.user_id, service_id: @service.id, buyer_id: current_user&.id), class: "btn btn-primary btn-custom" %>
+          <%= link_to "Hacer el pedido", new_order_path(seller_id: @service.user_id, service_id: @service.id, buyer_id: current_user&.id), class: "btn btn-primary" %>
         </div>
       </div>
+
       <!-- end div service -->
       <div class="col-md-5 d-none d-md-block d-lg-block">
         <div class="col" style="position: fixed;">
           <h3>Vendedor/a</h3>
           <div class="posts-index-item">
             <div style="display: flex; justify-content: flex-end;">
-              
             </div>
             <div class="row">
               <div class="col-12">
@@ -104,7 +103,7 @@
                   <%= image_tag('default_user.jpg') %>
                 <% end %>
               </div>
-              <div class="col-12 text-center post-user-name mt-3">
+              <div class="col-12 text-center mt-3">
                 <%= link_to(@service.user.name, user_path(@service.user)) %>
               </div>
               <div class="col-12 text-center mt-2">
@@ -123,7 +122,7 @@
       <!-- end col -->
     </div>
     <!-- end row -->
-    
+
     <br>
     <h3>Evaluación</h3>
     <% @reviews.each do |review| %>

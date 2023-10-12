@@ -1,5 +1,5 @@
 class ServicesController < ApplicationController
-  before_action :authenticate_user, except: [:index, :show]
+  before_action :authenticate_user, except: [:index, :show, :filter]
   before_action :set_service, only: %i[show edit update destroy]
   before_action :authorize_user, only: %i[edit update destroy]
 
@@ -50,16 +50,20 @@ class ServicesController < ApplicationController
   end
 
   def filter
+    @services = Service.all
+
     if params[:category_id].present?
-      @services = Category.find(params[:category_id]).services
-    elsif params[:keyword].present?
-      @services = Service.by_keyword(params[:keyword])
-    else
-      @services = Service.all
+      @services = @services.where(category_id: params[:category_id])
     end
 
+    if params[:keyword].present?
+      @services = @services.by_keyword(params[:keyword])
+    end
+
+    @services = @services.active.order(created_at: :desc).page(params[:page]).per(10)
+
     respond_to do |format|
-      format.turbo_stream { render turbo_stream: turbo_stream.replace('services', partial: 'services/services', locals: { services: @services.active.order(created_at: :desc).page(params[:page]).per(10) })}
+      format.turbo_stream { render turbo_stream: turbo_stream.replace('services', partial: 'services/services', locals: { services: @services })}
     end
   end
 

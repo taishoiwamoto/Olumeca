@@ -1,9 +1,9 @@
 <%= turbo_frame_tag 'user' do %>
   <span class="turbo_frame_content"><i class="fa-solid fa-envelope"></i>: <%= @user.email %></span>
   <span class="turbo_frame_content"><i class="fa-solid fa-phone"></i>: <%= @user.phone_number %></span>
-  <span class="turbo_frame_content align-right">
+  <span class="turbo_frame_content" style="text-align: right;">
     <%= link_to :back do %>
-      <i class="fa-solid fa-rotate-left"></i> <span class="small-text-with-underline">Regresar</span>
+      <i class="fa-solid fa-rotate-left"></i>
     <% end %>
   </span>
 <% end %>

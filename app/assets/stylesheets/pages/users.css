@@ -16,18 +16,6 @@
   object-fit: cover;
 }
 
-.user h2 {
-  font-size: 20px;
-  font-weight: 600;
-  line-height: 1.2;
-}
-
-.user a {
-  color: #8899a6;
-  text-decoration: underline;
-  font-weight: 200;
-}
-
 .user span {
   color: #afb6bf;
   font-weight: 200;
@@ -64,13 +52,4 @@
 .turbo_frame_content {
   font-size: 12px;
   display: block; /* Makes each element appear on a new line */
-}
-
-.align-right {
-  text-align: right;
-}
-
-.small-text-with-underline {
-  font-size: 12px; /* Adjust this value as per your need */
-  text-decoration: underline;
 }

@@ -1,13 +1,16 @@
 <div class="main">
   <div class="container">
-    <h1>Detalles del Pedido</h1>
-    <div class="form-001">
-      <%= form_with(model: @order) do |f| %>
-        <input type="hidden" name="order[service_id]" value="<%= @service.id %>" />
-        <p>Servicio: <%= @service.title %></p>
-        <p>Vendedor(a): <%= @service.user.name %></p>
-        <%= f.submit 'Realizar Pedido', class: "btn btn-primary" %>
-      <% end %>
+    <h1 class="mb-4">Detalles del Pedido</h1>
+    <div class="form">
+      <div class="form-body">
+          <%= form_with(model: @order) do |f| %>
+            <%= f.hidden_field :service_id, value: @service.id %>
+            <p class="mb-2"><strong>Servicio:</strong> <%= @service.title %></p>
+            <p class="mb-4"><strong>Vendedor(a):</strong> <%= @service.user.name %></p>
+            <%= f.submit 'Realizar Pedido', class: "btn btn-primary" %>
+          <% end %>
+        </div>
+      </div>
     </div>
   </div>
 </div>
