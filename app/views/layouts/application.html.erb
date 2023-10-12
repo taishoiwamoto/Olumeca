@@ -15,50 +15,62 @@
 
   <body>
     <header>
-      <div class="header-logo">
-        <%= link_to("Olumeca", "/") %>
-      </div>
-      <ul class="header-menus">
-        <% if user_signed_in?  %>
-          <li class="contact-item" style="margin-left: 15px;">
-              <a href="https://wa.me/4423831033" target="_blank" style="color: black; display: flex; align-items: center;">
-                  <i class="fab fa-whatsapp fa-2x" style="margin-right: 5px;"></i>
-                  <span class="contact-text">Contactar</span>
-              </a>
-          </li>
-          <li>
-            <%= link_to("Servicios", services_path) %>
-          </li>
-          <li>
-            <%= link_to("Publicar", new_service_path) %>
-          </li>
-          <li>
-            <%= link_to "Mi página", user_path(current_user) %>
-          </li>
-          <li>
-            <%= button_to 'Salir', destroy_user_session_path, method: :delete %>
-          </li>
-        <% else %>
-          <li class="contact-item" style="margin-left: 15px;">
-              <a href="https://wa.me/4423831033" target="_blank" style="color: black; display: flex; align-items: center;">
-                  <i class="fab fa-whatsapp fa-2x" style="margin-right: 5px;"></i>
-                  <span class="contact-text">Contactar</span>
-              </a>
-          </li>
-          <li>
-            <%= link_to("Servicios", services_path) %>
-          </li>
-          <li>
-            <%= link_to("Publicar", new_service_path) %>
-          </li>
-          <li>
-            <%= link_to("Registar", new_user_registration_path) %>
-          </li>
-          <li>
-            <%= link_to("Iniciar", new_user_session_path) %>
-          </li>
-        <% end %>
-      </ul>
+      <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/">Olumeca</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="https://wa.me/4423831033">
+                  <i class="fab fa-whatsapp fa-1x" style="margin-right: 5px;"></i>Contactar
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <%= link_to "Servicios", services_path, class: "nav-link" %>
+              </li>
+
+              <li class="nav-item">
+                <%= link_to "Publicar", new_service_path, class: "nav-link" %>
+              </li>
+
+              <% if user_signed_in?  %>
+
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Mis páginas
+                  </a>
+                  <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="<%= user_path(current_user) %>">Perfil</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="#">Another action</a></li>
+                  </ul>
+                </li>
+                <li><%= button_to 'Salir', destroy_user_session_path, method: :delete %></li>
+
+              <% else %>
+                <li class="nav-item">
+                  <%= link_to "Registar", new_user_registration_path, class: "nav-link" %>
+                </li>
+
+                <li class="nav-item">
+                  <%= link_to "Iniciar", new_user_session_path, class: "nav-link" %>
+                </li>
+              <% end %>
+            </ul>
+
+            <form class="d-flex" role="search">
+              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+          </div>
+        </div>
+      </nav>
     </header>
 
     <% if flash[:notice] %>
