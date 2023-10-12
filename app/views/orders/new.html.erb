@@ -1,6 +1,6 @@
-<div class="main posts-show">
+<div class="main">
   <div class="container">
-    <h1 class="form-heading">Detalles del Pedido</h1>
+    <h1>Detalles del Pedido</h1>
     <div class="form-001">
       <%= form_with(model: @order) do |f| %>
         <input type="hidden" name="order[service_id]" value="<%= @service.id %>" />

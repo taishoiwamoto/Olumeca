@@ -5,13 +5,6 @@
   box-shadow: 0 2px 6px #c1ced7;
 }
 
-.form-heading {
-  font-weight: 300;
-  margin: 60px 0 20px;
-  font-size: 48px;
-  color: #bcc8d4;
-}
-
 .form-body {
   padding: 30px;
 }
@@ -19,11 +12,6 @@
 .form-error {
   color: #ff4d75;
 }
-
-.form-error-body {
-  padding: 30px 30px 0px 30px;
-}
-
 
 .form textarea {
   width: 100%;
@@ -36,25 +24,15 @@
   width: 100%;
   border: 1px solid #d8dadf;
   padding: 10px;
-  color: #57575f;
   font-size: 16px;
   letter-spacing: 2px;
   border-radius: 2px;
-}
-
-.form-body:after {
-  content: '';
-  display: table;
-  clear: both;
 }
 
 .field {
   margin-bottom: 20px;  /* フィールドの下部に20pxのマージンを追加 */
 }
 
-.actions {
-  margin-top: 20px;  /* actionsの上部に20pxのマージンを追加 */
-}
 
 .form-001 {
   padding: 30px;
