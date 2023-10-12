@@ -66,16 +66,6 @@
                 </li>
               <% end %>
             </ul>
-            <%#= form_with(url: filter_services_path, method: :post, class: "d-flex" ) do |f| %>
-              <%#= f.select :category_id, options_for_select(Category.all.map{|category| [category.name, category.id]}), { prompt: 'Todas categorías' }, class: "form-control me-1" %>
-              <%#= f.text_field :keyword, placeholder: "Palabra clave", class: "form-control me-1" %>
-              <%#= f.submit 'Buscar', class: 'btn btn-outline-success' %><br/>
-            <%# end %>
-
-            <form class="d-flex" role="search">
-              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-              <button class="btn btn-outline-success" type="submit">Search</button>
-            </form>
           </div>
         </div>
       </nav>
