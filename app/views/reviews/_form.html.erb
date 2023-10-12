@@ -1,26 +1,24 @@
-<%= form_with(model: review, url: [service, review]) do |form| %>
+<%= form_with(model: review, url: [service, review], html: { class: 'needs-validation', novalidate: true }) do |form| %>
   <% if review.errors.any? %>
-    <div class="form-error-body">
+    <div class="alert alert-danger" role="alert">
       <% review.errors.full_messages.each do |message| %>
-        <div class="form-error">
-          <%= message %>
-        </div>
+        <p class="mb-0"><%= message %></p>
       <% end %>
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :rating, 'Evaluación' %>
+  <div class="mb-3">
+    <%= form.label :rating, 'Evaluación', class: 'form-label' %>
     <% if review.rating.present? %>
-      <%= form.select :rating, options_for_select(review_select_options, :selected => review.rating ), :required => true %>
+      <%= form.select :rating, options_for_select(review_select_options, :selected => review.rating), { required: true }, class: 'form-select' %>
     <% else %>
-      <%= form.select :rating, options_for_select(review_select_options), { :include_blank => 'Seleccione un valor numérico'}, :required => true %>
+      <%= form.select :rating, options_for_select(review_select_options), { :include_blank => 'Seleccione un valor numérico', required: true }, class: 'form-select' %>
     <% end %>
   </div>
 
-  <div class="field">
-    <%= form.label :comment, 'Comentario' %>
-    <%= form.text_area :comment %>
+  <div class="mb-3">
+    <%= form.label :comment, 'Comentario', class: 'form-label' %>
+    <%= form.text_area :comment, class: 'form-control' %>
   </div>
 
   <%= form.submit 'Guardar',  class: "btn btn-primary"%>

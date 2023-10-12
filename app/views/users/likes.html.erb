@@ -8,7 +8,7 @@
         <%= image_tag('default_user.jpg') %>
       <% end %>
 
-      <h2><%= @user.name %></h2>
+      <h5><%= @user.name %></h5>
 
       <% average_rating = @user.average_service_rating %>
       <% if average_rating > 0 %>
