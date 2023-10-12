@@ -1,90 +1,97 @@
-<div class="main user-show">
+<div class="main">
   <div class="container">
-    <div class="user">
 
-      <% if @user.image.attached? %>
-        <%= image_tag(@user.image) %>
-      <% else %>
-        <%= image_tag('default_user.jpg') %>
-      <% end %>
-
-      <h5><%= @user.name %></h5>
-
-      <% average_rating = @user.average_service_rating %>
-      <% if average_rating > 0 %>
-        <div class="average-rating">
-          <p><%= "⭐️" %> <%= sprintf('%.2f', average_rating) %></p>
+    <div class="user d-flex align-items-center p-3 justify-content-between">
+      <div class="d-flex align-items-center">
+        <div class="me-3">
+            <% if @user.image.attached? %>
+            <%= image_tag(@user.image, class: "img-fluid rounded-circle", alt: @user.name) %>
+            <% else %>
+            <%= image_tag('default_user.jpg', class: "img-fluid rounded-circle", alt: "Default user image") %>
+            <% end %>
         </div>
-      <% else %>
-        <p> -- </p>
-      <% end %>
-
-      <%= link_to "Editar tu cuenta", edit_user_registration_path if @user == current_user %>
+        <div>
+            <h2><%= @user.name %></h2>
+            <% average_rating = @user.average_service_rating %>
+            <% if average_rating > 0 %>
+            <div class="average-rating">
+                <p><%= "⭐️" %> <%= sprintf('%.2f', average_rating) %></p>
+            </div>
+            <% else %>
+            <p> -- </p>
+            <% end %>
+            <% if @user == current_user %>
+              <%= link_to("Editar tu cuenta", edit_user_registration_path) %>
+            <% end %>
+        </div>
+      </div>
     </div>
 
-    <ul class="user-tabs">
-      <li class="<%= 'active' if controller_name == 'users' && action_name == 'show' %>">
-        <%= link_to("Servicios", user_path(@user)) %>
-      </li>
-
-      <li class="<%= 'active' if controller_name == 'users' && action_name == 'reviews' %>">
-        <%= link_to("Evaluaciones", reviews_user_path(@user.id)) %>
-      </li>
-
-      <% if @user == current_user %>
-        <li class="<%= 'active' if controller_name == 'users' && action_name == 'likes' %>">
-          <%= link_to("Favoritos", likes_user_path(current_user.id)) %>
-        </li>
-      <% end %>
-      <% if @user == current_user %>
-        <li class="<%= 'active' if controller_name == 'users' && action_name == 'orders' %>">
-          <%= link_to("Pedidos", orders_user_path(current_user.id)) %>
-        </li>
-      <% end %>
-      <% if @user == current_user %>
-        <li class="<%= 'active' if controller_name == 'users' && action_name == 'sales' %>">
-          <%= link_to("Ventas", sales_user_path(current_user.id)) %>
-        </li>
-      <% end %>
-    </ul>
-
-    <% @services.each do |service| %>
-      <%= link_to service_path(service) do %>
-        <div class="posts-index-item">
-
-          <div class="post-left">
-          <% if service.image.attached? %>
-            <%= image_tag(service.image) %>
-          <% else %>
-            <%= image_tag('default_service.jpg') %>
-          <% end %>
-          </div>
-
-          <div class="post-right">
-            <div style="display: flex; justify-content: space-between;">
-              <h4><%= service.title %></h4><span><i> <%= (service.deleted_at ? '(Eliminado)' : '') %></i></span>
-            </div>
-            <div style="display: flex; justify-content: space-between;">
-              <p><%= service.user.name %></p>
-            </div>
-            <div style="display: flex; justify-content: space-between;">
-              <span><%= service.category&.name || "" %></span>
-            </div>
-            <div style="display: flex; justify-content: space-between;">
-              <div class="star">
-                <% reviews = service.reviews %>
-                <% if reviews.present? %>
-                  <% average_rating = calculate_average_rating(reviews) %>
-                  <%= "⭐️" %> <%= sprintf('%.2f', average_rating) %>
-                <% else %>
-                  <h5> -- </h5>
-                <% end %>
+    <h5>Servicios</h5>
+    <div class="row">
+      <% @services.each_slice(2) do |service_group| %>
+        <div class="row">
+          <% service_group.each do |service| %>
+            <div class="col-md-6">
+              <div class="card mb-3 bg-white" style="max-width: 540px;">
+                <div class="row g-0">
+                  <div class="col-md-4">
+                    <%= link_to service_path(service) do %>
+                      <% if service.image.attached? %>
+                        <%= image_tag service.image, class: "img-fluid rounded-start", alt: service.title %>
+                      <% else %>
+                        <%= image_tag 'default_service.jpg', class: "img-fluid rounded-start", alt: "Default service image" %>
+                      <% end %>
+                    <% end %>
+                  </div>
+                  <div class="col-md-8">
+                    <div class="card-body">
+                      <h5 class="card-title"><%= service.title %></h5>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
+          <% end %>
         </div>
       <% end %>
+    </div>
+
+    <h5>Evaluación</h5>
+    <% @reviews.each do |review| %>
+      <div class="posts-index-item">
+        <div class="post-left">
+
+          <% if review.user.image.attached? %>
+            <%= image_tag(review.user.image) %>
+          <% else %>
+            <%= image_tag('default_user.jpg') %>
+          <% end %>
+
+        </div>
+
+        <div class="post-right">
+          <% if review.rating.present? %>
+            <%= "⭐️" * review.rating %>
+          <% end %>
+          <div style="display: flex; justify-content: space-between;">
+            <h5><%= review&.service&.title&.truncate(25) || 'Este registro ha sido eliminada.' %></h5>
+          </div>
+          <div style="display: flex; justify-content: space-between;">
+            <% if review.user.name.present? %>
+              <p style="font-size: 14px;"><%= review.user.name %></p>
+            <% else %>
+              <p style="font-size: 14px;">Usuario dado de baja</p>
+            <% end %>
+          </div>
+          <div style="display: flex;">
+            <p style="font-size: 12px;">Creación: <%= review.created_at.strftime("%d/%m/%Y %H:%M") %>,</p>
+            <p style="font-size: 12px; margin-left: 10px;">Actualización: <%= review.updated_at.strftime("%d/%m/%Y %H:%M") %></p>
+          </div>
+          <p><%= review.comment %></p>
+        </div>
+      </div>
     <% end %>
-    <%= paginate @services %>
+    <%= paginate @reviews %>
   </div>
 </div>

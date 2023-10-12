@@ -1,14 +1,13 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user, except: [:show, :reviews]
-  before_action :find_active_user, only: %i[show likes orders sales reviews]
+  before_action :authenticate_user, except: [:show]
+  before_action :find_active_user, only: %i[show likes orders sales]
 
   def show
     @services = @user.services.active.order(created_at: :desc).page(params[:page]).per(5)
     @average_rating = @user.average_service_rating
-  end
 
-  def reviews
-    service_ids = Service.where(user_id: @user.id).pluck(:id)
+    # 以下のコードを追加して@reviewsをセットしてください
+    service_ids = @user.services.pluck(:id)
     @reviews = Review.where(service_id: service_ids).order(created_at: :desc).page(params[:page]).per(5)
   end
 
@@ -41,6 +40,8 @@ class UsersController < ApplicationController
 
   def find_active_user
     @user = User.active.find_by(id: params[:id])
+
+    render file: "#{Rails.root}/public/404.html" if @user.nil?
 
     if @user.nil?
       render file: "#{Rails.root}/public/404.html"

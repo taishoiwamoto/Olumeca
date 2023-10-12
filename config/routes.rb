@@ -17,7 +17,6 @@ Rails.application.routes.draw do
       get :likes
       get :orders
       get :sales
-      get :reviews
     end
   end
 

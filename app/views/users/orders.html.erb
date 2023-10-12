@@ -1,54 +1,5 @@
 <div class="main user-show">
   <div class="container">
-    <div class="user">
-
-      <% if @user.image.attached? %>
-        <%= image_tag(@user.image) %>
-      <% else %>
-        <%= image_tag('default_user.jpg') %>
-      <% end %>
-
-      <h5><%= current_user.name %></h5>
-
-      <% if @user.average_service_rating > 0 %>
-        <div class="average-rating">
-          <p><%= "⭐️" %> <%= sprintf('%.2f', @user.average_service_rating) %></p>
-        </div>
-      <% else %>
-        <p> -- </p>
-      <% end %>
-
-      <% if current_user %>
-        <%= link_to "Editar tu cuenta",  edit_user_registration_path %>
-      <% end %>
-    </div>
-
-    <ul class="user-tabs">
-      <li class="<%= 'active' if controller_name == 'users' && action_name == 'show' %>">
-        <%= link_to("Servicios", user_path(@user)) %>
-      </li>
-
-      <li class="<%= 'active' if controller_name == 'users' && action_name == 'reviews' %>">
-        <%= link_to("Evaluaciones", reviews_user_path(@user.id)) %>
-      </li>
-
-      <% if @user == current_user %>
-        <li class="<%= 'active' if controller_name == 'users' && action_name == 'likes' %>">
-          <%= link_to("Favoritos", likes_user_path(current_user.id)) %>
-        </li>
-      <% end %>
-      <% if @user == current_user %>
-        <li class="<%= 'active' if controller_name == 'users' && action_name == 'orders' %>">
-          <%= link_to("Pedidos", orders_user_path(current_user.id)) %>
-        </li>
-      <% end %>
-      <% if @user == current_user %>
-        <li class="<%= 'active' if controller_name == 'users' && action_name == 'sales' %>">
-          <%= link_to("Ventas", sales_user_path(current_user.id)) %>
-        </li>
-      <% end %>
-    </ul>
-
     <% @orders.each do |order| %>
       <div class="posts-index-item">
         <div class="post-left">
