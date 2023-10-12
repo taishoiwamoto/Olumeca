@@ -13,7 +13,7 @@ class UsersController < ApplicationController
 
   def likes
     # set_services_and_rating_for
-    @likes = Like.joins(:service).merge(Service.active).where(user_id: current_user.id).order(created_at: :desc).page(params[:page]).per(5)
+    @likes = Like.joins(:service).merge(Service.active).where(user_id: current_user.id).order(created_at: :desc).page(params[:page]).per(30)
   end
 
   def orders

@@ -1,43 +1,35 @@
-<div class="main user-show">
+<div class="main">
   <div class="container">
-    <% @likes.order(created_at: :desc).each do |like| %>
-      <% service = Service.find_by(id: like.service_id) %>
-        <%= link_to service_path(service.id) do %>
-          <div class="posts-index-item">
-            <div class="post-left">
-
-            <% if service.image.attached? %>
-              <%= image_tag(service.image) %>
-            <% else %>
-              <%= image_tag('default_service.jpg') %>
-            <% end %>
-
-            </div>
-            <div class="post-right">
-              <div style="display: flex; justify-content: space-between;">
-                <h4><%= service.title %></h4>
-              </div>
-              <div style="display: flex; justify-content: space-between;">
-                  <span><%= service.user.name %></span>
-              </div>
-              <div style="display: flex; justify-content: space-between;">
-                <span><%= service.category&.name || "" %></span>
-              </div>
-              <div style="display: flex; justify-content: space-between;">
-                <div class="star">
-                  <% reviews = service.reviews %>
-                  <% if reviews.present? %>
-                    <% average_rating = calculate_average_rating(reviews) %>
-                    <%= "⭐️" %> <%= sprintf('%.2f', average_rating) %>
+    <h1>Favoritos</h1>
+    <div class="cards-container">
+      <% @likes.order(created_at: :desc).each do |like| %>
+        <% service = Service.find_by(id: like.service_id) %>
+          <%= link_to service_path(service.id) do %>
+              <div class="card">
+                  <% if service.image.attached? %>
+                      <%= image_tag(service.image, class: "card-img-top", alt: "...") %>
                   <% else %>
-                    <h5> -- </h5>
+                      <%= image_tag('default_service.jpg', class: "card-img-top", alt: "...") %>
                   <% end %>
-                </div>
+                  <div class="card-body">
+                      <h5 class="card-title"><%= service.title.truncate(40) %></h5>
+                      <p class="card-text"><%= service.user.name %></p>
+                      <div style="display: flex; justify-content: space-between;">
+                        <div class="star">
+                          <% reviews = service.reviews %>
+                          <% if reviews.present? %>
+                            <% average_rating = calculate_average_rating(reviews) %>
+                            <%= "⭐️" %> <%= sprintf('%.2f', average_rating) %>
+                          <% else %>
+                            <h5> -- </h5>
+                          <% end %>
+                        </div>
+                      </div>
+                  </div>
               </div>
-            </div>
-          </div>
-        <% end %>
-    <% end %>
+          <% end %>
+      <% end %>
+    </div>
     <%= paginate @likes %>
   </div>
 </div>

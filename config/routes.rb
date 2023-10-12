@@ -37,7 +37,6 @@ Rails.application.routes.draw do
     member do
       put :accept
       put :reject
-      get '/user_info', to: 'orders#user_info'
     end
   end
 end

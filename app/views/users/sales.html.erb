@@ -1,53 +1,51 @@
-<div class="main user-show">
+<div class="main">
   <div class="container">
-    <% @sales.each do |sale| %>
-      <div class="posts-index-item">
-
-        <div class="post-left">
-
-          <% if sale.service.image.attached? %>
-            <%= image_tag(sale.service.image) %>
-          <% else %>
-            <%= image_tag('default_service.jpg') %>
-          <% end %>
-
-        </div>
-
-        <div class="post-right">
-          <div style="display: flex; justify-content: flex-end;">
-            <% if sale.pending? %>
-              <%= button_to "Aceptar", accept_order_path(sale), method: :put, class: "btn btn-primary btn-sm" %>
-              <%= button_to "Rechazar", reject_order_path(sale), method: :put, class: "btn btn-primary btn-sm" %>
-            <% end %>
-            <span style="padding: 0.1rem 0.5rem; border: 1px solid #000; font-size: 12px; margin-left: 10px;"><%= get_order_status(sale.status) %></span>
-          </div>
-
-          <div style="display: flex; justify-content: flex-end; padding-top: 10px; ">
-            <% if sale.accepted? %>
-              <%= turbo_frame_tag 'user' do %>
-                <%= link_to user_info_order_path(sale, user_id: sale.buyer_id ) do %>
-                  <i class="fa-regular fa-address-card" style="font-size: 1.5em;"></i>
-                <% end %>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">ID del Pedido</th>
+          <th scope="col">Imagen del Servicio</th>
+          <th scope="col">Nombre del Servicio</th>
+          <th scope="col">Nombre del Comprador</th>
+          <th scope="col">Fecha del Pedido</th>
+          <th scope="col">Estado</th>
+          <th scope="col">Acción</th>
+          <th scope="col">Info de Comprador</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @sales.each do |sale| %>
+          <tr>
+            <td><%= sale.id %></td>
+            <td>
+              <% if sale.service.image.attached? %>
+                <%= image_tag(sale.service.image, class: 'img-thumbnail', size: '50x50') %>
+              <% else %>
+                <%= image_tag('default_service.jpg', class: 'img-thumbnail', size: '50x50') %>
               <% end %>
-            <% end %>
-          </div>
-
-
-          <%= link_to service_path(sale.service) do %>
-            <h4>Servicio: <%= sale.service.title %></h4>
-          <% end %>
-
-          <%= link_to user_path(sale.buyer)  do %>
-            <p style="font-size: 14px;">Comprador/a: <%= get_name_buyer(sale.buyer_id) %></p>
-          <% end %>
-
-          <div style="display: flex">
-            <p style="font-size: 12px;">ID del pedido:<%= sale.id %>,</p>
-            <p style="font-size: 12px; margin-left: 10px;">Fecha: <%= sale.created_at.strftime("%d/%m/%Y %H:%M") %></p>
-          </div>
-        </div>
-      </div>
-    <% end %>
+            </td>
+            <td><%= link_to sale.service.title, service_path(sale.service) %></td>
+            <td><%= link_to get_name_buyer(sale.buyer_id), user_path(sale.buyer) %></td>
+            <td><%= sale.created_at.strftime("%d/%m/%Y %H:%M") %></td>
+            <td><%= get_order_status(sale.status) %></td>
+            <td>
+              <% if sale.pending? %>
+                <%= button_to "Aprobar", accept_order_path(sale), method: :put, class: "btn btn-primary btn-sm" %>
+                <%= button_to "Rechazar", reject_order_path(sale), method: :put, class: "btn btn-danger btn-sm" %>
+              <% end %>
+            </td>
+            <td>
+              <% if sale.accepted? %>
+                  <i class="fa-solid fa-envelope"></i>: <%= sale.buyer.email %> <br/>
+                  <i class="fa-solid fa-phone"></i>: <%= sale.buyer.phone_number %>
+              <% else %>
+                  N/A
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
     <%= paginate @sales %>
   </div>
 </div>

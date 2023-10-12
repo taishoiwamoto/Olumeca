@@ -1,54 +1,54 @@
-<div class="main user-show">
+<div class="main">
   <div class="container">
-    <% @orders.each do |order| %>
-      <div class="posts-index-item">
-        <div class="post-left">
-          <% if order.service.image.attached? %>
-            <%= image_tag(order.service.image) %>
-          <% else %>
-            <%= image_tag('default_service.jpg') %>
-          <% end %>
-        </div>
-
-        <div class="post-right">
-          <div style="display: flex; justify-content: flex-end;">
-            <% if order.accepted? %>
-              <% if order.service_reviewed_by_user?(current_user.id) %>
-                <%= link_to "Editar evaluación", edit_service_review_path(order.service, order.review_by_user(current_user.id)), class: "btn btn-primary btn-sm" %>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">ID del Pedido</th>
+          <th scope="col">Imagen del Servicio</th>
+          <th scope="col">Nombre del Servicio</th>
+          <th scope="col">Nombre del Proveedor</th>
+          <th scope="col">Fecha del Pedido</th>
+          <th scope="col">Estado</th>
+          <th scope="col">Acción</th>
+          <th scope="col">Info de Vendedor</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @orders.each do |order| %>
+          <tr>
+            <td><%= order.id %></td>
+            <td>
+              <% if order.service.image.attached? %>
+                <%= image_tag(order.service.image, class: 'img-thumbnail', size: '50x50') %>
               <% else %>
-                <%= link_to "Evaluar", new_service_review_path(order.service), class: "btn btn-primary btn-sm" %>
+                <%= image_tag('default_service.jpg', class: 'img-thumbnail', size: '50x50') %>
               <% end %>
-            <% end %>
-
-            <span style="padding: 0.1rem 0.5rem; border: 1px solid #000; font-size: 12px; margin-left: 10px;"><%= get_order_status(order.status) %></span>
-          </div>
-
-          <div style="display: flex; justify-content: flex-end; padding-top: 10px; ">
-            <% if order.accepted? %>
-              <%= turbo_frame_tag 'user' do %>
-                <%= link_to user_info_order_path(order, user_id: order.seller_id ) do %>
-                  <i class="fa-regular fa-address-card" style="font-size: 1.5em;"></i>
+            </td>
+            <td><%= link_to order.service.title, service_path(order.service) %></td>
+            <td><%= link_to order.service.user.name, user_path(order.seller) %></td>
+            <td><%= order.created_at.strftime("%d/%m/%Y %H:%M") %></td>
+            <td><%= get_order_status(order.status) %></td>
+            <td>
+              <% if order.accepted? %>
+                <% if order.service_reviewed_by_user?(current_user.id) %>
+                  <%= link_to "Editar Evaluación", edit_service_review_path(order.service, order.review_by_user(current_user.id)), class: "btn btn-primary btn-sm" %>
+                <% else %>
+                  <%= link_to "Evaluar", new_service_review_path(order.service), class: "btn btn-primary btn-sm" %>
                 <% end %>
               <% end %>
-            <% end %>
-          </div>
-
-          <%= link_to service_path(order.service) do %>
-            <h4>Servicio: <%= order.service.title %></h4>
-          <% end %>
-
-          <%= link_to user_path(order.seller) do %>
-            <p style="font-size: 14px;">Vendedor/a: <%= order.service.user.name %></p>
-          <% end %>
-
-          <div style="display: flex">
-            <p style="font-size: 12px;">ID del pedido:<%= order.id %>,</p>
-            <p style="font-size: 12px; margin-left: 10px;">Fecha: <%= order.created_at.strftime("%d/%m/%Y %H:%M") %></p>
-          </div>
-
-        </div>
-      </div>
-    <% end %>
+            </td>
+            <td>
+              <% if order.accepted? %>
+                  <i class="fa-solid fa-envelope"></i>: <%= order.seller.email %> <br/>
+                  <i class="fa-solid fa-phone"></i>: <%= order.seller.phone_number %>
+              <% else %>
+                  N/A
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
     <%= paginate @orders %>
   </div>
 </div>
