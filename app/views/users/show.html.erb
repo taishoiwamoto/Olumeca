@@ -1,6 +1,13 @@
 <div class="main">
   <div class="container">
 
+      <% if @user == current_user %>
+        <div class="d-flex justify-content-end align-items-right p-3">
+          <%= link_to "Editar tu cuenta", edit_user_registration_path, class: "btn btn-secondary" %>
+        </div>
+    <% end %>
+
+
     <div class="user d-flex align-items-center p-3 justify-content-between">
       <div class="d-flex align-items-center">
         <div class="me-3">
@@ -19,9 +26,6 @@
             </div>
             <% else %>
             <p> -- </p>
-            <% end %>
-            <% if @user == current_user %>
-              <%= link_to("Editar tu cuenta", edit_user_registration_path) %>
             <% end %>
         </div>
       </div>
