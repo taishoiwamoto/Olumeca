@@ -63,9 +63,9 @@
           <div style="display: flex; justify-content: flex-end;">
             <% if order.accepted? %>
               <% if order.service_reviewed_by_user?(current_user.id) %>
-                <%= link_to "Editar evaluación", edit_service_review_path(order.service, order.review_by_user(current_user.id)), class: "button-002", style: "font-size: 12px; margin-left: 10px;" %>
+                <%= link_to "Editar evaluación", edit_service_review_path(order.service, order.review_by_user(current_user.id)), class: "btn btn-primary btn-sm" %>
               <% else %>
-                <%= link_to "Evaluar", new_service_review_path(order.service), class: "button-002", style: "font-size: 12px; margin-left: 10px;" %>
+                <%= link_to "Evaluar", new_service_review_path(order.service), class: "btn btn-primary btn-sm" %>
               <% end %>
             <% end %>
 

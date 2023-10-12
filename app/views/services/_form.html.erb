@@ -2,7 +2,6 @@
   <div class="container">
     <h1 class="form-heading">Publicar</h1>
     <%= form_with(model: service) do |f| %>
-      <h3>Servicio</h3>
       <div class="form">
         <div class="form-body">
           <% @service.errors.full_messages_for(:title).each do |message| %>
@@ -37,7 +36,9 @@
         </div>
       </div>
       <br>
-      <%= f.submit text_btn, class: "button-004" %>
+      <div class="d-grid gap-2 col-6 mx-auto">
+        <%= f.submit text_btn, class: "btn btn-primary" %>
+      </div>
     <% end %>
     <br>
     <br>

@@ -6,7 +6,9 @@
           <h1>Servicio de mentoría con varios profesionales</h1>
         </div>
           <p>Es posible comprar y vender habilidades y conocimientos.</p>
-          <%= link_to "Registrar", new_user_registration_path, class: "buttons__main" %>
+          <div class="d-grid gap-2">
+            <%= link_to "Registrar", new_user_registration_path, class: "btn btn-primary" %>
+          </div>
       </div>
       <div class="right">
           <%= image_tag 'top-mainVisual.jpg', alt: 'Es posible comprar y vender habilidades y servicios.', class: 'normal-size-image' %>
@@ -38,52 +40,42 @@
   </div>
 
   <div class="top-newServices">
-    <div class="top-newServices__container">
       <h2 class="top-title">Servicios Nuevos</h2>
         <% if @services.empty? %>
           <p style="text-align: center">No hay servicios disponibles</p>
         <% else %>
-          <% @services.each do |service| %>
-            <%= link_to service_path(service) do %>
-
-              <div class="posts-index-item">
-                <div class="post-left">
-                  <% if service.image.attached? %>
-                    <%= image_tag(service.image) %>
-                  <% else %>
-                    <%= image_tag('default_service.jpg') %>
-                  <% end %>
-                </div>
-                <div class="post-right">
-                  <div style="display: flex; justify-content: space-between;">
-                    <h4><%= service.title.truncate(40) %></h4>
-                  </div>
-                  <div style="display: flex; justify-content: space-between;">
-                      <span><%= service.user.name %></span>
-                  </div>
-                  <div style="display: flex; justify-content: space-between;">
-                    <span><%= service.category&.name || "" %></span>
-                  </div>
-                  <div style="display: flex; justify-content: space-between;">
-                    <div class="star">
-                      <% reviews = service.reviews %>
-                      <% if reviews.present? %>
-                        <% average_rating = calculate_average_rating(reviews) %>
-                        <%= "⭐️" %> <%= sprintf('%.2f', average_rating) %>
-                      <% else %>
-                        <h5> -- </h5>
-                      <% end %>
+          <div class="cards-container">
+            <% @services.each do |service| %>
+              <%= link_to service_path(service) do %>
+                <div class="card" style="width: 18rem;">
+                    <% if service.image.attached? %>
+                        <%= image_tag(service.image, class: "card-img-top", alt: "...") %>
+                    <% else %>
+                        <%= image_tag('default_service.jpg', class: "card-img-top", alt: "...") %>
+                    <% end %>
+                    <div class="card-body">
+                        <h5 class="card-title"><%= service.title.truncate(40) %></h5>
+                        <p class="card-text"><%= service.user.name %></p>
+                        <div style="display: flex; justify-content: space-between;">
+                          <div class="star">
+                            <% reviews = service.reviews %>
+                            <% if reviews.present? %>
+                              <% average_rating = calculate_average_rating(reviews) %>
+                              <%= "⭐️" %> <%= sprintf('%.2f', average_rating) %>
+                            <% else %>
+                              <h5> -- </h5>
+                            <% end %>
+                          </div>
+                        </div>
                     </div>
-                  </div>
                 </div>
-              </div>
+              <% end %>
             <% end %>
-          <% end %>
+          </div>
           <div class="top-main-button">
-            <%= link_to "Ver más servicios", services_path, class: "buttons__main" %>
+            <%= link_to "Ver más servicios", services_path, class: "btn btn-primary" %>
           </div>
         <% end %>
-    </div>
   </div>
 
   <div class="top-main-buyer">
@@ -134,7 +126,7 @@
           <div class="c-serviceFlow_text">Después de realizar el pedido, puede ponerse en contacto con el vendedor.</div>
         </div>
       </div>
-      <%= link_to "Buscar un servicio", services_path, class: "buttons__main" %>
+      <%= link_to "Buscar un servicio", services_path, class: "btn btn-primary" %>
     </div>
   </div>
 
@@ -183,7 +175,7 @@
           <div class="c-serviceFlow_text">Después del pedido, puede ponerse en contacto con el comprador.</div>
         </div>
       </div>
-      <%= link_to "Publicar un servicio", new_service_path, class: "buttons__main" %>
+      <%= link_to "Publicar un servicio", new_service_path, class: "btn btn-primary" %>
     </div>
   </div>
 
@@ -191,7 +183,7 @@
   <div class="top-registar">
     <div class="top-registar__container">
       <h2 class="top-title">Comencemos con la registración gratuita</h2>
-      <%= link_to "Registar", new_user_registration_path, class: "btn btn--orange btn--cubic btn--shadow" %>
+      <%= link_to "Registar", new_user_registration_path, class: "btn btn-primary" %>
     </div>
   </div>
 </div>
