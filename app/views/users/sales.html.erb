@@ -1,12 +1,12 @@
 <div class="main">
   <div class="container">
+    <h1>Pedidos recibidos</h1>
     <table class="table table-hover">
       <thead>
         <tr>
           <th scope="col">ID del Pedido</th>
-          <th scope="col">Imagen del Servicio</th>
-          <th scope="col">Nombre del Servicio</th>
-          <th scope="col">Nombre del Comprador</th>
+          <th scope="col">Servicio</th>
+          <th scope="col">Comprador/a</th>
           <th scope="col">Fecha del Pedido</th>
           <th scope="col">Estado</th>
           <th scope="col">Acción</th>
@@ -17,29 +17,31 @@
         <% @sales.each do |sale| %>
           <tr>
             <td><%= sale.id %></td>
-            <td>
-              <% if sale.service.image.attached? %>
-                <%= image_tag(sale.service.image, class: 'img-thumbnail', size: '50x50') %>
-              <% else %>
-                <%= image_tag('default_service.jpg', class: 'img-thumbnail', size: '50x50') %>
-              <% end %>
-            </td>
             <td><%= link_to sale.service.title, service_path(sale.service) %></td>
             <td><%= link_to get_name_buyer(sale.buyer_id), user_path(sale.buyer) %></td>
-            <td><%= sale.created_at.strftime("%d/%m/%Y %H:%M") %></td>
-            <td><%= get_order_status(sale.status) %></td>
+            <td><%= sale.created_at.strftime("%d/%m/%Y") %></td>
+            <td>
+              <% case sale.status %>
+                <% when 'pending' %>
+                  <%= button_tag get_order_status(sale.status), class: "btn btn-secondary btn-sm", disabled: true %>
+                <% when 'accepted' %>
+                  <%= button_tag get_order_status(sale.status), class: "btn btn-success btn-sm", disabled: true %>
+                <% when 'rejected' %>
+                  <%= button_tag get_order_status(sale.status), class: "btn btn-danger btn-sm", disabled: true %>
+              <% end %>
+            </td>
             <td>
               <% if sale.pending? %>
-                <%= button_to "Aprobar", accept_order_path(sale), method: :put, class: "btn btn-primary btn-sm" %>
+                <%= button_to "Aceptar", accept_order_path(sale), method: :put, class: "btn btn-primary btn-sm", style: "margin-bottom: 5px;" %>
                 <%= button_to "Rechazar", reject_order_path(sale), method: :put, class: "btn btn-danger btn-sm" %>
+              <% else %>
+
               <% end %>
             </td>
             <td>
               <% if sale.accepted? %>
-                  <i class="fa-solid fa-envelope"></i>: <%= sale.buyer.email %> <br/>
-                  <i class="fa-solid fa-phone"></i>: <%= sale.buyer.phone_number %>
-              <% else %>
-                  N/A
+                  <i class="fa-solid fa-envelope"></i>: <span style="font-size: 12px;"><%= sale.buyer.email %></span> <br/>
+                  <i class="fa-solid fa-phone"></i>: <span style="font-size: 12px;"><%= sale.buyer.phone_number %>
               <% end %>
             </td>
           </tr>
