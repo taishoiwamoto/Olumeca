@@ -1,8 +1,8 @@
 <%= form_with(model: review, url: [service, review], html: { class: 'needs-validation', novalidate: true }) do |form| %>
   <% if review.errors.any? %>
-    <div class="alert alert-danger" role="alert">
+    <div class="mb-3">
       <% review.errors.full_messages.each do |message| %>
-        <p class="mb-0"><%= message %></p>
+        <li class="form-error"><%= message %></li>
       <% end %>
     </div>
   <% end %>

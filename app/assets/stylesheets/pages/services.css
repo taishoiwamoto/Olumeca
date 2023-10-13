@@ -6,7 +6,9 @@
 }
 
 .service-show-item {
-  padding: 30px;
+  padding-top: 30px;
+  padding-left: 30px;
+  padding-right: 30px;
   background-color: white;
   border: 1px solid #cbd5d5;
   margin-bottom: 30px; /* spacing between elements */
