@@ -17,7 +17,7 @@
   <body>
     <header>
       <nav class="navbar navbar-expand-lg bg-white">
-        <div class="container-fluid">
+        <div class="container-fluid mt-1 mb-1">
           <a class="navbar-brand" href="/">Olumeca</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -61,17 +61,17 @@
               <% else %>
 
                 <li class="nav-item">
-                  <a class="nav-link active" aria-current="page" href="https://wa.me/4423831033">
+                  <a class="nav-link active me-3" aria-current="page" href="https://wa.me/4423831033">
                     <i class="fab fa-whatsapp fa-1x" style="margin-right: 5px;"></i>Contactar
                   </a>
                 </li>
 
                 <li class="nav-item">
-                  <%= link_to "Iniciar", new_user_session_path, class: "btn btn-primary me-2 mb-2" %>
+                  <%= link_to "Iniciar", new_user_session_path, class: "btn btn-primary me-3 mb-1" %>
                 </li>
 
                 <li class="nav-item">
-                  <%= link_to "Registar", new_user_registration_path, class: "btn btn-success" %>
+                  <%= link_to "Registar", new_user_registration_path, class: "btn btn-success me-2" %>
                 </li>
 
               <% end %>
@@ -82,14 +82,14 @@
     </header>
 
     <% if flash[:notice] %>
-      <div class="alert alert-warning alert-dismissible text-center fade show" role="alert" style="margin-top: 65px;">
+      <div class="alert alert-warning alert-dismissible text-center fade show mb-0" role="alert" style="margin-top: 65px;">
         <%= flash[:notice] %>
           <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
       </div>
     <% end %>
 
     <% if flash[:alert] %>
-      <div class="alert alert-danger alert-dismissible text-center fade show" role="alert" style="margin-top: 65px;">
+      <div class="alert alert-danger alert-dismissible text-center fade show mb-0" role="alert" style="margin-top: 65px;">
         <%= flash[:alert] %>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
       </div>
