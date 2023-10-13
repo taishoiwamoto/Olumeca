@@ -26,6 +26,15 @@
 }
 
 /* Service and favorite card border between text and pics */
-.card-body {
-  border-top: 1px solid #cbd5d5;
+.card-img-top {
+  border-bottom: 1px solid #cbd5d5;
+}
+
+/* サービスタイトルが異なるものでもcard_bodyの長さを統一するため */
+.top-newServices .card-body {
+  height: 150px;
+}
+
+.cards-container .card-body{
+  height: 150px;
 }

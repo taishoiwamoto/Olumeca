@@ -16,7 +16,7 @@
                 <% end %>
             <% end %>
           </div>
-            <h3><%= @service.title %></h3>
+            <h3 class="mt-3"><%= @service.title %></h3>
           <div style="display: flex; justify-content: space-between;">
             <div class="star">
               <% if @reviews.present? %>
@@ -24,7 +24,7 @@
                   <p><%= "⭐️" %> <%= sprintf('%.2f', calculate_average_rating(@reviews)) %></p>
                 </div>
               <% else %>
-                <h5> -- </h5>
+                --
               <% end %>
             </div>
             <div class="like-button">
@@ -77,7 +77,7 @@
                       <% end %>
 
                       <div class="flex-grow-1" style="margin-left: 10px;">
-                        <h5 style="margin-top: 10px; color: #196F3D;">Servicio: <%= review&.service&.title&.truncate(25) || 'Este registro ha sido eliminada.' %></h5>
+                        <h5 style="margin-top: 10px; color: #196F3D;">Servicio: <%= review&.service&.title || 'Este registro ha sido eliminada.' %></h5>
                         <% if review.rating.present? %>
                           <div><%= "⭐️" * review.rating %></div>
                         <% end %>

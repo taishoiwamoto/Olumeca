@@ -9,8 +9,8 @@
 .card {
   flex-basis: calc(33.333% - 16px); /* カードの幅をコンテナの33.333%に、gapを考慮して調整 */
   width: 300px;
-  max-width: 100%; /* カードの最大幅を100%に設定 */
   height: 370px;
+  max-width: 100%; /* カードの最大幅を100%に設定 */
 }
 
 @media (max-width: 1200px) {
