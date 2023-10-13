@@ -24,13 +24,18 @@
 
           <div class="mb-3">
             <%= f.label :image, 'Imagen', class: 'form-label' %>
-            <%= f.file_field :image, class: 'form-control', required: true %>
-            <div class="invalid-feedback">Por favor, selecciona una imagen.</div>
+
+            <% if @service.image.attached? %>
+              <%= f.file_field :image, class: 'form-control' %>
+            <% else %>
+              <%= f.file_field :image, class: 'form-control', required: true %>
+              <div class="invalid-feedback">Por favor, selecciona una imagen.</div>
+            <% end %>
           </div>
 
           <div class="mb-3">
             <%= f.label :category_id, class: 'form-label' %>
-            <%= f.select :category_id, options_for_select(Category.all.map{|category| [category.name, category.id]}), { include_blank: 'Por favor, elija de la siguiente lista' }, { class: 'form-select', required: true } %>
+            <%= f.select :category_id, options_for_select(Category.all.map{|category| [category.name, category.id]}, @service.category_id), { include_blank: 'Por favor, elija de la siguiente lista' }, { class: 'form-select', required: @service.category_id.nil? } %>
             <div class="invalid-feedback">Por favor, selecciona una categoría.</div>
           </div>
 
@@ -40,7 +45,7 @@
             <div class="invalid-feedback">Por favor, proporciona un detalle.</div>
           </div>
 
-          <div class="d-grid gap-2 col-6">
+          <div class="d-grid gap-2 col-6 mx-auto">
             <%= f.submit text_btn, class: "btn btn-primary" %>
           </div>
         <% end %>
