@@ -5,13 +5,13 @@
       <table class="table table-hover">
         <thead>
           <tr>
-            <th scope="col">ID del Pedido</th>
+            <th scope="col">ID</th>
             <th scope="col">Servicio</th>
-            <th scope="col">Proveedor/a</th>
-            <th scope="col">Fecha del Pedido</th>
+            <th scope="col">Vendedor/a</th>
+            <th scope="col">Fecha</th>
             <th scope="col">Estado</th>
             <th scope="col">Evaluación</th>
-            <th scope="col">Info de Vendedor</th>
+            <th scope="col">Info</th>
           </tr>
         </thead>
         <tbody>
@@ -34,7 +34,7 @@
               <td>
                 <% if order.accepted? %>
                   <% if order.service_reviewed_by_user?(current_user.id) %>
-                    <%= link_to "Editar Evaluación", edit_service_review_path(order.service, order.review_by_user(current_user.id)), class: "btn btn-primary btn-sm"  %>
+                    <%= link_to "Editar", edit_service_review_path(order.service, order.review_by_user(current_user.id)), class: "btn btn-primary btn-sm"  %>
                   <% else %>
                     <%= link_to "Evaluar", new_service_review_path(order.service), class: "btn btn-primary btn-sm" %>
                   <% end %>

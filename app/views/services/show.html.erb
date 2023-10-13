@@ -8,12 +8,12 @@
         <div class="service-show-item">
           <div style="display: flex; justify-content: flex-end;">
             <% if current_user && @service.user_id == current_user.id %>
-              <%= button_to edit_service_path(@service), method: :get do %>
-                <i class="fa-solid fa-pen-to-square"></i>
-              <% end %>
-              <%= button_to service_path(@service), method: :delete, form: { data: { turbo_confirm: "¿Estás seguro de que deseas eliminar este servicio?" }} do %>
-                <i class="fa-solid fa-trash"></i>
-              <% end %>
+                <%= button_to edit_service_path(@service), method: :get, class: "btn btn-primary btn-sm me-2" do %>
+                    <i class="fa-solid fa-pen-to-square"></i> Editar
+                <% end %>
+                <%= button_to service_path(@service), method: :delete, class: "btn btn-danger btn-sm", form: { data: { turbo_confirm: "¿Estás seguro de que deseas eliminar este servicio?" }} do %>
+                    <i class="fa-solid fa-trash"></i> Eliminar
+                <% end %>
             <% end %>
           </div>
             <h3><%= @service.title %></h3>
@@ -54,8 +54,9 @@
           </div>
           <p><%= simple_format(@service.detail) %></p>
         </div>
-        <div class="d-grid gap-2 col-12 mx-auto">
-          <%= link_to "Hacer el pedido", new_order_path(seller_id: @service.user_id, service_id: @service.id, buyer_id: current_user&.id), class: "btn btn-primary" %>
+
+        <div class="d-grid gap-2 col-10 mx-auto">
+          <%= link_to "Hacer el pedido", new_order_path(seller_id: @service.user_id, service_id: @service.id, buyer_id: current_user&.id), class: "btn btn-success btn-lg" %>
         </div>
 
         <h3 class="mt-5 mb-4">Evaluación</h3>
