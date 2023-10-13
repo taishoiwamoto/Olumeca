@@ -1,58 +1,60 @@
 <div class="main">
   <div class="container">
   <h1>Pedidos realizados</h1>
-    <table class="table table-hover">
-      <thead>
-        <tr>
-          <th scope="col">ID del Pedido</th>
-          <th scope="col">Servicio</th>
-          <th scope="col">Proveedor/a</th>
-          <th scope="col">Fecha del Pedido</th>
-          <th scope="col">Estado</th>
-          <th scope="col">Evaluación</th>
-          <th scope="col">Info de Vendedor</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @orders.each do |order| %>
+    <div class="table-responsive">
+      <table class="table table-hover">
+        <thead>
           <tr>
-            <td><%= order.id %></td>
-            <td><%= link_to order.service.title, service_path(order.service) %></td>
-            <td><%= link_to order.service.user.name, user_path(order.seller) %></td>
-            <td><%= order.created_at.strftime("%d/%m/%Y") %></td>
-            <td>
-              <% case order.status %>
-                <% when 'pending' %>
-                  <%= button_tag get_order_status(order.status), class: "btn btn-secondary btn-sm", disabled: true %>
-                <% when 'accepted' %>
-                  <%= button_tag get_order_status(order.status), class: "btn btn-success btn-sm", disabled: true %>
-                <% when 'rejected' %>
-                  <%= button_tag get_order_status(order.status), class: "btn btn-danger btn-sm", disabled: true %>
-              <% end %>
-            </td>
-            <td>
-              <% if order.accepted? %>
-                <% if order.service_reviewed_by_user?(current_user.id) %>
-                  <%= link_to "Editar Evaluación", edit_service_review_path(order.service, order.review_by_user(current_user.id)), class: "btn btn-primary btn-sm"  %>
-                <% else %>
-                  <%= link_to "Evaluar", new_service_review_path(order.service), class: "btn btn-primary btn-sm" %>
-                <% end %>
-              <% end %>
-            </td>
-            <td>
-              <% if order.accepted? %>
-                <% if order.seller.deleted_at.nil? %>
-                    <i class="fa-solid fa-envelope"></i>: <span style="font-size: 12px;"><%= order.seller.email %></span> <br/>
-                    <i class="fa-solid fa-phone"></i>: <span style="font-size: 12px;"><%= order.seller.phone_number %></span>
-                <% else %>
-                    <span style="color: red; font-size: 12px;">Dado de baja</span>
-                <% end %>
-              <% end %>
-            </td>
+            <th scope="col">ID del Pedido</th>
+            <th scope="col">Servicio</th>
+            <th scope="col">Proveedor/a</th>
+            <th scope="col">Fecha del Pedido</th>
+            <th scope="col">Estado</th>
+            <th scope="col">Evaluación</th>
+            <th scope="col">Info de Vendedor</th>
           </tr>
-        <% end %>
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          <% @orders.each do |order| %>
+            <tr>
+              <td><%= order.id %></td>
+              <td><%= link_to order.service.title, service_path(order.service) %></td>
+              <td><%= link_to order.service.user.name, user_path(order.seller) %></td>
+              <td><%= order.created_at.strftime("%d/%m/%Y") %></td>
+              <td>
+                <% case order.status %>
+                  <% when 'pending' %>
+                    <%= button_tag get_order_status(order.status), class: "btn btn-secondary btn-sm", disabled: true %>
+                  <% when 'accepted' %>
+                    <%= button_tag get_order_status(order.status), class: "btn btn-success btn-sm", disabled: true %>
+                  <% when 'rejected' %>
+                    <%= button_tag get_order_status(order.status), class: "btn btn-danger btn-sm", disabled: true %>
+                <% end %>
+              </td>
+              <td>
+                <% if order.accepted? %>
+                  <% if order.service_reviewed_by_user?(current_user.id) %>
+                    <%= link_to "Editar Evaluación", edit_service_review_path(order.service, order.review_by_user(current_user.id)), class: "btn btn-primary btn-sm"  %>
+                  <% else %>
+                    <%= link_to "Evaluar", new_service_review_path(order.service), class: "btn btn-primary btn-sm" %>
+                  <% end %>
+                <% end %>
+              </td>
+              <td>
+                <% if order.accepted? %>
+                  <% if order.seller.deleted_at.nil? %>
+                      <i class="fa-solid fa-envelope"></i>: <span style="font-size: 12px;"><%= order.seller.email %></span> <br/>
+                      <i class="fa-solid fa-phone"></i>: <span style="font-size: 12px;"><%= order.seller.phone_number %></span>
+                  <% else %>
+                      <span style="color: red; font-size: 12px;">Dado de baja</span>
+                  <% end %>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <div>
     <%= paginate @orders %>
   </div>
 </div>
