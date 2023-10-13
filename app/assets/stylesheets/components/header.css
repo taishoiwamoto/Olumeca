@@ -1,3 +1,4 @@
+/* makes header design */
 header {
   position: fixed;  /* この行を変更 */
   z-index: 1;
@@ -6,6 +7,8 @@ header {
   left: 0;          /* この行を追加 */
 }
 
+
+/* makes header white */
 .bg-white {
   background-color: #ffffff !important;
   border-bottom: 1px solid #e9eef1;

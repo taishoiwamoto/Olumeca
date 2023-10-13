@@ -8,12 +8,12 @@
         <div class="service-show-item">
           <div style="display: flex; justify-content: flex-end;">
             <% if current_user && @service.user_id == current_user.id %>
-              <%= button_to edit_service_path(@service), method: :get do %>
-                <i class="fa-solid fa-pen-to-square"></i>
-              <% end %>
-              <%= button_to service_path(@service), method: :delete, form: { data: { turbo_confirm: "¿Estás seguro de que deseas eliminar este servicio?" }} do %>
-                <i class="fa-solid fa-trash"></i>
-              <% end %>
+                <%= button_to edit_service_path(@service), method: :get, class: "btn btn-primary btn-sm me-2" do %>
+                    <i class="fa-solid fa-pen-to-square"></i> Editar
+                <% end %>
+                <%= button_to service_path(@service), method: :delete, class: "btn btn-danger btn-sm", form: { data: { turbo_confirm: "¿Estás seguro de que deseas eliminar este servicio?" }} do %>
+                    <i class="fa-solid fa-trash"></i> Eliminar
+                <% end %>
             <% end %>
           </div>
             <h3><%= @service.title %></h3>
