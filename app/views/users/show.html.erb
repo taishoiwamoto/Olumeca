@@ -95,7 +95,7 @@
                     <% end %>
 
                     <div class="flex-grow-1" style="margin-left: 10px;">
-                      <h5 style="margin-top: 10px; color: #196F3D;">Servicio: <%= review&.service&.title) || 'Este registro ha sido eliminada.' %></h5>
+                      <h5 style="margin-top: 10px; color: #196F3D;">Servicio: <%= review&.service&.title || 'Este registro ha sido eliminada.' %></h5>
                       <% if review.rating.present? %>
                         <div><%= "⭐️" * review.rating %></div>
                       <% end %>
