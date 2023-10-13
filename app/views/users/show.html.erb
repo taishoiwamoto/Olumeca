@@ -95,7 +95,7 @@
                     <% end %>
 
                     <div class="flex-grow-1" style="margin-left: 10px;">
-                      <h5 style="margin-top: 5px; color: #196F3D;">Servicio: <%= review&.service&.title&.truncate(25) || 'Este registro ha sido eliminada.' %></h5>
+                      <h5 style="margin-top: 10px; color: #196F3D;">Servicio: <%= review&.service&.title&.truncate(25) || 'Este registro ha sido eliminada.' %></h5>
                       <% if review.rating.present? %>
                         <div><%= "⭐️" * review.rating %></div>
                       <% end %>
@@ -108,7 +108,7 @@
                         <div style="margin-right: 10px;">Creación: <%= review.created_at.strftime("%d/%m/%Y %H:%M") %></div>
                         <div style="margin-bottom: 10px;">Actualización: <%= review.updated_at.strftime("%d/%m/%Y %H:%M") %></div>
                       </div>
-                      <p><%= review.comment %></p>
+                      <p class="mb-0"><%= review.comment %></p>
                     </div>
                   </div>
                 </div>
