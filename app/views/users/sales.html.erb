@@ -40,8 +40,12 @@
             </td>
             <td>
               <% if sale.accepted? %>
-                  <i class="fa-solid fa-envelope"></i>: <span style="font-size: 12px;"><%= sale.buyer.email %></span> <br/>
-                  <i class="fa-solid fa-phone"></i>: <span style="font-size: 12px;"><%= sale.buyer.phone_number %>
+                <% if sale.buyer.deleted_at.nil? %>
+                    <i class="fa-solid fa-envelope"></i>: <span style="font-size: 12px;"><%= sale.buyer.email %></span> <br/>
+                    <i class="fa-solid fa-phone"></i>: <span style="font-size: 12px;"><%= sale.buyer.phone_number %></span>
+                <% else %>
+                    <span style="color: red; font-size: 12px;">Dado de baja</span>
+                <% end %>
               <% end %>
             </td>
           </tr>

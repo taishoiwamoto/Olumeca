@@ -1,9 +1,10 @@
 <div class="main">
   <div class="container">
-    <h1>Favoritos</h1>
+    <h1 class="text-center">Favoritos</h1>
     <div class="cards-container">
-      <% @likes.order(created_at: :desc).each do |like| %>
-        <% service = Service.find_by(id: like.service_id) %>
+      <% if @likes.any? %>
+        <% @likes.order(created_at: :desc).each do |like| %>
+          <% service = Service.find_by(id: like.service_id) %>
           <%= link_to service_path(service.id) do %>
               <div class="card">
                   <% if service.image.attached? %>
@@ -28,8 +29,11 @@
                   </div>
               </div>
           <% end %>
+        <% end %>
+        <%= paginate @likes %>
+      <% else %>
+        <p>No tienes servicios favoritos.</p>
       <% end %>
     </div>
-    <%= paginate @likes %>
   </div>
 </div>
