@@ -8,19 +8,12 @@ es:
         password: "Contraseña"
         password_confirmation: "Confirmación de la contraseña"
         agreement: ""
-      service:
-        title: "Título"
-        category: "Categoría"
-        detail: "Detalle"
-      order:
-        status:
-          pending: "Pendiente"
-          accepted: "Aceptado"
-          rejected: "Rechazado"
     errors:
       models:
         user:
           attributes:
+            password:
+              too_short: "es demasiado corta (el mínimo es %{count} caracteres)"
             agreement:
               accepted: "Debe aceptar los términos y condiciones y la política de privacidad."
             password_confirmation:
@@ -39,5 +32,6 @@ es:
         invalid: "es inválido."
         required: 'es requerido'
         greater_than_or_equal_to: "debe ser mayor o igual a %{count}"
-        less_than_or_equal_to: "El rating debe ser un valor entre 1 y 5"
+        less_than_or_equal_to: "debe ser menor o igual a %{count}"
         not_a_number: "debe ser un número"
+        too_short: "es demasiado corto (el mínimo es %{count} caracteres)"
