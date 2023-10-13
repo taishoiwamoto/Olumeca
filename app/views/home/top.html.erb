@@ -54,20 +54,20 @@
                         <%= image_tag('default_service.jpg', class: "card-img-top", alt: "...") %>
                     <% end %>
                     <div class="card-body">
-                        <h5 class="card-title"><%= service.title.truncate(40) %></h5>
-                        <p class="card-text"><%= service.user.name %></p>
-                        <div style="display: flex; justify-content: space-between;">
-                          <div class="star">
-                            <% reviews = service.reviews %>
-                            <% if reviews.present? %>
-                              <% average_rating = calculate_average_rating(reviews) %>
-                              <%= "⭐️" %> <%= sprintf('%.2f', average_rating) %>
-                            <% else %>
-                              <h5> -- </h5>
-                            <% end %>
-                          </div>
+                      <h5 class="card-title"><%= service.title.truncate(45) %></h5>
+                      <p class="card-text"><%= service.user.name %></p>
+                      <div style="display: flex; justify-content: space-between;">
+                        <div class="star">
+                          <% reviews = service.reviews %>
+                          <% if reviews.present? %>
+                            <% average_rating = calculate_average_rating(reviews) %>
+                            <%= "⭐️" %> <%= sprintf('%.2f', average_rating) %>
+                          <% else %>
+                            --
+                          <% end %>
                         </div>
-                    </div>
+                      </div>
+                  </div>
                 </div>
               <% end %>
             <% end %>
