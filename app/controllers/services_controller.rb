@@ -14,7 +14,7 @@ class ServicesController < ApplicationController
     else
       @user = @service.user
       @likes_count = Like.where(service_id: @service.id).count
-      @reviews = @service.reviews.order(created_at: :desc).page(params[:page]).per(5)
+      @reviews = @service.reviews.order(created_at: :desc).page(params[:page]).per(10)
     end
   end
 
