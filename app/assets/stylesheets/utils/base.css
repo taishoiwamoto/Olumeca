@@ -22,3 +22,9 @@ body {
   padding-bottom: 100px;
   clear: both;
 }
+
+.form-container {
+  min-height: 100vh;
+  max-width: 600px;
+  margin: 60px auto 0px auto;
+}

@@ -1,5 +1,5 @@
-<div class="main users-edit">
-  <div class="container">
+<div class="main">
+  <div class="form-container">
     <h1 class="mb-4">Editar tu cuenta</h1>
     <div class="form">
       <div class="form-body">
@@ -58,7 +58,8 @@
         <% end %>
       </div>
     </div>
-    <h3 class="mb-3">Cancelar mi cuenta</h3>
-    <%= button_to "Cancelar", destroy_user_path(resource), form: { data: { turbo_confirm: "¿Realmente quieres eliminar tu cuenta?" }}, method: :delete, id: "frmDestroy", class: "btn btn-danger" %>
+    <br>
+    <br>
+    <%= button_to "Cancelar tu cuenta", destroy_user_path(resource), form: { data: { turbo_confirm: "¿Realmente quieres eliminar tu cuenta?" }}, method: :delete, id: "frmDestroy", class: "btn btn-danger" %>
   </div>
 </div>
