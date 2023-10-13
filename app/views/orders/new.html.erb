@@ -7,7 +7,9 @@
             <%= f.hidden_field :service_id, value: @service.id %>
             <p class="mb-2"><strong>Servicio:</strong> <%= @service.title %></p>
             <p class="mb-4"><strong>Vendedor(a):</strong> <%= @service.user.name %></p>
+          <div class="d-grid gap-2 col-6">
             <%= f.submit 'Realizar Pedido', class: "btn btn-primary" %>
+          </div>
           <% end %>
         </div>
       </div>
