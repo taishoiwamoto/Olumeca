@@ -3,7 +3,7 @@
     <h1 class="mb-4">Publicar</h1>
     <div class="form">
       <div class="form-body">
-        <%= form_with(model: service, local: true, html: { class: 'needs-validation', novalidate: true }) do |f| %>
+        <%= form_with(model: service, local: true, html: { class: 'needs-validation' }) do |f| %>
 
           <% @service.errors.full_messages_for(:title).each do |message| %>
             <div class="alert alert-danger">
@@ -30,7 +30,7 @@
 
           <div class="mb-3">
             <%= f.label :category_id, class: 'form-label' %>
-            <%= f.select :category_id, options_for_select(Category.all.map{|category| [category.name, category.id]}), { prompt: 'Por favor, elija de la siguiente lista' }, { class: 'form-select', required: true } %>
+            <%= f.select :category_id, options_for_select(Category.all.map{|category| [category.name, category.id]}), { include_blank: 'Por favor, elija de la siguiente lista' }, { class: 'form-select', required: true } %>
             <div class="invalid-feedback">Por favor, selecciona una categoría.</div>
           </div>
 

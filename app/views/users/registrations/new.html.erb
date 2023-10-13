@@ -3,7 +3,7 @@
     <h1 class="mb-4">Registrarse</h1>
     <div class="form">
       <div class="form-body">
-        <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {class: 'needs-validation', novalidate: true}) do |f| %>
+        <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {class: 'needs-validation'}) do |f| %>
           <%= render "users/shared/error_messages", resource: resource, class: "form-error" %>
 
           <div class="mb-3">
