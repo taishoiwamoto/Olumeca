@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   before_action :find_active_user, only: %i[show likes orders sales]
 
   def show
-    @services = @user.services.active.order(created_at: :desc).page(params[:page]).per(10)
+    @services = @user.services.active.order(created_at: :desc)
     @average_rating = @user.average_service_rating
 
     # 以下のコードを追加して@reviewsをセットしてください
@@ -18,12 +18,12 @@ class UsersController < ApplicationController
 
   def orders
     # set_services_and_rating_for
-    @orders = Order.where(buyer_id: current_user.id).order(created_at: :desc).page(params[:page]).per(10)
+    @orders = Order.where(buyer_id: current_user.id).order(created_at: :desc).page(params[:page]).per(30)
   end
 
   def sales
     # set_services_and_rating_for
-    @sales = Order.where(seller_id: current_user.id).order(created_at: :desc).page(params[:page]).per(10)
+    @sales = Order.where(seller_id: current_user.id).order(created_at: :desc).page(params[:page]).per(30)
   end
 
   def destroy
