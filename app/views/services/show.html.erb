@@ -2,35 +2,9 @@
   <div class="container">
     <div class="row">
 
-      <div class="col-12 d-block d-sm-block d-md-none mb-5">
-        <h3>Vendedor/a</h3>
-        <div class="posts-index-item">
-          <div class="row">
-            <div class="col-12">
-              <% if @service.user.image.attached? %>
-                <%= image_tag(@service.user.image, class: 'rounded-circle mx-auto d-block') %>
-              <% else %>
-                <%= image_tag('default_user.jpg') %>
-              <% end %>
-            </div>
-            <div class="col-12 text-center mt-3">s
-              <%= link_to(@service.user.name, user_path(@service.user)) %>
-            </div>
-            <div class="col-12 text-center mt-2">
-              <% if @service.average_rating > 0 %>
-                <div class="average-rating">
-                  <p><%= "⭐️" %> <%= sprintf('%.2f', @service.average_rating) %></p>
-                </div>
-              <% else %>
-                <p> -- </p>
-              <% end %>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-7 col-lg-8 col-12">
-        <h3>Servicio</h3>
+      <!-- Servicio section -->
+      <div class="col-lg-7 col-md-8 col-12 order-1 order-md-1 mt-5">
+        <!-- ... the rest of your Servicio content ... -->
         <div class="service-show-item">
           <div style="display: flex; justify-content: flex-end;">
             <% if current_user && @service.user_id == current_user.id %>
@@ -78,89 +52,81 @@
               <%= image_tag('default_service.jpg', class: "service-image") %>
             <% end %>
           </div>
-          <br>
-          <h4>Detalle</h4>
           <p><%= simple_format(@service.detail) %></p>
         </div>
-        <br>
         <div class="d-grid gap-2 col-12 mx-auto">
           <%= link_to "Hacer el pedido", new_order_path(seller_id: @service.user_id, service_id: @service.id, buyer_id: current_user&.id), class: "btn btn-primary" %>
         </div>
-      </div>
 
-      <!-- end div service -->
-      <div class="col-md-5 col-lg-4 d-none d-md-block d-lg-block">
-        <div class="col">
-          <h3 class="text-center">Vendedor/a</h3>
-          <div class="posts-index-item">
-            <div style="display: flex; justify-content: flex-end;">
-            </div>
-            <div class="row">
-              <div class="col-12">
-                <% if @service.user.image.attached? %>
-                  <%= image_tag(@service.user.image, class: 'rounded-circle mx-auto d-block') %>
-                <% else %>
-                  <%= image_tag('default_user.jpg') %>
-                <% end %>
-              </div>
-              <div class="col-12 text-center mt-3">
-                <%= link_to(@service.user.name, user_path(@service.user)) %>
-              </div>
-              <div class="col-12 text-center mt-2">
-                <% if @service.average_rating > 0 %>
-                  <div class="average-rating">
-                    <p><%= "⭐️" %> <%= sprintf('%.2f', @service.average_rating) %></p>
-                  </div>
-                <% else %>
-                  <p> -- </p>
-                <% end %>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- end col -->
-    </div>
-    <!-- end row -->
+        <h3 class="mt-5 mb-4">Evaluación</h3>
+          <% if @reviews.any? %>
+          <!-- ... the rest of your Evaluación content ... -->
+          <div class="row">
+            <% @reviews.each do |review| %>
+              <div class="col-12 mb-4">
+                <div class="card" style="width: 100%;">
 
-    <br>
-    <h3>Evaluación</h3>
-      <div class="row">
-        <% @reviews.each do |review| %>
-          <div class="col-12 mb-4">
-            <div class="card" style="width: 100%;">
+                  <div class="card-body">
+                    <div class="d-flex align-items-start mb-3">
 
-              <div class="card-body">
-                <div class="d-flex align-items-start mb-3">
+                      <% if review.user.image.attached? %>
+                        <%= image_tag(review.user.image, class: "rounded-circle mr-3", style: "width: 50px; height: 50px;") %>
+                      <% else %>
+                        <%= image_tag('default_user.jpg', class: "rounded-circle mr-3", style: "width: 50px; height: 50px;") %>
+                      <% end %>
 
-                  <% if review.user.image.attached? %>
-                    <%= image_tag(review.user.image, class: "rounded-circle mr-3", style: "width: 50px; height: 50px;") %>
-                  <% else %>
-                    <%= image_tag('default_user.jpg', class: "rounded-circle mr-3", style: "width: 50px; height: 50px;") %>
-                  <% end %>
-
-                  <div class="flex-grow-1" style="margin-left: 10px;">
-                    <h5 style="margin-top: 10px; color: #196F3D;">Servicio: <%= review&.service&.title&.truncate(25) || 'Este registro ha sido eliminada.' %></h5>
-                    <% if review.rating.present? %>
-                      <div><%= "⭐️" * review.rating %></div>
-                    <% end %>
-                    <% if review.user.name.present? %>
-                      <p class="font-weight-bold" style="margin-top: 5px; margin-bottom: 5px;"><%= review.user.name %></p>
-                    <% else %>
-                      <p class="font-weight-bold" style="margin-top: 5px; margin-bottom: 5px;">Usuario dado de baja</p>
-                    <% end %>
-                    <div class="d-flex justify-content-start" style="font-size: 12px;">
-                      <div style="margin-right: 10px;">Creación: <%= review.created_at.strftime("%d/%m/%Y %H:%M") %></div>
-                      <div style="margin-bottom: 10px;">Actualización: <%= review.updated_at.strftime("%d/%m/%Y %H:%M") %></div>
+                      <div class="flex-grow-1" style="margin-left: 10px;">
+                        <h5 style="margin-top: 10px; color: #196F3D;">Servicio: <%= review&.service&.title&.truncate(25) || 'Este registro ha sido eliminada.' %></h5>
+                        <% if review.rating.present? %>
+                          <div><%= "⭐️" * review.rating %></div>
+                        <% end %>
+                        <% if review.user.name.present? %>
+                          <p class="font-weight-bold" style="margin-top: 5px; margin-bottom: 5px;"><%= review.user.name %></p>
+                        <% else %>
+                          <p class="font-weight-bold" style="margin-top: 5px; margin-bottom: 5px;">Usuario dado de baja</p>
+                        <% end %>
+                        <div class="d-flex justify-content-start" style="font-size: 12px;">
+                          <div style="margin-right: 10px;">Creación: <%= review.created_at.strftime("%d/%m/%Y %H:%M") %></div>
+                          <div style="margin-bottom: 10px;">Actualización: <%= review.updated_at.strftime("%d/%m/%Y %H:%M") %></div>
+                        </div>
+                        <p class="mb-0"><%= review.comment %></p>
+                      </div>
                     </div>
-                    <p class="mb-0"><%= review.comment %></p>
                   </div>
                 </div>
               </div>
-            </div>
+            <% end %>
           </div>
+          <%= paginate @reviews %>
+        <% else %>
+          <p>No hay evaluaciones.</p>
         <% end %>
       </div>
-      <%= paginate @reviews %>
+
+      <!-- Vendedor/a section -->
+      <div class="col-lg-3 col-md-4 col-12 order-2 order-md-1 mb-5 mt-5">
+          <%= link_to user_path(@service.user), class: 'text-decoration-none text-dark' do %>
+              <div class="card">
+                  <div class="card-body text-center">
+                      <% if @service.user.image.attached? %>
+                          <%= image_tag(@service.user.image, class: 'rounded-circle mx-auto d-block', style: 'width:100px; height:100px;') %>
+                      <% else %>
+                          <%= image_tag('default_user.jpg', class: 'rounded-circle mx-auto d-block', style: 'width:100px; height:100px;') %>
+                      <% end %>
+                      <h6 class="mt-3 mb-1">
+                          <%= @service.user.name %>
+                      </h6>
+                      <% if @service.average_rating > 0 %>
+                        <p class="mb-0"><%= "⭐️" %> <%= sprintf('%.2f', @service.average_rating) %></p>
+                      <% else %>
+                        <p class="mb-0"> -- </p>
+                      <% end %>
+                  </div>
+              </div>
+          <% end %>
+      </div>
+
+
+    </div>
   </div>
 </div>

@@ -1,14 +1,21 @@
-/* services/show ================================ */
 .service-image {
-  width: 100%;       /* コンテナの幅に合わせる */
-  height: auto;      /* アスペクト比を維持 */
-  object-fit: cover; /* 画像のアスペクト比を維持しつつ、コンテナに合わせて表示 */
-  border-radius: 0%;
-  box-shadow: 0 2px 6px #c1ced7; /* オプション: 影を追加 */
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 0;
 }
 
 .service-show-item {
   padding: 30px;
   background-color: white;
-  box-shadow: 0 2px 6px #c1ced7;
+  border: 1px solid #cbd5d5;
+  margin-bottom: 30px; /* spacing between elements */
+  border-radius: 5px;
+}
+
+/* Your previous media query is great! */
+@media (max-width: 767px) {
+  .row {
+    flex-direction: column-reverse;
+  }
 }
