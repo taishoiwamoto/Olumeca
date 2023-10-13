@@ -41,8 +41,6 @@ class UsersController < ApplicationController
   def find_active_user
     @user = User.active.find_by(id: params[:id])
 
-    render file: "#{Rails.root}/public/404.html" if @user.nil?
-
     if @user.nil?
       render file: "#{Rails.root}/public/404.html"
     else
