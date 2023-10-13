@@ -5,3 +5,8 @@ header {
   top: 0;           /* この行を追加 */
   left: 0;          /* この行を追加 */
 }
+
+.bg-white {
+  background-color: #ffffff !important;
+  border-bottom: 1px solid #e9eef1;
+}
