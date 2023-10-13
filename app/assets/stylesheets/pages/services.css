@@ -6,9 +6,7 @@
 }
 
 .service-show-item {
-  padding-top: 30px;
-  padding-left: 30px;
-  padding-right: 30px;
+  padding: 30px;
   background-color: white;
   border: 1px solid #cbd5d5;
   margin-bottom: 30px; /* spacing between elements */
@@ -25,4 +23,9 @@
     justify-content: center;
     align-items: center;
   }
+}
+
+/* Service and favorite card border between text and pics */
+.card-body {
+  border-top: 1px solid #cbd5d5;
 }
