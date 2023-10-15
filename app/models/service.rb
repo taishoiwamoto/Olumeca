@@ -11,7 +11,7 @@ class Service < ApplicationRecord
   validates :title,
     presence: true,
     length: {
-      maximum: 65,
+      maximum: 100,
       too_long: ':El nombre del servicio debe tener menos de %{count} caracteres.'
     }
   validates :detail, presence: true
