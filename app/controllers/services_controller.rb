@@ -4,15 +4,18 @@ class ServicesController < ApplicationController
   before_action :authorize_user, only: %i[edit update destroy]
 
   def index
+    # [重要度: 低] Serviceの量が増えてきたときに動作が遅くなる可能性があります。DBに適切なインデックスを張ることをお勧めします
     @services = Service.active.order(created_at: :desc).page(params[:page]).per(30)
   end
 
   def show
+    # [重要度: 低] find_byではなく、findの利用を検討してください。それだけで、見つからない際は404エラーを返却可能です
     @service = Service.active.find_by(id: params[:id])
     if @service.nil?
       render file: "#{Rails.root}/public/404.html"
     else
       @user = @service.user
+      # [重要度: 低] @service.likes.countの方が分かりやすいかと思います
       @likes_count = Like.where(service_id: @service.id).count
       @reviews = @service.reviews.order(created_at: :desc).page(params[:page]).per(10)
     end
@@ -52,6 +55,7 @@ class ServicesController < ApplicationController
   def filter
     @services = Service.all
 
+    # [重要度: 低] Serviceテーブルのデータ量が多くなった際に時間がかかる可能性が高いです。LIKE検索の有効的な軽量化方法は難しいため、外部の検索サービスなどの利用をお勧めします。
     if params[:category_id].present?
       @services = @services.where(category_id: params[:category_id])
     end
@@ -75,10 +79,12 @@ class ServicesController < ApplicationController
   end
 
   def set_service
+    # [重要度: 中] find_byではなく、findの利用を検討してください。idが適当だった際に後続処理が500エラーとなる可能性があります
     @service = Service.find_by(id: params[:id])
   end
 
   def authorize_user
+    # [重要度: 中] set_serviceメソッド内で行えば、この処理の呼び出し漏れを防ぐことが可能です
     return if @service.user.eql? current_user
 
     redirect_to service_path(@service), notice: 'No tienes autorización'

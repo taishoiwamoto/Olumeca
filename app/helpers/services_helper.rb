@@ -1,5 +1,6 @@
 module ServicesHelper
 
+  # [重要度: 中] 平均を求める処理が、モデルとhelperに分散しています。モデルへの集約を検討してください。
   def calculate_average_rating(reviews)
     total_rating = reviews.sum { |review| review.rating || 0 }.to_f
     average_rating = total_rating / reviews.size

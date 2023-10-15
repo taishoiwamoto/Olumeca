@@ -36,6 +36,7 @@ class ReviewsController < ApplicationController
 
   private
 
+  # [重要度: 中] ApplicationController内のauthenticate_userにほぼ同様の処理があります
   def require_login
     return if current_user
 
@@ -47,6 +48,8 @@ class ReviewsController < ApplicationController
   end
 
   def authorized_user
+    # [重要度: 低] @review.user_id == current_user.idとした方が、userテーブルへのselectを減らせるため、より高速な動作が見込めます
+    # [重要度: 中] set_reviewメソッド内で行えば、この処理の呼び出し漏れを防ぐことが可能です
     return if @review.user.eql?(current_user)
 
     redirect_to root_path, notice: 'No tiene permiso para editar esta evaluación.'
@@ -61,6 +64,7 @@ class ReviewsController < ApplicationController
   end
 
   def check_review_possibility
+    # [重要度: 中] set_reviewメソッド内で行えば、この処理の呼び出し漏れを防ぐことが可能です
     # サービスが購入されているか？
     purchased = Order.exists?(buyer: current_user, service: @service)
 
