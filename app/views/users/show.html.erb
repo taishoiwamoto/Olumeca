@@ -44,27 +44,26 @@
               <%= link_to service_path(service), class: "card-link-wrapper" do %>
                 <div class="card mb-4 bg-white" style="width: 100%;">
                   <div class="row g-1">
-                    <div class="col-3" style="display: flex; align-items: center; justify-content: center;">
-                        <% if service.image.attached? %>
-                            <%= image_tag service.image, class: "img-fluid rounded-start", style: "width: 75px; height: 75px; border: 2px solid #EEEEEE;", alt: service.title %>
-                        <% else %>
-                            <%= image_tag 'default_service.jpg', class: "img-fluid rounded-start", style: "width: 75px; height: 75px; border: 2px solid #EEEEEE;", alt: "Default service image" %>
-                        <% end %>
+                    <div class="col-3 d-none d-md-flex align-items-center justify-content-center">
+                      <% if service.image.attached? %>
+                        <%= image_tag service.image, class: "img-fluid rounded-start", style: "width: 75px; height: 75px; border: 2px solid #EEEEEE;", alt: service.title %>
+                      <% else %>
+                        <%= image_tag 'default_service.jpg', class: "img-fluid rounded-start", style: "width: 75px; height: 75px; border: 2px solid #EEEEEE;", alt: "Default service image" %>
+                      <% end %>
                     </div>
 
                     <div class="col-8">
                       <div class="card-body">
-                        <h5 class="card-title"><%= service.title %></h5>
-                          <div class="star">
-                            <% reviews = service.reviews %>
-                            <% if reviews.present? %>
-                              <% average_rating = calculate_average_rating(reviews) %>
-                                <p class="card-text"><%= "⭐️" %> <%= sprintf('%.2f', average_rating) %>
-                            <% else %>
-                              <p class="card-text"> --
-                            <% end %>
-                          </div>
-                        </p>
+                        <h5 class="card-title"><%= service.title.truncate(40) %></h5>
+                        <div class="star">
+                          <% reviews = service.reviews %>
+                          <% if reviews.present? %>
+                            <% average_rating = calculate_average_rating(reviews) %>
+                            <p class="card-text"><%= "⭐️" %> <%= sprintf('%.2f', average_rating) %></p>
+                          <% else %>
+                            <p class="card-text"> -- </p>
+                          <% end %>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -76,6 +75,7 @@
           <p>No hay servicios.</p>
         <% end %>
       </div>
+
 
 
       <h5>Evaluación</h5>
@@ -95,7 +95,7 @@
                     <% end %>
 
                     <div class="flex-grow-1" style="margin-left: 10px;">
-                      <h5 style="margin-top: 10px; color: #196F3D;">Servicio: <%= review&.service&.title || 'Este registro ha sido eliminada.' %></h5>
+                      <h5 style="margin-top: 10px;">Servicio: <%= review&.service&.title || 'Este registro ha sido eliminada.' %></h5>
                       <% if review.rating.present? %>
                         <div><%= "⭐️" * review.rating %></div>
                       <% end %>
