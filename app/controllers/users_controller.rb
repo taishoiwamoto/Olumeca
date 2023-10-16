@@ -27,6 +27,7 @@ class UsersController < ApplicationController
   end
 
   def destroy
+    # [重要度: 高] idの値を偽装することで任意のユーザの削除が可能になってます
     user_id = params[:id]
     @user = User.find(user_id)
     @user.soft_delete
@@ -39,11 +40,15 @@ class UsersController < ApplicationController
   # end
 
   def find_active_user
+    # [重要度: 中] find_byではなく、findの利用を検討してください。
     @user = User.active.find_by(id: params[:id])
 
     if @user.nil?
       render file: "#{Rails.root}/public/404.html"
     else
+      # [重要度: 中] @userには既に値が入ってますので再代入の必要はありません。
+      # またset_userにも同様の表記があります
+      # 同様の文章が複数あると、編集時の作業漏れにつながります
       @user = User.active.find(params[:id])
     end
   end

@@ -25,6 +25,9 @@ class ApplicationController < ActionController::Base
     #devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :phone_number, :profile_image])
   end
   def ensure_domain
+    # [重要度: 低] アクセスの制限を一部でしていると思いますが、本来的にはこのような処理はインフラレイヤーで行うべきです。
+    # 不要なアクセスをRailsで受けることになるため、不要なサーバーリソースを使うことになるためです。また実装不備によりこの処理が通らなかったときに重要な不具合となる可能性を秘めます。
+    # Herokuでどこまで行えるかという問題もありますので、重要度を低としています。
     return unless /\.herokuapp.com/ =~ request.host
 
     port = ":#{request.port}" unless [80, 443].include?(request.port)
