@@ -1,4 +1,4 @@
-<%= form_with(model: review, url: [service, review], html: { class: 'needs-validation', novalidate: true }) do |form| %>
+<%= form_with(model: review, url: [service, review], html: { class: 'needs-validation' }) do |form| %>
   <% if review.errors.any? %>
     <div class="mb-3">
       <% review.errors.full_messages.each do |message| %>
@@ -10,9 +10,9 @@
   <div class="mb-3">
     <%= form.label :rating, 'Evaluación', class: 'form-label' %>
     <% if review.rating.present? %>
-      <%= form.select :rating, options_for_select(review_select_options, :selected => review.rating), { required: true }, class: 'form-select' %>
+      <%= form.select :rating, options_for_select(review_select_options, :selected => review.rating), { include_blank: 'Seleccione un valor numérico' }, class: 'form-select', required: true %>
     <% else %>
-      <%= form.select :rating, options_for_select(review_select_options), { :include_blank => 'Seleccione un valor numérico', required: true }, class: 'form-select' %>
+      <%= form.select :rating, options_for_select(review_select_options), {include_blank: 'Seleccione un valor numérico'}, class: 'form-select',required: true %>
     <% end %>
   </div>
 
