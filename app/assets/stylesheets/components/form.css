@@ -1,8 +1,8 @@
 .form {
   max-width: 100%;
-  margin: 0 auto;
+  margin: 10px;
   background-color: white;
-  box-shadow: 0 2px 6px #c1ced7;
+  border: 1px solid #cbd5d5;
 }
 
 .form-body {
