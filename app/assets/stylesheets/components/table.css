@@ -1,0 +1,11 @@
+.full-text {
+  white-space: nowrap;
+  overflow: visible;
+  color: #007BFF !important;
+  text-decoration: none !important;
+}
+
+.full-text:hover {
+  color: #0056b3 !important;
+  text-decoration: underline !important;
+}

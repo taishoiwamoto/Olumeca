@@ -18,8 +18,8 @@
           <% @sales.each do |sale| %>
             <tr>
               <td><%= sale.id %></td>
-              <td><%= link_to sale.service.title, service_path(sale.service) %></td>
-              <td><%= link_to get_name_buyer(sale.buyer_id), user_path(sale.buyer) %></td>
+              <td><%= link_to sale.service.title, service_path(sale.service), class: "full-text" %></td>
+              <td><%= link_to get_name_buyer(sale.buyer_id), user_path(sale.buyer), class: "full-text" %></td>
               <td><%= sale.created_at.strftime("%d/%m/%Y") %></td>
               <td>
                 <% case sale.status %>
@@ -42,8 +42,8 @@
               <td>
                 <% if sale.accepted? %>
                   <% if sale.buyer.deleted_at.nil? %>
-                      <i class="fa-solid fa-envelope"></i>: <span style="font-size: 12px;"><%= sale.buyer.email %></span> <br/>
-                      <i class="fa-solid fa-phone"></i>: <span style="font-size: 12px;"><%= sale.buyer.phone_number %></span>
+                    <i class="fa-solid fa-envelope" style="font-size: 12px;"></i>: <span style="font-size: 12px;"><%= sale.buyer.email %></span> <br/>
+                    <i class="fa-solid fa-phone" style="font-size: 12px;"></i>: <span style="font-size: 12px;"><%= sale.buyer.phone_number %></span>
                   <% else %>
                       <span style="color: red;">Dado de baja</span>
                   <% end %>
