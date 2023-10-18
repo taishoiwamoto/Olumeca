@@ -8,7 +8,7 @@
     <p>Detalle del pedido:</p>
     <ul>
         <li>Nombre del producto: <%= sale.service.title %></li>
-        <li>Comprador/a: <%= get_name_buyer(sale.buyer_id) %></li>
+        <li>Comprador/a: <%= sale.buyer.name %></li>
     </ul>
 
     <% if Rails.env.development? %>

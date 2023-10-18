@@ -1,9 +1,7 @@
 class ReviewsController < ApplicationController
-  before_action :require_login
+  before_action :authenticate_user
   before_action :set_service
-  before_action :set_review, only: [:edit, :update]
-  before_action :authorized_user, only: [:edit, :update]
-  before_action :check_review_possibility, only: [:new, :create]
+  before_action :set_review, only: [:new, :create, :edit, :update]
 
   def new
     if @service.reviews.where(user: current_user).exists?
@@ -36,22 +34,17 @@ class ReviewsController < ApplicationController
 
   private
 
-  # [重要度: 中] ApplicationController内のauthenticate_userにほぼ同様の処理があります
-  def require_login
-    return if current_user
-
-    redirect_to new_user_session_path, notice: 'Es necesario iniciar sesión'
-  end
-
   def set_review
-    @review = Review.find(params[:id])
+    @review = Review.find_by(id: params[:id]) || @service.reviews.where(user: current_user).first
+
+    authorized_user if %w[edit update].include?(action_name)
+    check_review_possibility if %w[new create].include?(action_name)
   end
 
   def authorized_user
-    # [重要度: 低] @review.user_id == current_user.idとした方が、userテーブルへのselectを減らせるため、より高速な動作が見込めます
-    # [重要度: 中] set_reviewメソッド内で行えば、この処理の呼び出し漏れを防ぐことが可能です
-    return if @review.user.eql?(current_user)
-
+    # [重要度: 低] @review.user_id == current_user.idとした方が、userテーブルへのselectを減らせるため、より高速な動作が見込めます → 完了
+    # [重要度: 中] set_reviewメソッド内で行えば、この処理の呼び出し漏れを防ぐことが可能です → 完了
+    return if @review.user_id == current_user.id
     redirect_to root_path, notice: 'No tiene permiso para editar esta evaluación.'
   end
 
@@ -64,11 +57,9 @@ class ReviewsController < ApplicationController
   end
 
   def check_review_possibility
-    # [重要度: 中] set_reviewメソッド内で行えば、この処理の呼び出し漏れを防ぐことが可能です
-    # サービスが購入されているか？
+    # [重要度: 中] set_reviewメソッド内で行えば、この処理の呼び出し漏れを防ぐことが可能です → 完了
     purchased = Order.exists?(buyer: current_user, service: @service)
 
-    # サービスがすでにレビューされているか？
     reviewed = Order.service_reviewed_by_user?(current_user.id, @service.id)
 
     unless purchased && !reviewed

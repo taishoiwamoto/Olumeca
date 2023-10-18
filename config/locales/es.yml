@@ -1,4 +1,9 @@
 es:
+  order_statuses:
+    pending: 'Pendiente'
+    accepted: 'Aceptado'
+    rejected: 'Rechazado'
+
   activerecord:
     attributes:
       user:
