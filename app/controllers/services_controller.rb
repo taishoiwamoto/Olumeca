@@ -10,14 +10,10 @@ class ServicesController < ApplicationController
   def show
     # [重要度: 低] find_byではなく、findの利用を検討してください。それだけで、見つからない際は404エラーを返却可能です → 完了
     @service = Service.active.find(params[:id])
-    if @service.nil?
-      render file: "#{Rails.root}/public/404.html"
-    else
-      @user = @service.user
-      # [重要度: 低] @service.likes.countの方が分かりやすいかと思います → 完了
-      @likes_count = @service.likes.count
-      @reviews = @service.reviews.order(created_at: :desc).page(params[:page]).per(10)
-    end
+    @user = @service.user
+    # [重要度: 低] @service.likes.countの方が分かりやすいかと思います → 完了
+    @likes_count = @service.likes.count
+    @reviews = @service.reviews.order(created_at: :desc).page(params[:page]).per(10)
   end
 
   def new

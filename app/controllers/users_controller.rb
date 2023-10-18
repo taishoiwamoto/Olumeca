@@ -36,12 +36,8 @@ class UsersController < ApplicationController
   def find_active_user
     # [重要度: 中] find_byではなく、findの利用を検討してください。→ 完了
     @user = User.active.find(params[:id])
-
-    if @user.nil?
-      render file: "#{Rails.root}/public/404.html"
-      # [重要度: 中] @userには既に値が入ってますので再代入の必要はありません。→ 完了
-      # またset_userにも同様の表記があります
-      # 同様の文章が複数あると、編集時の作業漏れにつながります
-    end
+    # [重要度: 中] @userには既に値が入ってますので再代入の必要はありません。→ 完了
+    # またset_userにも同様の表記があります
+    # 同様の文章が複数あると、編集時の作業漏れにつながります
   end
 end
