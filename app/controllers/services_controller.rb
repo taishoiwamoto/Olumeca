@@ -63,7 +63,7 @@ class ServicesController < ApplicationController
       @services = @services.by_keyword(params[:keyword])
     end
 
-    @services = @services.active.order(created_at: :desc).page(params[:page]).per(10)
+    @services = @services.active.order(created_at: :desc).page(params[:page]).per(30)
 
     respond_to do |format|
       format.turbo_stream { render turbo_stream: turbo_stream.replace('services', partial: 'services/services', locals: { services: @services })}
