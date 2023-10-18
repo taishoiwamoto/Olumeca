@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
-  # [重要度: 高] accept, rejectはユーザログインを求めなくてもよいのでしょうか？
-  before_action :authenticate_user, only: [:new, :create, :completed]
+  # [重要度: 高] accept, rejectはユーザログインを求めなくてもよいのでしょうか？ → 完了
+  before_action :authenticate_user, only: [:new, :create, :completed, :accept, :reject]
   before_action :check_order_existence, only: [:new, :create]
   before_action :prevent_purchase_of_own_service, only: [:new, :create]
 
@@ -13,15 +13,17 @@ class OrdersController < ApplicationController
     @service = Service.find(params[:order][:service_id])
     @order = current_user.purchased_orders.build(
       service_id: @service.id,
-      # [重要度: 低] @service.user.id -> @service.user_id としてください。usersテーブルへのSELECTを減らし、より高速な動作が見込めます
-      seller_id: @service.user.id
+      # [重要度: 低] @service.user.id -> @service.user_id としてください。usersテーブルへのSELECTを減らし、より高速な動作が見込めます → 完了
+      seller_id: @service.user_id
     )
 
     if @order.save
       OrderMailer.with(order: @order).order_notification.deliver_later
       redirect_to completed_orders_path
     else
-      # [重要度: 中] エラー発生時の処理が抜けてます
+      # [重要度: 中] エラー発生時の処理が抜けてます → 完了
+      flash.now[:alert] = 'Hubo un error al crear el pedido. Por favor, inténtalo de nuevo.'
+      render :new
     end
   end
 
@@ -51,24 +53,21 @@ class OrdersController < ApplicationController
 
   private
 
-  # [重要度: 低] 利用されていないメソッド
-  def order_params
-    params.require(:order).permit(:service_id)
-  end
+  # [重要度: 低] 利用されていないメソッド → 完了
 
   def check_order_existence
-    # [重要度: 高] params[:order][:service_id]が不適切な値でも、params[:service_id]に適切な値を入れると注文することが可能になります
-    @service = Service.find(params[:service_id] || params[:order][:service_id])
+    # [重要度: 高] params[:order][:service_id]が不適切な値でも、params[:service_id]に適切な値を入れると注文することが可能になります → 完了
+    @service = Service.find(params[:action] == "new" ? params[:service_id] : params[:order][:service_id])
     if Order.exists?(buyer: current_user, service: @service)
       redirect_to @service, alert: 'Ya has pedido este servicio.'
     end
   end
 
   def prevent_purchase_of_own_service
-    # [重要度: 高] params[:order][:service_id]が不適切な値でも、params[:service_id]に適切な値を入れると注文することが可能になります
-    @service = Service.find(params[:service_id] || params[:order][:service_id])
-    # [重要度: 低] @service.user_id == current_user.idとしたほうが、userテーブルへのselectが走らず、より高速な動作が可能です
-    if @service.user == current_user
+    # [重要度: 高] params[:order][:service_id]が不適切な値でも、params[:service_id]に適切な値を入れると注文することが可能になります → 完了
+    @service = Service.find(params[:action] == "new" ? params[:service_id] : params[:order][:service_id])
+    # [重要度: 低] @service.user_id == current_user.idとしたほうが、userテーブルへのselectが走らず、より高速な動作が可能です → 完了
+    if @service.user_id == current_user.id
       redirect_to @service, alert: 'No puedes pedir tu propio servicio.'
     end
   end

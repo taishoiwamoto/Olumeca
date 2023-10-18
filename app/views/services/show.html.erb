@@ -2,9 +2,7 @@
   <div class="container">
     <div class="row">
 
-      <!-- Servicio section -->
       <div class="col-lg-7 col-md-8 col-12 order-1 order-md-1 mt-5">
-        <!-- ... the rest of your Servicio content ... -->
         <div class="service-show-item">
           <div style="display: flex; justify-content: flex-end;">
             <% if current_user && @service.user_id == current_user.id %>
@@ -21,7 +19,7 @@
             <div class="star">
               <% if @reviews.present? %>
                 <div class="average-rating">
-                  <p><%= "⭐️" %> <%= sprintf('%.2f', calculate_average_rating(@reviews)) %></p>
+                  <p><%= "⭐️" %> <%= sprintf('%.2f', @service.average_rating) %></p>
                 </div>
               <% else %>
                 --
@@ -61,7 +59,6 @@
 
         <h3 class="mt-5 mb-4">Evaluación</h3>
           <% if @reviews.any? %>
-          <!-- ... the rest of your Evaluación content ... -->
           <div class="row">
             <% @reviews.each do |review| %>
               <div class="col-12 mb-4">
@@ -104,7 +101,6 @@
         <% end %>
       </div>
 
-      <!-- Vendedor/a section -->
       <div class="col-lg-3 col-md-4 col-12 order-2 order-md-1 mb-5 mt-5">
           <%= link_to user_path(@service.user), class: 'text-decoration-none text-dark' do %>
               <div class="card">

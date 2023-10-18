@@ -23,10 +23,7 @@ class Service < ApplicationRecord
   end
 
   def average_rating
-    average = reviews.pluck('AVG(rating)')[0]
-    return average if average.present?
-
-    0
+    reviews.average(:rating).to_f.round(2)
   end
 
   def count_likes

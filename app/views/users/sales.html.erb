@@ -19,7 +19,7 @@
             <tr>
               <td><%= sale.id %></td>
               <td><%= link_to sale.service.title, service_path(sale.service), class: "full-text" %></td>
-              <td><%= link_to get_name_buyer(sale.buyer_id), user_path(sale.buyer), class: "full-text" %></td>
+              <td><%= link_to sale.buyer.name, user_path(sale.buyer), class: "full-text" %></td>
               <td><%= sale.created_at.strftime("%d/%m/%Y") %></td>
               <td>
                 <% case sale.status %>
@@ -33,8 +33,8 @@
               </td>
               <td>
                 <% if sale.pending? %>
-                  <div style="display: flex; justify-content: space-between;">
-                    <%= button_to "Aceptar", accept_order_path(sale), method: :put, class: "btn btn-primary btn-sm", style: "margin-right: 5px;" %>
+                  <div style="display: flex;">
+                    <%= button_to "Aceptar", accept_order_path(sale), method: :put, class: "btn btn-primary btn-sm", style: "margin-right: 10px;" %>
                     <%= button_to "Rechazar", reject_order_path(sale), method: :put, class: "btn btn-danger btn-sm" %>
                   </div>
                 <% else %>

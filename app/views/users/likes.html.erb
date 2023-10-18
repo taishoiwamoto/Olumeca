@@ -19,7 +19,7 @@
                         <div class="star">
                           <% reviews = service.reviews %>
                           <% if reviews.present? %>
-                            <% average_rating = calculate_average_rating(reviews) %>
+                            <% average_rating = service.average_rating %>
                             <%= "⭐️" %> <%= sprintf('%.2f', average_rating) %>
                           <% else %>
                             --
