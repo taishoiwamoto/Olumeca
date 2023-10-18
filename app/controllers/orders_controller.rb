@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
   # [重要度: 高] accept, rejectはユーザログインを求めなくてもよいのでしょうか？ → 完了
-  before_action :authenticate_user, only: [:new, :create, :completed, :accept, :reject]
+  before_action :authenticate_user, only: [:new, :create, :completed, :accept, :reject, :user_info]
   before_action :check_order_existence, only: [:new, :create]
   before_action :prevent_purchase_of_own_service, only: [:new, :create]
 
