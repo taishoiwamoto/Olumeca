@@ -89,21 +89,20 @@
           </div>
         </div>
       </nav>
-    </header>
+      <% if flash[:notice] %>
+        <div class="alert alert-warning alert-dismissible text-center fade show mb-0" role="alert" style="margin-top: 0px;">
+          <%= flash[:notice] %>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      <% end %>
 
-    <% if flash[:notice] %>
-      <div class="alert alert-warning alert-dismissible text-center fade show mb-0" role="alert" style="margin-top: 65px;">
-        <%= flash[:notice] %>
+      <% if flash[:alert] %>
+        <div class="alert alert-danger alert-dismissible text-center fade show mb-0" role="alert" style="margin-top: 0px;">
+          <%= flash[:alert] %>
           <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-      </div>
-    <% end %>
-
-    <% if flash[:alert] %>
-      <div class="alert alert-danger alert-dismissible text-center fade show mb-0" role="alert" style="margin-top: 65px;">
-        <%= flash[:alert] %>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-      </div>
-    <% end %>
+        </div>
+      <% end %>
+    </header>
 
     <%= yield %>
 
