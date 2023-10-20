@@ -21,5 +21,6 @@ test:
   database: db/test.sqlite3
 
 production:
-  <<: *default
-  database: db/test.sqlite3
+  database: olumeca_production
+  username: aydsxbkgxiyzla
+  password: 3e104448c1e056043f4ace93489319f1249edb92c9971722c607aa8edf754b02
