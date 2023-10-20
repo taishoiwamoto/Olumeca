@@ -50,7 +50,7 @@ class User < ApplicationRecord
   end
 
   def soft_delete
-    # [重要度: 高] 退会後に個人情報を削除しないと問題になる可能性があります → 未対応
+    # [重要度: 高] 退会後に個人情報を削除しないと問題になる可能性があります → 対応済（methodのhard_deleteで上書きする）
     # 一方で、即日削除も、ユーザが不適切な行為を行った場合の責任追及ができないなど問題が生じます。
     # 適切な期間を置いた後で完全に情報が削除できるような検討をしてください。
     # 物理削除をすると他の問題が出てきますので、通常、適当な値で上書きをしてあげるという処置をします。
@@ -68,6 +68,11 @@ class User < ApplicationRecord
 
   after_update :reject_pending_orders, if: -> { saved_change_to_attribute?(:deleted_at) && !deleted_at.nil? }
 
+  def hard_delete
+    update(name: "Dado de baja", email: "--", phone_number: "--")
+    save
+  end
+
   private
 
   def reject_pending_orders
@@ -83,5 +88,4 @@ class User < ApplicationRecord
   def password_required?
     !persisted? || !password.nil? || !password_confirmation.nil?
   end
-
 end

@@ -18,8 +18,21 @@
           <% @orders.each do |order| %>
             <tr>
               <td><%= order.id %></td>
-              <td><%= link_to order.service.title, service_path(order.service), class: "full-text" %></td>
-              <td><%= link_to order.service.user.name, user_path(order.seller), class: "full-text" %></td>
+              <td>
+                <% if order.service.user.deleted_at.nil? %>
+                  <%= link_to order.service.title, service_path(order.service), class: "full-text" %>
+                <% else %>
+                  <%= order.service.title %>
+                <% end %>
+              </td>
+
+              <td>
+                <% if order.service.user.deleted_at.nil? %>
+                  <%= link_to order.service.user.name, user_path(order.seller), class: "full-text" %>
+                <% else %>
+                  <%= order.service.user.name %>
+                <% end %>
+              </td>
               <td><%= order.created_at.strftime("%d/%m/%Y") %></td>
               <td>
                 <% case order.status %>
@@ -42,12 +55,8 @@
               </td>
               <td>
                 <% if order.accepted? %>
-                  <% if order.seller.deleted_at.nil? %>
-                      <i class="fa-solid fa-envelope" style="font-size: 12px;"></i>: <span style="font-size: 12px;"><%= order.seller.email %></span> <br/>
-                      <i class="fa-solid fa-phone" style="font-size: 12px;"></i>: <span style="font-size: 12px;"><%= order.seller.phone_number %></span>
-                  <% else %>
-                      <span style="color: red;">Dado de baja</span>
-                  <% end %>
+                  <i class="fa-solid fa-envelope" style="font-size: 12px;"></i>: <span style="font-size: 12px;"><%= order.seller.email %></span> <br/>
+                  <i class="fa-solid fa-phone" style="font-size: 12px;"></i>: <span style="font-size: 12px;"><%= order.seller.phone_number %></span>
                 <% end %>
               </td>
             </tr>
