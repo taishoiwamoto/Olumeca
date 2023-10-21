@@ -3,9 +3,9 @@
     <div class="top-mainVisual__container">
       <div class="left">
         <div class="top-message">
-          <h1>Mercado de habilidades con varios profesionales</h1>
+          <h1>Mercado de servicios con varios profesionales</h1>
         </div>
-          <p>Es posible comprar y vender habilidades y conocimientos.</p>
+          <p>Es posible comprar y vender habilidades, conocimientos y experiencias.</p>
           <div class="d-grid gap-2 col-10 mt-5">
             <%= link_to "Registrar", new_user_registration_path, class: "btn btn-primary btn-lg" %>
           </div>
@@ -54,7 +54,7 @@
                         <%= image_tag('default_service.jpg', class: "card-img-top", alt: "...") %>
                     <% end %>
                     <div class="card-body">
-                      <h5 class="card-title"><%= service.title.truncate(45) %></h5>
+                      <h5 class="card-title"><%= service.title.truncate(30) %></h5>
                       <p class="card-text"><%= service.user.name %></p>
                       <div style="display: flex; justify-content: space-between;">
                         <div class="star">

@@ -20,7 +20,7 @@
               <td><%= order.id %></td>
               <td>
                 <% if order.service.user.deleted_at.nil? %>
-                  <%= link_to order.service.title, service_path(order.service), class: "full-text" %>
+                  <%= link_to order.service.title, service_path(order.service), class: "link-text" %>
                 <% else %>
                   <%= order.service.title %>
                 <% end %>
@@ -28,7 +28,7 @@
 
               <td>
                 <% if order.service.user.deleted_at.nil? %>
-                  <%= link_to order.service.user.name, user_path(order.seller), class: "full-text" %>
+                  <%= link_to order.service.user.name, user_path(order.seller), class: "link-text" %>
                 <% else %>
                   <%= order.service.user.name %>
                 <% end %>
@@ -55,8 +55,12 @@
               </td>
               <td>
                 <% if order.accepted? %>
-                  <i class="fa-solid fa-envelope" style="font-size: 12px;"></i>: <span style="font-size: 12px;"><%= order.seller.email %></span> <br/>
-                  <i class="fa-solid fa-phone" style="font-size: 12px;"></i>: <span style="font-size: 12px;"><%= order.seller.phone_number %></span>
+                  <div class="info-item">
+                    <i class="fa-solid fa-envelope"></i>: <%= order.seller.email %></span> <br/>
+                  </div>
+                  <div class="info-item">
+                    <i class="fa-solid fa-phone"></i>: <%= order.seller.phone_number %></span>
+                  </div>
                 <% end %>
               </td>
             </tr>
