@@ -2,6 +2,7 @@
   <% if review.errors.any? %>
     <div class="mb-3">
       <% review.errors.full_messages.each do |message| %>
+        <%# [優先度: 低] ulタグが内にも関わらず、liタグが利用されてます %>
         <li class="form-error"><%= message %></li>
       <% end %>
     </div>
@@ -10,6 +11,7 @@
   <div class="mb-3">
     <%= form.label :rating, 'Evaluación', class: 'form-label' %>
     <% if review.rating.present? %>
+      <%# [優先度: 低] `:selected => review.rating` => `selected: review.rating`。表記方法を統一してください %>
       <%= form.select :rating, options_for_select(review_select_options, :selected => review.rating), { include_blank: 'Seleccione un valor numérico' }, class: 'form-select', required: true %>
     <% else %>
       <%= form.select :rating, options_for_select(review_select_options), {include_blank: 'Seleccione un valor numérico'}, class: 'form-select',required: true %>

@@ -58,6 +58,7 @@
                     Mi Página
                   </a>
                   <ul class="dropdown-menu dropdown-menu-end">
+                    <%# [優先度: 中] aタグは利用せず、link_toの利用を検討してください。ほかにも同様の指摘箇所がありますが、多いので省略させて下さい。。。 %>
                     <li><a class="dropdown-item" href="<%= user_path(current_user) %>">Perfil</a></li>
                     <li><a class="dropdown-item" href="<%= edit_user_registration_path %>">Editar tu cuenta</a></li>
                     <li><a class="dropdown-item" href="<%= likes_user_path(current_user.id) %>">Favoritos</a></li>
@@ -71,6 +72,7 @@
               <% else %>
 
                 <li class="nav-item">
+                    <%# [優先度: 中] link_toの利用を検討してください %>
                   <a class="nav-link active me-3" aria-current="page" href="https://wa.me/4423831033">
                     <i class="fab fa-whatsapp fa-1x" style="margin-right: 5px;"></i>Contactar
                   </a>
@@ -92,6 +94,7 @@
       <% if flash[:notice] %>
         <div class="alert alert-warning alert-dismissible text-center fade show mb-0" role="alert" style="margin-top: 0px;">
           <%= flash[:notice] %>
+          <%# [優先度: 中]インデントずれ %>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
       <% end %>
@@ -115,6 +118,7 @@
           <p class="footer-item"><%= link_to 'Términos y condiciones', static_pages_terms_of_service_path %></p>
           <p class="footer-item"><%= link_to 'Política de privacidad', static_pages_privacy_policy_path %></p>
           <p class="footer-item"><%= link_to 'Perfil Empresa', 'https://miraie-mexico.com/%e4%bc%9a%e7%a4%be%e6%a6%82%e8%a6%81/' %></p>
+          <%# [優先度: 中] link_to do ~ end の利用を検討し、html_safeの利用を極力避けて下さい %>
           <p class="footer-item"><%= link_to '<i class="fab fa-instagram"></i>'.html_safe, 'https://www.instagram.com/olumeca/' %></p>
           <p class="footer-item"><%= link_to '<i class="fab fa-facebook-f"></i>'.html_safe, 'https://www.facebook.com/profile.php?id=61552368129464' %></p>
         </div>

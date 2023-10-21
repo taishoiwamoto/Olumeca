@@ -11,6 +11,11 @@ class UsersController < ApplicationController
   end
 
   def likes
+    # [優先度: 中] Viewに表示したいのは、Likeの情報ではなく、Serviceの情報かと思います。
+    # なので、Serviceを中心にクエリを組み立ててください
+    # @services = Service.joins(:likes).where(likes: { user_id: current_user.id }).order("likes.created_at desc").page(params[:page]).per(30)
+    # ↑実際に動かしてないので、動かないかもしれません。。。。
+
     @likes = Like.joins(:service).merge(Service.active).where(user_id: current_user.id).order(created_at: :desc).page(params[:page]).per(30)
   end
 
