@@ -12,5 +12,4 @@
   height: 20px; /* 適切な高さに調整する */
   overflow: hidden;
   white-space: nowrap;
-  text-overflow: ellipsis;
 }
