@@ -4,6 +4,7 @@
         <% @services.each do |service| %>
           <%= link_to service_path(service) do %>
             <div class="card">
+                <%# [優先度: 中] インデントずれ %>
                 <% if service.image.attached? %>
                     <%= image_tag(service.image, class: "card-img-top", alt: "...") %>
                 <% else %>
@@ -12,6 +13,7 @@
                 <div class="card-body">
                     <h5 class="card-title"><%= service.title.truncate(30) %></h5>
                     <p class="card-text"><%= service.user.name %></p>
+                    <%# [優先度: 中] 極力インラインスタイルは避けてください。 %>
                     <div style="display: flex; justify-content: space-between;">
                       <div class="star">
                         <% reviews = service.reviews %>

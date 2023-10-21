@@ -1,7 +1,7 @@
 <div class="main">
   <div class="container">
     <div class="user-show-container">
-
+        <%# [優先度: 中] インデントがずれてます。またdivの開始とdiv閉じるの個数が異なります。 %>
         <% if @user == current_user %>
           <div class="d-flex justify-content-end align-items-right p-3 mb-0">
             <%= link_to "Editar tu cuenta", edit_user_registration_path, class: "btn btn-primary btn-sm" %>
@@ -13,6 +13,7 @@
           <div class="row align-items-center flex-column flex-md-row">
               <div class="col-12 col-md-auto text-center text-md-start mb-3 mb-md-0">
                   <% if @user.image.attached? %>
+                  <%# [優先度: 中] インデントがずれてます。またdivの開始とdiv閉じるの個数が異なります。 %>
                   <%= image_tag(@user.image, class: "img-fluid rounded-circle", alt: @user.name) %>
                   <% else %>
                   <%= image_tag('default_user.jpg', class: "img-fluid rounded-circle", alt: "Default user image") %>
@@ -33,7 +34,7 @@
           </div>
       </div>
 
-
+      <%# [優先度: 低] hタグはh1から順に使います。基本的にh2を飛ばしてh3を使うなどはしません。文字サイズは見出しの番号ではなくスタイルで制御してください。 %>
       <h5>Servicios</h5>
       <div class="row">
         <% if @services.any? %>
@@ -85,7 +86,7 @@
 
                 <div class="card-body">
                   <div class="d-flex align-items-start mb-3">
-
+                    <%# [優先度: 高] userが退会していた際の考慮がされてないです %>
                     <% if review.user.image.attached? %>
                       <%= image_tag(review.user.image, class: "rounded-circle mr-3", style: "width: 50px; height: 50px;") %>
                     <% else %>

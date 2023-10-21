@@ -19,6 +19,7 @@
             <tr>
               <td><%= sale.id %></td>
             <td>
+              <%# [優先度: 低] `user.deleted_at.nil?`と書くより`user.deleted?`と書く方が、「ユーザが削除されているか？」をより直感的に表せるかと思います。 %>
               <% if sale.service.user.deleted_at.nil? %>
                 <%= link_to sale.service.title, service_path(sale.service), class: "link-text" %>
               <% else %>
@@ -46,6 +47,7 @@
               </td>
               <td>
                 <% if sale.pending? %>
+                  <%# [優先度: 中] インラインスタイルは避けた方がよいです %>
                   <div style="display: flex;">
                     <%= button_to "Aceptar", accept_order_path(sale), method: :put, class: "btn btn-primary btn-sm", style: "margin-right: 10px;" %>
                     <%= button_to "Rechazar", reject_order_path(sale), method: :put, class: "btn btn-danger btn-sm" %>
@@ -56,6 +58,8 @@
               <td>
                 <% if sale.accepted? %>
                   <div class="info-item">
+                    <%# [優先度: 中] spanの閉じタグがありません %>
+                    <%# [優先度: 高] buyerが退会していた際の考慮がされてないです %>
                     <i class="fa-solid fa-envelope"></i>: <%= sale.buyer.email %></span>
                   </div>
                   <div class="info-item">

@@ -6,6 +6,7 @@
         <div class="service-show-item">
           <div style="display: flex; justify-content: flex-end;">
             <% if current_user && @service.user_id == current_user.id %>
+                <%# [優先度: 中] インデントずれ %>
                 <%= button_to edit_service_path(@service), method: :get, class: "btn btn-primary btn-sm me-2" do %>
                     <i class="fa-solid fa-pen-to-square"></i> Editar
                 <% end %>
@@ -14,7 +15,9 @@
                 <% end %>
             <% end %>
           </div>
+            <%# [優先度: 中] インデントずれ %>
             <h3 class="mt-3" style="word-wrap: break-word; overflow-wrap: break-word;"><%= @service.title %></h3>
+          <%# [優先度: 中] 極力インラインスタイルは避けてください %>
           <div style="display: flex; justify-content: space-between;">
             <div class="star">
               <% if @reviews.present? %>
@@ -27,6 +30,7 @@
             </div>
             <div class="like-button">
               <% if current_user %>
+                <%# [優先度: 中] Like.user_and_serviceの呼び出しは見た目の構成ではなく、データの取得処理なので、controllerに移動してください %>
                 <% if Like.user_and_service(current_user.id, @service.id) %>
                   <%= button_to like_path(service_id: @service.id), method: :delete do %>
                     <span class="fa fa-heart liked-btn"></span>
@@ -39,6 +43,7 @@
               <% end %>
             </div>
           </div>
+          <%# [優先度: 中] 極力インラインスタイルは避けてください %>
           <div style="display: flex; justify-content: space-between;">
             <%= @service.category&.name || "" %>
           </div>
@@ -50,6 +55,7 @@
               <%= image_tag('default_service.jpg', class: "service-image") %>
             <% end %>
           </div>
+          <%# [情報] 今後の拡張によってはXSSにつながるため気を付けてください。現状は問題ないです。 %>
           <p><%= simple_format(@service.detail) %></p>
         </div>
 
@@ -62,6 +68,7 @@
           <div class="row">
             <% @reviews.each do |review| %>
               <div class="col-12 mb-4">
+                <%# [優先度: 中] 極力インラインスタイルは避けてください %>
                 <div class="card" style="width: 100%;">
 
                   <div class="card-body">
@@ -74,11 +81,14 @@
                       <% end %>
 
                       <div class="flex-grow-1" style="margin-left: 10px;">
+                        <%# [優先度: 低] hタグはh1から順に使います。基本的にh2を飛ばしてh3を使うなどはしません。文字サイズは見出しの番号ではなくスタイルで制御してください。 %>
                         <h5 style="margin-top: 10px;">Servicio: <%= review&.service&.title || 'Este registro ha sido eliminada.' %></h5>
                         <% if review.rating.present? %>
                           <div><%= "⭐️" * review.rating %></div>
                         <% end %>
                         <% if review.user.name.present? %>
+                          <%# [優先度: 中] 極力インラインスタイルは避けてください %>
+                          <%# [優先度: 低] `review.user.name || "Usuario dado de baja"`とするとif文不要になります %>
                           <p class="font-weight-bold" style="margin-top: 5px; margin-bottom: 5px;"><%= review.user.name %></p>
                         <% else %>
                           <p class="font-weight-bold" style="margin-top: 5px; margin-bottom: 5px;">Usuario dado de baja</p>
@@ -102,6 +112,7 @@
       </div>
 
       <div class="col-lg-3 col-md-4 col-12 order-2 order-md-1 mb-5 mt-5">
+          <%# [優先度: 中] インデントずれ %>
           <%= link_to user_path(@service.user), class: 'text-decoration-none text-dark' do %>
               <div class="card">
                   <div class="card-body text-center">
@@ -110,6 +121,7 @@
                       <% else %>
                           <%= image_tag('default_user.jpg', class: 'rounded-circle mx-auto d-block', style: 'width:100px; height:100px;') %>
                       <% end %>
+                      <%# [優先度: 低] hタグはh1から順に使います。基本的にh2を飛ばしてh3を使うなどはしません。文字サイズは見出しの番号ではなくスタイルで制御してください。 %>
                       <h6 class="mt-3 mb-1">
                           <%= @service.user.name %>
                       </h6>
