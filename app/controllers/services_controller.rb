@@ -74,6 +74,9 @@ class ServicesController < ApplicationController
   end
 
   def set_service
+    # [重要度: 中] ここだけではないのですが、Serviceに関連するuserも使われてます
+    # その場合、`Service.preload(:user).find(params[:id])`としないとパフォーマンスが悪化します。
+    # preload, eager_loadと利用できるメソッドは複数あるのでちょっと調べてみてください。
     @service = Service.find(params[:id])
 
     # [重要度: 中] set_serviceメソッド内で行えば、この処理の呼び出し漏れを防ぐことが可能です → 完了

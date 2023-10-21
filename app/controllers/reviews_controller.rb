@@ -58,6 +58,8 @@ class ReviewsController < ApplicationController
 
   def check_review_possibility
     # [重要度: 中] set_reviewメソッド内で行えば、この処理の呼び出し漏れを防ぐことが可能です → 完了
+    # すみません、、、私の記載ミスです。ちょっとこれを書いた意図を覚えていないのでおそらくですが、set_reviewではなく、set_serviceと言いたかったのではないかと予想します。
+    # set_reviewにしてしまうと、set_review内の処理が複雑になりますし、適切なserviceか？を見たいのにset_reviewではおかしいですね。。。。
     purchased = Order.exists?(buyer: current_user, service: @service)
 
     reviewed = Order.service_reviewed_by_user?(current_user.id, @service.id)
