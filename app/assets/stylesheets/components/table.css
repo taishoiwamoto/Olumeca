@@ -1,11 +1,16 @@
-.full-text {
-  white-space: nowrap;
-  overflow: visible;
+.link-text {
   color: #007BFF !important;
   text-decoration: none !important;
 }
 
-.full-text:hover {
+.link-text:hover {
   color: #0056b3 !important;
   text-decoration: underline !important;
+}
+
+.info-item {
+  height: 20px; /* 適切な高さに調整する */
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
