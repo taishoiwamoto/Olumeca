@@ -39,21 +39,15 @@ class User < ApplicationRecord
   end
 
   def average_service_rating
-    #完了 [重要度: 低] https://railsdoc.com/page/average active recordのaverageの利用を検討してください。
     reviews = Review.joins(service: :user).where(services: { user_id: id })
     reviews.average(:rating).to_f
   end
 
   def average_rating
-    #完了 [重要度: 低] https://railsdoc.com/page/average active recordのaverageの利用を検討してください。
     reviews.average(:rating).to_f
   end
 
   def soft_delete
-    #完了 [重要度: 高] 退会後に個人情報を削除しないと問題になる可能性があります → methodのhard_deleteで上書きする
-    # 一方で、即日削除も、ユーザが不適切な行為を行った場合の責任追及ができないなど問題が生じます。
-    # 適切な期間を置いた後で完全に情報が削除できるような検討をしてください。
-    # 物理削除をすると他の問題が出てきますので、通常、適当な値で上書きをしてあげるという処置をします。
     update_attribute(:deleted_at, Time.now)
     services.each(&:soft_delete)
   end
