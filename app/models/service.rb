@@ -29,4 +29,8 @@ class Service < ApplicationRecord
   def count_likes
     likes.length
   end
+
+  def deleted?
+    deleted_at.present?
+  end
 end

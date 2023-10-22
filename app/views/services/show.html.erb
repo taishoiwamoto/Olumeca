@@ -88,8 +88,12 @@
                           <div class="ms-2"><%= "⭐️" * review.rating %></div>
                         <% end %>
                       </div>
-                      <%# 完了 %><%# [優先度: 低] `review.user.name || "Usuario dado de baja"`とするとif文不要になります %>
-                      <p class="font-weight-bold mt-2 mb-0">Comprador/a: <%= review.user.name || "Dado de baja" %></p>
+                      <%# 未対応 %><%# [優先度: 低] `review.user.name || "Usuario dado de baja"`とするとif文不要になります %>
+                      <% if review.user.deleted_at.nil? %>
+                        <p class="font-weight-bold mt-2 mb-0">Comprador/a: <%= review.user.name %></p>
+                      <% else %>
+                        <p class="font-weight-bold mt-2 mb-0">Comprador/a: Dado de baja</p>
+                      <% end %>
                       <%# 未対応 %><%# [優先度: 中] 極力インラインスタイルは避けてください %>
                       <div class="d-flex justify-content-start mt-2" style="font-size: 12px;">
                         <div style="margin-right: 10px;">Creación: <%= review.created_at.strftime("%d/%m/%Y %H:%M") %></div>

@@ -1,7 +1,7 @@
 <div class="main">
   <div class="container">
     <div class="user-show-container">
-      <%# 未対応 %><%# [優先度: 中] インデントがずれてます。またdivの開始とdiv閉じるの個数が異なります。 %>
+      <%# 完了 %><%# [優先度: 中] インデントがずれてます。またdivの開始とdiv閉じるの個数が異なります。 %>
       <% if @user == current_user %>
         <div class="d-flex justify-content-end align-items-right p-3 mb-0">
           <%= link_to "Editar tu cuenta", edit_user_registration_path, class: "btn btn-primary btn-sm" %>
@@ -13,7 +13,7 @@
         <div class="row align-items-center flex-column flex-md-row">
           <div class="col-12 col-md-auto text-center text-md-start mb-3 mb-md-0">
             <% if @user.image.attached? %>
-              <%# 未対応 %><%# [優先度: 中] インデントがずれてます。またdivの開始とdiv閉じるの個数が異なります。 %>
+              <%# 完了 %><%# [優先度: 中] インデントがずれてます。またdivの開始とdiv閉じるの個数が異なります。 %>
               <%= image_tag(@user.image, class: "img-fluid rounded-circle", alt: @user.name) %>
             <% else %>
               <%= image_tag('default_user.jpg', class: "img-fluid rounded-circle", alt: "Default user image") %>
@@ -88,7 +88,11 @@
 
                     <%# 未対応 %><%# [優先度: 低] hタグはh1から順に使います。基本的にh2を飛ばしてh3を使うなどはしません。文字サイズは見出しの番号ではなくスタイルで制御してください。 %>
                     <h5 style="margin-top: 10px; word-wrap: break-word; overflow-wrap: break-word;">
-                      <%= link_to "Servicio: #{review&.service&.title}", service_path(review&.service), class: "link-class-name link-text" %>
+                      <% if review&.service.deleted? %>
+                        <%= link_to "Servicio: #{review.service.title}", service_path(review.service), class: "link-class-name link-text" %>
+                      <% else %>
+                        Servicio: Eliminado
+                      <% end %>
                     </h5>
 
 
@@ -102,9 +106,13 @@
                         <div class="ms-2"><%= "⭐️" * review.rating %></div>
                       <% end %>
                     </div>
-                    <p class="font-weight-bold mt-2 mb-0">Comprador/a: <%= review.user.name || "Dado de baja" %></p>
+                    <%# 未対応 %><%# [優先度: 低] `review.user.name || "Usuario dado de baja"`とするとif文不要になります %>
+                    <% if review.user.deleted? %>
+                      <p class="font-weight-bold mt-2 mb-0">Comprador/a: Dado de baja</p>
+                    <% else %>
+                      <p class="font-weight-bold mt-2 mb-0">Comprador/a: <%= review.user.name %></p>
+                    <% end %>
                     <%# 未対応 %><%# [優先度: 中] 極力インラインスタイルは避けてください %>
-                    <%# 完了 %><%# [優先度: 低] `review.user.name || "Usuario dado de baja"`とするとif文不要になります %>
                     <div class="d-flex justify-content-start mt-2" style="font-size: 12px;">
                       <div style="margin-right: 10px;">Creación: <%= review.created_at.strftime("%d/%m/%Y %H:%M") %></div>
                       <div style="margin-bottom: 10px;">Actualización: <%= review.updated_at.strftime("%d/%m/%Y %H:%M") %></div>

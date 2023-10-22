@@ -23,6 +23,15 @@ body {
   clear: both;
 }
 
+.table-container {
+  min-height: 100vh;
+  max-width: 2000px;
+  margin: 60px auto 0px auto;
+  padding-left: 50px;
+  padding-right: 50px;
+  clear: both;
+}
+
 .form-container {
   min-height: 100vh;
   max-width: 600px;

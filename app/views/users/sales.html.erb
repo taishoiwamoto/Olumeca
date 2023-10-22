@@ -1,39 +1,21 @@
 <div class="main">
-  <div class="container">
+  <div class="table-container">
     <h1>Pedidos recibidos</h1>
     <div class="table-responsive">
       <table class="table table-hover" style="border: 1px solid #cbd5d5;">
         <thead>
           <tr>
-            <th scope="col">ID</th>
-            <th scope="col">Servicio</th>
-            <th scope="col">Comprador/a</th>
             <th scope="col">Fecha</th>
             <th scope="col">Estado</th>
             <th scope="col">Acción</th>
             <th scope="col">Info</th>
+            <th scope="col">Comprador/a</th>
+            <th scope="col">Servicio</th>
           </tr>
         </thead>
         <tbody>
           <% @sales.each do |sale| %>
             <tr>
-              <td><%= sale.id %></td>
-            <td>
-              <%# 完了 %><%# [優先度: 低] `user.deleted_at.nil?`と書くより`user.deleted?`と書く方が、「ユーザが削除されているか？」をより直感的に表せるかと思います。 %>
-              <% if sale.service.user.deleted? %>
-                <%= sale.service.title %>
-              <% else %>
-                <%= link_to sale.service.title.truncate(30), service_path(sale.service), class: "link-text" %>
-              <% end %>
-            </td>
-
-            <td>
-              <% if sale.buyer.deleted? %>
-                <%= sale.buyer.name %>
-              <% else %>
-                <%= link_to sale.buyer.name, user_path(sale.buyer), class: "link-text" %>
-              <% end %>
-            </td>
               <td><%= sale.created_at.strftime("%d/%m/%Y") %></td>
               <td>
                 <% case sale.status %>
@@ -74,6 +56,21 @@
                       <i class="fa-solid fa-phone"></i>: <%= sale.buyer.phone_number %>
                     </div>
                   <% end %>
+                <% end %>
+              </td>
+              <td>
+                <% if sale.buyer.deleted? %>
+                  <%= sale.buyer.name %>
+                <% else %>
+                  <%= link_to sale.buyer.name, user_path(sale.buyer), class: "link-text" %>
+                <% end %>
+              </td>
+              <td>
+                <%# 完了 %><%# [優先度: 低] `user.deleted_at.nil?`と書くより`user.deleted?`と書く方が、「ユーザが削除されているか？」をより直感的に表せるかと思います。 %>
+                <% if sale.service.deleted? %>
+                  <%= sale.service.title %>
+                <% else %>
+                  <%= link_to sale.service.title, service_path(sale.service), class: "link-text" %>
                 <% end %>
               </td>
             </tr>
