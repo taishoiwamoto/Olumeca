@@ -31,7 +31,6 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    #完了 [重要度: 高] idの値を偽装することで任意のユーザの削除が可能になってます
     if current_user.soft_delete
       redirect_to root_path, notice: 'Has eliminado tu cuenta.'
     else
@@ -42,10 +41,6 @@ class UsersController < ApplicationController
   private
 
   def find_active_user
-    #完了 [重要度: 中] find_byではなく、findの利用を検討してください。
     @user = User.active.find(params[:id])
-    #完了 [重要度: 中] @userには既に値が入ってますので再代入の必要はありません。
-    # またset_userにも同様の表記があります
-    # 同様の文章が複数あると、編集時の作業漏れにつながります
   end
 end

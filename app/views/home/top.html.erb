@@ -48,25 +48,25 @@
             <% @services.each do |service| %>
               <%= link_to service_path(service) do %>
                 <div class="card" style="width: 18rem;">
-                    <% if service.image.attached? %>
-                      <%= image_tag(service.image, class: "card-img-top", alt: "...") %>
-                    <% else %>
-                      <%= image_tag('default_service.jpg', class: "card-img-top", alt: "...") %>
-                    <% end %>
-                    <div class="card-body">
-                      <h5 class="card-title"><%= service.title.truncate(30) %></h5>
-                      <p class="card-text"><%= service.user.name %></p>
-                      <div style="display: flex; justify-content: space-between;">
-                        <div class="star">
-                          <% reviews = service.reviews %>
-                          <% if reviews.present? %>
-                            <% average_rating = service.average_rating %>
-                            <%= "⭐️" %> <%= sprintf('%.2f', average_rating) %>
-                          <% else %>
-                            --
-                          <% end %>
-                        </div>
+                  <% if service.image.attached? %>
+                    <%= image_tag(service.image, class: "card-img-top", alt: "...") %>
+                  <% else %>
+                    <%= image_tag('default_service.jpg', class: "card-img-top", alt: "...") %>
+                  <% end %>
+                  <div class="card-body">
+                    <span class="card-title"><%= service.title.truncate(30) %></span>
+                    <p class="card-text"><%= service.user.name %></p>
+                    <div style="display: flex; justify-content: space-between;">
+                      <div class="star">
+                        <% reviews = service.reviews %>
+                        <% if reviews.present? %>
+                          <% average_rating = service.average_rating %>
+                          <%= "⭐️" %> <%= sprintf('%.2f', average_rating) %>
+                        <% else %>
+                          --
+                        <% end %>
                       </div>
+                    </div>
                   </div>
                 </div>
               <% end %>
@@ -82,7 +82,7 @@
       </div>
       <br>
       <div class="inner noflex">
-        <h2 class="top-title">Lo que puede hacer comprador/a</h2>
+        <h3 class="top-title">Lo que puede hacer comprador/a</h3>
         <div class="about_service__list flexbox">
           <div class="about_service__list_item">
             <%= image_tag 'top-main-buyer-1.jpg', alt: 'Compra de servicios de listado', class: 'normal-size-image' %>
@@ -104,7 +104,7 @@
       <br>
       <br>
       <br>
-      <h2 class="top-title">Pasos para comprar un servicio</h2>
+      <h3 class="top-title">Pasos para comprar un servicio</h3>
       <div class="c-serviceStep_flow">
         <div class="c-serviceFlow">
           <div class="about_service__list_item_head">1. Búsqueda</div>
@@ -134,7 +134,7 @@
       </div>
       <br>
       <div class="inner noflex">
-        <h2 class="top-title">Lo que puede hacer vendedor/a</h2>
+        <h3 class="top-title">Lo que puede hacer vendedor/a</h3>
         <div class="about_service__list flexbox">
           <div class="about_service__list_item">
             <%= image_tag 'top-main-seller-1.jpg', alt: 'Oferta de servicios', class: 'normal-size-image' %>
@@ -156,7 +156,7 @@
       <br>
       <br>
       <br>
-      <h2 class="top-title">Pasos para ofrecer un servicio</h2>
+      <h3 class="top-title">Pasos para ofrecer un servicio</h3>
       <div class="c-serviceStep_flow">
         <div class="c-serviceFlow">
           <div class="about_service__list_item_head">1. Publicación</div>

@@ -3,16 +3,13 @@ class ServicesController < ApplicationController
   before_action :set_service, only: %i[edit update destroy]
 
   def index
-    #完了 [重要度: 低] Serviceの量が増えてきたときに動作が遅くなる可能性があります。DBに適切なインデックスを張ることをお勧めします
     @services = Service.active.order(created_at: :desc).page(params[:page]).per(30)
   end
 
   def show
-    #完了 [重要度: 低] find_byではなく、findの利用を検討してください。それだけで、見つからない際は404エラーを返却可能です
     @service = Service.active.find(params[:id])
     @user = @service.user
     @user_has_liked = Like.user_and_service(current_user.id, @service.id) if current_user
-    #完了 [重要度: 低] @service.likes.countの方が分かりやすいかと思います
     @likes_count = @service.likes.count
     @reviews = @service.reviews.order(created_at: :desc).page(params[:page]).per(10)
   end
@@ -80,12 +77,8 @@ class ServicesController < ApplicationController
     # preload, eager_loadと利用できるメソッドは複数あるのでちょっと調べてみてください。
     @service = Service.preload(:user).find(params[:id])
 
-    #完了 [重要度: 中] set_serviceメソッド内で行えば、この処理の呼び出し漏れを防ぐことが可能です
     unless @service.user.eql? current_user
       redirect_to service_path(@service), notice: 'No tienes autorización' and return
     end
   end
-
-
-    #完了 [重要度: 中] set_serviceメソッド内で行えば、この処理の呼び出し漏れを防ぐことが可能です
 end

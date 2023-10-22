@@ -2,9 +2,6 @@ class LikesController < ApplicationController
   before_action :authenticate_user
 
   def create
-    #完了 [重要度: 低] new->saveと順に行うだけであれば、createを利用した方がシンプルに記載が可能です。
-    #完了 [重要度: 中] service_idに適当なパラメータを渡すと、ゴミデータの作成が可能になります。ServiceとLikeの外部キー制約の作成・Serviceの存在確認をするなど検討してください
-    #完了 [重要度: 低] find_byではなく、findの利用を検討してください。
     service = Service.find(params[:service_id])
 
     unless service
@@ -18,7 +15,6 @@ class LikesController < ApplicationController
   end
 
   def destroy
-    #完了 [重要度: 中] service_idに適当なパラメータを渡すと500番台のエラーとなります。400番台で落とすためにも、find_byではなく、find_by!の利用を検討してください。
     @like = Like.find_by!(user_id: current_user.id, service_id: params[:service_id])
 
     @like.destroy

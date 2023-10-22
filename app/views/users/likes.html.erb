@@ -14,7 +14,7 @@
                 <%= image_tag('default_service.jpg', class: "card-img-top", alt: "...") %>
               <% end %>
               <div class="card-body">
-                <h5 class="card-title"><%= service.title.truncate(30) %></h5>
+                <span class="card-title"><%= service.title.truncate(30) %></span>
                 <p class="card-text"><%= service.user.name %></p>
                 <div style="display: flex; justify-content: space-between;">
                   <div class="star">

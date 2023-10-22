@@ -16,7 +16,7 @@
             <% end %>
           </div>
           <%# 完了 %><%# [優先度: 中] インデントずれ %>
-          <h3 class="mt-3" style="word-wrap: break-word; overflow-wrap: break-word;"><%= @service.title %></h3>
+          <h1 class="mt-3" style="word-wrap: break-word; overflow-wrap: break-word;"><%= @service.title %></h1>
           <%# 未対応 %><%# [優先度: 中] 極力インラインスタイルは避けてください %>
           <div style="display: flex; justify-content: space-between;">
             <div class="star">
@@ -63,7 +63,7 @@
           <%= link_to "Hacer el pedido", new_order_path(seller_id: @service.user_id, service_id: @service.id, buyer_id: current_user&.id), class: "btn btn-primary btn-lg" %>
         </div>
 
-        <h3 class="mt-5 mb-4">Evaluación</h3>
+        <h2 class="mt-5 mb-4">Evaluación</h2>
           <% if @reviews.any? %>
           <div class="row">
             <% @reviews.each do |review| %>
@@ -71,13 +71,9 @@
                 <%# 未対応 %><%# [優先度: 中] 極力インラインスタイルは避けてください %>
                 <div class="card" style="width: 100%;">
                   <div class="card-body">
-                    <div class="flex-grow-1 mt-3" style="margin-left: 10px;">
+                    <div class="flex-grow-1" style="margin-left: 10px;">
 
-                      <%# 未対応 %><%# [優先度: 低] hタグはh1から順に使います。基本的にh2を飛ばしてh3を使うなどはしません。文字サイズは見出しの番号ではなくスタイルで制御してください。 %>
-                      <h5 style="margin-top: 10px; word-wrap: break-word; overflow-wrap: break-word;">
-                        <%= link_to "Servicio: #{review&.service&.title}", service_path(review&.service), class: "link-class-name link-text" %>
-                      </h5>
-
+                      <%# 完了 %><%# [優先度: 低] hタグはh1から順に使います。基本的にh2を飛ばしてh3を使うなどはしません。文字サイズは見出しの番号ではなくスタイルで制御してください。 %>
                       <div class="d-flex align-items-center mt-2">
                         <% if review.user.image.attached? %>
                           <%= image_tag(review.user.image, class: "rounded-circle mr-3", style: "width: 40px; height: 40px;") %>
@@ -88,11 +84,11 @@
                           <div class="ms-2"><%= "⭐️" * review.rating %></div>
                         <% end %>
                       </div>
-                      <%# 未対応 %><%# [優先度: 低] `review.user.name || "Usuario dado de baja"`とするとif文不要になります %>
-                      <% if review.user.deleted_at.nil? %>
-                        <p class="font-weight-bold mt-2 mb-0">Comprador/a: <%= review.user.name %></p>
-                      <% else %>
+                      <%# 完了 %><%# [優先度: 低] `review.user.name || "Usuario dado de baja"`とするとif文不要になります %>
+                      <% if review.user.deleted? %>
                         <p class="font-weight-bold mt-2 mb-0">Comprador/a: Dado de baja</p>
+                      <% else %>
+                        <p class="font-weight-bold mt-2 mb-0">Comprador/a: <%= review.user.name %></p>
                       <% end %>
                       <%# 未対応 %><%# [優先度: 中] 極力インラインスタイルは避けてください %>
                       <div class="d-flex justify-content-start mt-2" style="font-size: 12px;">
@@ -123,9 +119,9 @@
                 <%= image_tag('default_user.jpg', class: 'rounded-circle mx-auto d-block', style: 'width:100px; height:100px;') %>
               <% end %>
               <%# 未対応 %><%# [優先度: 低] hタグはh1から順に使います。基本的にh2を飛ばしてh3を使うなどはしません。文字サイズは見出しの番号ではなくスタイルで制御してください。 %>
-              <h6 class="mt-3 mb-1">
+              <span class="mt-3 mb-1">
                   <%= @service.user.name %>
-              </h6>
+              </span>
               <% if @service.average_rating > 0 %>
                 <p class="mb-0"><%= "⭐️" %> <%= sprintf('%.2f', @service.average_rating) %></p>
               <% else %>

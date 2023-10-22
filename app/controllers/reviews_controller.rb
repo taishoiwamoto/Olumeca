@@ -47,8 +47,6 @@ class ReviewsController < ApplicationController
   end
 
   def authorized_user
-    #完了 [重要度: 低] @review.user_id == current_user.idとした方が、userテーブルへのselectを減らせるため、より高速な動作が見込めます
-    #完了 [重要度: 中] set_reviewメソッド内で行えば、この処理の呼び出し漏れを防ぐことが可能です
     return if @review.user_id == current_user.id
     redirect_to root_path, notice: 'No tiene permiso para editar esta evaluación.'
   end
