@@ -19,19 +19,19 @@
             <tr>
               <td><%= sale.id %></td>
             <td>
-              <%# [優先度: 低] `user.deleted_at.nil?`と書くより`user.deleted?`と書く方が、「ユーザが削除されているか？」をより直感的に表せるかと思います。 %>
-              <% if sale.service.user.deleted_at.nil? %>
-                <%= link_to sale.service.title, service_path(sale.service), class: "link-text" %>
-              <% else %>
+              <%# 完了 %><%# [優先度: 低] `user.deleted_at.nil?`と書くより`user.deleted?`と書く方が、「ユーザが削除されているか？」をより直感的に表せるかと思います。 %>
+              <% if sale.service.user.deleted? %>
                 <%= sale.service.title %>
+              <% else %>
+                <%= link_to sale.service.title.truncate(30), service_path(sale.service), class: "link-text" %>
               <% end %>
             </td>
 
             <td>
-              <% if sale.buyer.deleted_at.nil? %>
-                <%= link_to sale.buyer.name, user_path(sale.buyer), class: "link-text" %>
-              <% else %>
+              <% if sale.buyer.deleted? %>
                 <%= sale.buyer.name %>
+              <% else %>
+                <%= link_to sale.buyer.name, user_path(sale.buyer), class: "link-text" %>
               <% end %>
             </td>
               <td><%= sale.created_at.strftime("%d/%m/%Y") %></td>
@@ -47,7 +47,7 @@
               </td>
               <td>
                 <% if sale.pending? %>
-                  <%# [優先度: 中] インラインスタイルは避けた方がよいです %>
+                  <%# 未対応 %><%# [優先度: 中] インラインスタイルは避けた方がよいです %>
                   <div style="display: flex;">
                     <%= button_to "Aceptar", accept_order_path(sale), method: :put, class: "btn btn-primary btn-sm", style: "margin-right: 10px;" %>
                     <%= button_to "Rechazar", reject_order_path(sale), method: :put, class: "btn btn-danger btn-sm" %>
@@ -57,14 +57,23 @@
               </td>
               <td>
                 <% if sale.accepted? %>
-                  <div class="info-item">
-                    <%# [優先度: 中] spanの閉じタグがありません %>
-                    <%# [優先度: 高] buyerが退会していた際の考慮がされてないです %>
-                    <i class="fa-solid fa-envelope"></i>: <%= sale.buyer.email %></span>
-                  </div>
-                  <div class="info-item">
-                    <i class="fa-solid fa-phone"></i>: <%= sale.buyer.phone_number %></span>
-                  </div>
+                  <% if sale.buyer.deleted? %>
+                    <div class="info-item">
+                      <i class="fa-solid fa-envelope"></i>: --
+                    </div>
+                    <div class="info-item">
+                      <i class="fa-solid fa-phone"></i>: --
+                    </div>
+                  <% else %>
+                    <div class="info-item">
+                      <%# 完了 %><%# [優先度: 中] spanの閉じタグがありません %>
+                      <%# 完了 %><%# [優先度: 高] buyerが退会していた際の考慮がされてないです %>
+                      <i class="fa-solid fa-envelope"></i>: <%= sale.buyer.email %>
+                    </div>
+                    <div class="info-item">
+                      <i class="fa-solid fa-phone"></i>: <%= sale.buyer.phone_number %>
+                    </div>
+                  <% end %>
                 <% end %>
               </td>
             </tr>

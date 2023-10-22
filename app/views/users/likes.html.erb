@@ -2,37 +2,36 @@
   <div class="container">
     <h1 class="text-center">Favoritos</h1>
     <div class="cards-container">
-      <% if @likes.any? %>
-        <% @likes.order(created_at: :desc).each do |like| %>
-          <%# [優先度: 中] find_byメソッドはコントローラーで実施してください。ここのコントローラーがLikeを中心にデータを引っ張ってきているのでやりにくいと思います。詳細はコントローラーに記載します。 %>
-          <% service = Service.find_by(id: like.service_id) %>
+      <% if @services.any? %>
+        <% @services.each do |service| %>
+          <%# 完了 %><%# [優先度: 中] find_byメソッドはコントローラーで実施してください。ここのコントローラーがLikeを中心にデータを引っ張ってきているのでやりにくいと思います。詳細はコントローラーに記載します。 %>
           <%= link_to service_path(service.id) do %>
-              <%# [優先度: 中] インデントずれ %>
-              <div class="card">
-                  <% if service.image.attached? %>
-                      <%= image_tag(service.image, class: "card-img-top", alt: "...") %>
-                  <% else %>
-                      <%= image_tag('default_service.jpg', class: "card-img-top", alt: "...") %>
-                  <% end %>
-                  <div class="card-body">
-                      <h5 class="card-title"><%= service.title.truncate(30) %></h5>
-                      <p class="card-text"><%= service.user.name %></p>
-                      <div style="display: flex; justify-content: space-between;">
-                        <div class="star">
-                          <% reviews = service.reviews %>
-                          <% if reviews.present? %>
-                            <% average_rating = service.average_rating %>
-                            <%= "⭐️" %> <%= sprintf('%.2f', average_rating) %>
-                          <% else %>
-                            --
-                          <% end %>
-                        </div>
-                      </div>
+            <%# 完了 %><%# [優先度: 中] インデントずれ %>
+            <div class="card">
+              <% if service.image.attached? %>
+                <%= image_tag(service.image, class: "card-img-top", alt: "...") %>
+              <% else %>
+                <%= image_tag('default_service.jpg', class: "card-img-top", alt: "...") %>
+              <% end %>
+              <div class="card-body">
+                <h5 class="card-title"><%= service.title.truncate(30) %></h5>
+                <p class="card-text"><%= service.user.name %></p>
+                <div style="display: flex; justify-content: space-between;">
+                  <div class="star">
+                    <% reviews = service.reviews %>
+                    <% if reviews.present? %>
+                      <% average_rating = service.average_rating %>
+                      <%= "⭐️" %> <%= sprintf('%.2f', average_rating) %>
+                    <% else %>
+                      --
+                    <% end %>
                   </div>
+                </div>
               </div>
+            </div>
           <% end %>
         <% end %>
-        <%= paginate @likes %>
+        <%= paginate @services %>
       <% else %>
         <p>No tienes servicios favoritos.</p>
       <% end %>

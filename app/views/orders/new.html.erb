@@ -3,17 +3,16 @@
     <h1 class="ms-2 me-2">Detalles del Pedido</h1>
     <div class="form">
       <div class="form-body">
-          <%= form_with(model: @order) do |f| %>
-            <%= f.hidden_field :service_id, value: @service.id %>
-            <%# [優先度: 低] strongは強調表示という意味です。文中での重要部分であると解釈されます。見出しであればHタグの検討や、太字にしたいのみであればCSSで対応してください %>
-            <p class="mb-2"><strong>Servicio:</strong> <%= @service.title %></p>
-            <p class="mb-4"><strong>Vendedor(a):</strong> <%= @service.user.name %></p>
-          <%# [優先度: 中] インデントがずれてます。またdivの開始とdiv閉じるの個数が異なります。 %>
+        <%= form_with(model: @order) do |f| %>
+          <%= f.hidden_field :service_id, value: @service.id %>
+          <%# 完了 %><%# [優先度: 低] strongは強調表示という意味です。文中での重要部分であると解釈されます。見出しであればHタグの検討や、太字にしたいのみであればCSSで対応してください %>
+          <p class="mb-2 text-break">Servicio: <%= @service.title %></p>
+          <p class="mb-4 text-break">Vendedor(a): <%= @service.user.name %></p>
+          <%# 完了 %><%# [優先度: 中] インデントがずれてます。またdivの開始とdiv閉じるの個数が異なります。 %>
           <div class="d-grid gap-2 col-6">
             <%= f.submit 'Realizar Pedido', class: "btn btn-primary" %>
           </div>
-          <% end %>
-        </div>
+        <% end %>
       </div>
     </div>
   </div>

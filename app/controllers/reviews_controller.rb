@@ -34,16 +34,21 @@ class ReviewsController < ApplicationController
 
   private
 
+  def set_service
+    @service = Service.find(params[:service_id])
+
+    check_review_possibility if %w[new create].include?(action_name)
+  end
+
   def set_review
     @review = Review.find_by(id: params[:id]) || @service.reviews.where(user: current_user).first
 
     authorized_user if %w[edit update].include?(action_name)
-    check_review_possibility if %w[new create].include?(action_name)
   end
 
   def authorized_user
-    # [重要度: 低] @review.user_id == current_user.idとした方が、userテーブルへのselectを減らせるため、より高速な動作が見込めます → 完了
-    # [重要度: 中] set_reviewメソッド内で行えば、この処理の呼び出し漏れを防ぐことが可能です → 完了
+    #完了 [重要度: 低] @review.user_id == current_user.idとした方が、userテーブルへのselectを減らせるため、より高速な動作が見込めます
+    #完了 [重要度: 中] set_reviewメソッド内で行えば、この処理の呼び出し漏れを防ぐことが可能です
     return if @review.user_id == current_user.id
     redirect_to root_path, notice: 'No tiene permiso para editar esta evaluación.'
   end
@@ -52,12 +57,8 @@ class ReviewsController < ApplicationController
     params.require(:review).permit(:rating, :comment)
   end
 
-  def set_service
-    @service = Service.find(params[:service_id])
-  end
-
   def check_review_possibility
-    # [重要度: 中] set_reviewメソッド内で行えば、この処理の呼び出し漏れを防ぐことが可能です → 完了
+    #完了 [重要度: 中] set_reviewメソッド内で行えば、この処理の呼び出し漏れを防ぐことが可能です
     # すみません、、、私の記載ミスです。ちょっとこれを書いた意図を覚えていないのでおそらくですが、set_reviewではなく、set_serviceと言いたかったのではないかと予想します。
     # set_reviewにしてしまうと、set_review内の処理が複雑になりますし、適切なserviceか？を見たいのにset_reviewではおかしいですね。。。。
     purchased = Order.exists?(buyer: current_user, service: @service)

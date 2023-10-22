@@ -9,35 +9,45 @@
           <div class="mb-3">
             <%= f.label :name, 'Nombre', class: 'form-label' %>
             <%= f.text_field :name, autofocus: true, autocomplete: "name", class: 'form-control', maxlength: 50, required: true %>
-            <div class="invalid-feedback">Por favor, ingresa tu nombre.</div>
+            <div class="invalid-feedback">
+              Por favor, ingresa tu nombre.
+            </div>
           </div>
 
           <div class="mb-3">
             <%= f.label :email, 'Correo electrónico', class: 'form-label' %>
             <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control', required: true %>
-            <div class="invalid-feedback">Por favor, ingresa tu correo electrónico.</div>
+            <div class="invalid-feedback">
+              Por favor, ingresa tu correo electrónico.
+            </div>
           </div>
 
           <div class="mb-3">
             <%= f.label :phone_number, 'Número de teléfono', class: 'form-label' %>
             <%= f.text_field :phone_number, autofocus: true, autocomplete: "tel", class: 'form-control', maxlength: 14, required: true %>
-            <div class="invalid-feedback">Por favor, ingresa tu número de teléfono.</div>
+            <div class="invalid-feedback">
+              Por favor, ingresa tu número de teléfono.
+            </div>
           </div>
 
           <div class="mb-3">
             <%= f.label :password, 'Contraseña', class: 'form-label' %>
             <% if @minimum_password_length %>
-              <%# [優先度: 低] emの利用は推奨されません。重要事項のため強調が目的であればstrongタグを、見た目上斜体にしたいだけであればCSSを利用してください %>
-              <em>(<%= @minimum_password_length %> caracteres mínimos)</em>
+              <%# 完了 %><%# [優先度: 低] emの利用は推奨されません。重要事項のため強調が目的であればstrongタグを、見た目上斜体にしたいだけであればCSSを利用してください %>
+              <div class="invalid-feedback">(<%= @minimum_password_length %> caracteres mínimos)</div>
             <% end %>
             <%= f.password_field :password, autocomplete: "new-password", class: 'form-control', required: true %>
-            <div class="invalid-feedback">Por favor, ingresa tu contraseña.</div>
+            <div class="invalid-feedback">
+              Por favor, ingresa tu contraseña.
+            </div>
           </div>
 
           <div class="mb-3">
             <%= f.label :password_confirmation, 'Confirmación de contraseña', class: 'form-label' %>
             <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'form-control', required: true %>
-            <div class="invalid-feedback">Por favor, confirma tu contraseña.</div>
+            <div class="invalid-feedback">
+              Por favor, confirma tu contraseña.
+            </div>
           </div>
 
           <%#= recaptcha_tags %>

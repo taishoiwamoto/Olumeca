@@ -34,11 +34,11 @@
 
           <div class="mb-3">
             <%= f.label :password, 'Contraseña', class: 'form-label' %>
-            <small class="form-text text-muted">(Deja en blanco si no deseas cambiarlo)</small>
+            <div class="form-text text-muted">(Deja en blanco si no deseas cambiarlo)</div>
             <%= f.password_field :password, autocomplete: "new-password", class: 'form-control' %>
             <% if @minimum_password_length %>
-              <%# [優先度: 低] smallの利用は推奨されません。CSSを利用してください %>
-              <small class="form-text text-muted"><%= @minimum_password_length %> caracteres mínimos</small>
+              <%# 未対応 %><%# [優先度: 低] smallの利用は推奨されません。CSSを利用してください %>
+              <div class="form-text text-muted"><%= @minimum_password_length %> caracteres mínimos</div>
             <% end %>
           </div>
 
@@ -49,8 +49,8 @@
 
           <div class="mb-3">
             <%= f.label :current_password, 'Contraseña actual', class: 'form-label' %>
-            <%# [優先度: 低] smallの利用は推奨されません。CSSを利用してください %>
-            <small class="form-text text-muted">(Necesitamos tu contraseña actual para confirmar tus cambios)</small>
+            <%# 未対応 %><%# [優先度: 低] smallの利用は推奨されません。CSSを利用してください %>
+            <div class="form-text text-muted">(Necesitamos tu contraseña actual para confirmar tus cambios)</div>
             <%= f.password_field :current_password, autocomplete: "current-password", class: 'form-control', required: true %>
           </div>
 
@@ -60,10 +60,8 @@
         <% end %>
       </div>
     </div>
-    <%# [優先度: 低] brの連打は推奨されません。marginを利用してください %>
-    <br>
-    <br>
-    <%= button_to "Cancelar tu cuenta", destroy_user_path(resource), form: { data: { turbo_confirm: "¿Realmente quieres eliminar tu cuenta?" }}, method: :delete, id: "frmDestroy", class: "btn btn-danger ms-3" %>
+    <%# 完了 %><%# [優先度: 低] brの連打は推奨されません。marginを利用してください %>
+    <%= button_to "Cancelar tu cuenta", destroy_user_path(resource), form: { data: { turbo_confirm: "¿Realmente quieres eliminar tu cuenta?" }}, method: :delete, id: "frmDestroy", class: "btn btn-danger mt-5 ms-3" %>
     <br>
     <br>
   </div>
