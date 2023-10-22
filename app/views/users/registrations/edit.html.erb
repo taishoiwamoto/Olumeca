@@ -34,10 +34,10 @@
 
           <div class="mb-3">
             <%= f.label :password, 'Contraseña', class: 'form-label' %>
-            <div class="form-text text-muted">(Deja en blanco si no deseas cambiarlo)</div>
+            <span class="form-text text-muted">(Deja en blanco si no deseas cambiarlo)</span>
             <%= f.password_field :password, autocomplete: "new-password", class: 'form-control' %>
             <% if @minimum_password_length %>
-              <%# 未対応 %><%# [優先度: 低] smallの利用は推奨されません。CSSを利用してください %>
+              <%# 完了 %><%# [優先度: 低] smallの利用は推奨されません。CSSを利用してください %>
               <div class="form-text text-muted"><%= @minimum_password_length %> caracteres mínimos</div>
             <% end %>
           </div>
@@ -49,8 +49,8 @@
 
           <div class="mb-3">
             <%= f.label :current_password, 'Contraseña actual', class: 'form-label' %>
-            <%# 未対応 %><%# [優先度: 低] smallの利用は推奨されません。CSSを利用してください %>
-            <div class="form-text text-muted">(Necesitamos tu contraseña actual para confirmar tus cambios)</div>
+            <%# 完了 %><%# [優先度: 低] smallの利用は推奨されません。CSSを利用してください %>
+            <span class="form-text text-muted">(Necesitamos tu contraseña actual para confirmar tus cambios)</span>
             <%= f.password_field :current_password, autocomplete: "current-password", class: 'form-control', required: true %>
           </div>
 

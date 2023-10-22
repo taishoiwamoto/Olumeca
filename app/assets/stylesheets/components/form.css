@@ -12,3 +12,12 @@
 .form-error {
   color: #ff4d75;
 }
+
+  /* registrations/edit */
+.form-text {
+  font-size: 12px;
+}
+
+.text-muted {
+  color: #6c757d; /* これはBootstrapでのデフォルトの色です */
+}
