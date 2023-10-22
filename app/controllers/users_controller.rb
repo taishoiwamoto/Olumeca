@@ -11,16 +11,19 @@ class UsersController < ApplicationController
   end
 
   def likes
-    # [優先度: 中] Viewに表示したいのは、Likeの情報ではなく、Serviceの情報かと思います。
+    #完了 [優先度: 中] Viewに表示したいのは、Likeの情報ではなく、Serviceの情報かと思います。
     # なので、Serviceを中心にクエリを組み立ててください
     # @services = Service.joins(:likes).where(likes: { user_id: current_user.id }).order("likes.created_at desc").page(params[:page]).per(30)
     # ↑実際に動かしてないので、動かないかもしれません。。。。
 
-    @likes = Like.joins(:service).merge(Service.active).where(user_id: current_user.id).order(created_at: :desc).page(params[:page]).per(30)
+    @services = Service.joins(:likes).where(likes: { user_id: current_user.id }).order("likes.created_at desc").page(params[:page]).per(30)
   end
 
   def orders
     @orders = Order.where(buyer_id: current_user.id).order(created_at: :desc).page(params[:page]).per(30)
+
+    service_ids = @orders.map(&:service_id)
+    @reviews_by_user = Review.where(user_id: current_user.id, service_id: service_ids)
   end
 
   def sales
@@ -28,7 +31,7 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    # [重要度: 高] idの値を偽装することで任意のユーザの削除が可能になってます → 完了
+    #完了 [重要度: 高] idの値を偽装することで任意のユーザの削除が可能になってます
     if current_user.soft_delete
       redirect_to root_path, notice: 'Has eliminado tu cuenta.'
     else
@@ -39,9 +42,9 @@ class UsersController < ApplicationController
   private
 
   def find_active_user
-    # [重要度: 中] find_byではなく、findの利用を検討してください。→ 完了
+    #完了 [重要度: 中] find_byではなく、findの利用を検討してください。
     @user = User.active.find(params[:id])
-    # [重要度: 中] @userには既に値が入ってますので再代入の必要はありません。→ 完了
+    #完了 [重要度: 中] @userには既に値が入ってますので再代入の必要はありません。
     # またset_userにも同様の表記があります
     # 同様の文章が複数あると、編集時の作業漏れにつながります
   end

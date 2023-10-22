@@ -11,6 +11,7 @@
   border: 1px solid #cbd5d5;
   margin-bottom: 30px; /* spacing between elements */
   border-radius: 5px;
+  overflow-wrap: break-word;
 }
 
 /* Your previous media query is great! */
@@ -32,9 +33,9 @@
 
 /* サービスタイトルが異なるものでもcard_bodyの長さを統一するため */
 .top-newServices .card-body {
-  height: 150px;
+  height: 170px;
 }
 
 .cards-container .card-body{
-  height: 150px;
+  height: 170px;
 }

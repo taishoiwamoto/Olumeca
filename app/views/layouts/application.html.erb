@@ -21,9 +21,9 @@
     <header>
       <nav class="navbar navbar-expand-lg bg-white">
         <div class="container-fluid mt-1 mb-1 ms-3">
-          <a class="navbar-brand" href="/">
+          <%= link_to root_path, class: "navbar-brand" do %>
             <%= image_tag 'olumeca.png', alt: 'Olumeca Logo', style: 'height: 25px; width: auto;' %>
-          </a>
+          <% end %>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -48,22 +48,20 @@
               <% if user_signed_in?  %>
 
                 <li class="nav-item">
-                  <a class="nav-link active" aria-current="page" href="https://wa.me/4423831033">
+                  <%= link_to "https://wa.me/4423831033", class: "nav-link active", aria: { current: "page" } do %>
                     <i class="fab fa-whatsapp" style="margin-right: 5px;"></i>Contactar
-                  </a>
+                  <% end %>
                 </li>
 
                 <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Mi Página
-                  </a>
+                  <%= link_to "Mi Página", "#", class: "nav-link dropdown-toggle", role: "button", data: { bs_toggle: "dropdown" }, aria: { expanded: "false" } %>
                   <ul class="dropdown-menu dropdown-menu-end">
-                    <%# [優先度: 中] aタグは利用せず、link_toの利用を検討してください。ほかにも同様の指摘箇所がありますが、多いので省略させて下さい。。。 %>
-                    <li><a class="dropdown-item" href="<%= user_path(current_user) %>">Perfil</a></li>
-                    <li><a class="dropdown-item" href="<%= edit_user_registration_path %>">Editar tu cuenta</a></li>
-                    <li><a class="dropdown-item" href="<%= likes_user_path(current_user.id) %>">Favoritos</a></li>
-                    <li><a class="dropdown-item" href="<%= orders_user_path(current_user.id) %>">Pedidos realizados</a></li>
-                    <li><a class="dropdown-item" href="<%= sales_user_path(current_user.id) %>">Pedidos recibidos</a></li>
+                    <%# 完了 %><%# [優先度: 中] aタグは利用せず、link_toの利用を検討してください。ほかにも同様の指摘箇所がありますが、多いので省略させて下さい。。。 %>
+                    <li><%= link_to 'Perfil', user_path(current_user), class: "dropdown-item" %></li>
+                    <li><%= link_to 'Editar tu cuenta', edit_user_registration_path, class: "dropdown-item" %></li>
+                    <li><%= link_to 'Favoritos', likes_user_path(current_user.id), class: "dropdown-item" %></li>
+                    <li><%= link_to 'Pedidos realizados', orders_user_path(current_user.id), class: "dropdown-item" %></li>
+                    <li><%= link_to 'Pedidos recibidos', sales_user_path(current_user.id), class: "dropdown-item" %></li>
                     <li><hr class="dropdown-divider"></li>
                     <li><%= button_to 'Salir', destroy_user_session_path, method: :delete, class: "dropdown-item" %></li>
                   </ul>
@@ -72,10 +70,10 @@
               <% else %>
 
                 <li class="nav-item">
-                    <%# [優先度: 中] link_toの利用を検討してください %>
-                  <a class="nav-link active me-3" aria-current="page" href="https://wa.me/4423831033">
+                  <%# 完了 %><%# [優先度: 中] link_toの利用を検討してください %>
+                  <%= link_to "https://wa.me/4423831033", class: "nav-link active me-3", aria: { current: "page" } do %>
                     <i class="fab fa-whatsapp fa-1x" style="margin-right: 5px;"></i>Contactar
-                  </a>
+                  <% end %>
                 </li>
 
                 <li class="nav-item">
@@ -94,8 +92,8 @@
       <% if flash[:notice] %>
         <div class="alert alert-warning alert-dismissible text-center fade show mb-0" role="alert" style="margin-top: 0px;">
           <%= flash[:notice] %>
-          <%# [優先度: 中]インデントずれ %>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          <%# 完了 %><%# [優先度: 中]インデントずれ %>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
       <% end %>
 
@@ -118,9 +116,17 @@
           <p class="footer-item"><%= link_to 'Términos y condiciones', static_pages_terms_of_service_path %></p>
           <p class="footer-item"><%= link_to 'Política de privacidad', static_pages_privacy_policy_path %></p>
           <p class="footer-item"><%= link_to 'Perfil Empresa', 'https://miraie-mexico.com/%e4%bc%9a%e7%a4%be%e6%a6%82%e8%a6%81/' %></p>
-          <%# [優先度: 中] link_to do ~ end の利用を検討し、html_safeの利用を極力避けて下さい %>
-          <p class="footer-item"><%= link_to '<i class="fab fa-instagram"></i>'.html_safe, 'https://www.instagram.com/olumeca/' %></p>
-          <p class="footer-item"><%= link_to '<i class="fab fa-facebook-f"></i>'.html_safe, 'https://www.facebook.com/profile.php?id=61552368129464' %></p>
+          <%# 完了 %><%# [優先度: 中] link_to do ~ end の利用を検討し、html_safeの利用を極力避けて下さい %>
+          <p class="footer-item">
+            <%= link_to 'https://www.instagram.com/olumeca/' do %>
+              <i class="fab fa-instagram"></i>
+            <% end %>
+          </p>
+          <p class="footer-item">
+            <%= link_to 'https://www.facebook.com/profile.php?id=61552368129464' do %>
+              <i class="fab fa-facebook-f"></i>
+            <% end %>
+          </p>
         </div>
       </div>
     </footer>

@@ -18,13 +18,10 @@
   </ul>
 
 
-  <%# [優先度: 中] 環境による分岐は環境によっては起きる不具合の発見が遅れることになり、好ましくありません。hogehoge_urlなどのヘルパーの利用を検討して下さい。(https://railsguides.jp/routing.html)%>
-  <%# [優先度: 中] link_toの利用を検討してください %>
-  <% if Rails.env.development? %>
-      <p>Puede revisar sus pedidos en Olumeca a través del siguiente <a href="http://localhost:3000/users/<%= @buyer.id %>/orders">enlace</a>.</p>
-  <% else %>
-      <p>Puede revisar sus pedidos en Olumeca a través del siguiente <a href="https://olumeca.com/users/<%= @buyer.id %>/orders">enlace</a>.</p>
-  <% end %>
+  <%# 完了 %><%# [優先度: 中] 環境による分岐は環境によっては起きる不具合の発見が遅れることになり、好ましくありません。hogehoge_urlなどのヘルパーの利用を検討して下さい。(https://railsguides.jp/routing.html)%>
+  <%# 完了 %><%# [優先度: 中] link_toの利用を検討してください %>
+  <p>Puede revisar sus pedidos en Olumeca a través del siguiente <%= link_to 'enlace', user_orders_url(@buyer) %>.</p>
+
 
   <p>Atentamente,</p>
   <p>Equipo de Olumeca</p>

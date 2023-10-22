@@ -11,8 +11,10 @@
           <div class="mb-3">
             <%= f.label :password, "Cambia mi contraseña", class: 'form-label' %>
             <% if @minimum_password_length %>
-              <%# [優先度: 低] emの利用は推奨されません。重要事項のため強調が目的であればstrongタグを、見た目上斜体にしたいだけであればCSSを利用してください %>
-              <em>(<%= @minimum_password_length %> mínimo de caracteres)</em><br />
+              <%# 完了 %><%# [優先度: 低] emの利用は推奨されません。重要事項のため強調が目的であればstrongタグを、見た目上斜体にしたいだけであればCSSを利用してください %>
+              <div class="invalid-feedback">
+                (<%= @minimum_password_length %> mínimo de caracteres)</em>
+              </div>
             <% end %>
             <%= f.password_field :password, autofocus: true, autocomplete: "new-password", class: 'form-control', required: true %>
             <div class="invalid-feedback">
