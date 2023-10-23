@@ -101,10 +101,12 @@
 
 
                     <div class="d-flex align-items-center mt-2">
-                      <% if review.user.image.attached? %>
-                        <%= image_tag(review.user.image, class: "rounded-circle mr-3 small-image") %>
+                      <% if review.user.deleted? %>
+                        <%= image_tag('default_user.jpg', class: "rounded-circle mr-3 small-image", alt: "Default user image") %>
+                      <% elsif review.user.image.attached? %>
+                        <%= image_tag(review.user.image, class: "rounded-circle mr-3 small-image", alt: "User image") %>
                       <% else %>
-                        <%= image_tag('default_user.jpg', class: "rounded-circle mr-3 small-image") %>
+                        <%= image_tag('default_user.jpg', class: "rounded-circle mr-3 small-image", alt: "Default user image") %>
                       <% end %>
                       <% if review.rating.present? %>
                         <div class="ms-2"><%= "⭐️" * review.rating %></div>
@@ -129,7 +131,7 @@
           <% end %>
         <% else %>
           <p>No hay evaluaciones.</p>
-         <% end %>
+        <% end %>
       </div>
       <%= paginate @reviews %>
     </div>

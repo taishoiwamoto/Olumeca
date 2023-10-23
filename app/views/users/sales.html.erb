@@ -28,39 +28,33 @@
                 <% end %>
               </td>
               <td>
-                <% if sale.pending? %>
+                <% if sale.buyer.deleted? || sale.accepted? || sale.rejected? %>
+                  N/A
+                <% elsif sale.pending? %>
                   <%# 完了 %><%# [優先度: 中] インラインスタイルは避けた方がよいです %>
                   <div class="flex-container">
                     <%= button_to "Aceptar", accept_order_path(sale), method: :put, class: "btn btn-primary btn-sm me-2" %>
                     <%= button_to "Rechazar", reject_order_path(sale), method: :put, class: "btn btn-danger btn-sm" %>
                   </div>
-                <% else %>
                 <% end %>
               </td>
               <td>
-                <% if sale.accepted? %>
-                  <% if sale.buyer.deleted? %>
-                    <div class="info-item">
-                      <i class="fa-solid fa-envelope"></i>: --
-                    </div>
-                    <div class="info-item">
-                      <i class="fa-solid fa-phone"></i>: --
-                    </div>
-                  <% else %>
-                    <div class="info-item">
-                      <%# 完了 %><%# [優先度: 中] spanの閉じタグがありません %>
-                      <%# 完了 %><%# [優先度: 高] buyerが退会していた際の考慮がされてないです %>
-                      <i class="fa-solid fa-envelope"></i>: <%= sale.buyer.email %>
-                    </div>
-                    <div class="info-item">
-                      <i class="fa-solid fa-phone"></i>: <%= sale.buyer.phone_number %>
-                    </div>
-                  <% end %>
+                <% if sale.buyer.deleted? || sale.pending? || sale.rejected? %>
+                  N/A
+                <% elsif sale.accepted? %>
+                  <div class="info-item">
+                    <%# 完了 %><%# [優先度: 中] spanの閉じタグがありません %>
+                    <%# 完了 %><%# [優先度: 高] buyerが退会していた際の考慮がされてないです %>
+                    <i class="fa-solid fa-envelope"></i>: <%= sale.buyer.email %>
+                  </div>
+                  <div class="info-item">
+                    <i class="fa-solid fa-phone"></i>: <%= sale.buyer.phone_number %>
+                  </div>
                 <% end %>
               </td>
               <td>
                 <% if sale.buyer.deleted? %>
-                  <%= sale.buyer.name %>
+                  Dado de baja
                 <% else %>
                   <%= link_to sale.buyer.name, user_path(sale.buyer), class: "link-text" %>
                 <% end %>
@@ -68,7 +62,7 @@
               <td>
                 <%# 完了 %><%# [優先度: 低] `user.deleted_at.nil?`と書くより`user.deleted?`と書く方が、「ユーザが削除されているか？」をより直感的に表せるかと思います。 %>
                 <% if sale.service.deleted? %>
-                  <%= sale.service.title %>
+                  Eliminado
                 <% else %>
                   <%= link_to sale.service.title, service_path(sale.service), class: "link-text" %>
                 <% end %>
