@@ -35,7 +35,7 @@ class ReviewsController < ApplicationController
   private
 
   def set_service
-    @service = Service.find(params[:service_id])
+    @service = Service.includes(:reviews).find(params[:service_id])
 
     check_review_possibility if %w[new create].include?(action_name)
   end
