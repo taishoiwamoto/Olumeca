@@ -9,7 +9,6 @@
       <% end %>
     </div>
   <% end %>
-
   <div class="mb-3">
     <%= form.label :rating, 'Evaluación', class: 'form-label' %>
     <% if review.rating.present? %>
@@ -19,7 +18,6 @@
       <%= form.select :rating, options_for_select(review_select_options), {include_blank: 'Seleccione un valor numérico'}, class: 'form-select',required: true %>
     <% end %>
   </div>
-
   <div class="mb-3">
     <%= form.label :comment, 'Comentario', class: 'form-label' %>
     <%= form.text_area :comment, class: 'form-control' %>

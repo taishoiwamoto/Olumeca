@@ -1,33 +1,33 @@
 <div id='services'>
   <% if services.any? %>
-      <div class="cards-container">
-        <% @services.each do |service| %>
-          <%= link_to service_path(service) do %>
-            <div class="card">
-              <%# 完了 %><%# [優先度: 中] インデントずれ %>
-              <% if service.image.attached? %>
-                <%= image_tag(service.image, class: "card-img-top", alt: "...") %>
-              <% else %>
-                <%= image_tag('default_service.jpg', class: "card-img-top", alt: "...") %>
-              <% end %>
-              <div class="card-body">
-                <p class="card-title"><%= service.title.truncate(30) %></p>
-                <p class="card-text"><%= service.user.name %></p>
-                <%# 完了 %><%# [優先度: 中] 極力インラインスタイルは避けてください。 %>
-                <div class="star">
-                  <% reviews = service.reviews %>
-                  <% if reviews.present? %>
-                    <% average_rating = service.average_rating %>
-                    <%= "⭐️" %> <%= sprintf('%.2f', average_rating) %>
-                  <% else %>
-                    --
-                  <% end %>
-                </div>
+    <div class="cards-container">
+      <% @services.each do |service| %>
+        <%= link_to service_path(service) do %>
+          <div class="card">
+            <%# 完了 %><%# [優先度: 中] インデントずれ %>
+            <% if service.image.attached? %>
+              <%= image_tag(service.image, class: "card-img-top", alt: "...") %>
+            <% else %>
+              <%= image_tag('default_service.jpg', class: "card-img-top", alt: "...") %>
+            <% end %>
+            <div class="card-body">
+              <p class="card-title"><%= service.title.truncate(30) %></p>
+              <p class="card-text"><%= service.user.name %></p>
+              <%# 完了 %><%# [優先度: 中] 極力インラインスタイルは避けてください。 %>
+              <div class="star">
+                <% reviews = service.reviews %>
+                <% if reviews.present? %>
+                  <% average_rating = service.average_rating %>
+                  <%= "⭐️" %> <%= sprintf('%.2f', average_rating) %>
+                <% else %>
+                  --
+                <% end %>
               </div>
             </div>
-          <% end %>
+          </div>
         <% end %>
-      </div>
+      <% end %>
+    </div>
     <%= paginate services %>
   <% else %>
     <p>No se encontraron servicios.</p>

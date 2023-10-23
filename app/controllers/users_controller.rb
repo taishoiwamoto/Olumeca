@@ -6,8 +6,8 @@ class UsersController < ApplicationController
     @services = @user.services.active.order(created_at: :desc)
     @average_rating = @user.average_service_rating
 
-    service_ids = @user.services.pluck(:id)
-    @reviews = Review.where(service_id: service_ids).order(created_at: :desc).page(params[:page]).per(10)
+    service_ids = @services.pluck(:id)
+    @reviews = Review.includes(:service, :user).where(service_id: service_ids).order(created_at: :desc).page(params[:page]).per(10)
   end
 
   def likes
@@ -15,19 +15,18 @@ class UsersController < ApplicationController
     # なので、Serviceを中心にクエリを組み立ててください
     # @services = Service.joins(:likes).where(likes: { user_id: current_user.id }).order("likes.created_at desc").page(params[:page]).per(30)
     # ↑実際に動かしてないので、動かないかもしれません。。。。
-
-    @services = Service.joins(:likes).where(likes: { user_id: current_user.id }).where(deleted_at: nil).order("likes.created_at desc").page(params[:page]).per(30)
+    @services = Service.joins(:likes).preload(:user).where(likes: { user_id: current_user.id }).where(deleted_at: nil).order("likes.created_at desc").page(params[:page]).per(30)
   end
 
   def orders
-    @orders = Order.where(buyer_id: current_user.id).order(created_at: :desc).page(params[:page]).per(30)
+    @orders = Order.where(buyer_id: current_user.id).includes(:seller, service: :user).order(created_at: :desc).page(params[:page]).per(30)
 
     service_ids = @orders.map(&:service_id)
     @reviews_by_user = Review.where(user_id: current_user.id, service_id: service_ids)
   end
 
   def sales
-    @sales = Order.where(seller_id: current_user.id).order(created_at: :desc).page(params[:page]).per(30)
+    @sales = Order.where(seller_id: current_user.id).includes(:buyer, service: :user).order(created_at: :desc).page(params[:page]).per(30)
   end
 
   def destroy

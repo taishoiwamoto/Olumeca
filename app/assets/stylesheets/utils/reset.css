@@ -3,12 +3,13 @@
 }
 
 html {
-  font: 100%/1.5 'Avenir Next', 'Hiragino Sans', sans-serif;
+  font: 100%/1.5 "Avenir Next", "Hiragino Sans", sans-serif;
   line-height: 1.7;
   letter-spacing: 1px;
 }
 
-ul, li {
+ul,
+li {
   padding: 0;
   margin: 0;
 }
@@ -19,7 +20,13 @@ a {
   font-size: 14px;
 }
 
-h1, h2, h3, h4, h5, h6, p {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
   margin: 0;
 }
 
@@ -33,7 +40,9 @@ form input[type="submit"] {
   cursor: pointer;
 }
 
-dd, dl, dt {
+dd,
+dl,
+dt {
   margin: 0;
   padding: 0x;
 }

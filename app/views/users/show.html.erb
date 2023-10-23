@@ -7,8 +7,6 @@
           <%= link_to "Editar tu cuenta", edit_user_registration_path, class: "btn btn-primary btn-sm" %>
         </div>
       <% end %>
-
-
       <div class="user p-3 mt-0">
         <div class="row align-items-center flex-column flex-md-row">
           <div class="col-12 col-md-auto text-center text-md-start mb-3 mb-md-0">
@@ -19,7 +17,6 @@
               <%= image_tag('default_user.jpg', class: "img-fluid rounded-circle", alt: "Default user image") %>
             <% end %>
           </div>
-
           <div class="col text-center text-md-start">
             <h1 class="main-title"><%= @user.name %></h1>
             <% average_rating = @user.average_service_rating %>
@@ -33,7 +30,6 @@
           </div>
         </div>
       </div>
-
       <%# 完了 %><%# [優先度: 低] hタグはh1から順に使います。基本的にh2を飛ばしてh3を使うなどはしません。文字サイズは見出しの番号ではなくスタイルで制御してください。 %>
       <h2 class="sub-title mt-5 mb-4">Servicios</h2>
       <div class="row">
@@ -54,13 +50,11 @@
                         </div>
                       <% end %>
                     </div>
-
                     <div class="col-8">
                       <div class="card-body">
                         <p class="card-title"><%= service.title.truncate(15) %></p>
                         <div class="star">
-                          <% reviews = service.reviews %>
-                          <% if reviews.present? %>
+                          <% if @reviews.present? %>
                             <% average_rating = service.average_rating %>
                             <%= "⭐️" %> <%= sprintf('%.2f', average_rating) %>
                           <% else %>
@@ -78,9 +72,6 @@
           <p>No hay servicios.</p>
         <% end %>
       </div>
-
-
-
       <h2 class="sub-title mt-5 mb-4">Evaluación</h2>
       <div class="row">
         <% if @reviews.any? %>
@@ -89,7 +80,6 @@
               <div class="card full-width">
                 <div class="card-body">
                   <div class="flex-grow-1">
-
                     <%# 完了 %><%# [優先度: 低] hタグはh1から順に使います。基本的にh2を飛ばしてh3を使うなどはしません。文字サイズは見出しの番号ではなくスタイルで制御してください。 %>
                     <p class="card-title">
                       <% if review&.service.deleted? %>
@@ -98,8 +88,6 @@
                         <%= link_to "Servicio: #{review.service.title}", service_path(review.service), class: "link-class-name link-text" %>
                       <% end %>
                     </p>
-
-
                     <div class="d-flex align-items-center mt-2">
                       <% if review.user.deleted? %>
                         <%= image_tag('default_user.jpg', class: "rounded-circle mr-3 small-image", alt: "Default user image") %>

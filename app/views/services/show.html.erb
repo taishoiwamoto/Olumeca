@@ -54,13 +54,11 @@
           <%# 完了 %><%# [情報] 今後の拡張によってはXSSにつながるため気を付けてください。現状は問題ないです。 %>
           <p><%= simple_format(h(@service.detail)) %></p>
         </div>
-
         <div class="d-grid gap-2 col-10 mx-auto">
           <%= link_to "Hacer el pedido", new_order_path(seller_id: @service.user_id, service_id: @service.id, buyer_id: current_user&.id), class: "btn btn-primary btn-lg" %>
         </div>
-
         <h2 class="sub-title mt-5 mb-4">Evaluación</h2>
-          <% if @reviews.any? %>
+        <% if @reviews.any? %>
           <div class="row">
             <% @reviews.each do |review| %>
               <div class="col-12 mb-4">
@@ -68,7 +66,6 @@
                 <div class="card full-width">
                   <div class="card-body">
                     <div class="flex-grow-1">
-
                       <%# 完了 %><%# [優先度: 低] hタグはh1から順に使います。基本的にh2を飛ばしてh3を使うなどはしません。文字サイズは見出しの番号ではなくスタイルで制御してください。 %>
                       <div class="d-flex align-items-center mt-2">
                         <% if review.user.deleted? %>
@@ -105,7 +102,6 @@
           <p>No hay evaluaciones.</p>
         <% end %>
       </div>
-
       <div class="col-lg-3 col-md-4 col-12 order-2 order-md-1 mb-5 mt-5">
         <%# 完了 %><%# [優先度: 中] インデントずれ %>
         <%= link_to user_path(@service.user), class: 'text-decoration-none text-dark' do %>

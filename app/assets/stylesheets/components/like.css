@@ -4,12 +4,12 @@
 }
 
 .like-button button {
-    background-color: transparent;  /* 背景色を透明に */
-    border: none;                   /* 境界線を削除 */
-    padding: 0;                     /* パディングを0に */
-    margin: 0;                      /* 余白を0に */
-    font: inherit;                  /* ボタンのフォントを継承 */
-    cursor: pointer;                /* カーソルをポインタに */
+  background-color: transparent; /* 背景色を透明に */
+  border: none; /* 境界線を削除 */
+  padding: 0; /* パディングを0に */
+  margin: 0; /* 余白を0に */
+  font: inherit; /* ボタンのフォントを継承 */
+  cursor: pointer; /* カーソルをポインタに */
 }
 
 .unliked-btn {

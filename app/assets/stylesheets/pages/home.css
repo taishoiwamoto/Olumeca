@@ -1,5 +1,5 @@
-a{
-  color:#222 !important;
+a {
+  color: #222 !important;
   text-decoration: none !important;
 }
 
@@ -61,18 +61,17 @@ a{
   }
 
   .top-mainVisual__container .left {
-    display: flex;            /* Flexboxを有効に */
-    flex-direction: column;   /* 子要素を縦に並べる */
-    justify-content: center;  /* 子要素をコンテナの中央に配置（縦方向） */
-    align-items: center;       /* 子要素をコンテナの開始位置に配置（横方向） */
-    width: 100%;               /* コンテナの幅を50%に設定 */
+    display: flex; /* Flexboxを有効に */
+    flex-direction: column; /* 子要素を縦に並べる */
+    justify-content: center; /* 子要素をコンテナの中央に配置（縦方向） */
+    align-items: center; /* 子要素をコンテナの開始位置に配置（横方向） */
+    width: 100%; /* コンテナの幅を50%に設定 */
   }
 }
 
 .top-mainVisual__container .right img {
   max-width: 90%;
 }
-
 
 .top-mainVisual__container {
   max-width: 960px;
@@ -127,7 +126,7 @@ a{
 }
 
 .noflex {
-  display: block!important;
+  display: block !important;
 }
 
 .top-main-about-service {
@@ -211,7 +210,6 @@ a{
   height: auto;
 }
 
-
 .top-main-buyer__container {
   max-width: 1200px;
   margin: 0px auto;
@@ -271,16 +269,16 @@ a{
   height: auto;
   display: block;
   margin: 0 auto;
-  object-fit: cover;  /* 追加: 画像のアスペクト比を保ちつつ、コンテナを満たします。 */
-  height: 200px;  /* 追加: 高さを指定。 */
+  object-fit: cover; /* 追加: 画像のアスペクト比を保ちつつ、コンテナを満たします。 */
+  height: 200px; /* 追加: 高さを指定。 */
 }
 
 .vendor-title {
-  color: #3366FF;
+  color: #3366ff;
   font-weight: bold;
 }
 
 .buyer-title {
-  color: #33CC33;
+  color: #33cc33;
   font-weight: bold;
 }
