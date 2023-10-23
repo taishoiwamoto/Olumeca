@@ -1,27 +1,22 @@
 <div class="main users-edit">
   <div class="form-container">
-  <h1 class="ms-2 me-2">Change your password</h1>
-  <%# 完了 %><%# [優先度: 中] インデントずれ %>
-  <div class="form">
-    <div class="form-body">
-
-      <h2>Resend confirmation instructions</h2>
-
-      <%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
-        <%= render "users/shared/error_messages", resource: resource %>
-
-        <div class="field">
-          <%= f.label :email %><br />
-          <%= f.email_field :email, autofocus: true, autocomplete: "email", value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email) %>
-        </div>
-
-        <div class="actions">
-          <%= f.submit "Resend confirmation instructions" %>
-        </div>
-      <% end %>
-
-      <%= render "users/shared/links" %>
+    <h1 class="ms-2 me-2">Change your password</h1>
+    <%# 完了 %><%# [優先度: 中] インデントずれ %>
+    <div class="form">
+      <div class="form-body">
+        <h2>Resend confirmation instructions</h2>
+        <%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
+          <%= render "users/shared/error_messages", resource: resource %>
+          <div class="field">
+            <%= f.label :email %><br />
+            <%= f.email_field :email, autofocus: true, autocomplete: "email", value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email) %>
+          </div>
+          <div class="actions">
+            <%= f.submit "Resend confirmation instructions" %>
+          </div>
+        <% end %>
+        <%= render "users/shared/links" %>
+      </div>
     </div>
-  </div>
   </div>
 </div>

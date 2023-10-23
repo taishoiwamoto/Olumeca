@@ -27,32 +27,26 @@
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
-
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-
               <li class="nav-item">
                 <%= link_to services_path, class: "nav-link" do %>
                   <i class="fa-solid fa-magnifying-glass"></i> Servicios
                 <% end %>
               </li>
-
               <li class="nav-item">
                 <%= link_to new_service_path, class: "nav-link" do %>
                   <i class="fa-solid fa-square-plus"></i> Publicar
                 <% end %>
               </li>
-
             </ul>
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
               <% if user_signed_in?  %>
-
                 <li class="nav-item">
                   <%= link_to "https://wa.me/4423831033", class: "nav-link active", aria: { current: "page" } do %>
                     <i class="fab fa-whatsapp me-1"></i>Contactar
                   <% end %>
                 </li>
-
                 <li class="nav-item dropdown">
                   <%= link_to "Mi Página", "#", class: "nav-link dropdown-toggle", role: "button", data: { bs_toggle: "dropdown" }, aria: { expanded: "false" } %>
                   <ul class="dropdown-menu dropdown-menu-end">
@@ -66,24 +60,19 @@
                     <li><%= button_to 'Salir', destroy_user_session_path, method: :delete, class: "dropdown-item" %></li>
                   </ul>
                 </li>
-
               <% else %>
-
                 <li class="nav-item">
                   <%# 完了 %><%# [優先度: 中] link_toの利用を検討してください %>
                   <%= link_to "https://wa.me/4423831033", class: "nav-link active me-3", aria: { current: "page" } do %>
                     <i class="fab fa-whatsapp fa-1x me-1"></i>Contactar
                   <% end %>
                 </li>
-
                 <li class="nav-item">
                   <%= link_to "Iniciar", new_user_session_path, class: "btn btn-primary me-3 mb-1" %>
                 </li>
-
                 <li class="nav-item">
                   <%= link_to "Registrar", new_user_registration_path, class: "btn btn-success me-2" %>
                 </li>
-
               <% end %>
             </ul>
           </div>
@@ -96,7 +85,6 @@
           <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
       <% end %>
-
       <% if flash[:alert] %>
         <div class="alert alert-danger alert-dismissible text-center fade show mb-0 mt-0" role="alert">
           <%= flash[:alert] %>
@@ -104,9 +92,7 @@
         </div>
       <% end %>
     </header>
-
     <%= yield %>
-
     <footer class="footer bg-white">
       <div class="footer-wrapper">
         <div class="footer-container">
