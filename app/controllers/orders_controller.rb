@@ -4,12 +4,12 @@ class OrdersController < ApplicationController
   before_action :prevent_purchase_of_own_service, only: [:new, :create]
 
   def new
-    @service = Service.find(params[:service_id])
+    @service = Service.includes(:user).find(params[:service_id])
     @order = current_user.purchased_orders.build()
   end
 
   def create
-    @service = Service.find(params[:order][:service_id])
+    @service = Service.includes(:user).find(params[:order][:service_id])
     @order = current_user.purchased_orders.build(
       service_id: @service.id,
       seller_id: @service.user_id
@@ -31,14 +31,14 @@ class OrdersController < ApplicationController
   end
 
   def accept
-    @order = Order.find(params[:id])
+    @order = Order.includes(service: :user).find(params[:id])
     @order.accepted!
     OrderMailer.with(order: @order).order_status_notification.deliver_later
     redirect_to sales_user_path(current_user.id), notice: 'Pedido aceptado.'
   end
 
   def reject
-    @order = Order.find(params[:id])
+    @order = Order.includes(service: :user).find(params[:id])
     @order.rejected!
     OrderMailer.with(order: @order).order_status_notification.deliver_later
     redirect_to sales_user_path(current_user.id), notice: 'Pedido rechazado.'
