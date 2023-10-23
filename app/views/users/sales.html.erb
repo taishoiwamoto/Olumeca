@@ -2,7 +2,7 @@
   <div class="table-container">
     <h1>Pedidos recibidos</h1>
     <div class="table-responsive">
-      <table class="table table-hover" style="border: 1px solid #cbd5d5;">
+      <table class="table table-hover">
         <thead>
           <tr>
             <th scope="col">Fecha</th>
@@ -29,9 +29,9 @@
               </td>
               <td>
                 <% if sale.pending? %>
-                  <%# 未対応 %><%# [優先度: 中] インラインスタイルは避けた方がよいです %>
-                  <div style="display: flex;">
-                    <%= button_to "Aceptar", accept_order_path(sale), method: :put, class: "btn btn-primary btn-sm", style: "margin-right: 10px;" %>
+                  <%# 完了 %><%# [優先度: 中] インラインスタイルは避けた方がよいです %>
+                  <div class="flex-container">
+                    <%= button_to "Aceptar", accept_order_path(sale), method: :put, class: "btn btn-primary btn-sm me-2" %>
                     <%= button_to "Rechazar", reject_order_path(sale), method: :put, class: "btn btn-danger btn-sm" %>
                   </div>
                 <% else %>

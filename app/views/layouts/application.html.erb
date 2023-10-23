@@ -22,7 +22,7 @@
       <nav class="navbar navbar-expand-lg bg-white">
         <div class="container-fluid mt-1 mb-1 ms-3">
           <%= link_to root_path, class: "navbar-brand" do %>
-            <%= image_tag 'olumeca.png', alt: 'Olumeca Logo', style: 'height: 25px; width: auto;' %>
+            <%= image_tag 'olumeca.png', alt: 'Olumeca Logo', class: 'logo-dimensions' %>
           <% end %>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -49,7 +49,7 @@
 
                 <li class="nav-item">
                   <%= link_to "https://wa.me/4423831033", class: "nav-link active", aria: { current: "page" } do %>
-                    <i class="fab fa-whatsapp" style="margin-right: 5px;"></i>Contactar
+                    <i class="fab fa-whatsapp me-1"></i>Contactar
                   <% end %>
                 </li>
 
@@ -72,7 +72,7 @@
                 <li class="nav-item">
                   <%# 完了 %><%# [優先度: 中] link_toの利用を検討してください %>
                   <%= link_to "https://wa.me/4423831033", class: "nav-link active me-3", aria: { current: "page" } do %>
-                    <i class="fab fa-whatsapp fa-1x" style="margin-right: 5px;"></i>Contactar
+                    <i class="fab fa-whatsapp fa-1x me-1"></i>Contactar
                   <% end %>
                 </li>
 
@@ -90,7 +90,7 @@
         </div>
       </nav>
       <% if flash[:notice] %>
-        <div class="alert alert-warning alert-dismissible text-center fade show mb-0" role="alert" style="margin-top: 0px;">
+        <div class="alert alert-warning alert-dismissible text-center fade show mb-0 mt-0" role="alert">
           <%= flash[:notice] %>
           <%# 完了 %><%# [優先度: 中]インデントずれ %>
           <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -98,7 +98,7 @@
       <% end %>
 
       <% if flash[:alert] %>
-        <div class="alert alert-danger alert-dismissible text-center fade show mb-0" role="alert" style="margin-top: 0px;">
+        <div class="alert alert-danger alert-dismissible text-center fade show mb-0 mt-0" role="alert">
           <%= flash[:alert] %>
           <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
@@ -107,7 +107,7 @@
 
     <%= yield %>
 
-    <footer class="footer" style="background-color: #fff;">
+    <footer class="footer bg-white">
       <div class="footer-wrapper">
         <div class="footer-container">
           <p class="footer-item">©Olumeca</p>

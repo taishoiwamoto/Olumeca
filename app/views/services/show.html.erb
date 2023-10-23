@@ -1,10 +1,9 @@
 <div class="main">
   <div class="container">
     <div class="row">
-
       <div class="col-lg-7 col-md-8 col-12 order-1 order-md-1 mt-5">
         <div class="service-show-item">
-          <div style="display: flex; justify-content: flex-end;">
+          <div class="flex-end">
             <% if current_user && @service.user_id == current_user.id %>
               <%# 完了 %><%# [優先度: 中] インデントずれ %>
               <%= button_to edit_service_path(@service), method: :get, class: "btn btn-primary btn-sm me-2" do %>
@@ -16,9 +15,9 @@
             <% end %>
           </div>
           <%# 完了 %><%# [優先度: 中] インデントずれ %>
-          <h1 class="mt-3" style="word-wrap: break-word; overflow-wrap: break-word;"><%= @service.title %></h1>
-          <%# 未対応 %><%# [優先度: 中] 極力インラインスタイルは避けてください %>
-          <div style="display: flex; justify-content: space-between;">
+          <h1 class="main-title mt-3"><%= @service.title %></h1>
+          <%# 完了 %><%# [優先度: 中] 極力インラインスタイルは避けてください %>
+          <div class="flex-space-between">
             <div class="star">
               <% if @reviews.present? %>
                 <div class="average-rating">
@@ -43,11 +42,8 @@
               <% end %>
             </div>
           </div>
-          <%# 未対応 %><%# [優先度: 中] 極力インラインスタイルは避けてください %>
-          <div style="display: flex; justify-content: space-between;">
-            <%= @service.category&.name || "" %>
-          </div>
-          <br>
+          <%# 完了 %><%# [優先度: 中] 極力インラインスタイルは避けてください %>
+          <div class="mb-1"><%= @service.category&.name || "" %></div>
           <div class="service-image">
             <% if @service.image.attached? %>
               <%= image_tag(@service.image, class: "service-image") %>
@@ -63,22 +59,22 @@
           <%= link_to "Hacer el pedido", new_order_path(seller_id: @service.user_id, service_id: @service.id, buyer_id: current_user&.id), class: "btn btn-primary btn-lg" %>
         </div>
 
-        <h2 class="mt-5 mb-4">Evaluación</h2>
+        <h2 class="sub-title mt-5 mb-4">Evaluación</h2>
           <% if @reviews.any? %>
           <div class="row">
             <% @reviews.each do |review| %>
               <div class="col-12 mb-4">
-                <%# 未対応 %><%# [優先度: 中] 極力インラインスタイルは避けてください %>
-                <div class="card" style="width: 100%;">
+                <%# 完了 %><%# [優先度: 中] 極力インラインスタイルは避けてください %>
+                <div class="card full-width">
                   <div class="card-body">
-                    <div class="flex-grow-1" style="margin-left: 10px;">
+                    <div class="flex-grow-1">
 
                       <%# 完了 %><%# [優先度: 低] hタグはh1から順に使います。基本的にh2を飛ばしてh3を使うなどはしません。文字サイズは見出しの番号ではなくスタイルで制御してください。 %>
                       <div class="d-flex align-items-center mt-2">
                         <% if review.user.image.attached? %>
-                          <%= image_tag(review.user.image, class: "rounded-circle mr-3", style: "width: 40px; height: 40px;") %>
+                          <%= image_tag(review.user.image, class: "rounded-circle mr-3 small-image") %>
                         <% else %>
-                          <%= image_tag('default_user.jpg', class: "rounded-circle mr-3", style: "width: 40px; height: 40px;") %>
+                          <%= image_tag('default_user.jpg', class: "rounded-circle mr-3 small-image") %>
                         <% end %>
                         <% if review.rating.present? %>
                           <div class="ms-2"><%= "⭐️" * review.rating %></div>
@@ -90,10 +86,10 @@
                       <% else %>
                         <p class="font-weight-bold mt-2 mb-0">Comprador/a: <%= review.user.name %></p>
                       <% end %>
-                      <%# 未対応 %><%# [優先度: 中] 極力インラインスタイルは避けてください %>
-                      <div class="d-flex justify-content-start mt-2" style="font-size: 12px;">
-                        <div style="margin-right: 10px;">Creación: <%= review.created_at.strftime("%d/%m/%Y %H:%M") %></div>
-                        <div style="margin-bottom: 10px;">Actualización: <%= review.updated_at.strftime("%d/%m/%Y %H:%M") %></div>
+                      <%# 完了 %><%# [優先度: 中] 極力インラインスタイルは避けてください %>
+                      <div class="d-flex justify-content-start mt-2 small-text">
+                        <div class="me-2">Creación: <%= review.created_at.strftime("%d/%m/%Y %H:%M") %></div>
+                        <div class>Actualización: <%= review.updated_at.strftime("%d/%m/%Y %H:%M") %></div>
                       </div>
                       <p><%= simple_format(h(review.comment)) %></p>
                     </div>
@@ -114,14 +110,12 @@
           <div class="card">
             <div class="card-body text-center">
               <% if @service.user.image.attached? %>
-                <%= image_tag(@service.user.image, class: 'rounded-circle mx-auto d-block', style: 'width:100px; height:100px;') %>
+                <%= image_tag(@service.user.image, class: 'rounded-circle mx-auto d-block mediam-image-container') %>
               <% else %>
-                <%= image_tag('default_user.jpg', class: 'rounded-circle mx-auto d-block', style: 'width:100px; height:100px;') %>
+                <%= image_tag('default_user.jpg', class: 'rounded-circle mx-auto d-block mediam-image-container') %>
               <% end %>
-              <%# 未対応 %><%# [優先度: 低] hタグはh1から順に使います。基本的にh2を飛ばしてh3を使うなどはしません。文字サイズは見出しの番号ではなくスタイルで制御してください。 %>
-              <span class="mt-3 mb-1">
-                  <%= @service.user.name %>
-              </span>
+              <%# 完了 %><%# [優先度: 低] hタグはh1から順に使います。基本的にh2を飛ばしてh3を使うなどはしません。文字サイズは見出しの番号ではなくスタイルで制御してください。 %>
+              <p class="card-title mt-3 mb-1"><%= @service.user.name %></p>
               <% if @service.average_rating > 0 %>
                 <p class="mb-0"><%= "⭐️" %> <%= sprintf('%.2f', @service.average_rating) %></p>
               <% else %>
