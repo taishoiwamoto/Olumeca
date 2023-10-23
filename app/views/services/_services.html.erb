@@ -11,19 +11,17 @@
                 <%= image_tag('default_service.jpg', class: "card-img-top", alt: "...") %>
               <% end %>
               <div class="card-body">
-                <span class="card-title"><%= service.title.truncate(30) %></span>
+                <p class="card-title"><%= service.title.truncate(30) %></p>
                 <p class="card-text"><%= service.user.name %></p>
-                <%# 未対応 %><%# [優先度: 中] 極力インラインスタイルは避けてください。 %>
-                <div style="display: flex; justify-content: space-between;">
-                  <div class="star">
-                    <% reviews = service.reviews %>
-                    <% if reviews.present? %>
-                      <% average_rating = service.average_rating %>
-                      <%= "⭐️" %> <%= sprintf('%.2f', average_rating) %>
-                    <% else %>
-                      --
-                    <% end %>
-                  </div>
+                <%# 完了 %><%# [優先度: 中] 極力インラインスタイルは避けてください。 %>
+                <div class="star">
+                  <% reviews = service.reviews %>
+                  <% if reviews.present? %>
+                    <% average_rating = service.average_rating %>
+                    <%= "⭐️" %> <%= sprintf('%.2f', average_rating) %>
+                  <% else %>
+                    --
+                  <% end %>
                 </div>
               </div>
             </div>

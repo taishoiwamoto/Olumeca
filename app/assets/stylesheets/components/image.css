@@ -1,0 +1,37 @@
+.normal-size-image {
+  width: 100%;  /* 画像をコンテナの幅に合わせます。 */
+  max-width: 300px;  /* 最大幅を300pxに制限します。 */
+  height: auto;  /* 画像のアスペクト比を保持します。 */
+  display: block;  /* 画像をブロック要素として扱います。 */
+  margin: 0 auto;  /* 上下の余白は0、左右の余白はautoで画像を中央に配置します。 */
+}
+
+.service-image {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 0;
+}
+
+.mediam-image-container {
+  width: 75px;
+  height: 75px;
+  overflow: hidden;
+  position: relative;
+  border: 2px solid #EEEEEE;
+}
+
+.mediam-image {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  min-width: 100%;
+  min-height: 100%;
+  object-fit: cover;
+}
+
+.small-image {
+  width: 40px;
+  height: 40px;
+}

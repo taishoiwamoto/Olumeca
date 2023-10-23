@@ -115,7 +115,7 @@ a{
 .top-main-button {
   margin-top: 30px;
   display: flex;
-  justify-content: center; /* 水平方向の中央揃え */
+  justify-content: center;
   padding-bottom: 20px;
 }
 
@@ -275,10 +275,12 @@ a{
   height: 200px;  /* 追加: 高さを指定。 */
 }
 
-.normal-size-image {
-  width: 100%;  /* 画像をコンテナの幅に合わせます。 */
-  max-width: 300px;  /* 最大幅を300pxに制限します。 */
-  height: auto;  /* 画像のアスペクト比を保持します。 */
-  display: block;  /* 画像をブロック要素として扱います。 */
-  margin: 0 auto;  /* 上下の余白は0、左右の余白はautoで画像を中央に配置します。 */
+.vendor-title {
+  color: #3366FF;
+  font-weight: bold;
+}
+
+.buyer-title {
+  color: #33CC33;
+  font-weight: bold;
 }

@@ -16,7 +16,7 @@ class UsersController < ApplicationController
     # @services = Service.joins(:likes).where(likes: { user_id: current_user.id }).order("likes.created_at desc").page(params[:page]).per(30)
     # ↑実際に動かしてないので、動かないかもしれません。。。。
 
-    @services = Service.joins(:likes).where(likes: { user_id: current_user.id }).order("likes.created_at desc").page(params[:page]).per(30)
+    @services = Service.joins(:likes).where(likes: { user_id: current_user.id }).where(deleted_at: nil).order("likes.created_at desc").page(params[:page]).per(30)
   end
 
   def orders

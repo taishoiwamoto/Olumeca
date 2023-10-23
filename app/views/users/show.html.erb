@@ -21,7 +21,7 @@
           </div>
 
           <div class="col text-center text-md-start">
-            <h1><%= @user.name %></h1>
+            <h1 class="main-title"><%= @user.name %></h1>
             <% average_rating = @user.average_service_rating %>
             <% if average_rating > 0 %>
               <div class="average-rating">
@@ -34,33 +34,37 @@
         </div>
       </div>
 
-      <%# 未対応 %><%# [優先度: 低] hタグはh1から順に使います。基本的にh2を飛ばしてh3を使うなどはしません。文字サイズは見出しの番号ではなくスタイルで制御してください。 %>
-      <h2>Servicios</h2>
+      <%# 完了 %><%# [優先度: 低] hタグはh1から順に使います。基本的にh2を飛ばしてh3を使うなどはしません。文字サイズは見出しの番号ではなくスタイルで制御してください。 %>
+      <h2 class="sub-title mt-5 mb-4">Servicios</h2>
       <div class="row">
         <% if @services.any? %>
           <% @services.each do |service| %>
             <div class="col-lg-6">
               <%= link_to service_path(service), class: "card-link-wrapper" do %>
-                <div class="card mb-4 bg-white" style="width: 100%;">
+                <div class="card mb-4 bg-white full-width">
                   <div class="row g-1">
                     <div class="col-3 d-none d-md-flex align-items-center justify-content-center">
                       <% if service.image.attached? %>
-                        <%= image_tag service.image, class: "img-fluid rounded-start", style: "width: 75px; height: 75px; border: 2px solid #EEEEEE;", alt: service.title %>
+                        <div class="mediam-image-container">
+                          <%= image_tag service.image, class: "img-fluid rounded-start mediam-image", alt: service.title %>
+                        </div>
                       <% else %>
-                        <%= image_tag 'default_service.jpg', class: "img-fluid rounded-start", style: "width: 75px; height: 75px; border: 2px solid #EEEEEE;", alt: "Default service image" %>
+                        <div class="mediam-image-container">
+                          <%= image_tag 'default_service.jpg', class: "img-fluid rounded-start mediam-image", alt: "Default service image" %>
+                        </div>
                       <% end %>
                     </div>
 
                     <div class="col-8">
                       <div class="card-body">
-                        <span class="card-title"><%= service.title.truncate(20) %></span>
+                        <p class="card-title"><%= service.title.truncate(15) %></p>
                         <div class="star">
                           <% reviews = service.reviews %>
                           <% if reviews.present? %>
                             <% average_rating = service.average_rating %>
-                            <p class="card-text"><%= "⭐️" %> <%= sprintf('%.2f', average_rating) %></p>
+                            <%= "⭐️" %> <%= sprintf('%.2f', average_rating) %>
                           <% else %>
-                            <p class="card-text"> -- </p>
+                            --
                           <% end %>
                         </div>
                       </div>
@@ -77,30 +81,30 @@
 
 
 
-      <h2>Evaluación</h2>
+      <h2 class="sub-title mt-5 mb-4">Evaluación</h2>
       <div class="row">
         <% if @reviews.any? %>
           <% @reviews.each do |review| %>
             <div class="col-12 mb-4">
-              <div class="card" style="width: 100%;">
+              <div class="card full-width">
                 <div class="card-body">
-                  <div class="flex-grow-1" style="margin-left: 10px;">
+                  <div class="flex-grow-1">
 
-                    <%# 未対応 %><%# [優先度: 低] hタグはh1から順に使います。基本的にh2を飛ばしてh3を使うなどはしません。文字サイズは見出しの番号ではなくスタイルで制御してください。 %>
-                    <span style="word-wrap: break-word; overflow-wrap: break-word;">
+                    <%# 完了 %><%# [優先度: 低] hタグはh1から順に使います。基本的にh2を飛ばしてh3を使うなどはしません。文字サイズは見出しの番号ではなくスタイルで制御してください。 %>
+                    <p class="card-title">
                       <% if review&.service.deleted? %>
                         Servicio: Eliminado
                       <% else %>
                         <%= link_to "Servicio: #{review.service.title}", service_path(review.service), class: "link-class-name link-text" %>
                       <% end %>
-                    </span>
+                    </p>
 
 
                     <div class="d-flex align-items-center mt-2">
                       <% if review.user.image.attached? %>
-                        <%= image_tag(review.user.image, class: "rounded-circle mr-3", style: "width: 40px; height: 40px;") %>
+                        <%= image_tag(review.user.image, class: "rounded-circle mr-3 small-image") %>
                       <% else %>
-                        <%= image_tag('default_user.jpg', class: "rounded-circle mr-3", style: "width: 40px; height: 40px;") %>
+                        <%= image_tag('default_user.jpg', class: "rounded-circle mr-3 small-image") %>
                       <% end %>
                       <% if review.rating.present? %>
                         <div class="ms-2"><%= "⭐️" * review.rating %></div>
@@ -112,10 +116,10 @@
                     <% else %>
                       <p class="font-weight-bold mt-2 mb-0">Comprador/a: <%= review.user.name %></p>
                     <% end %>
-                    <%# 未対応 %><%# [優先度: 中] 極力インラインスタイルは避けてください %>
-                    <div class="d-flex justify-content-start mt-2" style="font-size: 12px;">
-                      <div style="margin-right: 10px;">Creación: <%= review.created_at.strftime("%d/%m/%Y %H:%M") %></div>
-                      <div style="margin-bottom: 10px;">Actualización: <%= review.updated_at.strftime("%d/%m/%Y %H:%M") %></div>
+                    <%# 完了 %><%# [優先度: 中] 極力インラインスタイルは避けてください %>
+                    <div class="d-flex justify-content-start mt-2 small-text">
+                      <div class="me-2">Creación: <%= review.created_at.strftime("%d/%m/%Y %H:%M") %></div>
+                      <div class>Actualización: <%= review.updated_at.strftime("%d/%m/%Y %H:%M") %></div>
                     </div>
                     <p><%= simple_format(h(review.comment)) %></p>
                   </div>

@@ -12,3 +12,8 @@ header {
   background-color: #ffffff !important;
   border-bottom: 1px solid #e9eef1;
 }
+
+.logo-dimensions {
+  height: 25px;
+  width: auto;
+}
