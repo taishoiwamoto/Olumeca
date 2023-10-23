@@ -3,15 +3,14 @@ class ServicesController < ApplicationController
   before_action :set_service, only: %i[edit update destroy]
 
   def index
-    @services = Service.active.order(created_at: :desc).page(params[:page]).per(30)
+    @services = Service.active.preload(:user).order(created_at: :desc).page(params[:page]).per(30)
   end
 
   def show
-    @service = Service.active.find(params[:id])
+    @service = Service.active.preload(:user).find(params[:id])
     @user = @service.user
     @user_has_liked = Like.user_and_service(current_user.id, @service.id) if current_user
-    @likes_count = @service.likes.count
-    @reviews = @service.reviews.order(created_at: :desc).page(params[:page]).per(10)
+    @reviews = @service.reviews.preload(:user).order(created_at: :desc).page(params[:page]).per(10)
   end
 
   def new
@@ -57,7 +56,7 @@ class ServicesController < ApplicationController
       @services = @services.by_keyword(params[:keyword])
     end
 
-    @services = @services.active.order(created_at: :desc).page(params[:page]).per(30)
+    @services = @services.preload(:user).active.order(created_at: :desc).page(params[:page]).per(30)
 
     respond_to do |format|
       format.turbo_stream { render turbo_stream: turbo_stream.replace('services', partial: 'services/services', locals: { services: @services })}

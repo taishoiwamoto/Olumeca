@@ -54,8 +54,7 @@
                       <div class="card-body">
                         <p class="card-title"><%= service.title.truncate(15) %></p>
                         <div class="star">
-                          <% reviews = service.reviews %>
-                          <% if reviews.present? %>
+                          <% if @reviews.present? %>
                             <% average_rating = service.average_rating %>
                             <%= "⭐️" %> <%= sprintf('%.2f', average_rating) %>
                           <% else %>
