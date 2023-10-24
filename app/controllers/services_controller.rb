@@ -71,7 +71,7 @@ class ServicesController < ApplicationController
   end
 
   def set_service
-    #未対応 [重要度: 中] ここだけではないのですが、Serviceに関連するuserも使われてます
+    #完了 [重要度: 中] ここだけではないのですが、Serviceに関連するuserも使われてます
     # その場合、`Service.preload(:user).find(params[:id])`としないとパフォーマンスが悪化します。
     # preload, eager_loadと利用できるメソッドは複数あるのでちょっと調べてみてください。
     @service = Service.preload(:user).find(params[:id])
