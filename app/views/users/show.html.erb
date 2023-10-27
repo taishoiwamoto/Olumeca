@@ -52,7 +52,7 @@
                     </div>
                     <div class="col-8">
                       <div class="card-body">
-                        <p class="card-title"><%= service.title.truncate(15) %></p>
+                        <p class="card-title"><%= service.title.truncate(70) %></p>
                         <div class="star">
                           <% if @reviews.present? %>
                             <% average_rating = service.average_rating %>
