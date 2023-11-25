@@ -28,7 +28,7 @@ class ApplicationController < ActionController::Base
   def ensure_domain
     #未対応 [重要度: 低] アクセスの制限を一部でしていると思いますが、本来的にはこのような処理はインフラレイヤーで行うべきです。
     # 不要なアクセスをRailsで受けることになるため、不要なサーバーリソースを使うことになるためです。また実装不備によりこの処理が通らなかったときに重要な不具合となる可能性を秘めます。
-    # Herokuでどこまで行えるかという問題もありますので、重要度を低としています。
+    # Herokuでどこまで行えるかという問題もありますので、重要度を低としています。Herokuの間は、あまり気にしなくても良い。
     return unless /\.herokuapp.com/ =~ request.host
 
     port = ":#{request.port}" unless [80, 443].include?(request.port)

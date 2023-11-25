@@ -47,7 +47,7 @@ class ServicesController < ApplicationController
   def filter
     @services = Service.all
 
-    #未対応 [重要度: 低] Serviceテーブルのデータ量が多くなった際に時間がかかる可能性が高いです。LIKE検索の有効的な軽量化方法は難しいため、外部の検索サービスなどの利用をお勧めします。
+    #未対応 [重要度: 低] Serviceテーブルのデータ量が多くなった際に時間がかかる可能性が高いです。LIKE検索の有効的な軽量化方法は難しいため、外部の検索サービスなどの利用をお勧めします。service.rbの二行目の箇所。規模がかなり大きくなる前に対策をした方が良い程度。サービステーブルが万くらいまでは気にしなくても良さそう。
     if params[:category_id].present?
       @services = @services.where(category_id: params[:category_id])
     end
