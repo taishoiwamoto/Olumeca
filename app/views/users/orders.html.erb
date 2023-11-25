@@ -2,7 +2,6 @@
   <div class="table-container">
     <h1>Pedidos realizados</h1>
     <div class="table-responsive">
-      <%# 完了 %><%# [優先度: 中] インラインスタイルは避けた方がよいです %>
       <table class="table table-hover">
         <thead>
           <tr>
@@ -34,8 +33,6 @@
               <% elsif order.accepted? %>
                 <% review_for_order = @reviews_by_user.find { |review| review.service_id == order.service_id } %>
                 <% if review_for_order %>
-                  <%# 完了 %><%# [優先度: 中] review_by_userがN+1問題を発生させます。%>
-                  <%# あらかじめコントローラで当該ユーザが記載したレビュー一覧を取得してください %>
                   <%= link_to "Editar", edit_service_review_path(order.service, review_for_order), class: "btn btn-primary btn-sm"  %>
                 <% else %>
                   <%= link_to "Evaluar", new_service_review_path(order.service), class: "btn btn-primary btn-sm" %>
@@ -47,9 +44,6 @@
                 N/A
               <% elsif order.accepted? %>
                 <div class="info-item">
-                  <%# 完了 %><%# [優先度: 中] spanの閉じタグがありません %>
-                  <%# 完了 %><%# [優先度: 低] brではなくmarginで行間は調整してください %>
-                  <%# 完了 %><%# [優先度: 高] sellerが退会していた際の考慮がされてないです %>
                   <i class="fa-solid fa-envelope"></i>: <%= order.seller.email %>
                 </div>
                 <div class="info-item">
@@ -65,11 +59,6 @@
               <% end %>
             </td>
             <td>
-              <%# 完了 %><%# [優先度: 低] `user.deleted_at.nil?`と書くより`user.deleted?`と書く方が、「ユーザが削除されているか？」をより直感的に表せるかと思います。 %>
-              <%# models/user.rbにdeleted?メソッドを下記のように定義してみてください %>
-              <%# def deleted? %>
-              <%#   deleted_at.present? %>
-              <%# end %>
               <% if order.service.user.deleted? || order.service.deleted? %>
                 Eliminado
               <% else %>

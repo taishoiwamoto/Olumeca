@@ -1,7 +1,6 @@
 <div class="main">
   <div class="container">
     <div class="user-show-container">
-      <%# 完了 %><%# [優先度: 中] インデントがずれてます。またdivの開始とdiv閉じるの個数が異なります。 %>
       <% if @user == current_user %>
         <div class="d-flex justify-content-end align-items-right p-3 mb-0">
           <%= link_to "Editar tu cuenta", edit_user_registration_path, class: "btn btn-primary btn-sm" %>
@@ -11,7 +10,6 @@
         <div class="row align-items-center flex-column flex-md-row">
           <div class="col-12 col-md-auto text-center text-md-start mb-3 mb-md-0">
             <% if @user.image.attached? %>
-              <%# 完了 %><%# [優先度: 中] インデントがずれてます。またdivの開始とdiv閉じるの個数が異なります。 %>
               <%= image_tag(@user.image, class: "img-fluid rounded-circle", alt: @user.name) %>
             <% else %>
               <%= image_tag('default_user.jpg', class: "img-fluid rounded-circle", alt: "Default user image") %>
@@ -30,7 +28,6 @@
           </div>
         </div>
       </div>
-      <%# 完了 %><%# [優先度: 低] hタグはh1から順に使います。基本的にh2を飛ばしてh3を使うなどはしません。文字サイズは見出しの番号ではなくスタイルで制御してください。 %>
       <h2 class="sub-title mt-5 mb-4">Servicios</h2>
       <div class="row">
         <% if @services.any? %>
@@ -80,7 +77,6 @@
               <div class="card full-width">
                 <div class="card-body">
                   <div class="flex-grow-1">
-                    <%# 完了 %><%# [優先度: 低] hタグはh1から順に使います。基本的にh2を飛ばしてh3を使うなどはしません。文字サイズは見出しの番号ではなくスタイルで制御してください。 %>
                     <p class="card-title">
                       <% if review&.service.deleted? %>
                         Servicio: Eliminado
@@ -100,13 +96,11 @@
                         <div class="ms-2"><%= "⭐️" * review.rating %></div>
                       <% end %>
                     </div>
-                    <%# 完了 %><%# [優先度: 低] `review.user.name || "Usuario dado de baja"`とするとif文不要になります %>
                     <% if review.user.deleted? %>
                       <p class="font-weight-bold mt-2 mb-0">Comprador/a: Dado de baja</p>
                     <% else %>
                       <p class="font-weight-bold mt-2 mb-0">Comprador/a: <%= review.user.name %></p>
                     <% end %>
-                    <%# 完了 %><%# [優先度: 中] 極力インラインスタイルは避けてください %>
                     <div class="d-flex justify-content-start mt-2 small-text">
                       <div class="me-2">Creación: <%= review.created_at.strftime("%d/%m/%Y %H:%M") %></div>
                       <div class>Actualización: <%= review.updated_at.strftime("%d/%m/%Y %H:%M") %></div>

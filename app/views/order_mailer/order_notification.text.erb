@@ -2,8 +2,6 @@ Estimado/a <%= @seller.name %>,
 Le informamos que ha recibido un nuevo pedido en Olumeca. A continuación, le ofrecemos los detalles:
 - Nombre del producto: <%= sale.service.title %>
 - Comprador/a: <%= sale.buyer.name %>
-<%# 完了 %><%# [優先度: 中] 環境による分岐は環境によっては起きる不具合の発見が遅れることになり、好ましくありません。hogehoge_urlなどのヘルパーの利用を検討して下さい。(https://railsguides.jp/routing.html)%>
-<%# 完了 %><%# [優先度: 中] link_toの利用を検討してください %>
 Puede revisar el detalle de sus ventas en el siguiente <%= link_to 'enlace', user_sales_url(@seller) %>.
 Atentamente,
 Equipo de Olumeca

@@ -4,9 +4,7 @@
     <div class="cards-container">
       <% if @services.any? %>
         <% @services.each do |service| %>
-          <%# 完了 %><%# [優先度: 中] find_byメソッドはコントローラーで実施してください。ここのコントローラーがLikeを中心にデータを引っ張ってきているのでやりにくいと思います。詳細はコントローラーに記載します。 %>
           <%= link_to service_path(service.id) do %>
-            <%# 完了 %><%# [優先度: 中] インデントずれ %>
             <div class="card">
               <% if service.image.attached? %>
                 <%= image_tag(service.image, class: "card-img-top", alt: "...") %>
