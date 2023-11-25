@@ -5,7 +5,6 @@
         <div class="service-show-item">
           <div class="flex-end">
             <% if current_user && @service.user_id == current_user.id %>
-              <%# 完了 %><%# [優先度: 中] インデントずれ %>
               <%= button_to edit_service_path(@service), method: :get, class: "btn btn-primary btn-sm me-2" do %>
                 <i class="fa-solid fa-pen-to-square"></i> Editar
               <% end %>
@@ -14,9 +13,7 @@
               <% end %>
             <% end %>
           </div>
-          <%# 完了 %><%# [優先度: 中] インデントずれ %>
           <h1 class="main-title mt-3"><%= @service.title %></h1>
-          <%# 完了 %><%# [優先度: 中] 極力インラインスタイルは避けてください %>
           <div class="flex-space-between">
             <div class="star">
               <% if @reviews.present? %>
@@ -29,7 +26,6 @@
             </div>
             <div class="like-button">
               <% if current_user %>
-                <%# 完了 %><%# [優先度: 中] Like.user_and_serviceの呼び出しは見た目の構成ではなく、データの取得処理なので、controllerに移動してください %>
                 <% if @user_has_liked %>
                   <%= button_to like_path(service_id: @service.id), method: :delete do %>
                     <span class="fa fa-heart liked-btn"></span>
@@ -42,7 +38,6 @@
               <% end %>
             </div>
           </div>
-          <%# 完了 %><%# [優先度: 中] 極力インラインスタイルは避けてください %>
           <div class="mb-1"><%= @service.category&.name || "" %></div>
           <div class="service-image">
             <% if @service.image.attached? %>
@@ -51,7 +46,6 @@
               <%= image_tag('default_service.jpg', class: "service-image") %>
             <% end %>
           </div>
-          <%# 完了 %><%# [情報] 今後の拡張によってはXSSにつながるため気を付けてください。現状は問題ないです。 %>
           <p><%= simple_format(h(@service.detail)) %></p>
         </div>
         <div class="d-grid gap-2 col-10 mx-auto">
@@ -62,11 +56,9 @@
           <div class="row">
             <% @reviews.each do |review| %>
               <div class="col-12 mb-4">
-                <%# 完了 %><%# [優先度: 中] 極力インラインスタイルは避けてください %>
                 <div class="card full-width">
                   <div class="card-body">
                     <div class="flex-grow-1">
-                      <%# 完了 %><%# [優先度: 低] hタグはh1から順に使います。基本的にh2を飛ばしてh3を使うなどはしません。文字サイズは見出しの番号ではなくスタイルで制御してください。 %>
                       <div class="d-flex align-items-center mt-2">
                         <% if review.user.deleted? %>
                           <%= image_tag('default_user.jpg', class: "rounded-circle mr-3 small-image") %>
@@ -79,13 +71,11 @@
                           <div class="ms-2"><%= "⭐️" * review.rating %></div>
                         <% end %>
                       </div>
-                      <%# 完了 %><%# [優先度: 低] `review.user.name || "Usuario dado de baja"`とするとif文不要になります %>
                       <% if review.user.deleted? %>
                         <p class="font-weight-bold mt-2 mb-0">Comprador/a: Dado de baja</p>
                       <% else %>
                         <p class="font-weight-bold mt-2 mb-0">Comprador/a: <%= review.user.name %></p>
                       <% end %>
-                      <%# 完了 %><%# [優先度: 中] 極力インラインスタイルは避けてください %>
                       <div class="d-flex justify-content-start mt-2 small-text">
                         <div class="me-2">Creación: <%= review.created_at.strftime("%d/%m/%Y %H:%M") %></div>
                         <div class>Actualización: <%= review.updated_at.strftime("%d/%m/%Y %H:%M") %></div>
@@ -103,7 +93,6 @@
         <% end %>
       </div>
       <div class="col-lg-3 col-md-4 col-12 order-2 order-md-1 mb-5 mt-5">
-        <%# 完了 %><%# [優先度: 中] インデントずれ %>
         <%= link_to user_path(@service.user), class: 'text-decoration-none text-dark' do %>
           <div class="card">
             <div class="card-body text-center">
@@ -112,7 +101,6 @@
               <% else %>
                 <%= image_tag('default_user.jpg', class: 'rounded-circle mx-auto d-block mediam-image-container') %>
               <% end %>
-              <%# 完了 %><%# [優先度: 低] hタグはh1から順に使います。基本的にh2を飛ばしてh3を使うなどはしません。文字サイズは見出しの番号ではなくスタイルで制御してください。 %>
               <p class="card-title mt-3 mb-1"><%= @service.user.name %></p>
               <% if @service.average_rating > 0 %>
                 <p class="mb-0"><%= "⭐️" %> <%= sprintf('%.2f', @service.average_rating) %></p>

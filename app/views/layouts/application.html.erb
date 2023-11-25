@@ -50,7 +50,6 @@
                 <li class="nav-item dropdown">
                   <%= link_to "Mi Página", "#", class: "nav-link dropdown-toggle", role: "button", data: { bs_toggle: "dropdown" }, aria: { expanded: "false" } %>
                   <ul class="dropdown-menu dropdown-menu-end">
-                    <%# 完了 %><%# [優先度: 中] aタグは利用せず、link_toの利用を検討してください。ほかにも同様の指摘箇所がありますが、多いので省略させて下さい。。。 %>
                     <li><%= link_to 'Perfil', user_path(current_user), class: "dropdown-item" %></li>
                     <li><%= link_to 'Editar tu cuenta', edit_user_registration_path, class: "dropdown-item" %></li>
                     <li><%= link_to 'Favoritos', likes_user_path(current_user.id), class: "dropdown-item" %></li>
@@ -62,7 +61,6 @@
                 </li>
               <% else %>
                 <li class="nav-item">
-                  <%# 完了 %><%# [優先度: 中] link_toの利用を検討してください %>
                   <%= link_to "https://wa.me/4423831033", class: "nav-link active me-3", aria: { current: "page" } do %>
                     <i class="fab fa-whatsapp fa-1x me-1"></i>Contactar
                   <% end %>
@@ -81,7 +79,6 @@
       <% if flash[:notice] %>
         <div class="alert alert-warning alert-dismissible text-center fade show mb-0 mt-0" role="alert">
           <%= flash[:notice] %>
-          <%# 完了 %><%# [優先度: 中]インデントずれ %>
           <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
       <% end %>
@@ -102,7 +99,6 @@
           <p class="footer-item"><%= link_to 'Términos y condiciones', static_pages_terms_of_service_path %></p>
           <p class="footer-item"><%= link_to 'Política de privacidad', static_pages_privacy_policy_path %></p>
           <p class="footer-item"><%= link_to 'Perfil Empresa', 'https://miraie-mexico.com/%e4%bc%9a%e7%a4%be%e6%a6%82%e8%a6%81/' %></p>
-          <%# 完了 %><%# [優先度: 中] link_to do ~ end の利用を検討し、html_safeの利用を極力避けて下さい %>
           <p class="footer-item">
             <%= link_to 'https://www.instagram.com/olumeca/' do %>
               <i class="fab fa-instagram"></i>

@@ -2,7 +2,6 @@ class LikesController < ApplicationController
   before_action :authenticate_user
 
   def create
-    #完了 [重要度: 低] find_byではなく、findの利用を検討してください。
     service = Service.find(params[:service_id])
 
     unless service

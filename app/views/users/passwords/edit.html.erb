@@ -9,7 +9,6 @@
           <div class="mb-3">
             <%= f.label :password, "Cambia mi contraseña", class: 'form-label' %>
             <% if @minimum_password_length %>
-              <%# 完了 %><%# [優先度: 低] emの利用は推奨されません。重要事項のため強調が目的であればstrongタグを、見た目上斜体にしたいだけであればCSSを利用してください %>
               <div class="invalid-feedback">
                 (<%= @minimum_password_length %> mínimo de caracteres)</em>
             </div>
