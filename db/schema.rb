@@ -11,6 +11,9 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.0].define(version: 2023_10_23_150357) do
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -58,17 +61,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_23_150357) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "status", default: 0
-    t.integer "service_id"
+    t.bigint "service_id"
     t.index ["service_id"], name: "index_orders_on_service_id"
   end
 
   create_table "reviews", force: :cascade do |t|
-    t.integer "user_id"
+    t.bigint "user_id"
     t.integer "rating"
     t.text "comment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "service_id"
+    t.bigint "service_id"
     t.index ["service_id"], name: "index_reviews_on_service_id"
     t.index ["user_id"], name: "index_reviews_on_user_id"
   end
@@ -80,7 +83,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_23_150357) do
     t.integer "user_id"
     t.text "detail"
     t.datetime "deleted_at"
-    t.integer "category_id"
+    t.bigint "category_id"
     t.index ["category_id"], name: "index_services_on_category_id"
     t.index ["created_at"], name: "index_services_on_created_at"
     t.index ["deleted_at", "created_at"], name: "index_services_on_deleted_at_and_created_at"

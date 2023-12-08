@@ -20,7 +20,9 @@
               <%= f.label :remember_me, 'Recuérdame', class: 'form-check-label' %>
             </div>
           <% end %>
-          <%#= recaptcha_tags %>
+          <div class="mb-3">
+            <%= recaptcha_tags %>
+          </div>
           <div class="actions mb-3">
             <%= f.submit "Iniciar sesión", class: "btn btn-primary" %>
           </div>
