@@ -11,10 +11,6 @@ class Users::SessionsController < Devise::SessionsController
     end
   end
 
-  def new
-    self.resource = resource_class.new(sign_in_params || {})
-  end
-
   # before_action :configure_sign_in_params, only: [:create]
 
   # GET /resource/sign_in
