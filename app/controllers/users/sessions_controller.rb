@@ -13,7 +13,7 @@ class Users::SessionsController < Devise::SessionsController
 
   # GET /resource/sign_in
   def new
-    self.resource = resource_class.new(sign_in_params)
+    self.resource = resource_class.new(sign_in_params || {}) # sign_in_params が nil の場合に備えて空のハッシュを渡す
   end
 
   # POST /resource/sign_in
