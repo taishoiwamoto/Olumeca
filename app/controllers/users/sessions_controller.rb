@@ -5,6 +5,7 @@ class Users::SessionsController < Devise::SessionsController
     if verify_recaptcha
       super
     else
+      self.resource = resource_class.new(sign_in_params)
       flash.now[:alert] = 'Recaptcha verification failed'
       render :new
     end
