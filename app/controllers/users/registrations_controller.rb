@@ -3,12 +3,13 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   before_action :configure_sign_up_params, only: [:create]
   before_action :configure_account_update_params, only: [:update]
+  before_action :check_email_uniqueness, only: [:create]
 
   # DELETE /resource
   def destroy
-    #resource.soft_delete
+    resource.soft_delete
 
-    #sign_out resource
+    sign_out resource
     redirect_to root_path, notice: 'La cuenta de usuario fue cancelada'
   end
 
@@ -61,6 +62,21 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # If you have extra params to permit, append them to the sanitizer.
   def configure_sign_up_params
     devise_parameter_sanitizer.permit(:sign_up, keys: [:agreement, :name, :phone_number, :email, :password, :password_confirmation])
+  end
+
+  def check_email_uniqueness
+    if User.email_taken?(params[:user][:email])
+      existing_user = User.find_by(email: params[:user][:email])
+      if existing_user.deleted_at.nil?
+        # Email is in use by an active account
+        flash[:error] = "This email is already registered. If you forgot your password, you can reset it."
+      else
+        # Email is in use by an inactive account, allow the registration.
+        bypass_sign_in(existing_user) # Bypass Devise's sign-in
+        existing_user.update(deleted_at: nil) # Activate the existing user
+        redirect_to new_user_session_path
+      end
+    end
   end
 
   # If you have extra params to permit, append them to the sanitizer.

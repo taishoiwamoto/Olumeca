@@ -1,9 +1,13 @@
-<div class="main posts-show">
-  <div class="container">
-    <h1 class="form-heading">Pedido Completada</h1>
-    <div class="form-001">
-      <p>Su pedido ha sido procesado exitosamente.</p>
-      <%= link_to "Ver tus pedidos", orders_user_path(current_user), class: "button-004" %>
+<div class="main">
+  <div class="form-container">
+    <h1 class="ms-2 me-2">Pedido Completada</h1>
+    <div class="form">
+      <div class="form-body">
+        <p>Tu pedido ha sido procesado exitosamente.</p>
+        <div class="d-grid gap-2 col-6">
+          <%= link_to "Ver tus pedidos", orders_user_path(current_user), class: "btn btn-primary" %>
+        </div>
+      </div>
     </div>
   </div>
 </div>

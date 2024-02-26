@@ -1,0 +1,44 @@
+.service-show-item {
+  padding: 30px;
+  background-color: white;
+  border: 1px solid #cbd5d5;
+  margin-bottom: 30px; /* spacing between elements */
+  border-radius: 5px;
+  overflow-wrap: break-word;
+}
+
+/* Your previous media query is great! */
+@media (max-width: 767px) {
+  .row {
+    flex-direction: column-reverse;
+  }
+  .col-lg-3.col-md-4.col-12.order-2.order-md-1.mb-5.mt-5 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+/* Service and favorite card border between text and pics */
+.card-img-top {
+  border-bottom: 1px solid #cbd5d5;
+}
+
+/* サービスタイトルが異なるものでもcard_bodyの長さを統一するため */
+.top-newServices .card-body {
+  height: 170px;
+}
+
+.cards-container .card-body {
+  height: 170px;
+}
+
+.flex-end {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.flex-space-between {
+  display: flex;
+  justify-content: space-between;
+}

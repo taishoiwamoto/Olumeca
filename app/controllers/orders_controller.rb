@@ -1,49 +1,26 @@
 class OrdersController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create]
+  before_action :authenticate_user, only: [:new, :create, :completed, :accept, :reject, :user_info]
+  before_action :check_order_existence, only: [:new, :create]
+  before_action :prevent_purchase_of_own_service, only: [:new, :create]
 
   def new
-    @order = Order.new
-    @plan = Plan.find_by(id: params[:plan_id])
-    @service = @plan.service
-    @buyer = current_user
-    @seller = User.find(@service.user_id)
-
-    if @seller.id == @buyer.id
-      redirect_to @service, notice: 'No puedes pedir tu propio servicio.'
-      return
-    end
+    @service = Service.includes(:user).find(params[:service_id])
+    @order = current_user.purchased_orders.build()
   end
 
   def create
-    @order = Order.new(order_params)
+    @service = Service.includes(:user).find(params[:order][:service_id])
+    @order = current_user.purchased_orders.build(
+      service_id: @service.id,
+      seller_id: @service.user_id
+    )
 
-    #if Plan.find(@order.plan_id).deleted_at
-    #  redirect_to Plan.find(@order.plan_id).service, notice: 'No se puede realizar el pedido ya que el plan se encuentra cancelado.'
-    #  return
-    #end
-
-    #if Plan.find(@order.plan_id).service.deleted_at
-    #  redirect_to Plan.find(@order.plan_id).service, notice: 'No se puede realizar el pedido ya que el servicio se encuentra cancelado.'
-    #  return
-    #end
-
-
-    @order.buyer_id = current_user.id
-    @order.buyer_name = current_user.name
-
-    plan = Plan.find(@order.plan_id)
-
-    service = plan.service
-    @order.seller_id = service.user_id
-    @order.seller_name = User.find(service.user_id).name
-    @order.service_title = service.title
-    @order.plan_title = plan.title
-    @order.price = plan.price
-    #@order.status = "pending"
     if @order.save
       OrderMailer.with(order: @order).order_notification.deliver_later
       redirect_to completed_orders_path
     else
+      flash.now[:alert] = 'Hubo un error al crear el pedido. Por favor, inténtalo de nuevo.'
+      render :new
     end
   end
 
@@ -54,14 +31,14 @@ class OrdersController < ApplicationController
   end
 
   def accept
-    @order = Order.find(params[:id])
+    @order = Order.includes(service: :user).find(params[:id])
     @order.accepted!
     OrderMailer.with(order: @order).order_status_notification.deliver_later
     redirect_to sales_user_path(current_user.id), notice: 'Pedido aceptado.'
   end
 
   def reject
-    @order = Order.find(params[:id])
+    @order = Order.includes(service: :user).find(params[:id])
     @order.rejected!
     OrderMailer.with(order: @order).order_status_notification.deliver_later
     redirect_to sales_user_path(current_user.id), notice: 'Pedido rechazado.'
@@ -73,11 +50,17 @@ class OrdersController < ApplicationController
 
   private
 
-  def order_params
-    params.require(:order).permit(:plan_id)
+  def check_order_existence
+    @service = Service.find(params[:action] == "new" ? params[:service_id] : params[:order][:service_id])
+    if Order.exists?(buyer: current_user, service: @service)
+      redirect_to @service, alert: 'Ya has pedido este servicio.'
+    end
   end
 
-  def service_id
-    self.plan.service_id
+  def prevent_purchase_of_own_service
+    @service = Service.find(params[:action] == "new" ? params[:service_id] : params[:order][:service_id])
+    if @service.user_id == current_user.id
+      redirect_to @service, alert: 'No puedes pedir tu propio servicio.'
+    end
   end
 end

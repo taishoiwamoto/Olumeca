@@ -7,17 +7,10 @@
     <p>Le informamos que se ha registrado un nuevo pedido en Olumeca.</p>
     <p>Detalle del pedido:</p>
     <ul>
-        <li>Nombre del producto: <%= @order.service_title %></li>
-        <li>Plan: <%= @order.plan_title %></li>
-        <li>Comprador: <%= @order.buyer_name %></li>
+      <li>Nombre del producto: <%= sale.service.title %></li>
+      <li>Comprador/a: <%= sale.buyer.name %></li>
     </ul>
-
-    <% if Rails.env.development? %>
-        <p>Puede revisar el detalle de sus ventas en el siguiente <a href="http://localhost:3000/users/<%= @seller.id %>/sales">enlace</a>.</p>
-    <% else %>
-        <p>Puede revisar el detalle de sus ventas en el siguiente <a href="https://olumeca.com/users/<%= @seller.id %>/sales">enlace</a>.</p>
-    <% end %>
-
+    <p>Puede revisar el detalle de sus ventas en el siguiente <%= link_to 'enlace', user_sales_path(@seller.id) %>.</p>
     <p>Atentamente,</p>
     <p>Equipo de Olumeca</p>
   </body>

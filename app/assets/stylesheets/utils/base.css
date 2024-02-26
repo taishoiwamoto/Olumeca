@@ -1,0 +1,49 @@
+body {
+  color: #2d3133;
+  background-color: #ffffff;
+  margin: 0;
+}
+
+.main {
+  padding-top: 30px;
+  top: 64px;
+  width: 100%;
+  height: auto;
+  min-height: 100%;
+  background-color: #f5f8fa;
+}
+
+.container {
+  min-height: 100vh;
+  max-width: 600px;
+  margin: 60px auto 0px auto;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-bottom: 100px;
+  clear: both;
+}
+
+/* user/show, service/show */
+.main-title {
+  font-size: 30px;
+}
+
+.sub-title {
+  color: gray;
+  font-size: 20px;
+}
+
+.table-container {
+  min-height: 100vh;
+  max-width: 2000px;
+  margin: 60px auto 0px auto;
+  padding-left: 50px;
+  padding-right: 50px;
+  clear: both;
+}
+
+.form-container {
+  min-height: 100vh;
+  max-width: 600px;
+  margin: 60px auto 0px auto;
+}

@@ -1,0 +1,26 @@
+<%= form_with(model: review, url: [service, review], html: { class: 'needs-validation' }) do |form| %>
+  <% if review.errors.any? %>
+    <div class="mb-3">
+      <% review.errors.full_messages.each do |message| %>
+        <div class="form-error">
+          <%= message %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+  <div class="mb-3">
+    <%= form.label :rating, 'Evaluación', class: 'form-label' %>
+    <% if review.rating.present? %>
+      <%= form.select :rating, options_for_select(review_select_options, selected: review.rating), { include_blank: 'Seleccione un valor numérico' }, class: 'form-select', required: true %>
+    <% else %>
+      <%= form.select :rating, options_for_select(review_select_options), {include_blank: 'Seleccione un valor numérico'}, class: 'form-select',required: true %>
+    <% end %>
+  </div>
+  <div class="mb-3">
+    <%= form.label :comment, 'Comentario', class: 'form-label' %>
+    <%= form.text_area :comment, class: 'form-control' %>
+  </div>
+  <div class="d-grid gap-2 col-6">
+    <%= form.submit 'Guardar',  class: "btn btn-primary"%>
+  </div>
+<% end %>

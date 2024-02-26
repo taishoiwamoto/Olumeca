@@ -1,18 +1,22 @@
 class Order < ApplicationRecord
   belongs_to :buyer, class_name: 'User', foreign_key: 'buyer_id'
   belongs_to :seller, class_name: 'User', foreign_key: 'seller_id'
-  belongs_to :plan
-  #has_one :review
+  belongs_to :service
   enum status: ['pending', 'accepted', 'rejected']
 
-  def reviewed_by_user?(user)
-    #Review.where(user_id: user.id, order_id: id).exists?
-    Review.where(user_id: user.id, service_id: self.plan.service.id).exists?
+  def service_reviewed_by_user?(user_id)
+    Review.find_by(user_id: user_id, service: service).present?
   end
 
-  def previously_reviewed_by_user?(user)
-    return false unless self.plan && self.plan.service
-    #Review.joins(:order).where("orders.plan_id IN (?)", self.plan.service.plans.ids).where(user_id: user.id).exists?
-    Review.joins(:service).where(service:{id: self.plan.service.id}).where(user_id: user.id).exists?
+  def review_by_user(user_id)
+    Review.find_by(user_id: user_id, service: service)&.id
+  end
+
+  def self.service_reviewed_by_user?(user_id, service_id)
+    Review.exists?(user_id: user_id, service_id: service_id)
+  end
+
+  def self.review_id_by_user(user_id, service_id)
+    Review.find_by(user_id: user_id, service_id: service_id)&.id
   end
 end

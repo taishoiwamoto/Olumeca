@@ -1,110 +1,75 @@
-<div class="main user-show">
-  <div class="container">
-    <div class="user">
-
-      <% if @user.image.attached? %>
-        <%= image_tag(@user.image) %>
-      <% else %>
-        <%= image_tag('default_user.jpg') %>
-      <% end %>
-
-      <h2><%= current_user.name %></h2>
-
-      <% average_rating = @user.average_service_rating %>
-      <% if average_rating > 0 %>
-        <div class="average-rating">
-          <p><%= "⭐️" %> <%= sprintf('%.2f', average_rating) %></p>
-        </div>
-      <% else %>
-        <p> -- </p>
-      <% end %>
-
-      <% if current_user %>
-        <%= link_to "Editar tu cuenta",  edit_user_registration_path %>
-      <% end %>
-    </div>
-
-    <ul class="user-tabs">
-      <li class="<%= 'active' if controller_name == 'users' && action_name == 'show' %>">
-        <%= link_to("Servicios", user_path(@user)) %>
-      </li>
-
-      <li class="<%= 'active' if controller_name == 'users' && action_name == 'reviews' %>">
-        <%= link_to("Evaluaciones", reviews_user_path(@user.id)) %>
-      </li>
-
-      <% if @user == current_user %>
-        <li class="<%= 'active' if controller_name == 'users' && action_name == 'likes' %>">
-          <%= link_to("Favoritos", likes_user_path(current_user.id)) %>
-        </li>
-      <% end %>
-      <% if @user == current_user %>
-        <li class="<%= 'active' if controller_name == 'users' && action_name == 'orders' %>">
-          <%= link_to("Pedidos", orders_user_path(current_user.id)) %>
-        </li>
-      <% end %>
-      <% if @user == current_user %>
-        <li class="<%= 'active' if controller_name == 'users' && action_name == 'sales' %>">
-          <%= link_to("Ventas", sales_user_path(current_user.id)) %>
-        </li>
-      <% end %>
-    </ul>
-
-    <% @orders.each do |order| %>
-      <div class="posts-index-item">
-        <div class="post-left">
-          <% if order.plan && order.plan.service && order.plan.service.image.attached? %>
-            <%= image_tag(order.plan.service.image) %>
-          <% else %>
-            <%= image_tag('default_service.jpg') %>
-          <% end %>
-        </div>
-
-        <div class="post-right">
-          <div style="display: flex; justify-content: flex-end;">
-            <% if order.accepted? %>
-              <% if order.reviewed_by_user?(current_user) || order.previously_reviewed_by_user?(current_user) %>
-                <%= link_to "Editar evaluación", order.plan.service.reviews.present? ? edit_review_path(order.plan.service.reviews.last.id) : new_review_path(order_id: order.id, service_id: order.plan.service.id), class: "button-002", style: "font-size: 12px; margin-left: 10px;" %>
-              <% else %>
-                <%= link_to "Evaluar", new_review_path(order_id: order.id, plan_id: order.plan.id, service_id: order.plan.service.id), class: "button-002", style: "font-size: 12px; margin-left: 10px;" %>
+<div class="main">
+  <div class="table-container">
+    <h1>Pedidos realizados</h1>
+    <div class="table-responsive">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">Fecha</th>
+            <th scope="col">Estado</th>
+            <th scope="col">Evaluación</th>
+            <th scope="col">Info</th>
+            <th scope="col">Vendedor/a</th>
+            <th scope="col">Servicio</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @orders.each do |order| %>
+            <tr>
+              <td><%= order.created_at.strftime("%d/%m/%Y") %></td>
+              <td>
+                <% case order.status %>
+                <% when 'pending' %>
+                <%= button_tag get_order_status(order.status), class: "btn btn-secondary btn-sm", disabled: true %>
+                <% when 'accepted' %>
+                <%= button_tag get_order_status(order.status), class: "btn btn-success btn-sm", disabled: true %>
+                <% when 'rejected' %>
+                <%= button_tag get_order_status(order.status), class: "btn btn-danger btn-sm", disabled: true %>
               <% end %>
-            <% end %>
-
-            <span style="padding: 0.1rem 0.5rem; border: 1px solid #000; font-size: 12px; margin-left: 10px;"><%= get_order_status(order.status) %></span>
-          </div>
-
-          <div style="display: flex; justify-content: flex-end; padding-top: 10px; ">
-            <% if order.accepted? %>
-              <%= turbo_frame_tag 'user' do %>
-                <%= link_to user_info_order_path(order, user_id: order.seller_id ) do %>
-                  <i class="fa-regular fa-address-card" style="font-size: 1.5em;"></i>
+            </td>
+            <td>
+              <% if order.seller.deleted? %>
+                N/A
+              <% elsif order.accepted? %>
+                <% review_for_order = @reviews_by_user.find { |review| review.service_id == order.service_id } %>
+                <% if review_for_order %>
+                  <%= link_to "Editar", edit_service_review_path(order.service, review_for_order), class: "btn btn-primary btn-sm"  %>
+                <% else %>
+                  <%= link_to "Evaluar", new_service_review_path(order.service), class: "btn btn-primary btn-sm" %>
                 <% end %>
               <% end %>
-            <% end %>
-          </div>
-
-
-          <%= link_to service_path(order.plan.service) do %>
-            <h4>Servicio: <%= order.service_title %></h4>
-            <h4>Plan: <%= order.plan_title %></h4>
-          <% end %>
-
-          <%= link_to user_path(order.seller) do %>
-            <p style="font-size: 14px;">Provedor/a: <%= order.seller_name %></p>
-          <% end %>
-
-          <div style="display: flex; justify-content: space-between;">
-            <p style="font-size: 14px;">Precio del pedido: <%= order.price %> MXN</p>
-          </div>
-
-        <div style="display: flex">
-          <p style="font-size: 12px;">ID del pedido:<%= order.id %>,</p>
-          <p style="font-size: 12px; margin-left: 10px;">Fecha: <%= order.created_at.strftime("%d/%m/%Y %H:%M") %></p>
-        </div>
-
-        </div>
-      </div>
-    <% end %>
-    <%= paginate @orders %>
+            </td>
+            <td>
+              <% if order.seller.deleted? || order.pending? || order.rejected? %>
+                N/A
+              <% elsif order.accepted? %>
+                <div class="info-item">
+                  <i class="fa-solid fa-envelope"></i>: <%= order.seller.email %>
+                </div>
+                <div class="info-item">
+                  <i class="fa-solid fa-phone"></i>: <%= order.seller.phone_number %>
+                </div>
+              <% end %>
+            </td>
+            <td>
+              <% if order.service.user.deleted? %>
+                Dado de baja
+              <% else %>
+                <%= link_to order.service.user.name, user_path(order.seller), class: "link-text" %>
+              <% end %>
+            </td>
+            <td>
+              <% if order.service.user.deleted? || order.service.deleted? %>
+                Eliminado
+              <% else %>
+                <%= link_to order.service.title, service_path(order.service), class: "link-text" %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
   </div>
+  <%= paginate @orders %>
+</div>
 </div>

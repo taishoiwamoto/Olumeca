@@ -1,94 +1,36 @@
-<div class="main user-show">
+<div class="main">
   <div class="container">
-    <div class="user">
-
-      <% if @user.image.attached? %>
-        <%= image_tag(@user.image) %>
-      <% else %>
-        <%= image_tag('default_user.jpg') %>
-      <% end %>
-
-      <h2><%= @user.name %></h2>
-
-      <% average_rating = @user.average_service_rating %>
-      <% if average_rating > 0 %>
-        <div class="average-rating">
-          <p><%= "⭐️" %> <%= sprintf('%.2f', average_rating) %></p>
-        </div>
-      <% else %>
-        <p> -- </p>
-      <% end %>
-
-      <% if current_user %>
-        <%= link_to "Editar tu cuenta",  edit_user_registration_path %>
-      <% end %>
-    </div>
-
-
-    <ul class="user-tabs">
-      <li class="<%= 'active' if controller_name == 'users' && action_name == 'show' %>">
-        <%= link_to("Servicios", user_path(@user)) %>
-      </li>
-
-      <li class="<%= 'active' if controller_name == 'users' && action_name == 'reviews' %>">
-        <%= link_to("Evaluaciones", reviews_user_path(@user.id)) %>
-      </li>
-
-      <% if @user == current_user %>
-        <li class="<%= 'active' if controller_name == 'users' && action_name == 'likes' %>">
-          <%= link_to("Favoritos", likes_user_path(current_user.id)) %>
-        </li>
-      <% end %>
-      <% if @user == current_user %>
-        <li class="<%= 'active' if controller_name == 'users' && action_name == 'orders' %>">
-          <%= link_to("Pedidos", orders_user_path(current_user.id)) %>
-        </li>
-      <% end %>
-      <% if @user == current_user %>
-        <li class="<%= 'active' if controller_name == 'users' && action_name == 'sales' %>">
-          <%= link_to("Ventas", sales_user_path(current_user.id)) %>
-        </li>
-      <% end %>
-    </ul>
-
-    <% @likes.order(created_at: :desc).each do |like| %>
-      <% service = Service.find_by(id: like.service_id) %>
-        <%= link_to service_path(service.id) do %>
-          <div class="posts-index-item">
-            <div class="post-left">
-
-            <% if service.image.attached? %>
-              <%= image_tag(service.image) %>
-            <% else %>
-              <%= image_tag('default_service.jpg') %>
-            <% end %>
-
-            </div>
-            <div class="post-right">
-              <div style="display: flex; justify-content: space-between;">
-                <h4><%= service.title %></h4>
-              </div>
-              <div style="display: flex; justify-content: space-between;">
-                  <span><%= service.user.name %></span>
-              </div>
-              <div style="display: flex; justify-content: space-between;">
-                <span><%= service.category&.name || "" %></span>
-              </div>
-              <div style="display: flex; justify-content: space-between;">
+    <h1 class="text-center">Favoritos</h1>
+    <div class="cards-container">
+      <% if @services.any? %>
+        <% @services.each do |service| %>
+          <%= link_to service_path(service.id) do %>
+            <div class="card">
+              <% if service.image.attached? %>
+                <%= image_tag(service.image, class: "card-img-top", alt: "...") %>
+              <% else %>
+                <%= image_tag('default_service.jpg', class: "card-img-top", alt: "...") %>
+              <% end %>
+              <div class="card-body">
+                <p class="card-title"><%= service.title.truncate(30) %></p>
+                <p class="card-text"><%= service.user.name %></p>
                 <div class="star">
                   <% reviews = service.reviews %>
                   <% if reviews.present? %>
-                    <% average_rating = calculate_average_rating(reviews) %>
+                    <% average_rating = service.average_rating %>
                     <%= "⭐️" %> <%= sprintf('%.2f', average_rating) %>
                   <% else %>
-                    <h5> -- </h5>
+                    --
                   <% end %>
                 </div>
               </div>
             </div>
-          </div>
+          <% end %>
         <% end %>
-    <% end %>
-    <%= paginate @likes %>
+        <%= paginate @services %>
+      <% else %>
+        <p>No tienes servicios favoritos.</p>
+      <% end %>
+    </div>
   </div>
 </div>

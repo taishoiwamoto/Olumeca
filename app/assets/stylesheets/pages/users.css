@@ -1,0 +1,14 @@
+/* users/show ================================ */
+.user img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  box-shadow: 0 2px 6px #c1ced7;
+  margin: 20px 0 10px;
+  object-fit: cover;
+}
+
+.user-show-container {
+  max-width: 80%;
+  margin: auto;
+}

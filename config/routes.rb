@@ -17,23 +17,16 @@ Rails.application.routes.draw do
       get :likes
       get :orders
       get :sales
-      get :reviews
     end
   end
+
   resources :services do
+    resources :reviews, only: [:new, :create, :edit, :update]
+
     collection do
       post '/filter', to: 'services#filter'
     end
   end
-
-  resources :plans, only: [], param: :index do
-    member do
-      delete '(:id)' => "plans#destroy", as: ""
-      post '/' => "plans#create"
-    end
-  end
-
-  get 'plans/:id' => 'plans#show'
 
   resources :likes, only: [:create, :destroy]
 
@@ -44,9 +37,6 @@ Rails.application.routes.draw do
     member do
       put :accept
       put :reject
-      get '/user_info', to: 'orders#user_info'
     end
   end
-
-  resources :reviews, only: [:new, :create, :edit, :update]
 end

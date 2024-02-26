@@ -1,24 +1,22 @@
-<div class="main users-edit">
-  <div class="container">
-    <h1 class="form-heading">¿Olvidaste tu contraseña?</h1>
-      <div class="form">
-        <div class="form-body">
-
-          <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-            <%= render "users/shared/error_messages", resource: resource %>
-
-            <div class="field">
-              <%= f.label :email, 'Correo electrónico' %><br />
-              <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+<div class="main">
+  <div class="form-container">
+    <h1 class="ms-2 me-2">¿Olvidaste tu contraseña?</h1>
+    <div class="form">
+      <div class="form-body">
+        <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { class: 'needs-validation', novalidate: true, method: :post }) do |f| %>
+          <%= render "users/shared/error_messages", resource: resource %>
+          <div class="mb-3">
+            <%= f.label :email, 'Correo electrónico', class: 'form-label' %>
+            <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control', required: true %>
+            <div class="invalid-feedback">
+              Por favor, ingresa tu correo electrónico.
             </div>
-
-            <div class="actions">
-              <%= f.submit "Instrucciones para restablecerla" %>
-            </div>
-          <% end %>
-
-          <%= render "users/shared/links" %>
-        </div>
+          </div>
+          <div class="actions">
+            <%= f.submit "Enviar", class: "btn btn-primary text-white" %>
+          </div>
+        <% end %>
+        <%= render "users/shared/links" %>
       </div>
     </div>
   </div>

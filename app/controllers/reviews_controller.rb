@@ -1,57 +1,32 @@
 class ReviewsController < ApplicationController
-  before_action :require_login
-  before_action :set_review_params, only: [:new]
-  before_action :find_order, only: [:new]
-  before_action :set_review, only: [:edit, :update]
-  before_action :authorized_user, only: [:edit, :update]
+  before_action :authenticate_user
+  before_action :set_service
+  before_action :set_review, only: [:new, :create, :edit, :update]
 
   def new
-    plan = Plan.find(@plan_id)
-    #existing_reviews = Review.where(user_id: current_user.id, plan: Plan.where(service: plan.service))
-    existing_reviews = Review.where(user_id: current_user.id, service_id: plan.service.id)
-
-    if existing_reviews.any?
-      redirect_to edit_review_path(existing_reviews.first)
+    if @service.reviews.where(user: current_user).exists?
+      redirect_to service_path(@service), notice: 'Ya has evaluado este servicio.'
     else
-      @review = Review.new
-      #@review.plan_id = @plan_id
-      @review.user_id = current_user.id if current_user
-      @review.order_id = @order.id
-      @review.service_id = @order.plan.service.id
+      @review = @service.reviews.build(user: current_user)
     end
   end
 
   def create
-    @review = Review.new(review_params)
-    order = Order.find_by!(buyer_id: current_user.id, id: @review.order_id)
-    #@review.plan_id = order.plan_id
-    @review.user_id = order.buyer_id
-    @errores = ''
-
-    #existing_reviews = Review.where(user_id: current_user.id, plan: Plan.where(service: order.plan.service))
-    existing_reviews = Review.where(user_id: current_user.id, service_id: order.plan.service.id)
-    if existing_reviews.any?
-      redirect_to edit_review_path(existing_reviews.first)
-      return
-    end
+    @review = @service.reviews.build review_params
+    @review.user = current_user
 
     if @review.save
-      flash[:notice] = 'La evaluación ha sido registrada.'
-      redirect_to orders_user_path(current_user)
+      redirect_to orders_user_path(current_user), notice: 'La evaluación ha sido creada.'
     else
-      #flash[:notice] = @review.errors.full_messages.join(', ')
-      @errores = @review.errors.full_messages.join(', ')
       render :new, status: :unprocessable_entity
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @review.update(review_params)
-      flash[:notice] = 'La evaluación ha sido actualizada.'
-      redirect_to orders_user_path(current_user)
+      redirect_to orders_user_path(current_user), notice: 'La evaluación ha sido actualizada.'
     else
       render 'edit', status: :unprocessable_entity
     end
@@ -59,34 +34,34 @@ class ReviewsController < ApplicationController
 
   private
 
-  def require_login
-    unless current_user
-      flash[:error] = 'Se requiere iniciar sesión.'
-      redirect_to new_user_session_path
-    end
+  def set_service
+    @service = Service.includes(:reviews).find(params[:service_id])
+
+    check_review_possibility if %w[new create].include?(action_name)
   end
 
   def set_review
-    @review = Review.find(params[:id])
+    @review = Review.find_by(id: params[:id]) || @service.reviews.where(user: current_user).first
+
+    authorized_user if %w[edit update].include?(action_name)
   end
 
   def authorized_user
     return if @review.user_id == current_user.id
-
-    flash[:error] = 'No tiene permiso para editar esta evaluación.'
-    redirect_to root_path
+    redirect_to root_path, notice: 'No tiene permiso para editar esta evaluación.'
   end
 
   def review_params
-    params.require(:review).permit(:user_id, :rating, :comment, :order_id, :service_id) #:plan_id
+    params.require(:review).permit(:rating, :comment)
   end
 
-  def set_review_params
-    @plan_id = params[:plan_id]
-  end
+  def check_review_possibility
+    purchased = Order.exists?(buyer: current_user, service: @service)
 
-  def find_order
-    @order_id = params[:order_id]
-    @order = Order.find_by!(id: @order_id, buyer_id: current_user.id, plan_id: @plan_id)
+    reviewed = Order.service_reviewed_by_user?(current_user.id, @service.id)
+
+    unless purchased && !reviewed
+      redirect_to orders_user_path(current_user), notice: 'No puedes evaluar este servicio.'
+    end
   end
 end

@@ -1,0 +1,23 @@
+.form {
+  max-width: 100%;
+  margin: 10px;
+  background-color: white;
+  border: 1px solid #cbd5d5;
+}
+
+.form-body {
+  padding: 30px;
+}
+
+.form-error {
+  color: #ff4d75;
+}
+
+/* registrations/edit */
+.form-text {
+  font-size: 12px;
+}
+
+.text-muted {
+  color: #6c757d;
+}

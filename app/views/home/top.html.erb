@@ -3,17 +3,18 @@
     <div class="top-mainVisual__container">
       <div class="left">
         <div class="top-message">
-          <h1>Servicio de mentoría con varios profesionales.</h1>
+          <h1>Mercado de servicios con varios profesionales.</h1>
         </div>
-          <p>Es posible comprar y vender habilidades y conocimientos.</p>
-          <%= link_to "Registrar", new_user_registration_path, class: "buttons__main" %>
+        <p>Es posible comprar y vender habilidades, conocimientos y experiencias.</p>
+        <div class="d-grid gap-2 col-10 mt-5">
+          <%= link_to "Registrar", new_user_registration_path, class: "btn btn-primary btn-lg" %>
+        </div>
       </div>
       <div class="right">
-          <%= image_tag 'top-mainVisual.jpg', alt: 'Es posible comprar y vender habilidades y servicios.', class: 'normal-size-image' %>
+        <%= image_tag 'top-mainVisual.jpg', alt: 'Es posible comprar y vender habilidades y servicios.', class: 'normal-size-image' %>
       </div>
     </div>
   </div>
-
   <div class="top-main-about-service">
     <div class="inner noflex">
       <h2 class="top-title">Las razones por las que Olumeca ha sido elegido</h2>
@@ -21,12 +22,12 @@
         <div class="about_service__list_item">
           <%= image_tag 'top-main-about-service-1.jpg', alt: 'Pregunta a los profesionales en el campo.', class: 'normal-size-image' %>
           <p class="about_service__list_item_head">Pregunta a los profesionales en el campo</p>
-          <p class="about_service__list_item_body">Consulta directamente con un profesional. Por lo tanto, adquirirás habilidades y conocimientos prácticos.</p>
+          <p class="about_service__list_item_body">Consulta directamente con un profesional. El consejo profesional te guiará hacia el éxito y la realización de tus objetivos.</p>
         </div>
         <div class="about_service__list_item">
           <%= image_tag 'top-main-about-service-2.jpg', alt: 'Aprende a tu propio ritmo. Por eso no te rindes.', class: 'normal-size-image' %>
-          <p class="about_service__list_item_head">Aprende a tu propio ritmo</p>
-          <p class="about_service__list_item_body">Uno-a-uno y a medida. Puedes armar tu propio plan de estudios a tu propio ritmo.</p>
+          <p class="about_service__list_item_head">Amplia variedad de categorías</p>
+          <p class="about_service__list_item_body">Puede comparar fácilmente servicios por categoría. También hay información detallada y evaluaciones, así que puede estar tranquilo.</p>
         </div>
         <div class="about_service__list_item">
           <%= image_tag 'top-main-about-service-3.jpg', alt: 'Precios razonables.', class: 'normal-size-image' %>
@@ -36,64 +37,46 @@
       </div>
     </div>
   </div>
-
   <div class="top-newServices">
-    <div class="top-newServices__container">
-      <h2 class="top-title">Servicios Nuevos</h2>
-        <% if @services.empty? %>
-          <p style="text-align: center">No hay servicios disponibles</p>
-        <% else %>
-          <% @services.each do |service| %>
-            <%= link_to service_path(service) do %>
-
-              <div class="posts-index-item">
-                <div class="post-left">
-                  <% if service.image.attached? %>
-                    <%= image_tag(service.image) %>
+    <h2 class="top-title">Servicios Nuevos</h2>
+    <% if @services.empty? %>
+      <p class="text-center">No hay servicios disponibles</p>
+    <% else %>
+      <div class="cards-container">
+        <% @services.each do |service| %>
+          <%= link_to service_path(service) do %>
+            <div class="card">
+              <% if service.image.attached? %>
+                <%= image_tag(service.image, class: "card-img-top", alt: "...") %>
+              <% else %>
+                <%= image_tag('default_service.jpg', class: "card-img-top", alt: "...") %>
+              <% end %>
+              <div class="card-body">
+                <p class="card-title"><%= service.title.truncate(30) %></p>
+                <p class="card-text"><%= service.user.name %></p>
+                <div class="star">
+                  <% reviews = service.reviews %>
+                  <% if reviews.present? %>
+                    <% average_rating = service.average_rating %>
+                    <%= "⭐️" %> <%= sprintf('%.2f', average_rating) %>
                   <% else %>
-                    <%= image_tag('default_service.jpg') %>
+                    --
                   <% end %>
                 </div>
-                <div class="post-right">
-                  <div style="display: flex; justify-content: space-between;">
-                    <h4><%= service.title.truncate(40) %></h4>
-                  </div>
-                  <div style="display: flex; justify-content: space-between;">
-                      <span><%= service.user.name %></span>
-                  </div>
-                  <div style="display: flex; justify-content: space-between;">
-                    <span><%= service.category&.name || "" %></span>
-                  </div>
-                  <div style="display: flex; justify-content: space-between;">
-                    <div class="star">
-                      <% reviews = service.reviews %>
-                      <% if reviews.present? %>
-                        <% average_rating = calculate_average_rating(reviews) %>
-                        <%= "⭐️" %> <%= sprintf('%.2f', average_rating) %>
-                      <% else %>
-                        <h5> -- </h5>
-                      <% end %>
-                    </div>
-                  </div>
-                </div>
               </div>
-            <% end %>
+            </div>
           <% end %>
-          <div class="top-main-button">
-            <%= link_to "Ver más servicios", services_path, class: "buttons__main" %>
-          </div>
         <% end %>
-    </div>
+      </div>
+    <% end %>
   </div>
-
   <div class="top-main-buyer">
     <div class="top-main-buyer__container">
       <div class="top-message">
-        <h2 style="color: #33CC33; font-weight: bold;">PARA COMPRADOR/A</h2>
+        <h2 class="buyer-title">PARA COMPRADOR/A</h2>
       </div>
-      <br>
       <div class="inner noflex">
-        <h2 class="top-title">Lo que puede hacer comprador/a</h2>
+        <h3 class="top-title">Lo que puede hacer comprador/a</h3>
         <div class="about_service__list flexbox">
           <div class="about_service__list_item">
             <%= image_tag 'top-main-buyer-1.jpg', alt: 'Compra de servicios de listado', class: 'normal-size-image' %>
@@ -112,10 +95,7 @@
           </div>
         </div>
       </div>
-      <br>
-      <br>
-      <br>
-      <h2 class="top-title">Pasos para comprar un servicio</h2>
+      <h3 class="top-title">Pasos para comprar un servicio</h3>
       <div class="c-serviceStep_flow">
         <div class="c-serviceFlow">
           <div class="about_service__list_item_head">1. Búsqueda</div>
@@ -134,19 +114,15 @@
           <div class="c-serviceFlow_text">Después de realizar el pedido, puede ponerse en contacto con el vendedor.</div>
         </div>
       </div>
-      <%= link_to "Buscar un servicio", services_path, class: "buttons__main" %>
     </div>
   </div>
-
-
   <div class="top-main-seller">
     <div class="top-main-seller__container">
       <div class="top-message">
-        <h2 style="color: #3366FF; font-weight: bold;">PARA VENDEDOR/A</h2>
+        <h2 class="vendor-title">PARA VENDEDOR/A</h2>
       </div>
-      <br>
       <div class="inner noflex">
-        <h2 class="top-title">Lo que puede hacer vendedor/a</h2>
+        <h3 class="top-title">Lo que puede hacer vendedor/a</h3>
         <div class="about_service__list flexbox">
           <div class="about_service__list_item">
             <%= image_tag 'top-main-seller-1.jpg', alt: 'Oferta de servicios', class: 'normal-size-image' %>
@@ -165,10 +141,7 @@
           </div>
         </div>
       </div>
-      <br>
-      <br>
-      <br>
-      <h2 class="top-title">Pasos para ofrecer un servicio</h2>
+      <h3 class="top-title">Pasos para ofrecer un servicio</h3>
       <div class="c-serviceStep_flow">
         <div class="c-serviceFlow">
           <div class="about_service__list_item_head">1. Publicación</div>
@@ -183,15 +156,14 @@
           <div class="c-serviceFlow_text">Después del pedido, puede ponerse en contacto con el comprador.</div>
         </div>
       </div>
-      <%= link_to "Publicar un servicio", new_service_path, class: "buttons__main" %>
     </div>
   </div>
-
-
   <div class="top-registar">
     <div class="top-registar__container">
       <h2 class="top-title">Comencemos con la registración gratuita</h2>
-      <%= link_to "Registar", new_user_registration_path, class: "btn btn--orange btn--cubic btn--shadow" %>
+      <div class="d-grid col-lg-5 col-md-5 col-5">
+        <%= link_to "Registar", new_user_registration_path, class: "btn btn-success btn-lg" %>
+      </div>
     </div>
   </div>
 </div>

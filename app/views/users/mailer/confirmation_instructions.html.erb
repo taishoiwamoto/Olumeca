@@ -1,8 +1,5 @@
 <p>¡Bienvenido <%= @email %>!</p>
-
 <p>Puedes confirmar el correo electrónico de tu cuenta a través del enlace de abajo:</p>
-
 <p><%= link_to 'Confirmar mi cuenta', confirmation_url(@resource, confirmation_token: @token) %></p>
-
 <p>Atentamente,</p>
 <p>Equipo de Olumeca</p>

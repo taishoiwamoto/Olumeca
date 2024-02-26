@@ -1,23 +1,14 @@
 Estimado/a <%= @buyer.name %>,
-
 <% if @order.accepted? %>
-    <p>Nos complace informarle que su pedido en Olumeca ha sido aceptado.</p>
+  <p>Nos complace informarle que su pedido en Olumeca ha sido aceptado.</p>
 <% else %>
-    <p>Lamentablemente, su pedido en Olumeca ha sido rechazado.</p>
+  <p>Lamentablemente, su pedido en Olumeca ha sido rechazado.</p>
 <% end %>
-
 <p>A continuación, le presentamos los detalles de su pedido:</p>
 <ul>
-    <li>Nombre del producto: <%= @order.service_title %></li>
-    <li>Plan: <%= @order.plan_title %></li>
-    <li>Vendedor: <%= @seller.name %></li>
+  <li>Nombre del producto: <%= order.service.title %></li>
+  <li>Vendedor/a: <%= order.service.user.name%></li>
 </ul>
-
-<% if Rails.env.development? %>
-    <p>Puede revisar todos sus pedidos en Olumeca a través del siguiente <a href="http://localhost:3000/users/<%= @buyer.id %>/orders">enlace</a>.</p>
-<% else %>
-    <p>Puede revisar todos sus pedidos en Olumeca a través del siguiente <a href="https://olumeca.com/users/<%= @buyer.id %>/orders">enlace</a>.</p>
-<% end %>
-
+<p>Puede revisar todos sus pedidos en Olumeca a través del siguiente <%= link_to 'enlace', user_orders_path(@buyer) %>.</p>
 Atentamente,
 Equipo de Olumeca

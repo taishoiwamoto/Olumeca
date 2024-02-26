@@ -1,0 +1,13 @@
+.table {
+  border: 1px solid #cbd5d5;
+}
+
+.info-item {
+  height: 22px; /* 適切な高さに調整する */
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.flex-container {
+  display: flex;
+}

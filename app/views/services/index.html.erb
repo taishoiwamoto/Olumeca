@@ -1,16 +1,19 @@
-<div class="main posts-index">
+<div class="main">
   <div class="container">
-    <h1 class="form-heading">Servicios</h1>
-    <%= form_with(scope: :services, url: filter_services_path, method: :post ) do |f| %>
-      <div class="field">
-        <%= f.select :category_id, options_for_select(Category.all.map{|category| [category.name, category.id]}), { prompt: 'Todas categorías' } %>
+    <h1 class="mb-4">Servicios</h1>
+    <%= form_with(url: filter_services_path, method: :post, class: "g-3") do |f| %>
+      <div class="col-12 col-md-6">
+        <%= f.select :category_id, options_for_select(Category.all.map{|category| [category.name, category.id]}), { prompt: 'Todas categorías' }, class: "form-select" %>
       </div>
-      <div class="field">
-        <%= f.text_field :keyword, placeholder: "Palabra clave" %>
+      <div class="col-12 col-md-4 mt-3">
+        <%= f.text_field :keyword, placeholder: "Palabra clave", class: "form-control" %>
       </div>
-      <%= f.submit 'Buscar', class: 'buttons__main' %><br/>
+      <div class="col-12 col-md-2 mt-3">
+        <%= f.submit 'Buscar', class: 'btn btn-primary w-100' %>
+      </div>
     <% end %>
-    <br>
-    <%= render 'services' , services: @services %>
+    <div class="mt-4">
+      <%= render 'services' , services: @services %>
+    </div>
   </div>
 </div>
