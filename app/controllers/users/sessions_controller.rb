@@ -1,12 +1,7 @@
 # frozen_string_literal: true
 
 class Users::SessionsController < Devise::SessionsController
-  def new
-    self.resource = resource_class.new
-  end
-
   def create
-    self.resource = resource_class.new(sign_in_params || {})
     if verify_recaptcha
       super
     else
@@ -14,6 +9,13 @@ class Users::SessionsController < Devise::SessionsController
       render :new
     end
   end
+  # before_action :configure_sign_in_params, only: [:create]
+
+  # GET /resource/sign_in
+  def new
+    self.resource = resource_class.new(sign_in_params || {})
+  end
+
   # POST /resource/sign_in
   # def create
   #   super
