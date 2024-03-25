@@ -53,7 +53,6 @@ group :development, :test do
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
   gem 'dotenv-rails'
   gem 'hirb'
-  gem "dotenv-rails"
 end
 
 group :development do
@@ -89,3 +88,5 @@ gem 'recaptcha', require: 'recaptcha/rails'
 gem "image_processing", ">= 1.2"
 
 gem "font-awesome-sass", "~> 6.4.2"
+
+gem "cloudinary"
