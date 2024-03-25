@@ -88,3 +88,5 @@ gem 'recaptcha', require: 'recaptcha/rails'
 gem "image_processing", ">= 1.2"
 
 gem "font-awesome-sass", "~> 6.4.2"
+
+gem "cloudinary"
