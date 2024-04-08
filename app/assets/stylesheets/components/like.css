@@ -1,8 +1,10 @@
+/* .like-buttonクラスは、「いいね」ボタン全体のコンテナに適用され、フレックスボックスを用いて要素を縦方向の中央に揃えます。 */
 .like-button {
-  display: flex;
+  display: flex; /* フレックスボックスモデルを使用し、要素を一列に並べます。 */
   align-items: center; /* いいねボタンとカウントも縦方向の中央に配置 */
 }
 
+/* .like-buttonクラス内のbutton要素にスタイルを適用します。ボタンのデフォルトスタイルを取り除き、カスタマイズしやすくします。 */
 .like-button button {
   background-color: transparent; /* 背景色を透明に */
   border: none; /* 境界線を削除 */
@@ -12,10 +14,12 @@
   cursor: pointer; /* カーソルをポインタに */
 }
 
+/* .unliked-btnクラスは、まだ「いいね」されていない状態のボタンに適用され、色を指定します。 */
 .unliked-btn {
-  color: #8899a6;
+  color: #8899a6; /* 未「いいね」状態のボタンの色を灰色に設定します。 */
 }
 
+/* .liked-btnクラスは、「いいね」された状態のボタンに適用され、色を指定します。 */
 .liked-btn {
-  color: #ff2581;
+  color: #ff2581; /* 「いいね」状態のボタンの色を鮮やかなピンクに設定します。 */
 }

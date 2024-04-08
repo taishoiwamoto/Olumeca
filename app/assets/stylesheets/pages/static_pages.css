@@ -1,4 +1,5 @@
 /* privacy policy ================================ */
+/*.right-align クラスを持つ要素のテキストを右寄せにする　*/
 .right-align {
-  text-align: right;
+  text-align: right; /* テキストを右寄せにする　*/
 }
