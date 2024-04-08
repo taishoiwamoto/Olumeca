@@ -1,3 +1,5 @@
+// この設定ファイルは、webpackの設定を定義しています。
+
 const path = require('path');
 
 module.exports = {
