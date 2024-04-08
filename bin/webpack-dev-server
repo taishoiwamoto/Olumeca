@@ -1,3 +1,8 @@
+#このファイルは、RailsプロジェクトでWebpackerの開発サーバーを起動するためのスクリプトです。
+#Webpackerは、RailsアプリケーションでWebpackを使いやすくするためのラッパーです。
+#Webpackは、JavaScriptやCSSなどのフロントエンド資源をバンドルするためのモジュールバンドラーです。
+#このスクリプトは、開発環境でWebpackerを介してWebpackの開発サーバーを実行し、ホットモジュールリプレースメント（HMR）などの機能を利用する際に使われます。
+
 #!/usr/bin/env ruby
 
 ENV["RAILS_ENV"] ||= ENV["RACK_ENV"] || "development"
