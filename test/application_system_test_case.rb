@@ -8,7 +8,7 @@ require "test_helper"
 
 # Seleniumを使用して、Chromeブラウザでテストを実行します。また、ブラウザのスクリーンサイズを
 # 1400x1400ピクセルに設定します。この設定は、テスト実行時のブラウザの見た目を統一するため、
-# また特定のレスポンシブデザインのブレークポイントでのテストを可能にするために重要です。
+# また特定のレスポンシブデザインのブレークポイントでのテストを可能にするために重要です
 class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   driven_by :selenium, using: :chrome, screen_size: [1400, 1400]
 end
