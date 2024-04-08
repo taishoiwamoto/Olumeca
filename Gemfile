@@ -1,3 +1,5 @@
+# Railsプロジェクトで使用するGemのリストを書いたファイルです。 簡単に言うと、プロジェクトで必要な道具をリストアップしているようなものです。
+
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
