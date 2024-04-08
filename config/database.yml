@@ -1,3 +1,8 @@
+#このYAMLファイルは、Ruby on Railsアプリケーションのデータベース接続設定を定義しており、
+#特にPostgreSQLデータベースを想定しています。
+#ここでは、異なる環境（開発、テスト、本番）ごとの設定を記述しており、DRY（Don't Repeat Yourself）原則に従って
+#共通設定をdefaultセクションにまとめています。
+
 default: &default
   adapter: postgresql
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>

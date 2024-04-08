@@ -1,3 +1,8 @@
+// このJavaScriptファイルは、Babelの設定を定義しているものです。BabelはJavaScriptコードを変換するツールで、
+// 最新のJavaScript（ES6+）を古いブラウザや環境でも実行できるようにES5などの以前のバージョンに変換します。
+// この設定ファイルは、開発（development）、テスト（test）、本番（production）の3つの環境に応じて、
+// 異なるBabelのプリセットとプラグインを適用するための条件を含んでいます。
+
 module.exports = function(api) {
   var validEnv = ['development', 'test', 'production']
   var currentEnv = api.env()

@@ -1,3 +1,7 @@
+#このファイルは、Ruby on Rails アプリケーションのためのWebpacker設定ファイルです。
+#WebpackerはRailsプロジェクト内でWebpackを使いやすくするためのラッパーであり、
+#JavaScript、CSS、画像などのフロントエンドアセットを管理し、ビルドするために使われます。
+#この設定ファイルでは、開発（development）、テスト（test）、本番（production）の異なる環境ごとにWebpackの設定をカスタマイズできます。
 # Note: You must restart bin/webpack-dev-server for changes to take effect
 
 default: &default

@@ -1,3 +1,5 @@
+#このファイルは、Ruby on Railsアプリケーションの中核部分であるTweetAppアプリケーションの設定を行うファイルです。
+
 require_relative "boot"
 
 require "rails/all"

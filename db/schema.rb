@@ -1,3 +1,8 @@
+# このファイルは、Active Record（RailsのORM）を用いて、データベースのスキーマ（テーブルの構造や関係性など）を管理するためのものです。
+# このスキーマファイルはデータベースの現在の状態を表し、Railsアプリケーションのモデルとデータベースのテーブルを同期させるために使用されます。
+# ファイル内の指示に従ってデータベースのスキーマを定義し、
+# bin/rails db:schema:load コマンドを使用して新しいデータベースを作成するときにこの定義に基づいてテーブルが作成されます。
+
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -14,6 +19,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_23_150357) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  # active_storage関連のテーブルの作成
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -42,12 +48,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_23_150357) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  # カテゴリーテーブルの作成
   create_table "categories", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
+  # お気に入りテーブルの作成
   create_table "likes", force: :cascade do |t|
     t.integer "user_id"
     t.datetime "created_at", null: false
@@ -55,6 +63,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_23_150357) do
     t.integer "service_id"
   end
 
+  # 注文テーブルの作成
   create_table "orders", force: :cascade do |t|
     t.integer "buyer_id"
     t.integer "seller_id"
@@ -65,6 +74,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_23_150357) do
     t.index ["service_id"], name: "index_orders_on_service_id"
   end
 
+  # レビューテーブルの作成
   create_table "reviews", force: :cascade do |t|
     t.bigint "user_id"
     t.integer "rating"
@@ -76,6 +86,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_23_150357) do
     t.index ["user_id"], name: "index_reviews_on_user_id"
   end
 
+  # サービステーブルの作成
   create_table "services", force: :cascade do |t|
     t.text "title"
     t.datetime "created_at", null: false
@@ -89,6 +100,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_23_150357) do
     t.index ["deleted_at", "created_at"], name: "index_services_on_deleted_at_and_created_at"
   end
 
+  # ユーザーテーブルの作成
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -104,6 +116,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_23_150357) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  # 外部キー制約の追加
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "reviews", "services"
