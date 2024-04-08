@@ -1,49 +1,55 @@
+/* body全体に対する基本的なスタイルを設定。テキストの色と背景色を指定し、マージンを0に設定してデフォルトの余白を取り除きます。 */
 body {
-  color: #2d3133;
-  background-color: #ffffff;
-  margin: 0;
+  color: #2d3133; /* テキストの色をダークグレーに設定 */
+  background-color: #ffffff; /* 背景色を白に設定 */
+  margin: 0; /* ページの外側の余白を無しに設定 */
 }
 
+/* .mainクラスにスタイルを適用し、パディング、幅、背景色を指定します。 */
 .main {
-  padding-top: 30px;
-  top: 64px;
-  width: 100%;
-  height: auto;
-  min-height: 100%;
-  background-color: #f5f8fa;
+  padding-top: 30px; /* 上部に30pxの内側余白を追加 */
+  top: 64px; /* 要素の上端から64pxの位置に設定 */
+  width: 100%; /* 幅を100%に設定し、親要素いっぱいに広げる */
+  height: auto; /* 高さを内容に合わせて自動調整 */
+  min-height: 100%; /* 最小の高さをビューポートの100%に設定 */
+  background-color: #f5f8fa; /* 背景色を薄いグレーに設定 */
 }
 
+/* .containerクラスにスタイルを適用し、最小高さ、最大幅、マージン、パディングを指定します。 */
 .container {
-  min-height: 100vh;
-  max-width: 600px;
-  margin: 60px auto 0px auto;
-  padding-left: 15px;
-  padding-right: 15px;
-  padding-bottom: 100px;
-  clear: both;
+  min-height: 100vh; /* 最小高さをビューポートの高さ100%に設定 */
+  max-width: 600px; /* 最大幅を600pxに設定 */
+  margin: 60px auto 0px auto; /* 上部に60px、下部に0pxの外側余白を設定し、中央揃え */
+  padding-left: 15px; /* 左側に15pxの内側余白を追加 */
+  padding-right: 15px; /* 右側に15pxの内側余白を追加 */
+  padding-bottom: 100px; /* 下部に100pxの内側余白を追加 */
+  clear: both; /* 左右のフロートをクリア */
 }
 
-/* user/show, service/show */
+/* user/showおよびservice/showページに適用される.main-titleクラスに対するスタイル。フォントサイズを大きく設定。 */
 .main-title {
-  font-size: 30px;
+  font-size: 30px; /* フォントサイズを30pxに設定 */
 }
 
+/* .sub-titleクラスにスタイルを適用し、色とフォントサイズを指定します。 */
 .sub-title {
-  color: gray;
-  font-size: 20px;
+  color: gray; /* 色をグレーに設定 */
+  font-size: 20px; /* フォントサイズを20pxに設定 */
 }
 
+/* .table-containerクラスにスタイルを適用。最小高さ、最大幅、マージン、パディングを設定します。 */
 .table-container {
-  min-height: 100vh;
-  max-width: 2000px;
-  margin: 60px auto 0px auto;
-  padding-left: 50px;
-  padding-right: 50px;
-  clear: both;
+  min-height: 100vh; /* 最小高さをビューポートの高さ100%に設定 */
+  max-width: 2000px; /* 最大幅を2000pxに設定 */
+  margin: 60px auto 0px auto; /* 上部に60px、下部に0pxの外側余白を設定し、中央揃え */
+  padding-left: 50px; /* 左側に50pxの内側余白を追加 */
+  padding-right: 50px; /* 右側に50pxの内側余白を追加 */
+  clear: both; /* 左右のフロートをクリア */
 }
 
+/* .form-containerクラスにスタイルを適用。フォームの最小高さ、最大幅、マージンを指定します。 */
 .form-container {
-  min-height: 100vh;
-  max-width: 600px;
-  margin: 60px auto 0px auto;
+  min-height: 100vh; /* 最小高さをビューポートの高さ100%に設定 */
+  max-width: 600px; /* 最大幅を600pxに設定 */
+  margin: 60px auto 0px auto; /* 上部に60px、下部に0pxの外側余白を設定し、中央揃え */
 }
