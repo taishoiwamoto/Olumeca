@@ -1,25 +1,30 @@
+/* 全ての要素にborder-boxのbox-sizingを適用し、要素の幅と高さがパディングとボーダーを含むようにします。 */
 * {
   box-sizing: border-box;
 }
 
+/* html要素に基本フォント、行間、文字間隔を設定します。 */
 html {
-  font: 100%/1.5 "Avenir Next", "Hiragino Sans", sans-serif;
-  line-height: 1.7;
-  letter-spacing: 1px;
+  font: 100%/1.5 "Avenir Next", "Hiragino Sans", sans-serif; /* 基本フォントサイズ100%、行高1.5、指定フォントを使用 */
+  line-height: 1.7; /* 行間を1.7に設定 */
+  letter-spacing: 1px; /* 文字間隔を1pxに設定 */
 }
 
+/* ul、li要素のパディングとマージンを0にリセットします。 */
 ul,
 li {
   padding: 0;
   margin: 0;
 }
 
+/* aタグのテキストデコレーションをなしにし、色とフォントサイズを設定します。 */
 a {
-  text-decoration: none;
-  color: #2d3133;
-  font-size: 14px;
+  text-decoration: none; /* 下線を除去 */
+  color: #2d3133; /* 文字色をダークグレーに設定 */
+  font-size: 14px; /* フォントサイズを14pxに設定 */
 }
 
+/* 見出しタグ(h1~h6)とpタグのマージンを0にリセットします。 */
 h1,
 h2,
 h3,
@@ -30,19 +35,22 @@ p {
   margin: 0;
 }
 
+/* input要素の背景色を透明にし、アウトラインの幅を0に設定します。 */
 input {
   background-color: transparent;
   outline-width: 0;
 }
 
+/* 送信ボタンのボーダーをなくし、カーソルをポインタに設定します。 */
 form input[type="submit"] {
-  border: none;
-  cursor: pointer;
+  border: none; /* ボーダーを削除 */
+  cursor: pointer; /* カーソルをポインタに設定 */
 }
 
+/* 定義リスト要素のマージンとパディングを0にリセット。 */
 dd,
 dl,
 dt {
   margin: 0;
-  padding: 0x;
+  padding: 0;
 }
