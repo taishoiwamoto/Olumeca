@@ -1,3 +1,7 @@
+#このファイルは、Railsアプリケーションのコマンドラインインターフェイス（CLI）を起動するためのスクリプトです。
+#このスクリプトは、bin/railsに位置している可能性が高く、
+#Railsコマンド（例えばrails server、rails console、rails generateなど）を実行する際に使用されます。
+
 #!/usr/bin/env ruby
 APP_PATH = File.expand_path("../config/application", __dir__)
 require_relative "../config/boot"

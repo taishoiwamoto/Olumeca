@@ -1,3 +1,7 @@
+#このファイルは、RailsアプリケーションのContent Security Policy (CSP) を設定するための設定スニペットです。
+#CSPは、クロスサイトスクリプティング攻撃（XSS）などの特定の種類の攻撃からウェブサイトを保護するための追加のセキュリティレイヤーを提供します。
+#このポリシーを通じて、ウェブページがどのリソースを読み込むことが許可されているかをブラウザに指示します。
+
 # Be sure to restart your server when you modify this file.
 
 # Define an application-wide content security policy.

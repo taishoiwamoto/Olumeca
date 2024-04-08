@@ -1,3 +1,6 @@
+#このスクリプトは、RubyプロジェクトでBundlerを使用するためのBundlerのバイナリスタブとして生成されたデフォルトのファイルです。
+#Bundlerは、Rubyの依存関係を管理するための標準的なツールで、プロジェクトが必要とするgemの正しいバージョンをロードし、維持するのを助けます。
+
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 

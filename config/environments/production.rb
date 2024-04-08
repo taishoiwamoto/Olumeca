@@ -1,3 +1,7 @@
+#このファイルは、Railsアプリケーションの本番環境設定を行うための設定ファイルです。
+#一般的にはconfig/environments/production.rbに位置し、本番環境で特有の設定を定義します。
+#開発環境やテスト環境の設定とは異なり、パフォーマンス最適化、セキュリティ強化、エラーロギングの抑制など、公開環境に適した設定が含まれます。
+
 require "active_support/core_ext/integer/time"
 
 Rails.application.configure do

@@ -1,3 +1,4 @@
+#Import mapsは JavaScript (ES6) の import 文や import() 式で取得するモジュール(ESModules)の URL を制御することができるWeb標準です。
 #!/usr/bin/env ruby
 
 require_relative "../config/application"
