@@ -1,11 +1,15 @@
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the
 // README at: https://github.com/devcontainers/templates/tree/main/src/docker-existing-dockerfile
+
+//このファイルを使用することで、プロジェクトに必要な依存関係やツールを含むカスタマイズされた開発環境をDockerコンテナ内に簡単にセットアップし、チーム間での環境の一貫性を保ちながら開発作業を行うことが可能になります。
 {
+	// 開発コンテナの名前を指定します。これは、コンテナを識別するために使用され、ユーザーインターフェイスに表示されます。
 	"name": "Olumeca Dockerfile",
+	// Dockerコンテナのビルド設定を定義します。
 	"build": {
-		// Sets the run context to one level up instead of the .devcontainer folder.
+		// Dockerビルドコンテキストを設定します。ここでは、.devcontainer フォルダの一つ上のディレクトリ（つまりプロジェクトのルートディレクトリ）をビルドコンテキストとして使用します。これにより、Dockerfileへのパスやビルド時に必要な他のファイルへ簡単にアクセスできます。
 		"context": "..",
-		// Update the 'dockerFile' property if you aren't using the standard 'Dockerfile' filename.
+		// 使用するDockerfileのパスを指定します。標準のDockerfile 名称を使用しない場合は、このプロパティを更新します。
 		"dockerfile": "../Dockerfile"
 	}
 

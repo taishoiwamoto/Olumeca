@@ -1,8 +1,10 @@
+/* リンクテキストの基本スタイルを定義します。 */
 .link-text {
-  color: #007bff !important;
-  font-size: 16px;
+  color: #007bff !important; /* テキストの色を青に設定し、他のスタイルによる上書きを防ぎます。 */
+  font-size: 16px; /* フォントサイズを16ピクセルに設定します。 */
 }
 
+/* ユーザーがリンクテキストにマウスカーソルを合わせた時のスタイルを定義します。 */
 .link-text:hover {
-  color: #0056b3 !important;
+  color: #0056b3 !important; /* ホバー時のテキストの色を濃い青に変更し、他のスタイルによる上書きを防ぎます。 */
 }

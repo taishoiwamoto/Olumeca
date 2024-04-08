@@ -1,4 +1,4 @@
 .card-title {
-  font-size: 16px;
-  font-weight: bold;
+  font-size: 16px; /* フォントサイズを16ピクセルに設定　*/
+  font-weight: bold; /* テキストを太字　*/
 }

@@ -1,3 +1,4 @@
+/* .normal-size-imageクラスは、画像をコンテナの幅いっぱいに広げつつ、その最大幅を300pxに制限します。画像はアスペクト比を保持し、ブロック要素として中央に配置されます。 */
 .normal-size-image {
   width: 100%; /* 画像をコンテナの幅に合わせます。 */
   max-width: 300px; /* 最大幅を300pxに制限します。 */
@@ -6,32 +7,36 @@
   margin: 0 auto; /* 上下の余白は0、左右の余白はautoで画像を中央に配置します。 */
 }
 
+/* .service-imageクラスは、画像をコンテナの幅いっぱいに表示し、アスペクト比を保ちながらコンテナを満たすように調整します。 */
 .service-image {
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-  border-radius: 0;
+  width: 100%; /* コンテナの幅に合わせて画像を伸縮させます。 */
+  height: auto; /* 高さは自動調整され、アスペクト比が保持されます。 */
+  object-fit: cover; /* コンテナを完全に埋めるように画像をトリミングします。 */
+  border-radius: 0; /* 画像の角は丸められません。 */
 }
 
+/* .mediam-image-containerクラスは、75px x 75pxのサイズのコンテナを作成し、その中の画像をクリップします。 */
 .mediam-image-container {
-  width: 75px;
-  height: 75px;
-  overflow: hidden;
-  position: relative;
-  border: 2px solid #eeeeee;
+  width: 75px; /* 幅を75pxに設定します。 */
+  height: 75px; /* 高さを75pxに設定します。 */
+  overflow: hidden; /* コンテナからはみ出た部分を非表示にします。 */
+  position: relative; /* 中に絶対位置指定された要素を配置する基準点を提供します。 */
+  border: 2px solid #eeeeee; /* コンテナの周りに薄灰色の境界線を追加します。 */
 }
 
+/* .mediam-imageクラスは、コンテナの中心に画像を配置し、少なくともコンテナを完全に埋めるサイズで表示します。 */
 .mediam-image {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  min-width: 100%;
-  min-height: 100%;
-  object-fit: cover;
+  position: absolute; /* 位置はコンテナに対して絶対位置で指定します。 */
+  top: 50%; /* 上辺から50%の位置に配置します。 */
+  left: 50%; /* 左辺から50%の位置に配置します。 */
+  transform: translate(-50%, -50%); /* 中心点を基準にして配置します。 */
+  min-width: 100%; /* 最小幅をコンテナの幅と同じにします。 */
+  min-height: 100%; /* 最小高さをコンテナの高さと同じにします。 */
+  object-fit: cover; /* コンテナを完全に埋めるように画像をトリミングします。 */
 }
 
+/* .small-imageクラスは、40px x 40pxのサイズの小さな画像を作成します。 */
 .small-image {
-  width: 40px;
-  height: 40px;
+  width: 40px; /* 幅を40pxに設定します。 */
+  height: 40px; /* 高さを40pxに設定します。 */
 }

@@ -1,13 +1,16 @@
+/* テーブルの境界線を設定します。薄い灰色の線で、見やすさを保ちながら区切りを明確にします。 */
 .table {
   border: 1px solid #cbd5d5;
 }
 
+/* .info-itemクラスの要素の高さを22pxに固定し、内容がこれを超える場合は非表示にします。また、テキストが複数行にならないように設定します。 */
 .info-item {
-  height: 22px; /* 適切な高さに調整する */
-  overflow: hidden;
-  white-space: nowrap;
+  height: 22px; /* 要素の高さを22pxに設定 */
+  overflow: hidden; /* 内容がオーバーフローした場合に非表示に */
+  white-space: nowrap; /* テキストを折り返さずに一行で表示 */
 }
 
+/* フレックスボックスモデルを使用して、子要素をフレキシブルなレイアウトで配置します。 */
 .flex-container {
-  display: flex;
+  display: flex; /* フレックスコンテナとして表示 */
 }

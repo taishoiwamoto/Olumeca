@@ -1,19 +1,20 @@
-/* makes header design */
+/* ヘッダーをページの最上部に固定し、スクロールしても常に表示されるようにします。 */
 header {
-  position: fixed; /* この行を変更 */
-  z-index: 1;
-  width: 100%;
-  top: 0; /* この行を追加 */
-  left: 0; /* この行を追加 */
+  position: fixed; /* ヘッダーの位置を固定 */
+  z-index: 1; /* 他の要素より上に表示されるようにz-indexを設定 */
+  width: 100%; /* 幅を画面いっぱいに広げる */
+  top: 0; /* 画面の最上部からの位置を0に設定 */
+  left: 0; /* 画面の左端からの位置を0に設定 */
 }
 
-/* makes header white */
+/* ヘッダーの背景色を白に設定し、下部に薄い境界線を追加します。 */
 .bg-white {
-  background-color: #ffffff !important;
-  border-bottom: 1px solid #e9eef1;
+  background-color: #ffffff !important; /* 背景色を白に設定 */
+  border-bottom: 1px solid #e9eef1; /* 下部に薄い灰色の境界線を追加 */
 }
 
+/* ロゴのサイズを定義します。 */
 .logo-dimensions {
-  height: 25px;
-  width: auto;
+  height: 25px; /* ロゴの高さを25pxに設定 */
+  width: auto; /* 幅は自動で調整し、アスペクト比を維持 */
 }
