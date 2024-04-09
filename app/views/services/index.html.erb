@@ -1,17 +1,22 @@
 <div class="main">
   <div class="container">
     <h1 class="mb-4">Servicios</h1>
+    <!-- サービスフィルターフォーム。送信先はfilter_services_pathで、POSTメソッドを使用 -->
     <%= form_with(url: filter_services_path, method: :post, class: "g-3") do |f| %>
+      <!-- カテゴリ選択のためのドロップダウンメニュー。全カテゴリオプションも含む -->
       <div class="col-12 col-md-6">
         <%= f.select :category_id, options_for_select(Category.all.map{|category| [category.name, category.id]}), { prompt: 'Todas categorías' }, class: "form-select" %>
       </div>
+      <!-- キーワード検索のためのテキストフィールド -->
       <div class="col-12 col-md-4 mt-3">
         <%= f.text_field :keyword, placeholder: "Palabra clave", class: "form-control" %>
       </div>
+      <!-- 検索ボタン。全幅を使用し、Bootstrapのプライマリスタイルを適用 -->
       <div class="col-12 col-md-2 mt-3">
         <%= f.submit 'Buscar', class: 'btn btn-primary w-100' %>
       </div>
     <% end %>
+    <!-- フィルタリングされたサービスのリストを表示する部分テンプレートのレンダリング -->
     <div class="mt-4">
       <%= render 'services' , services: @services %>
     </div>

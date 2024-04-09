@@ -1,13 +1,16 @@
 <div class="main">
   <div class="container">
     <div class="user-show-container">
+      <!-- 現在のユーザーがプロフィールの所有者である場合、アカウント編集リンクを表示 -->
       <% if @user == current_user %>
         <div class="d-flex justify-content-end align-items-right p-3 mb-0">
           <%= link_to "Editar tu cuenta", edit_user_registration_path, class: "btn btn-primary btn-sm" %>
         </div>
       <% end %>
+      <!-- ユーザー情報の表示部分 -->
       <div class="user p-3 mt-0">
         <div class="row align-items-center flex-column flex-md-row">
+          <!-- ユーザー画像 -->
           <div class="col-12 col-md-auto text-center text-md-start mb-3 mb-md-0">
             <% if @user.image.attached? %>
               <%= image_tag(@user.image, class: "img-fluid rounded-circle", alt: @user.name) %>
@@ -15,6 +18,7 @@
               <%= image_tag('default_user.jpg', class: "img-fluid rounded-circle", alt: "Default user image") %>
             <% end %>
           </div>
+          <!-- ユーザー名と平均評価 -->
           <div class="col text-center text-md-start">
             <h1 class="main-title"><%= @user.name %></h1>
             <% average_rating = @user.average_service_rating %>
@@ -28,13 +32,17 @@
           </div>
         </div>
       </div>
+      <!-- 提供サービスのリスト -->
       <h2 class="sub-title mt-5 mb-4">Servicios</h2>
       <div class="row">
+        <!-- 各サービスのカード表示 -->
         <% if @services.any? %>
           <% @services.each do |service| %>
+            <!-- サービスの詳細へのリンク -->
             <div class="col-lg-6">
               <%= link_to service_path(service), class: "card-link-wrapper" do %>
                 <div class="card mb-4 bg-white full-width">
+                  <!-- サービス画像 -->
                   <div class="row g-1">
                     <div class="col-3 d-none d-md-flex align-items-center justify-content-center">
                       <% if service.image.attached? %>
@@ -47,6 +55,7 @@
                         </div>
                       <% end %>
                     </div>
+                    <!-- サービスタイトルと評価 -->
                     <div class="col-8">
                       <div class="card-body">
                         <p class="card-title"><%= service.title.truncate(15) %></p>
@@ -69,21 +78,26 @@
           <p>No hay servicios.</p>
         <% end %>
       </div>
+      <!-- ユーザーが受け取った評価のリスト -->
       <h2 class="sub-title mt-5 mb-4">Evaluación</h2>
       <div class="row">
+        <!-- 各評価の表示 -->
         <% if @reviews.any? %>
           <% @reviews.each do |review| %>
+            <!-- 評価の詳細 -->
             <div class="col-12 mb-4">
               <div class="card full-width">
                 <div class="card-body">
                   <div class="flex-grow-1">
                     <p class="card-title">
+                      <!-- サービスタイトル（削除されていない場合） -->
                       <% if review&.service.deleted? %>
                         Servicio: Eliminado
                       <% else %>
                         <%= link_to "Servicio: #{review.service.title}", service_path(review.service), class: "link-class-name link-text" %>
                       <% end %>
                     </p>
+                    <!-- 評価者の画像と評価 -->
                     <div class="d-flex align-items-center mt-2">
                       <% if review.user.deleted? %>
                         <%= image_tag('default_user.jpg', class: "rounded-circle mr-3 small-image", alt: "Default user image") %>
@@ -96,15 +110,18 @@
                         <div class="ms-2"><%= "⭐️" * review.rating %></div>
                       <% end %>
                     </div>
+                    <!-- 評価者の名前 -->
                     <% if review.user.deleted? %>
                       <p class="font-weight-bold mt-2 mb-0">Comprador/a: Dado de baja</p>
                     <% else %>
                       <p class="font-weight-bold mt-2 mb-0">Comprador/a: <%= review.user.name %></p>
                     <% end %>
+                    <!-- 評価の作成日と更新日 -->
                     <div class="d-flex justify-content-start mt-2 small-text">
                       <div class="me-2">Creación: <%= review.created_at.strftime("%d/%m/%Y %H:%M") %></div>
                       <div class>Actualización: <%= review.updated_at.strftime("%d/%m/%Y %H:%M") %></div>
                     </div>
+                    <!-- コメント -->
                     <p><%= simple_format(h(review.comment)) %></p>
                   </div>
                 </div>
@@ -115,6 +132,7 @@
           <p>No hay evaluaciones.</p>
         <% end %>
       </div>
+      <!-- データベースのデータがページに収まりきらない時に、それを分割して、複数ページにする -->
       <%= paginate @reviews %>
     </div>
   </div>

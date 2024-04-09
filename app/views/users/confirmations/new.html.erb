@@ -1,19 +1,25 @@
+<!-- パスワード変更ページのメインコンテンツコンテナ -->
 <div class="main users-edit">
   <div class="form-container">
     <h1 class="ms-2 me-2">Change your password</h1>
     <div class="form">
       <div class="form-body">
         <h2>Resend confirmation instructions</h2>
+        <!-- 確認メール再送信フォーム -->
         <%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
+          <!-- エラーメッセージの表示部分 -->
           <%= render "users/shared/error_messages", resource: resource %>
           <div class="field">
+            <!-- メールアドレス入力フィールド -->
             <%= f.label :email %><br />
             <%= f.email_field :email, autofocus: true, autocomplete: "email", value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email) %>
           </div>
+          <!-- 提出ボタン -->
           <div class="actions">
             <%= f.submit "Resend confirmation instructions" %>
           </div>
         <% end %>
+        <!-- Deviseのデフォルトリンク -->
         <%= render "users/shared/links" %>
       </div>
     </div>

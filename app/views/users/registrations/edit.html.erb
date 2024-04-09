@@ -1,31 +1,40 @@
 <div class="main">
   <div class="form-container">
+    <!-- フォームのタイトル -->
     <h1 class="ms-2 me-2">Editar tu cuenta</h1>
     <div class="form">
       <div class="form-body">
+        <!-- ユーザーの情報を更新するためのフォーム。PUTメソッドを使用 -->
         <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: 'needs-validation' }) do |f| %>
+          <!-- エラーメッセージを表示するための部分 -->
           <%= render "users/shared/error_messages", resource: resource %>
+          <!-- 名前の入力フィールド -->
           <div class="mb-3">
             <%= f.label :name, 'Nombre', class: 'form-label' %>
             <%= f.text_field :name, autofocus: true, autocomplete: "name", class: 'form-control', maxlength: 50, required: true %>
           </div>
+          <!-- 画像アップロードの入力フィールド -->
           <div class="mb-3">
             <%= f.label :image, 'Imagen', class: 'form-label' %>
             <%= f.file_field :image, autofocus: true, autocomplete: "image", class: 'form-control' %>
           </div>
+          <!-- メールアドレスの入力フィールド -->
           <div class="mb-3">
             <%= f.label :email, 'Correo electrónico', class: 'form-label' %>
             <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control', required: true %>
           </div>
+          <!-- メールアドレス確認待ちの場合に表示する情報 -->
           <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
             <div class="alert alert-info" role="alert">
               Currently waiting confirmation for: <%= resource.unconfirmed_email %>
             </div>
           <% end %>
+          <!-- 電話番号の入力フィールド -->
           <div class="mb-3">
             <%= f.label :phone_number, 'Número de teléfono', class: 'form-label' %>
             <%= f.text_field :phone_number, autofocus: true, autocomplete: "tel", class: 'form-control', maxlength: 14, required: true %>
           </div>
+          <!-- 新しいパスワードの入力フィールド（変更を希望しない場合は空白） -->
           <div class="mb-3">
             <%= f.label :password, 'Contraseña', class: 'form-label' %>
             <span class="form-text text-muted">(Deja en blanco si no deseas cambiarlo)</span>
@@ -34,21 +43,25 @@
               <div class="form-text text-muted"><%= @minimum_password_length %> caracteres mínimos</div>
             <% end %>
           </div>
+          <!-- 新しいパスワードの確認入力フィールド -->
           <div class="mb-3">
             <%= f.label :password_confirmation, 'Confirmación de contraseña', class: 'form-label' %>
             <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'form-control' %>
           </div>
+          <!-- 現在のパスワードの入力フィールド（変更確認用） -->
           <div class="mb-3">
             <%= f.label :current_password, 'Contraseña actual', class: 'form-label' %>
             <span class="form-text text-muted">(Necesitamos tu contraseña actual para confirmar tus cambios)</span>
             <%= f.password_field :current_password, autocomplete: "current-password", class: 'form-control', required: true %>
           </div>
+          <!-- 更新ボタン -->
           <div class="d-grid gap-2 col-6">
             <%= f.submit "Actualizar", class: "btn btn-primary" %>
           </div>
         <% end %>
       </div>
     </div>
+    <!-- アカウント削除のためのボタンと警告メッセージ -->
     <%= button_to "Cancelar tu cuenta", destroy_user_path(resource), form: { data: { turbo_confirm: "¿Realmente quieres eliminar tu cuenta?" }}, method: :delete, id: "frmDestroy", class: "btn btn-danger mt-5 ms-3" %>
   </div>
 </div>

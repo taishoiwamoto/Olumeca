@@ -1,6 +1,7 @@
 <p>¡Hola <%= @resource.email %>!</p>
 <p>Tu cuenta ha sido bloqueada debido a un número excesivo de intentos de inicio de sesión fallidos.</p>
 <p>Haz clic en el enlace de abajo para desbloquear tu cuenta:</p>
+<!-- アカウントのロックを解除するためのリンクを提供します。リンクには、@resourceと@tokenを使って生成されるURLが含まれます。 -->
 <p><%= link_to 'Desbloquear mi cuenta', unlock_url(@resource, unlock_token: @token) %></p>
 <p>Atentamente,</p>
 <p>Equipo de Olumeca</p>
