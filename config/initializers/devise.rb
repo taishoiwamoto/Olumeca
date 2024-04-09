@@ -1,9 +1,3 @@
-#このファイルは、Devise gemの初期設定ファイルです。
-#Deviseは、Railsアプリケーションの認証システムを簡単に構築するための柔軟なソリューションを提供する人気のあるgemです。
-#この設定ファイルでは、Deviseの動作をカスタマイズするための多くのオプションが設定されています。
-#これには、メーラーの設定、ORM (Object-Relational Mapping) の設定、認証キーのカスタマイズ、
-#セッションストレージのスキップ、パスワードの長さや複雑性の要件、アカウントの確認やロック、パスワードのリセット、などが含まれます。
-
 # frozen_string_literal: true
 
 # Assuming you have not yet modified this file, each configuration option below

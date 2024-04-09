@@ -1,5 +1,3 @@
-// postcss.config.js ファイルでは、PostCSS の設定を行うことができます。環境に応じて条件付きでプラグインを入れたい場合に便利です
-
 module.exports = {
   plugins: [
     require('postcss-import'),

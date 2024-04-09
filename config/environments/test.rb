@@ -1,8 +1,3 @@
-#このファイルは、Railsアプリケーションのテスト環境設定を行うための設定ファイルです。
-#通常、config/environments/test.rbに位置し、テストスイートを実行する際の設定を定義します。
-#テスト環境は、アプリケーションのテストスイートを実行する専用の環境であり、他の目的で使用することはありません。
-#テストデータベースはテスト実行のたびにクリアされ、再作成される"スクラッチスペース"として機能します。
-
 require "active_support/core_ext/integer/time"
 
 # The test environment is used exclusively to run your application's
