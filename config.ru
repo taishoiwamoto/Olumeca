@@ -1,7 +1,3 @@
-# このRubyファイルは、RackベースのサーバーでRailsアプリケーションを起動するための設定を含んでいます。
-# Rackは、RubyのWebサーバーとWebアプリケーションを接続するための標準的なインターフェースを提供するミドルウェアです。
-# Railsは内部でRackを使用しており、このファイルによってRailsアプリケーションがRackサーバー上で正しく実行されるように設定されます。
-
 require_relative "config/environment"
 
 run Rails.application

@@ -1,7 +1,3 @@
-#このファイルは、Railsアプリケーションの開発環境設定を行うための設定ファイルです。
-#config/environments/development.rbに位置し、開発時に特有の動作や設定を定義します。
-#このファイルの設定はconfig/application.rbでの設定に優先して適用されます。
-
 require "active_support/core_ext/integer/time"
 
 Rails.application.configure do
