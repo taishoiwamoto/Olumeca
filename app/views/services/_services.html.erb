@@ -1,17 +1,24 @@
+<!-- サービスを表示するためのコンテナ -->
 <div id='services'>
+  <!-- 提供されたサービスが存在するかどうかをチェック -->
   <% if services.any? %>
     <div class="cards-container">
+      <!-- 各サービスに対して繰り返し処理 -->
       <% @services.each do |service| %>
+        <!-- サービス詳細ページへのリンク -->
         <%= link_to service_path(service) do %>
           <div class="card">
+            <!-- サービスに画像が添付されているかチェックし、条件に応じて画像を表示 -->
             <% if service.image.attached? %>
               <%= image_tag(service.image, class: "card-img-top", alt: "...") %>
             <% else %>
               <%= image_tag('default_service.jpg', class: "card-img-top", alt: "...") %>
             <% end %>
             <div class="card-body">
+              <!-- サービスのタイトル（最大30文字に切り詰め）と提供者の名前を表示 -->
               <p class="card-title"><%= service.title.truncate(30) %></p>
               <p class="card-text"><%= service.user.name %></p>
+              <!-- サービスの平均評価を星と数値で表示、評価がない場合は「--」を表示 -->
               <div class="star">
                 <% reviews = service.reviews %>
                 <% if reviews.present? %>
@@ -26,8 +33,10 @@
         <% end %>
       <% end %>
     </div>
+    <!-- データベースのデータがページに収まりきらない時に、それを分割して、複数ページにする -->
     <%= paginate services %>
   <% else %>
+    <!-- サービスが見つからなかった場合のメッセージ -->
     <p>No se encontraron servicios.</p>
   <% end %>
 </div>

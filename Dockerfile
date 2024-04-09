@@ -19,7 +19,6 @@ RUN apt-get update \
 # Copy the Gemfile and the Gemfile.lock in the container app folder.
 COPY Gemfile .
 COPY Gemfile.lock .
-
 # Install ruby gems
 RUN bundle install
 

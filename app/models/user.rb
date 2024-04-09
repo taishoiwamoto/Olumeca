@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable
+
   validates_acceptance_of :agreement, allow_nil: false, on: :create
 
   validates_presence_of     :password, if: :password_required?
@@ -14,15 +15,14 @@ class User < ApplicationRecord
   has_many :likes, dependent: :destroy
   has_one_attached :image
 
-
   validates :name,
     presence: true,
     length: {
     maximum: 30,
     too_long: ':El nombre del usuario debe tener menos de %{count} caracteres.'
   }
-
   validates :phone_number, presence: true
+
   validate :email_uniqueness_for_inactive_accounts, on: :create
 
   scope :active, -> { where(deleted_at: nil) }
@@ -34,7 +34,7 @@ class User < ApplicationRecord
   end
 
   def self.find_for_authentication(conditions)
-    conditions[:deleted_at] = nil # Only consider active users
+    conditions[:deleted_at] = nil 
     find_by(conditions)
   end
 

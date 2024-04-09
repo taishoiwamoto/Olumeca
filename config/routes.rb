@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
+
   root "home#top"
+
   get 'static_pages/privacy_policy'
   get 'static_pages/terms_of_service'
 

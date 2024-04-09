@@ -1,6 +1,9 @@
+<!-- レビュー用のフォームを生成 -->
 <%= form_with(model: review, url: [service, review], html: { class: 'needs-validation' }) do |form| %>
+  <!-- レビューに関連するエラーがあるか確認 -->
   <% if review.errors.any? %>
     <div class="mb-3">
+      <!-- 各エラーメッセージを表示 -->
       <% review.errors.full_messages.each do |message| %>
         <div class="form-error">
           <%= message %>
@@ -8,18 +11,26 @@
       <% end %>
     </div>
   <% end %>
+
+  <!-- 評価（rating）の入力フィールド -->
   <div class="mb-3">
     <%= form.label :rating, 'Evaluación', class: 'form-label' %>
+    <!-- 既にratingが設定されている場合、その値を選択済みにする -->
     <% if review.rating.present? %>
       <%= form.select :rating, options_for_select(review_select_options, selected: review.rating), { include_blank: 'Seleccione un valor numérico' }, class: 'form-select', required: true %>
     <% else %>
+      <!-- ratingが設定されていない場合、選択肢の最初に空白を表示 -->
       <%= form.select :rating, options_for_select(review_select_options), {include_blank: 'Seleccione un valor numérico'}, class: 'form-select',required: true %>
     <% end %>
   </div>
+
+  <!-- コメントの入力フィールド -->
   <div class="mb-3">
     <%= form.label :comment, 'Comentario', class: 'form-label' %>
     <%= form.text_area :comment, class: 'form-control' %>
   </div>
+
+  <!-- フォームの送信ボタン -->
   <div class="d-grid gap-2 col-6">
     <%= form.submit 'Guardar',  class: "btn btn-primary"%>
   </div>

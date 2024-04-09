@@ -1,44 +1,49 @@
+/* サービス表示項目にパディング、背景色、境界線、マージン、角の丸み、およびテキストの折り返しを設定します。 */
 .service-show-item {
-  padding: 30px;
-  background-color: white;
-  border: 1px solid #cbd5d5;
-  margin-bottom: 30px; /* spacing between elements */
-  border-radius: 5px;
-  overflow-wrap: break-word;
+  padding: 30px; /* 内側の余白を全方向に30px設定 */
+  background-color: white; /* 背景色を白に設定 */
+  border: 1px solid #cbd5d5; /* 境界線を灰色で1pxの幅で設定 */
+  margin-bottom: 30px; /* 要素の下側に30pxの外側余白を設定 */
+  border-radius: 5px; /* 角を5pxの半径で丸める */
+  overflow-wrap: break-word; /* 長い単語がある場合には折り返す */
 }
 
-/* Your previous media query is great! */
+/* 画面幅が767px以下の場合、.rowクラスを持つ要素の子要素を縦方向に並べ、順番を逆にします。 */
 @media (max-width: 767px) {
   .row {
-    flex-direction: column-reverse;
+    flex-direction: column-reverse; /* flexボックスの子要素を縦に並べ、順序を逆にする */
   }
+  /* 指定したクラスを持つカラムのディスプレイをフレックスに設定し、内容を中央揃えにします。 */
   .col-lg-3.col-md-4.col-12.order-2.order-md-1.mb-5.mt-5 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    display: flex; /* フレックスボックス表示に設定 */
+    justify-content: center; /* 子要素を水平方向の中央に配置 */
+    align-items: center; /* 子要素を垂直方向の中央に配置 */
   }
 }
 
-/* Service and favorite card border between text and pics */
+/* カードの上部画像の下に境界線を追加します。 */
 .card-img-top {
-  border-bottom: 1px solid #cbd5d5;
+  border-bottom: 1px solid #cbd5d5; /* 下側の境界線を灰色で1pxの幅で設定 */
 }
 
-/* サービスタイトルが異なるものでもcard_bodyの長さを統一するため */
+/* .top-newServicesセクション内の.card-bodyクラスの高さを170pxに統一します。 */
 .top-newServices .card-body {
-  height: 170px;
+  height: 170px; /* 高さを170pxに設定 */
 }
 
+/* .cards-containerセクション内のすべての.card-bodyクラスの高さを170pxに統一します。 */
 .cards-container .card-body {
-  height: 170px;
+  height: 170px; /* 高さを170pxに設定 */
 }
 
+/* .flex-endクラスを使用して、要素をフレックスボックスとして表示し、内容を右端に揃えます。 */
 .flex-end {
-  display: flex;
-  justify-content: flex-end;
+  display: flex; /* フレックスボックス表示に設定 */
+  justify-content: flex-end; /* 子要素を右端に揃える */
 }
 
+/* .flex-space-betweenクラスを使用して、要素をフレックスボックスとして表示し、子要素を両端に均等に配置します。 */
 .flex-space-between {
-  display: flex;
-  justify-content: space-between;
+  display: flex; /* フレックスボックス表示に設定 */
+  justify-content: space-between; /* 子要素を両端に均等に配置 */
 }

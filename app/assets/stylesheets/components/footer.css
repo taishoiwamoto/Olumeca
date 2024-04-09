@@ -1,18 +1,21 @@
+/* フッター全体をラップするコンテナのスタイル。flexボックスを使い、内容を中央に揃えます。また、上部に1pxの境界線を追加します。 */
 .footer-wrapper {
-  display: flex;
-  justify-content: center;
-  border-top: 1px solid #e9eef1;
+  display: flex; /* フレックスボックス表示を使い、要素を一直線に配置　*/
+  justify-content: center; /* 子要素を水平方向の中心に揃える　*/
+  border-top: 1px solid #e9eef1; /* 上部に薄い灰色の境界線を追加　*/
 }
 
+/* フッターコンテナのスタイル。コンテナの最大幅を600pxに設定し、周囲に20pxのマージンを適用。flex-wrapを用いて内容を適切に折り返します。 */
 .footer-container {
-  max-width: 600px;
-  margin: 20px;
-  display: flex;
-  flex-wrap: wrap;
-  padding-left: 15px;
-  padding-right: 15px;
+  max-width: 600px; /* 最大幅を600pxに制限　*/
+  margin: 20px; /* 全方向に20pxのマージンを適用　*/
+  display: flex; /* フレックスボックス表示を使い、要素を一直線に配置　*/
+  flex-wrap: wrap; /* 子要素がコンテナの幅を超えた場合に折り返す　*/
+  padding-left: 15px; /* 左側に15pxの内側余白を追加　*/
+  padding-right: 15px; /* 右側に15pxの内側余白を追加　*/
 }
 
+/* フッター内の各アイテムのスタイル。アイテムの右に15pxのマージンを追加し、隣接するアイテムとの間隔を確保します。 */
 .footer-item {
-  margin-right: 15px;
+  margin-right: 15px; /* 右側に15pxの外側余白を追加　*/
 }

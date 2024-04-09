@@ -1,14 +1,17 @@
 /* users/show ================================ */
+
+/* ユーザーのプロファイル画像にスタイルを適用します。 */
 .user img {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  box-shadow: 0 2px 6px #c1ced7;
-  margin: 20px 0 10px;
-  object-fit: cover;
+  width: 120px; /* 画像の幅を120pxに設定 */
+  height: 120px; /* 画像の高さを120pxに設定 */
+  border-radius: 50%; /* 画像を円形にする */
+  box-shadow: 0 2px 6px #c1ced7; /* 画像に影を追加し、立体感を出す */
+  margin: 20px 0 10px; /* 上に20px、下に10pxのマージンを追加し、周囲との間隔を設定 */
+  object-fit: cover; /* 画像のアスペクト比を保持しつつ、指定した領域に合わせてカバーする */
 }
 
+/* ユーザー表示コンテナのスタイルを定義 */
 .user-show-container {
-  max-width: 80%;
-  margin: auto;
+  max-width: 80%; /* コンテナの最大幅を80%に設定 */
+  margin: auto; /* コンテナを画面中央に配置 */
 }

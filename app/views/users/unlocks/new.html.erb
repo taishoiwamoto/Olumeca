@@ -1,21 +1,26 @@
 <div class="main">
   <div class="form-container">
+    <!-- フォームのタイトル -->
     <h1 class="ms-2 me-2">Resend unlock instructions</h1>
       <div class="form">
         <div class="form-body">
+          <!-- Deviseのunlock_pathを指定してフォームを開始。POSTメソッドを使用 -->
           <%= form_for(resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post }) do |f| %>
+            <!-- ユーザーに関連するエラーメッセージを表示 -->
             <%= render "users/shared/error_messages", resource: resource %>
 
+            <!-- メールアドレス入力フィールド -->
             <div class="field">
               <%= f.label :email %><br />
               <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
             </div>
 
+            <!-- アンロック指示を再送するための送信ボタン -->
             <div class="actions">
               <%= f.submit "Resend unlock instructions" %>
             </div>
           <% end %>
-
+          <!-- Devideのデフォルトリンク -->
           <%= render "users/shared/links" %>
         </div>
       </div>

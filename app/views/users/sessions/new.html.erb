@@ -1,32 +1,42 @@
 <div class="main">
   <div class="form-container">
+    <!-- フォームのタイトル -->
     <h1 class="ms-2 me-2">Iniciar sesión</h1>
     <div class="form">
       <div class="form-body">
+        <!-- ログイン用のフォーム、バリデーションが必要で、バリデーションが適用されていない場合は送信されない -->
         <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: 'needs-validation', novalidate: true}) do |f| %>
+          <!-- メールアドレスの入力フィールド -->
           <div class="mb-3">
             <%= f.label :email, 'Correo electrónico', class: 'form-label' %>
             <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control', required: true %>
+            <!-- メールアドレス未入力時のエラーメッセージ -->
             <div class="invalid-feedback">Por favor, ingresa tu correo electrónico.</div>
           </div>
+          <!-- パスワードの入力フィールド -->
           <div class="mb-3">
             <%= f.label :password, 'Contraseña', class: 'form-label' %>
             <%= f.password_field :password, autocomplete: "current-password", class: 'form-control', required: true %>
+            <!-- パスワード未入力時のエラーメッセージ -->
             <div class="invalid-feedback">Por favor, ingresa tu contraseña.</div>
           </div>
+          <!-- 「記憶する」チェックボックス、Deviseがrememberableをサポートしている場合に表示 -->
           <% if devise_mapping.rememberable? %>
             <div class="mb-3 form-check">
               <%= f.check_box :remember_me, class: 'form-check-input' %>
               <%= f.label :remember_me, 'Recuérdame', class: 'form-check-label' %>
             </div>
           <% end %>
+          <!-- reCAPTCHAタグ、フォーム送信時のセキュリティ強化に用いる -->
           <div class="mb-3">
             <%= recaptcha_tags %>
           </div>
+          <!-- フォーム送信ボタン -->
           <div class="actions mb-3">
             <%= f.submit "Iniciar sesión", class: "btn btn-primary" %>
           </div>
         <% end %>
+        <!-- ユーザーがパスワードを忘れた場合や新規登録を促すリンク -->
         <%= render "users/shared/links" %>
       </div>
     </div>

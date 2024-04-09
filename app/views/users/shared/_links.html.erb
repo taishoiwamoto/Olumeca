@@ -1,19 +1,25 @@
 <%- if controller_name != 'sessions' %>
+  <!-- 現在のコントローラーがセッション管理ではない場合、ログインページへのリンクを表示 -->
   <%= link_to "Iniciar sesión", new_session_path(resource_name) %><br />
 <% end %>
 <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
+  <!-- ユーザー登録が可能で、現在のコントローラーがユーザー登録管理ではない場合、登録ページへのリンクを表示 -->
   <%= link_to "Registrarse", new_registration_path(resource_name) %><br />
 <% end %>
 <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
+  <!-- パスワードリセットが可能で、現在のコントローラーがパスワード管理またはユーザー登録管理ではない場合、パスワードリセットページへのリンクを表示 -->
   <%= link_to "¿Olvidaste tu contraseña?", new_password_path(resource_name) %><br />
 <% end %>
 <%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
+  <!-- アカウント確認が必要で、現在のコントローラーがアカウント確認管理ではない場合、確認指示送信ページへのリンクを表示 -->
   <%= link_to "¿No recibiste instrucciones de confirmación?", new_confirmation_path(resource_name) %><br />
 <% end %>
 <%- if devise_mapping.lockable? && resource_class.unlock_strategy_enabled?(:email) && controller_name != 'unlocks' %>
+  <!-- アカウントのロック解除が可能で、現在のコントローラーがアカウントロック解除管理ではない場合、ロック解除指示送信ページへのリンクを表示 -->
   <%= link_to "¿No recibiste instrucciones para desbloquear?", new_unlock_path(resource_name) %><br />
 <% end %>
 <%- if devise_mapping.omniauthable? %>
+  <!-- ソーシャルログインが有効であれば、各ソーシャルサービスプロバイダーでのログインボタンを表示 -->
   <%- resource_class.omniauth_providers.each do |provider| %>
     <%= button_to "Iniciar sesión con #{OmniAuth::Utils.camelize(provider)}", omniauth_authorize_path(resource_name, provider), data: { turbo: false } %><br />
   <% end %>

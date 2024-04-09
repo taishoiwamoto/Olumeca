@@ -6,68 +6,68 @@
     <meta charset="UTF-8">
     <style>
         .rails-default-error-page {
-            background-color: #f5f8fa;
-            color: #2E2F30;
-            font-family: arial, sans-serif;
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 80vh;
+            background-color: #f5f8fa; /* 背景色 */
+            color: #2E2F30; /* テキストの色 */
+            font-family: arial, sans-serif; /* フォントファミリー */
+            margin: 0; /* 外側の余白 */
+            display: flex; /* フレックスボックスを使用 */
+            flex-direction: column; /* 子要素を縦に並べる */
+            align-items: center; /* 中央揃えにする */
+            justify-content: center; /* 縦方向も中央揃えにする */
+            height: 80vh; /* 高さをビューポートの80%に設定 */
         }
 
         .dialog {
-          text-align: center;
-          background-color: white;
-          padding: 20px;
-          border-radius: 8px;
-          box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-          margin: 0 auto 0 auto;
-          max-width: calc(100% - 20px); /* 画面の幅から左右の10px分を引いた幅を最大幅とします */
-          box-sizing: border-box; /* paddingを含めてwidthやmax-widthを計算するようにします */
+          text-align: center; /* テキストを中央揃えに */
+          background-color: white; /* 背景色 */
+          padding: 20px; /* 内側の余白 */
+          border-radius: 8px; /* 角の丸み */
+          box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* 影の設定 */
+          margin: 0 auto 0 auto; /* 上下の余白は0、左右は自動で中央揃えに */
+          max-width: calc(100% - 20px); /* 最大幅を画面幅から20px引いたものに設定 */
+          box-sizing: border-box; /* パディングを含めた幅で計算 */
       }
 
         .footer {
-          display: none;
+          display: none; /* フッターを非表示にします */
         }
 
         p, ul {
-            text-align: left;
+            text-align: left; /* テキストを左揃えに */
         }
 
         ul {
-            list-style-type: none;
-            padding: 0;
+            list-style-type: none; /* リストマーカー無し */
+            padding: 0; /* リストの余白を0にします */
         }
 
         li {
-            margin: 8px 0;
+            margin: 8px 0; /* リストアイテムの間隔 */
         }
 
         a {
-            color: blue;
-            text-decoration: underline;
+            color: blue; /* リンクの色を青にします */
+            text-decoration: underline; /* リンクに下線を追加します */
         }
 
         .whatsapp-button {
-        margin-top: 30px;
-        margin-bottom: 30px;
-        color: white;
-        display: inline-block;
-        align-items: center;
-        background-color: #25D366;
-        padding: 10px;
-        border-radius: 5px;
-        text-decoration: none;
-        width: calc(100% - 40px); /* パディングの分を引いた100%の幅にします */
-        max-width: 310px; /* 必要な場合、最大幅を設定します。 */
-        text-align: center;
-        transition: background-color 0.3s;
+        margin-top: 30px; /* 上の余白 */
+        margin-bottom: 30px; /* 下の余白 */
+        color: white; /* テキストの色 */
+        display: inline-block;; /* インラインブロック要素として表示 */
+        align-items: center; /* 中央揃え */
+        background-color: #25D366; /* 背景色 */
+        padding: 10px; /* 内側の余白 */
+        border-radius: 5px; /* 角の丸み */
+        text-decoration: none; /* リンクの下線を無しに */
+        width: calc(100% - 40px); /* 幅をパディング込みで計算 */
+        max-width: 310px; /* 最大幅を指定 */
+        text-align: center; /* テキストを中央揃え */
+        transition: background-color 0.3s; /* 背景色の変化をアニメーション. */
     }
 
         .whatsapp-button:hover {
-          background-color: #128C53;
+          background-color: #128C53;  /* ホバー時の背景色を変更します */
         }
 
     </style>

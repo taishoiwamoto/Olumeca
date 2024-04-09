@@ -1,8 +1,12 @@
 <% if resource.errors.any? %>
+  <!-- エラーメッセージがある場合のみこのブロックが表示される -->
   <div id="error_explanation" data-turbo-cache="false">
+    <!-- エラーメッセージをリスト形式で表示 -->
     <ul>
+      <!-- resourceオブジェクトのerrorsコレクションをループし、各エラーメッセージをリストアイテムとして表示 -->
       <% resource.errors.full_messages.each do |message| %>
         <li class="form-error"><%= message %></li>
+        <!-- エラーメッセージはRailsのI18n機能を通じて多言語対応可能 -->
       <% end %>
     </ul>
   </div>

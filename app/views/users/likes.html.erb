@@ -1,19 +1,29 @@
 <div class="main">
   <div class="container">
     <h1 class="text-center">Favoritos</h1>
+    <!-- カードを表示するコンテナ -->
     <div class="cards-container">
+      <!-- @services変数にサービスが存在するかチェック -->
       <% if @services.any? %>
+        <!-- 存在する場合、各サービスに対して繰り返し処理を実行 -->
         <% @services.each do |service| %>
+          <!-- サービスの詳細ページへのリンク -->
           <%= link_to service_path(service.id) do %>
             <div class="card">
+              <!-- サービスに画像が添付されているかチェック -->
               <% if service.image.attached? %>
+                <!-- 添付されている場合はその画像を表示 -->
                 <%= image_tag(service.image, class: "card-img-top", alt: "...") %>
               <% else %>
+                <!-- そうでない場合はデフォルト画像を表示 -->
                 <%= image_tag('default_service.jpg', class: "card-img-top", alt: "...") %>
               <% end %>
+              <!-- カードの本文部分 -->
               <div class="card-body">
+                <!-- サービスのタイトルと提供者の名前を表示 -->
                 <p class="card-title"><%= service.title.truncate(30) %></p>
                 <p class="card-text"><%= service.user.name %></p>
+                <!-- 星評価の表示（評価がある場合）-->
                 <div class="star">
                   <% reviews = service.reviews %>
                   <% if reviews.present? %>
@@ -27,8 +37,10 @@
             </div>
           <% end %>
         <% end %>
+        <!-- データベースのデータがページに収まりきらない時に、それを分割して、複数ページにする -->
         <%= paginate @services %>
       <% else %>
+        <!-- @services変数にサービスがない場合のメッセージ -->
         <p>No tienes servicios favoritos.</p>
       <% end %>
     </div>

@@ -3,11 +3,19 @@
     <h1 class="ms-2 me-2">Detalles del Pedido</h1>
     <div class="form">
       <div class="form-body">
+        <!-- フォームを生成 -->
+        <!-- model: @orderで、このフォームが@orderインスタンスに基づいていることを指定しています。
+        Railsはこの@orderオブジェクトを使って適切なアクション（新規作成の場合はcreate、更新の場合はupdate）へのルートを自動的に推測します。 -->
+        <!-- do |f|は、フォームオブジェクトをブロック変数fとして使用するためのブロックを開始します。このfを使って、
+        フォームのさまざまなフィールドを生成します。 -->
         <%= form_with(model: @order) do |f| %>
+          <!-- フォームが送信されるときにservice_idパラメータとして@service.idの値が送信されます。
+          これは、注文が特定のサービスに関連付けられていることをサーバー側に伝えるために使用されます。 -->
           <%= f.hidden_field :service_id, value: @service.id %>
           <p class="mb-2 text-break">Servicio: <%= @service.title %></p>
           <p class="mb-4 text-break">Vendedor(a): <%= @service.user.name %></p>
           <div class="d-grid gap-2 col-6">
+            <!-- フォームの送信ボタンを生成 -->
             <%= f.submit 'Realizar Pedido', class: "btn btn-primary" %>
           </div>
         <% end %>

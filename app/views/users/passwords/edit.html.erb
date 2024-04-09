@@ -3,32 +3,44 @@
     <h1 class="ms-2 me-2">Cambia tu contraseña</h1>
     <div class="form">
       <div class="form-body">
+        <!-- パスワード変更用のフォーム開始 -->
         <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put, class: "needs-validation", novalidate: true }) do |f| %>
+          <!-- エラーメッセージの表示部分 -->
           <%= render "users/shared/error_messages", resource: resource %>
+          <!-- パスワードリセットトークンを隠しフィールドとして追加 -->
           <%= f.hidden_field :reset_password_token %>
           <div class="mb-3">
+            <!-- 新しいパスワード入力フィールド -->
             <%= f.label :password, "Cambia mi contraseña", class: 'form-label' %>
+            <!-- 最小パスワード長が設定されている場合に表示 -->
             <% if @minimum_password_length %>
               <div class="invalid-feedback">
+                <!-- 最小文字数の表示 -->
                 (<%= @minimum_password_length %> mínimo de caracteres)</em>
             </div>
           <% end %>
+          <!-- 新しいパスワード入力フィールド（実際にユーザーが入力する部分） -->
           <%= f.password_field :password, autofocus: true, autocomplete: "new-password", class: 'form-control', required: true %>
+          <!-- パスワードが入力されていない場合のエラーメッセージ -->
           <div class="invalid-feedback">
             Por favor, ingresa tu nueva contraseña.
           </div>
         </div>
         <div class="mb-3">
+          <!-- 新しいパスワードの確認入力フィールド -->
           <%= f.label :password_confirmation, "Confirma la nueva contraseña", class: 'form-label' %>
           <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'form-control', required: true %>
+          <!-- パスワード確認が一致しない場合のエラーメッセージ -->
           <div class="invalid-feedback">
             Por favor, confirma tu nueva contraseña.
           </div>
         </div>
         <div class="actions">
+          <!-- フォーム送信ボタン -->
           <%= f.submit "Cambia mi contraseña", class: "btn btn-primary" %>
         </div>
       <% end %>
+      <!-- Deviseのデフォルトリンク -->
       <%= render "users/shared/links" %>
     </div>
   </div>
