@@ -1,15 +1,15 @@
 # frozen_string_literal: true
 
 class Users::SessionsController < Devise::SessionsController
-#  def create
-#    if verify_recaptcha
-#      super
-#    else
-#      self.resource = resource_class.new(sign_in_params)
-#      flash.now[:alert] = 'Recaptcha verification failed'
-#      render :new
-#    end
-#  end
+  def create
+    if verify_recaptcha
+      super
+    else
+      self.resource = resource_class.new(sign_in_params)
+      flash.now[:alert] = 'Recaptcha verification failed'
+      render :new
+    end
+  end
 
   # before_action :configure_sign_in_params, only: [:create]
 
