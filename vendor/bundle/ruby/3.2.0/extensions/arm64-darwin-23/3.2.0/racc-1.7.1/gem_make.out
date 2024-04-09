@@ -1,0 +1,21 @@
+current directory: /Users/taishoiwamoto/code/ba0404hx/Olumeca/vendor/bundle/ruby/3.2.0/gems/racc-1.7.1/ext/racc/cparse
+/Users/taishoiwamoto/.rvm/rubies/ruby-3.2.2/bin/ruby extconf.rb
+checking for rb_block_call()... yes
+checking for rb_ary_subseq()... yes
+creating Makefile
+
+current directory: /Users/taishoiwamoto/code/ba0404hx/Olumeca/vendor/bundle/ruby/3.2.0/gems/racc-1.7.1/ext/racc/cparse
+make DESTDIR\= sitearchdir\=./.gem.20240408-24085-5k82b sitelibdir\=./.gem.20240408-24085-5k82b clean
+
+current directory: /Users/taishoiwamoto/code/ba0404hx/Olumeca/vendor/bundle/ruby/3.2.0/gems/racc-1.7.1/ext/racc/cparse
+make DESTDIR\= sitearchdir\=./.gem.20240408-24085-5k82b sitelibdir\=./.gem.20240408-24085-5k82b
+compiling cparse.c
+linking shared-object racc/cparse.bundle
+ld: warning: ignoring duplicate libraries: '-lruby.3.2'
+
+current directory: /Users/taishoiwamoto/code/ba0404hx/Olumeca/vendor/bundle/ruby/3.2.0/gems/racc-1.7.1/ext/racc/cparse
+make DESTDIR\= sitearchdir\=./.gem.20240408-24085-5k82b sitelibdir\=./.gem.20240408-24085-5k82b install
+/opt/homebrew/opt/coreutils/bin/ginstall -c -m 0755 cparse.bundle ./.gem.20240408-24085-5k82b/racc
+
+current directory: /Users/taishoiwamoto/code/ba0404hx/Olumeca/vendor/bundle/ruby/3.2.0/gems/racc-1.7.1/ext/racc/cparse
+make DESTDIR\= sitearchdir\=./.gem.20240408-24085-5k82b sitelibdir\=./.gem.20240408-24085-5k82b clean

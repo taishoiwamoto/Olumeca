@@ -1,8 +1,11 @@
 <div class="main">
   <div class="table-container">
+    <!-- テーブルをレスポンシブにするためのコンテナ -->
     <h1>Pedidos recibidos</h1>
     <div class="table-responsive">
+      <!-- ホバー効果付きのテーブル -->
       <table class="table table-hover">
+        <!-- テーブルのヘッダ -->
         <thead>
           <tr>
             <th scope="col">Fecha</th>
@@ -13,10 +16,14 @@
             <th scope="col">Servicio</th>
           </tr>
         </thead>
+        <!-- テーブルのボディ -->
         <tbody>
+          <!-- 各販売に対して繰り返し処理 -->
           <% @sales.each do |sale| %>
             <tr>
+              <!-- 注文の作成日 -->
               <td><%= sale.created_at.strftime("%d/%m/%Y") %></td>
+              <!-- 注文の状態に応じた表示 -->
               <td>
                 <% case sale.status %>
                 <% when 'pending' %>
@@ -27,6 +34,7 @@
                 <%= button_tag get_order_status(sale.status), class: "btn btn-danger btn-sm", disabled: true %>
               <% end %>
             </td>
+            <!-- 注文が保留中の場合に表示されるアクション -->
             <td>
               <% if sale.buyer.deleted? || sale.accepted? || sale.rejected? %>
                 N/A
@@ -37,6 +45,7 @@
                 </div>
               <% end %>
             </td>
+            <!-- 買い手の情報、注文が受け入れられた場合のみ表示 -->
             <td>
               <% if sale.buyer.deleted? || sale.pending? || sale.rejected? %>
                 N/A
@@ -49,6 +58,7 @@
                 </div>
               <% end %>
             </td>
+            <!-- 買い手の名前、アカウントが削除されていない場合のみ表示 -->
             <td>
               <% if sale.buyer.deleted? %>
                 Dado de baja
@@ -56,6 +66,7 @@
                 <%= link_to sale.buyer.name, user_path(sale.buyer), class: "link-text" %>
               <% end %>
             </td>
+            <!-- 購入されたサービス、削除されていない場合のみ表示 -->
             <td>
               <% if sale.service.deleted? %>
                 Eliminado
@@ -68,6 +79,7 @@
       </tbody>
     </table>
   </div>
+  <!-- データベースのデータがページに収まりきらない時に、それを分割して、複数ページにする -->
   <%= paginate @sales %>
 </div>
 </div>

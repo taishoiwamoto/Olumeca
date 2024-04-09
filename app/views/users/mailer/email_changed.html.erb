@@ -1,7 +1,10 @@
 <p>¡Hola <%= @email %>!</p>
+<!-- ユーザーがメールアドレスを変更中であるかどうかをチェックします。 -->
 <% if @resource.try(:unconfirmed_email?) %>
+  <!-- メールアドレスが変更中で、まだ確認されていない場合のメッセージ。 -->
   <p>Te estamos contactando para notificarte que tu correo electrónico se está cambiando a <%= @resource.unconfirmed_email %>.</p>
 <% else %>
+  <!-- メールアドレスの変更が完了している場合のメッセージ。 -->
   <p>Te estamos contactando para notificarte que tu correo electrónico ha sido cambiado a <%= @resource.email %>.</p>
 <% end %>
 <p>Atentamente,</p>

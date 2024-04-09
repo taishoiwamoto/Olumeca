@@ -1,23 +1,29 @@
+<!-- サイトのメインビジュアルとメッセージを表示するセクション -->
 <div class="top-main">
   <div class="top-mainVisual">
     <div class="top-mainVisual__container">
+      <!-- サービスマーケットプレイスについての説明 -->
       <div class="left">
         <div class="top-message">
           <h1>Mercado de servicios con varios profesionales.</h1>
         </div>
         <p>Es posible comprar y vender habilidades, conocimientos y experiencias.</p>
+        <!-- ユーザー登録ページへのリンク -->
         <div class="d-grid gap-2 col-10 mt-5">
           <%= link_to "Registrar", new_user_registration_path, class: "btn btn-primary btn-lg" %>
         </div>
       </div>
+      <!-- メインビジュアル画像 -->
       <div class="right">
         <%= image_tag 'top-mainVisual.jpg', alt: 'Es posible comprar y vender habilidades y servicios.', class: 'normal-size-image' %>
       </div>
     </div>
   </div>
+  <!-- サービスを選ぶ理由 -->
   <div class="top-main-about-service">
     <div class="inner noflex">
       <h2 class="top-title">Las razones por las que Olumeca ha sido elegido</h2>
+      <!-- サービスの特徴を説明するリスト -->
       <div class="about_service__list flexbox">
         <div class="about_service__list_item">
           <%= image_tag 'top-main-about-service-1.jpg', alt: 'Pregunta a los profesionales en el campo.', class: 'normal-size-image' %>
@@ -37,8 +43,10 @@
       </div>
     </div>
   </div>
+  <!-- 新しいサービスの紹介 -->
   <div class="top-newServices">
     <h2 class="top-title">Servicios Nuevos</h2>
+    <!-- 新しいサービスがある場合は表示、なければ「No hay servicios disponibles」を表示 -->
     <% if @services.empty? %>
       <p class="text-center">No hay servicios disponibles</p>
     <% else %>
@@ -70,7 +78,9 @@
       </div>
     <% end %>
   </div>
+  <!-- 購入者向けのガイド -->
   <div class="top-main-buyer">
+    <!-- 購入プロセスの説明 -->
     <div class="top-main-buyer__container">
       <div class="top-message">
         <h2 class="buyer-title">PARA COMPRADOR/A</h2>
@@ -116,7 +126,9 @@
       </div>
     </div>
   </div>
+  <!-- 販売者向けのガイド -->
   <div class="top-main-seller">
+    <!-- サービス提供プロセスの説明 -->
     <div class="top-main-seller__container">
       <div class="top-message">
         <h2 class="vendor-title">PARA VENDEDOR/A</h2>
@@ -158,9 +170,11 @@
       </div>
     </div>
   </div>
+  <!-- 登録促進セクション -->
   <div class="top-registar">
     <div class="top-registar__container">
       <h2 class="top-title">Comencemos con la registración gratuita</h2>
+      <!-- 無料登録へのリンクボタン -->
       <div class="d-grid col-lg-5 col-md-5 col-5">
         <%= link_to "Registar", new_user_registration_path, class: "btn btn-success btn-lg" %>
       </div>

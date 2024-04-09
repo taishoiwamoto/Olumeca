@@ -1,21 +1,28 @@
 <div class="main">
   <div class="form-container">
+    <!-- フォームのタイトル -->
     <h1 class="ms-2 me-2">¿Olvidaste tu contraseña?</h1>
     <div class="form">
       <div class="form-body">
+        <!-- パスワードリセット用のフォーム。POSTメソッドを使用し、バリデーションを必要とする設定になっている -->
         <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { class: 'needs-validation', novalidate: true, method: :post }) do |f| %>
+          <!-- ユーザーからのエラーメッセージを表示する部分 -->
           <%= render "users/shared/error_messages", resource: resource %>
           <div class="mb-3">
+            <!-- メールアドレス入力フィールド。自動でフォーカスされ、メールアドレスの自動補完が有効 -->
             <%= f.label :email, 'Correo electrónico', class: 'form-label' %>
             <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control', required: true %>
+            <!-- メールアドレスが未入力の場合に表示されるエラーメッセージ -->
             <div class="invalid-feedback">
               Por favor, ingresa tu correo electrónico.
             </div>
           </div>
           <div class="actions">
+            <!-- フォーム送信ボタン -->
             <%= f.submit "Enviar", class: "btn btn-primary text-white" %>
           </div>
         <% end %>
+        <!-- Deviseのデフォルトリンク -->
         <%= render "users/shared/links" %>
       </div>
     </div>

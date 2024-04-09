@@ -2,7 +2,9 @@
   <div class="table-container">
     <h1>Pedidos realizados</h1>
     <div class="table-responsive">
+      <!-- テーブルをレスポンシブデザインに対応させるためのコンテナ -->
       <table class="table table-hover">
+        <!-- テーブルのヘッダ -->
         <thead>
           <tr>
             <th scope="col">Fecha</th>
@@ -13,11 +15,14 @@
             <th scope="col">Servicio</th>
           </tr>
         </thead>
+        <!-- テーブルのボディ -->
         <tbody>
+          <!-- 注文情報を繰り返し表示 -->
           <% @orders.each do |order| %>
             <tr>
               <td><%= order.created_at.strftime("%d/%m/%Y") %></td>
               <td>
+                <!-- 注文の状態に応じたボタンを表示 -->
                 <% case order.status %>
                 <% when 'pending' %>
                 <%= button_tag get_order_status(order.status), class: "btn btn-secondary btn-sm", disabled: true %>
@@ -28,6 +33,8 @@
               <% end %>
             </td>
             <td>
+              <!-- 注文が受け入れられた場合のみ評価可能 -->
+              <!-- 評価済みの場合は編集リンク、そうでなければ評価リンクを表示 -->
               <% if order.seller.deleted? %>
                 N/A
               <% elsif order.accepted? %>
@@ -40,6 +47,7 @@
               <% end %>
             </td>
             <td>
+              <!-- 注文が受け入れられた場合のみ連絡先情報を表示 -->
               <% if order.seller.deleted? || order.pending? || order.rejected? %>
                 N/A
               <% elsif order.accepted? %>
@@ -52,6 +60,7 @@
               <% end %>
             </td>
             <td>
+              <!-- サービス提供者の情報。アカウントが削除されていない場合のみ表示 -->
               <% if order.service.user.deleted? %>
                 Dado de baja
               <% else %>
@@ -59,6 +68,7 @@
               <% end %>
             </td>
             <td>
+              <!-- サービス情報。サービスが削除されていない場合のみ表示 -->
               <% if order.service.user.deleted? || order.service.deleted? %>
                 Eliminado
               <% else %>
@@ -70,6 +80,7 @@
       </tbody>
     </table>
   </div>
+  <!-- データベースのデータがページに収まりきらない時に、それを分割して、複数ページにする -->
   <%= paginate @orders %>
 </div>
 </div>
