@@ -4,7 +4,7 @@ class Order < ApplicationRecord
   belongs_to :seller, class_name: 'User', foreign_key: 'seller_id'
   # サービスとの関連付け。
   belongs_to :service
-  # オーダーのステータスをenumで定義します。可能な値は'pending', 'accepted', 'rejected'です
+  # オーダーのステータスをenumで定義します。可能な値は'pending', 'accepted', 'rejected'です。
   enum status: ['pending', 'accepted', 'rejected']
 
   # 特定のユーザーがこのオーダーに関連するサービスをレビューしたかどうかを確認するインスタンスメソッド。
