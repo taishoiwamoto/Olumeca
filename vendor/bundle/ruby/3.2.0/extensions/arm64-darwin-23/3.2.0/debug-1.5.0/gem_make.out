@@ -1,0 +1,23 @@
+current directory: /Users/taishoiwamoto/code/ba0404hx/Olumeca/vendor/bundle/ruby/3.2.0/gems/debug-1.5.0/ext/debug
+/Users/taishoiwamoto/.rvm/rubies/ruby-3.2.2/bin/ruby extconf.rb
+checking for rb_iseq_parameters(NULL, 0) in VALUE rb_iseq_parameters(void *, int is_proc);... yes
+checking for rb_iseq_code_location(NULL, NULL, NULL, NULL, NULL) in void rb_iseq_code_location(void *, int *first_lineno, int *first_column, int *last_lineno, int *last_column);... yes
+checking for rb_iseq_type(NULL) in VALUE rb_iseq_type(void *);... yes
+creating Makefile
+
+current directory: /Users/taishoiwamoto/code/ba0404hx/Olumeca/vendor/bundle/ruby/3.2.0/gems/debug-1.5.0/ext/debug
+make DESTDIR\= sitearchdir\=./.gem.20240409-32215-2equnl sitelibdir\=./.gem.20240409-32215-2equnl clean
+
+current directory: /Users/taishoiwamoto/code/ba0404hx/Olumeca/vendor/bundle/ruby/3.2.0/gems/debug-1.5.0/ext/debug
+make DESTDIR\= sitearchdir\=./.gem.20240409-32215-2equnl sitelibdir\=./.gem.20240409-32215-2equnl
+compiling debug.c
+compiling iseq_collector.c
+linking shared-object debug/debug.bundle
+ld: warning: ignoring duplicate libraries: '-lruby.3.2'
+
+current directory: /Users/taishoiwamoto/code/ba0404hx/Olumeca/vendor/bundle/ruby/3.2.0/gems/debug-1.5.0/ext/debug
+make DESTDIR\= sitearchdir\=./.gem.20240409-32215-2equnl sitelibdir\=./.gem.20240409-32215-2equnl install
+/opt/homebrew/opt/coreutils/bin/ginstall -c -m 0755 debug.bundle ./.gem.20240409-32215-2equnl/debug
+
+current directory: /Users/taishoiwamoto/code/ba0404hx/Olumeca/vendor/bundle/ruby/3.2.0/gems/debug-1.5.0/ext/debug
+make DESTDIR\= sitearchdir\=./.gem.20240409-32215-2equnl sitelibdir\=./.gem.20240409-32215-2equnl clean
