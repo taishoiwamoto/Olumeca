@@ -1,0 +1,19 @@
+current directory: /Users/taishoiwamoto/code/ba0404hx/Olumeca/vendor/bundle/ruby/3.2.0/gems/bindex-0.8.1/ext/skiptrace
+/Users/taishoiwamoto/.rvm/rubies/ruby-3.2.2/bin/ruby extconf.rb
+creating Makefile
+
+current directory: /Users/taishoiwamoto/code/ba0404hx/Olumeca/vendor/bundle/ruby/3.2.0/gems/bindex-0.8.1/ext/skiptrace
+make DESTDIR\= sitearchdir\=./.gem.20240409-32215-ta05pz sitelibdir\=./.gem.20240409-32215-ta05pz clean
+
+current directory: /Users/taishoiwamoto/code/ba0404hx/Olumeca/vendor/bundle/ruby/3.2.0/gems/bindex-0.8.1/ext/skiptrace
+make DESTDIR\= sitearchdir\=./.gem.20240409-32215-ta05pz sitelibdir\=./.gem.20240409-32215-ta05pz
+compiling cruby.c
+linking shared-object skiptrace/internal/cruby.bundle
+ld: warning: ignoring duplicate libraries: '-lruby.3.2'
+
+current directory: /Users/taishoiwamoto/code/ba0404hx/Olumeca/vendor/bundle/ruby/3.2.0/gems/bindex-0.8.1/ext/skiptrace
+make DESTDIR\= sitearchdir\=./.gem.20240409-32215-ta05pz sitelibdir\=./.gem.20240409-32215-ta05pz install
+/opt/homebrew/opt/coreutils/bin/ginstall -c -m 0755 cruby.bundle ./.gem.20240409-32215-ta05pz/skiptrace/internal
+
+current directory: /Users/taishoiwamoto/code/ba0404hx/Olumeca/vendor/bundle/ruby/3.2.0/gems/bindex-0.8.1/ext/skiptrace
+make DESTDIR\= sitearchdir\=./.gem.20240409-32215-ta05pz sitelibdir\=./.gem.20240409-32215-ta05pz clean

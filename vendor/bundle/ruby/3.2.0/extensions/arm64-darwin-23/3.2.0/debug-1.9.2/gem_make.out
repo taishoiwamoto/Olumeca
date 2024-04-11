@@ -1,0 +1,20 @@
+current directory: /Users/taishoiwamoto/code/ba0404hx/Olumeca/vendor/bundle/ruby/3.2.0/gems/debug-1.9.2/ext/debug
+/Users/taishoiwamoto/.rvm/rubies/ruby-3.2.2/bin/ruby extconf.rb
+creating Makefile
+
+current directory: /Users/taishoiwamoto/code/ba0404hx/Olumeca/vendor/bundle/ruby/3.2.0/gems/debug-1.9.2/ext/debug
+make DESTDIR\= sitearchdir\=./.gem.20240410-8205-gtrztq sitelibdir\=./.gem.20240410-8205-gtrztq clean
+
+current directory: /Users/taishoiwamoto/code/ba0404hx/Olumeca/vendor/bundle/ruby/3.2.0/gems/debug-1.9.2/ext/debug
+make DESTDIR\= sitearchdir\=./.gem.20240410-8205-gtrztq sitelibdir\=./.gem.20240410-8205-gtrztq
+compiling debug.c
+compiling iseq_collector.c
+linking shared-object debug/debug.bundle
+ld: warning: ignoring duplicate libraries: '-lruby.3.2'
+
+current directory: /Users/taishoiwamoto/code/ba0404hx/Olumeca/vendor/bundle/ruby/3.2.0/gems/debug-1.9.2/ext/debug
+make DESTDIR\= sitearchdir\=./.gem.20240410-8205-gtrztq sitelibdir\=./.gem.20240410-8205-gtrztq install
+/opt/homebrew/opt/coreutils/bin/ginstall -c -m 0755 debug.bundle ./.gem.20240410-8205-gtrztq/debug
+
+current directory: /Users/taishoiwamoto/code/ba0404hx/Olumeca/vendor/bundle/ruby/3.2.0/gems/debug-1.9.2/ext/debug
+make DESTDIR\= sitearchdir\=./.gem.20240410-8205-gtrztq sitelibdir\=./.gem.20240410-8205-gtrztq clean
