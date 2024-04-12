@@ -3,8 +3,8 @@
 class Users::SessionsController < Devise::SessionsController
   def create
     if verify_recaptcha
-      redirect_to root_path
-      #super
+      #redirect_to root_path
+      super
       #render :edit
     else
       self.resource = resource_class.new(sign_in_params)
