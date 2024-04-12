@@ -3,6 +3,13 @@ class ServicesController < ApplicationController
   before_action :set_service, only: %i[edit update destroy]
 
   def index
+    #元々preload(:user)だったものをpreload(:reviews)に変更済み
+    #serviceの配列からreviewを取るコードになっているので、正しくはController側で以下のように実装するとN+1を回避できる
+    #https://zenn.dev/gottsu/articles/914d45332450a3
+    #https://github.com/taishoiwamoto/Olumeca/blob/85e8220a2683d08699ab638fffef6e72be620079/app/views/services/_services.html.erb#L16
+    #rails sでサーバーを起動したとき、そのコンソールに色々と文字が出力される。
+    #ここはサーバーの稼働ログが出力される場所で、そこにSQLのログも出力されます。
+    #それを見て、N+1が修正されたかどうかが判断できる
     @services = Service.active.preload(:reviews).order(created_at: :desc).page(params[:page]).per(30)
   end
 
