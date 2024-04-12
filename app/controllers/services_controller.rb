@@ -3,7 +3,7 @@ class ServicesController < ApplicationController
   before_action :set_service, only: %i[edit update destroy]
 
   def index
-    @services = Service.active.preload(:user).order(created_at: :desc).page(params[:page]).per(30)
+    @services = Service.active.preload(:reviews).order(created_at: :desc).page(params[:page]).per(30)
   end
 
   def show
