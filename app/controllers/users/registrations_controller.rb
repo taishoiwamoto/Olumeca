@@ -1,11 +1,15 @@
 # frozen_string_literal: true
 
 class Users::RegistrationsController < Devise::RegistrationsController
+  # 新規登録時に特定のパラメータを許可するための設定
   before_action :configure_sign_up_params, only: [:create]
+  # アカウント更新時に特定のパラメータを許可するための設定
   before_action :configure_account_update_params, only: [:update]
+  # 新規登録時にメールアドレスの重複チェックを行う
   before_action :check_email_uniqueness, only: [:create]
 
   # DELETE /resource
+  # ユーザーのアカウントを論理削除し、セッションを終了させる
   def destroy
     resource.soft_delete
 
@@ -15,14 +19,17 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   protected
 
+  # アカウント更新後のリダイレクト先
   def after_update_path_for(resource)
     user_path(current_user)
   end
 
+  # サインアップ時に追加で許可するパラメータを設定
   #def configure_sign_up_params
   #  devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :phone_number, :image])
   #end
 
+  # アカウント更新時に追加で許可するパラメータを設定
   def configure_account_update_params
     devise_parameter_sanitizer.permit(:account_update, keys: [:name, :phone_number, :image])
   end
@@ -59,21 +66,24 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # protected
 
-  # If you have extra params to permit, append them to the sanitizer.
+  # 許可する追加のパラメータがある場合は、サニタイザーに追加する。
   def configure_sign_up_params
     devise_parameter_sanitizer.permit(:sign_up, keys: [:agreement, :name, :phone_number, :email, :password, :password_confirmation])
   end
 
+  # メールアドレスの重複チェックを行うメソッド
   def check_email_uniqueness
     if User.email_taken?(params[:user][:email])
       existing_user = User.find_by(email: params[:user][:email])
       if existing_user.deleted_at.nil?
         # Email is in use by an active account
+        # アクティブなアカウントでメールアドレスが使用されている場合
         flash[:error] = "This email is already registered. If you forgot your password, you can reset it."
       else
         # Email is in use by an inactive account, allow the registration.
-        bypass_sign_in(existing_user) # Bypass Devise's sign-in
-        existing_user.update(deleted_at: nil) # Activate the existing user
+        # 非アクティブなアカウントでメールアドレスが使用されている場合、登録を許可
+        bypass_sign_in(existing_user) # Deviseのサインインをバイパス
+        existing_user.update(deleted_at: nil) # 既存のユーザーをアクティブにする
         redirect_to new_user_session_path
       end
     end

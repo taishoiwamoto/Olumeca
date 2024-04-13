@@ -1,12 +1,15 @@
 # frozen_string_literal: true
 
 class Users::SessionsController < Devise::SessionsController
+  # サインイン作成時のアクションをオーバーライド
   def create
     if verify_recaptcha
       #redirect_to root_path
+      # reCAPTCHA認証が成功した場合、Deviseのデフォルトのサインイン処理を実行
       super
       #render :edit
     else
+      # reCAPTCHA認証が失敗した場合、サインインページにリダイレクトしエラーメッセージを表示
       self.resource = resource_class.new(sign_in_params)
       flash.now[:alert] = 'Recaptcha verification failed'
       render :new

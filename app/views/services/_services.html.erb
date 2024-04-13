@@ -1,17 +1,26 @@
 <div id='services'>
+  <!-- サービスが存在するかどうかを確認 -->
   <% if services.any? %>
+    <!-- カードを格納するコンテナ -->
     <div class="cards-container">
+      <!-- 各サービスに対して繰り返し処理 -->
       <% @services.each do |service| %>
+        <!-- サービス詳細ページへのリンク -->
         <%= link_to service_path(service) do %>
           <div class="card">
+            <!-- サービス画像があれば表示、なければデフォルト画像を表示 -->
             <% if service.image.attached? %>
               <%= image_tag(service.image, class: "card-img-top", alt: "...") %>
             <% else %>
               <%= image_tag('default_service.jpg', class: "card-img-top", alt: "...") %>
             <% end %>
+            <!-- カードの本文部分 -->
             <div class="card-body">
+              <!-- サービスタイトル（30文字に省略） -->
               <p class="card-title"><%= service.title.truncate(30) %></p>
+              <!-- サービス提供者の名前 -->
               <p class="card-text"><%= service.user.name %></p>
+              <!-- サービスの評価を表示（存在する場合） -->
               <div class="star">
                 <% reviews = service.reviews %>
                 <% if reviews.present? %>
@@ -26,8 +35,10 @@
         <% end %>
       <% end %>
     </div>
+    <!-- サービス一覧のページネーション -->
     <%= paginate services %>
   <% else %>
+    <!-- サービスが一つもない場合のメッセージ -->
     <p>No se encontraron servicios.</p>
   <% end %>
 </div>

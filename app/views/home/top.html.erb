@@ -1,20 +1,25 @@
 <div class="top-main">
+  <!-- メインビジュアルセクション：サイトのメインメッセージとアクションコールを提示 -->
   <div class="top-mainVisual">
     <div class="top-mainVisual__container">
       <div class="left">
-        <div class="top-message">
+       <!-- メインメッセージ表示エリア -->
+       <div class="top-message">
           <h1>Mercado de servicios con varios profesionales!</h1>
         </div>
         <p>Es posible comprar y vender habilidades, conocimientos y experiencias.</p>
+        <!-- 登録促進ボタン -->
         <div class="d-grid gap-2 col-10 mt-5">
           <%= link_to "Registrar", new_user_registration_path, class: "btn btn-primary btn-lg" %>
         </div>
       </div>
+      <!-- 右側のビジュアル画像 -->
       <div class="right">
         <%= image_tag 'top-mainVisual.jpg', alt: 'Es posible comprar y vender habilidades y servicios.', class: 'normal-size-image' %>
       </div>
     </div>
   </div>
+  <!-- サービスについての詳細情報セクション -->
   <div class="top-main-about-service">
     <div class="inner noflex">
       <h2 class="top-title">Las razones por las que Olumeca ha sido elegido</h2>
@@ -39,27 +44,39 @@
   </div>
   <div class="top-newServices">
     <h2 class="top-title">Servicios Nuevos</h2>
+    <!-- サービスが存在しない場合の処理 -->
     <% if @services.empty? %>
       <p class="text-center">No hay servicios disponibles</p>
     <% else %>
+      <!-- サービスが存在する場合、カードコンテナを表示 -->
       <div class="cards-container">
+        <!-- 各サービスに対して繰り返し処理 -->
         <% @services.each do |service| %>
+          <!-- サービスの詳細ページへのリンク -->
           <%= link_to service_path(service) do %>
+            <!-- サービス情報を表示するカード -->
             <div class="card">
+              <!-- サービス画像があるかどうかの条件分岐 -->
               <% if service.image.attached? %>
+                <!-- 画像が存在する場合、その画像を表示 -->
                 <%= image_tag(service.image, class: "card-img-top", alt: "...") %>
               <% else %>
+                <!-- 画像がない場合、デフォルト画像を表示 -->
                 <%= image_tag('default_service.jpg', class: "card-img-top", alt: "...") %>
               <% end %>
               <div class="card-body">
+                <!-- サービスタイトル、最大30文字で省略表示 -->
                 <p class="card-title"><%= service.title.truncate(30) %></p>
+                <!-- サービス提供者の名前を表示 -->
                 <p class="card-text"><%= service.user.name %></p>
+                <!-- レビューの平均評価を表示 -->
                 <div class="star">
                   <% reviews = service.reviews %>
                   <% if reviews.present? %>
                     <% average_rating = service.average_rating %>
                     <%= "⭐️" %> <%= sprintf('%.2f', average_rating) %>
                   <% else %>
+                    <!-- レビューがない場合は「--」を表示 -->
                     --
                   <% end %>
                 </div>

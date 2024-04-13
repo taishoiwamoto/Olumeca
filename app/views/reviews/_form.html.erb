@@ -1,3 +1,5 @@
+<!-- form_with:で、model: review は、フォームが Review モデルに関連していることを示します。これにより、フォームのフィールドが Review モデルの属性と自動的に紐付けられます。 -->
+<!-- url: [service, review] は、フォームが送信されたときにデータが送られるルート（URL）を指定します。この設定は、ネストされたリソース（サービスに対するレビュー）に対応しています。 -->
 <%= form_with(model: review, url: [service, review], html: { class: 'needs-validation' }) do |form| %>
   <% if review.errors.any? %>
     <div class="mb-3">
@@ -8,14 +10,20 @@
       <% end %>
     </div>
   <% end %>
+
+  <!-- 評価 (Rating) の入力部分 -->
   <div class="mb-3">
     <%= form.label :rating, 'Evaluación', class: 'form-label' %>
+    <!-- ユーザーがレビューの評価を選択できるドロップダウンメニューです。
+    options_for_selectヘルパーは選択肢を動的に生成し、必要に応じて現在の評価を事前選択します。 -->
     <% if review.rating.present? %>
       <%= form.select :rating, options_for_select(review_select_options, selected: review.rating), { include_blank: 'Seleccione un valor numérico' }, class: 'form-select', required: true %>
     <% else %>
       <%= form.select :rating, options_for_select(review_select_options), {include_blank: 'Seleccione un valor numérico'}, class: 'form-select',required: true %>
     <% end %>
   </div>
+  
+  <!-- コメント (Comment) の入力部分 -->
   <div class="mb-3">
     <%= form.label :comment, 'Comentario', class: 'form-label' %>
     <%= form.text_area :comment, class: 'form-control' %>

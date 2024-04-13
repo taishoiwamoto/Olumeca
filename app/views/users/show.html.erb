@@ -1,22 +1,28 @@
 <div class="main">
   <div class="container">
+    <!-- 現在のユーザーがプロファイルの所有者である場合にのみ表示されるアカウント編集リンク -->
     <div class="user-show-container">
       <% if @user == current_user %>
         <div class="d-flex justify-content-end align-items-right p-3 mb-0">
           <%= link_to "Editar tu cuenta", edit_user_registration_path, class: "btn btn-primary btn-sm" %>
         </div>
       <% end %>
+      <!-- ユーザー情報の表示エリア -->
       <div class="user p-3 mt-0">
         <div class="row align-items-center flex-column flex-md-row">
           <div class="col-12 col-md-auto text-center text-md-start mb-3 mb-md-0">
+            <!-- ユーザー画像の表示（添付されている場合） -->
             <% if @user.image.attached? %>
               <%= image_tag(@user.image, class: "img-fluid rounded-circle", alt: @user.name) %>
             <% else %>
+              <!-- 標準のプレースホルダー画像 -->
               <%= image_tag('default_user.jpg', class: "img-fluid rounded-circle", alt: "Default user image") %>
             <% end %>
           </div>
           <div class="col text-center text-md-start">
+            <!-- ユーザー名の表示 -->
             <h1 class="main-title"><%= @user.name %></h1>
+            <!-- ユーザーの平均サービス評価 -->
             <% average_rating = @user.average_service_rating %>
             <% if average_rating > 0 %>
               <div class="average-rating">
@@ -28,8 +34,10 @@
           </div>
         </div>
       </div>
+      <!-- 提供サービスセクションのタイトル -->
       <h2 class="sub-title mt-5 mb-4">Servicios</h2>
       <div class="row">
+        <!-- 提供サービスの一覧表示 -->
         <% if @services.any? %>
           <% @services.each do |service| %>
             <div class="col-lg-6">
@@ -37,6 +45,7 @@
                 <div class="card mb-4 bg-white full-width">
                   <div class="row g-1">
                     <div class="col-3 d-none d-md-flex align-items-center justify-content-center">
+                      <!-- サービス画像の表示 -->
                       <% if service.image.attached? %>
                         <div class="mediam-image-container">
                           <%= image_tag service.image, class: "img-fluid rounded-start mediam-image", alt: service.title %>
@@ -49,7 +58,9 @@
                     </div>
                     <div class="col-8">
                       <div class="card-body">
+                        <!-- サービスタイトルの表示 -->
                         <p class="card-title"><%= service.title.truncate(15) %></p>
+                        <!-- サービス評価の表示 -->
                         <div class="star">
                           <% if @reviews.present? %>
                             <% average_rating = service.average_rating %>
@@ -66,17 +77,21 @@
             </div>
           <% end %>
         <% else %>
+          <!-- サービスがない場合のメッセージ -->
           <p>No hay servicios.</p>
         <% end %>
       </div>
+      <!-- ユーザー評価セクションのタイトル -->
       <h2 class="sub-title mt-5 mb-4">Evaluación</h2>
       <div class="row">
+        <!-- ユーザーによる評価の一覧 -->
         <% if @reviews.any? %>
           <% @reviews.each do |review| %>
             <div class="col-12 mb-4">
               <div class="card full-width">
                 <div class="card-body">
                   <div class="flex-grow-1">
+                    <!-- 評価されたサービスの情報 -->
                     <p class="card-title">
                       <% if review&.service.deleted? %>
                         Servicio: Eliminado
@@ -85,6 +100,7 @@
                       <% end %>
                     </p>
                     <div class="d-flex align-items-center mt-2">
+                      <!-- レビュアーの画像 -->
                       <% if review.user.deleted? %>
                         <%= image_tag('default_user.jpg', class: "rounded-circle mr-3 small-image", alt: "Default user image") %>
                       <% elsif review.user.image.attached? %>
@@ -92,10 +108,12 @@
                       <% else %>
                         <%= image_tag('default_user.jpg', class: "rounded-circle mr-3 small-image", alt: "Default user image") %>
                       <% end %>
+                      <!-- レビューの評価 -->
                       <% if review.rating.present? %>
                         <div class="ms-2"><%= "⭐️" * review.rating %></div>
                       <% end %>
                     </div>
+                    <!-- レビュアー情報と評価内容 -->
                     <% if review.user.deleted? %>
                       <p class="font-weight-bold mt-2 mb-0">Comprador/a: Dado de baja</p>
                     <% else %>
@@ -112,9 +130,11 @@
             </div>
           <% end %>
         <% else %>
+          <!-- 評価がない場合のメッセージ -->
           <p>No hay evaluaciones.</p>
         <% end %>
       </div>
+      <!-- 評価のページネーション -->
       <%= paginate @reviews %>
     </div>
   </div>

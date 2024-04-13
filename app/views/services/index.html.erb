@@ -1,17 +1,35 @@
 <div class="main">
   <div class="container">
     <h1 class="mb-4">Servicios</h1>
+    <!-- フォームの設定 -->
+    <!-- form_with:
+    url: filter_services_path はフォームが送信される先のパスを指定しています。このURLはおそらくサーバー側で設定されたルートに対応しており、フォームのデータを処理するアクションを指します。
+    method: :post はフォームデータをサーバーに送信するHTTPメソッドを指定しており、この場合はPOSTメソッドです。
+    class: "g-3" はBootstrapのグリッドシステムのクラスであり、適切なギャップを提供します。 -->
     <%= form_with(url: filter_services_path, method: :post, class: "g-3") do |f| %>
       <div class="col-12 col-md-6">
+        <!-- カテゴリ選択ドロップダウン -->
+        <!-- form_with:
+        f.select :category_id でカテゴリの選択ドロップダウンを生成しています。options_for_select(Category.all.map{|category| [category.name, category.id]}) はすべてのカテゴリをデータベースから取得し、選択肢として表示しています。
+        { prompt: 'Todas categorías' } はデフォルトの選択肢として「すべてのカテゴリ」と表示させるためのオプションです。-->
         <%= f.select :category_id, options_for_select(Category.all.map{|category| [category.name, category.id]}), { prompt: 'Todas categorías' }, class: "form-select" %>
       </div>
+      <!-- キーワード入力フィールド -->
+      <!-- f.text_field :keyword はユーザーがキーワードを入力できるテキストフィールドを提供します。
+      placeholder: "Palabra clave" でフィールド内に灰色のプレースホルダーテキストを表示します。 -->
       <div class="col-12 col-md-4 mt-3">
         <%= f.text_field :keyword, placeholder: "Palabra clave", class: "form-control" %>
       </div>
+      <!-- 検索ボタン -->
+      <!-- f.submit 'Buscar' でフォームのデータを送信するためのボタンを生成しています。
+      class: 'btn btn-primary w-100' でボタンを全幅で表示し、プライマリスタイルを適用しています。 -->
       <div class="col-12 col-md-2 mt-3">
         <%= f.submit 'Buscar', class: 'btn btn-primary w-100' %>
       </div>
     <% end %>
+    <!-- サービスの表示部分 -->
+    <!-- <%= render 'services', services: @services %> はservicesパーシャルをレンダリングしており、
+    @services変数に格納されたサービスのリストを表示します。これにより、検索結果が動的にページ上に表示されます。 -->
     <div class="mt-4">
       <%= render 'services' , services: @services %>
     </div>

@@ -1,25 +1,35 @@
 <div class="main">
   <div class="container">
+    <!-- ページのタイトルを中央揃えで表示 -->
     <h1 class="text-center">Favoritos</h1>
     <div class="cards-container">
+     <!-- お気に入りサービスがあるかどうかを確認 -->
       <% if @services.any? %>
+        <!-- お気に入りサービスを一つずつ表示 -->
         <% @services.each do |service| %>
+          <!-- サービス詳細ページへのリンク -->
           <%= link_to service_path(service.id) do %>
             <div class="card">
+              <!-- サービス画像が添付されているかどうかを確認し、添付されていればその画像を表示 -->
               <% if service.image.attached? %>
                 <%= image_tag(service.image, class: "card-img-top", alt: "...") %>
               <% else %>
+                <!-- 画像が添付されていなければデフォルト画像を表示 -->
                 <%= image_tag('default_service.jpg', class: "card-img-top", alt: "...") %>
               <% end %>
               <div class="card-body">
+                <!-- サービスのタイトルを表示（30文字に省略） -->
                 <p class="card-title"><%= service.title.truncate(30) %></p>
+                <!-- サービス提供者の名前を表示 -->
                 <p class="card-text"><%= service.user.name %></p>
+                <!-- レビューがあれば平均評価を星と数値で表示 -->
                 <div class="star">
                   <% reviews = service.reviews %>
                   <% if reviews.present? %>
                     <% average_rating = service.average_rating %>
                     <%= "⭐️" %> <%= sprintf('%.2f', average_rating) %>
                   <% else %>
+                    <!-- レビューがなければ評価なしと表示 -->
                     --
                   <% end %>
                 </div>
@@ -27,8 +37,10 @@
             </div>
           <% end %>
         <% end %>
+        <!-- お気に入りサービスのページネーションを表示 -->
         <%= paginate @services %>
       <% else %>
+        <!-- お気に入りサービスがない場合のメッセージ -->
         <p>No tienes servicios favoritos.</p>
       <% end %>
     </div>

@@ -4,7 +4,9 @@
     <title>La página que estabas buscando no existe (404)</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta charset="UTF-8">
+    <!-- スタイル定義: エラーページ全体のスタイルをここで設定しています。 -->
     <style>
+        /* エラーページの全体的なデザインを設定 */
         .rails-default-error-page {
             background-color: #f5f8fa;
             color: #2E2F30;
@@ -17,6 +19,7 @@
             height: 80vh;
         }
 
+        /* ダイアログボックスのスタイル */
         .dialog {
           text-align: center;
           background-color: white;
@@ -28,7 +31,8 @@
           box-sizing: border-box; /* paddingを含めてwidthやmax-widthを計算するようにします */
       }
 
-        .footer {
+      /* フッターは非表示に */  
+      .footer {
           display: none;
         }
 
@@ -50,6 +54,7 @@
             text-decoration: underline;
         }
 
+        /* WhatsAppボタンのスタイル */
         .whatsapp-button {
         margin-top: 30px;
         margin-bottom: 30px;
@@ -66,6 +71,7 @@
         transition: background-color 0.3s;
     }
 
+        /* WhatsAppボタンホバー時の背景色変更 */
         .whatsapp-button:hover {
           background-color: #128C53;
         }
@@ -74,14 +80,19 @@
 </head>
 <body class="rails-default-error-page">
     <div class="dialog">
+        <!-- ページのタイトルとして404エラーを説明する見出し -->
         <h1>La página que estabas buscando no existe.</h1>
+        <!-- エラーコードの明示 -->
         <p>Código de error: 404</p>
+        <!-- ユーザーに代替のリンクを提案するテキスト -->
         <p>Aquí tienes algunos enlaces útiles en su lugar:</p>
+        <!-- 代替のリンクをリスト表示 -->
         <ul>
             <li><a href="/">Página Principal</a></li>
             <li><a href="/services">Servicios</a></li>
             <li><a href="https://miraie-mexico.com/%e4%bc%9a%e7%a4%be%e6%a6%82%e8%a6%81/">Sobre Nosotros</a></li>
         </ul>
+        <!-- WhatsAppでの連絡を促すボタン -->
         <a href="https://wa.me/4423831033" target="_blank" class="whatsapp-button">
           <i class="fab fa-whatsapp"></i> Contactar por WhatsApp
       </a>

@@ -1,8 +1,11 @@
+<!-- 評価（レビュー）フォームを更新するためのビューファイルの一部 -->
 <div class="main">
   <div class="form-container">
     <h1 class="ms-2 me-2">Editar evaluación</h1>
     <div class="form">
       <div class="form-body">
+        <!-- パーシャル 'form' をレンダリング：_form.html.erb ファイルから読み込みます -->
+        <!-- このパーシャルには、レビューオブジェクトとサービスオブジェクトをローカル変数として渡します -->
         <%= render 'form', { review: @review, service: @service } %>
       </div>
     </div>

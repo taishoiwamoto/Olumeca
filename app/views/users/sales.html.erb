@@ -1,7 +1,9 @@
 <div class="main">
   <div class="table-container">
+    <!-- サービス名 -->
     <h1>Pedidos recibidos</h1>
     <div class="table-responsive">
+      <!-- テーブルの形式で注文情報を表示 -->
       <table class="table table-hover">
         <thead>
           <tr>
@@ -16,7 +18,9 @@
         <tbody>
           <% @sales.each do |sale| %>
             <tr>
+              <!-- 注文の作成日 -->
               <td><%= sale.created_at.strftime("%d/%m/%Y") %></td>
+              <!-- 注文の現在の状態を表示、色分けされたボタンで状態を示す -->
               <td>
                 <% case sale.status %>
                 <% when 'pending' %>
@@ -27,16 +31,19 @@
                 <%= button_tag get_order_status(sale.status), class: "btn btn-danger btn-sm", disabled: true %>
               <% end %>
             </td>
+            <!-- 受け取った注文に対する行動オプション -->
             <td>
               <% if sale.buyer.deleted? || sale.accepted? || sale.rejected? %>
                 N/A
               <% elsif sale.pending? %>
+                <!-- 注文を承認または拒否するアクションボタン -->
                 <div class="flex-container">
                   <%= button_to "Aceptar", accept_order_path(sale), method: :put, class: "btn btn-primary btn-sm me-2" %>
                   <%= button_to "Rechazar", reject_order_path(sale), method: :put, class: "btn btn-danger btn-sm" %>
                 </div>
               <% end %>
             </td>
+            <!-- 購入者の連絡情報 -->
             <td>
               <% if sale.buyer.deleted? || sale.pending? || sale.rejected? %>
                 N/A
@@ -49,6 +56,7 @@
                 </div>
               <% end %>
             </td>
+            <!-- 購入者の名前、リンク付き -->
             <td>
               <% if sale.buyer.deleted? %>
                 Dado de baja
@@ -56,6 +64,7 @@
                 <%= link_to sale.buyer.name, user_path(sale.buyer), class: "link-text" %>
               <% end %>
             </td>
+            <!-- 提供されたサービスの名前、リンク付き -->
             <td>
               <% if sale.service.deleted? %>
                 Eliminado
@@ -68,6 +77,7 @@
       </tbody>
     </table>
   </div>
+  <!-- ページネーション -->
   <%= paginate @sales %>
 </div>
 </div>
