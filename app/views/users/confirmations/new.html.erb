@@ -1,19 +1,28 @@
 <div class="main users-edit">
+  <!-- ユーザー設定やプロファイル編集ページのメインコンテナ -->
   <div class="form-container">
+    <!-- ページの主要なタイトル -->
     <h1 class="ms-2 me-2">Change your password</h1>
     <div class="form">
       <div class="form-body">
+        <!-- このセクションのタイトル -->
         <h2>Resend confirmation instructions</h2>
+        <!-- フォームの定義、特定のリソース（ユーザー）に基づいている -->
         <%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
+          <!-- エラーメッセージを表示する部分テンプレートを呼び出す -->
           <%= render "users/shared/error_messages", resource: resource %>
           <div class="field">
+            <!-- メールアドレス入力フィールドのラベル -->
             <%= f.label :email %><br />
+            <!-- メールアドレス入力フィールド、自動補完と初期値設定を含む -->
             <%= f.email_field :email, autofocus: true, autocomplete: "email", value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email) %>
           </div>
           <div class="actions">
+            <!-- フォームの送信ボタン -->
             <%= f.submit "Resend confirmation instructions" %>
           </div>
         <% end %>
+        <!-- ユーザー関連の追加リンクを表示する部分テンプレート -->
         <%= render "users/shared/links" %>
       </div>
     </div>

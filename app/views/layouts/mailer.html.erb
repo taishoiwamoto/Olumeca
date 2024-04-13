@@ -1,12 +1,17 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <!-- メールのContent-Typeと文字コードを設定 -->
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <style>
+      /* スタイル定義：メールではインラインスタイルが必要です */
+      /* ここに具体的なインラインスタイルを記述して、メールの見た目を整えます */
       /* Email styles need to be inline */
     </style>
   </head>
   <body>
+    <!-- この部分で、メールの具体的な内容を挿入します。 -->
+    <!-- yield は、このテンプレートを継承する個々のメールビューからのコンテンツを表示する場所です -->
     <%= yield %>
   </body>
 </html>

@@ -1,8 +1,10 @@
 <div class="main">
   <div class="table-container">
+    <!-- ページのタイトル -->
     <h1>Pedidos realizados</h1>
     <div class="table-responsive">
       <table class="table table-hover">
+        <!-- テーブルのヘッダー -->
         <thead>
           <tr>
             <th scope="col">Fecha</th>
@@ -13,10 +15,13 @@
             <th scope="col">Servicio</th>
           </tr>
         </thead>
+        <!-- テーブルのボディ -->
         <tbody>
           <% @orders.each do |order| %>
             <tr>
+              <!-- 注文日 -->
               <td><%= order.created_at.strftime("%d/%m/%Y") %></td>
+              <!-- 注文の状態 -->
               <td>
                 <% case order.status %>
                 <% when 'pending' %>
@@ -27,6 +32,7 @@
                 <%= button_tag get_order_status(order.status), class: "btn btn-danger btn-sm", disabled: true %>
               <% end %>
             </td>
+            <!-- 評価リンク -->
             <td>
               <% if order.seller.deleted? %>
                 N/A
@@ -39,6 +45,7 @@
                 <% end %>
               <% end %>
             </td>
+            <!-- 追加情報 -->
             <td>
               <% if order.seller.deleted? || order.pending? || order.rejected? %>
                 N/A
@@ -51,6 +58,7 @@
                 </div>
               <% end %>
             </td>
+            <!-- 販売者情報 -->
             <td>
               <% if order.service.user.deleted? %>
                 Dado de baja
@@ -58,6 +66,7 @@
                 <%= link_to order.service.user.name, user_path(order.seller), class: "link-text" %>
               <% end %>
             </td>
+            <!-- サービス名 -->
             <td>
               <% if order.service.user.deleted? || order.service.deleted? %>
                 Eliminado
@@ -70,6 +79,7 @@
       </tbody>
     </table>
   </div>
+  <!-- ページネーション -->
   <%= paginate @orders %>
 </div>
 </div>
