@@ -14,6 +14,7 @@ class LikesController < ApplicationController
     end
 
     # 現在のユーザーで、サービスIDを使用していいねを作成
+    # service_id は、Like モデル内の外部キーであり、どのサービスが「いいね」されたかを示します。
     @like = current_user.likes.create(service_id: service.id)
 
     # サービスの詳細ページにリダイレクト
@@ -23,6 +24,9 @@ class LikesController < ApplicationController
   # いいねを削除するアクション
   def destroy
     # 現在のユーザーIDとサービスIDでLikeオブジェクトを検索し、存在しない場合は例外を投げる
+    # Like.find_by! メソッドは、指定された条件でデータベース内の likes テーブルを検索し、条件に合致する最初のレコードを返します。
+    # 感嘆符 ! がついているバージョンを使用すると、条件に合致するレコードが一つも見つからない場合に ActiveRecord::RecordNotFound 例外が発生します。
+    # これにより、アプリケーションは特定のフローを中断させるか、エラーページにリダイレクトさせることができます。
     @like = Like.find_by!(user_id: current_user.id, service_id: params[:service_id])
 
     # いいねを削除

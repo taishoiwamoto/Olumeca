@@ -36,12 +36,14 @@
           <!-- カテゴリ選択ドロップダウン -->
           <div class="mb-3">
             <%= f.label :category_id, class: 'form-label' %>
+            <%# カテゴリの選択フィールドを生成します。選択オプションはCategoryモデルから取得し、現在のサービスのカテゴリIDをデフォルト値として設定します。%>
             <%= f.select :category_id, options_for_select(Category.all.map{|category| [category.name, category.id]}, @service.category_id), { include_blank: 'Por favor, elija de la siguiente lista' }, { class: 'form-select', required: @service.category_id.nil? } %>
             <div class="invalid-feedback">Por favor, selecciona una categoría.</div>
           </div>
           <!-- 詳細テキストエリア -->
           <div class="mb-3">
             <%= f.label :detail, 'Detalle', class: 'form-label' %>
+            <%# サービスの詳細を入力するためのテキストエリアをフォームに生成します。 %>
             <%= f.text_area :detail, value: @service.detail, class: 'form-control', required: true, rows: 5 %>
             <div class="invalid-feedback">Por favor, proporciona un detalle.</div>
           </div>
