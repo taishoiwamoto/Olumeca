@@ -3,7 +3,7 @@
     <h1 class="mb-4">Servicios</h1>
     <!-- フォームの設定 -->
     <!-- form_with:
-    url: filter_services_path はフォームが送信される先のパスを指定しています。このURLはおそらくサーバー側で設定されたルートに対応しており、フォームのデータを処理するアクションを指します。
+    url: filter_services_path はフォームが送信される先のパスを指定しています。このURLはサーバー側で設定されたルートに対応しており、フォームのデータを処理するアクションを指します。
     method: :post はフォームデータをサーバーに送信するHTTPメソッドを指定しており、この場合はPOSTメソッドです。
     class: "g-3" はBootstrapのグリッドシステムのクラスであり、適切なギャップを提供します。 -->
     <%= form_with(url: filter_services_path, method: :post, class: "g-3") do |f| %>

@@ -3,6 +3,7 @@
 <%= form_with(model: review, url: [service, review], html: { class: 'needs-validation' }) do |form| %>
   <% if review.errors.any? %>
     <div class="mb-3">
+      <!-- review.errors.full_messages は、全てのエラーメッセージを人が読める形式で返します。 -->
       <% review.errors.full_messages.each do |message| %>
         <div class="form-error">
           <%= message %>
@@ -17,8 +18,10 @@
     <!-- ユーザーがレビューの評価を選択できるドロップダウンメニューです。
     options_for_selectヘルパーは選択肢を動的に生成し、必要に応じて現在の評価を事前選択します。 -->
     <% if review.rating.present? %>
+      <%# form.selectを使用して、ratingのためのドロップダウンメニューを生成します。%>
       <%= form.select :rating, options_for_select(review_select_options, selected: review.rating), { include_blank: 'Seleccione un valor numérico' }, class: 'form-select', required: true %>
     <% else %>
+      <%# ratingが未設定の場合、選択肢にデフォルト値が選択されていない状態でドロップダウンメニューを生成します。%>
       <%= form.select :rating, options_for_select(review_select_options), {include_blank: 'Seleccione un valor numérico'}, class: 'form-select',required: true %>
     <% end %>
   </div>

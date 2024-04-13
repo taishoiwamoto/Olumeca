@@ -17,6 +17,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
     redirect_to root_path, notice: 'La cuenta de usuario fue cancelada'
   end
 
+  # protected キーワードによって定義されたメソッドは、同じクラスまたはそのサブクラスのインスタンスからのみアクセス可能です。
+  # これは、クラス外部からは直接呼び出すことができないことを意味します。
   protected
 
   # アカウント更新後のリダイレクト先
@@ -68,6 +70,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # 許可する追加のパラメータがある場合は、サニタイザーに追加する。
   def configure_sign_up_params
+    # :sign_up は、Devise で使用されるアクション
     devise_parameter_sanitizer.permit(:sign_up, keys: [:agreement, :name, :phone_number, :email, :password, :password_confirmation])
   end
 

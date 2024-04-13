@@ -29,7 +29,7 @@ Rails.application.routes.draw do
   # ユーザー関連のルート、限定的なリソースのみ使用
   # ユーザーリソースの中でeditアクションとshowアクションに対するルートのみを生成する
   resources :users, only: [:edit, :show] do
-    # memberブロック内では、特定のユーザー（つまり、特定のIDを持つユーザー）に関連する追加のアクションのルートを定義しています。
+    # memberブロック内では、特定のユーザーに関連する追加のアクションのルートを定義しています。
     member do
       # get :likes：各ユーザーの「いいね！」リストを表示するためのページへのルート
       get :likes
