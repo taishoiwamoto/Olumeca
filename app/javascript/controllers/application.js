@@ -1,4 +1,5 @@
 // "@hotwired/stimulus"からApplicationクラスをインポートします。
+// Stimulusは、Basecamp社によって開発されたJavaScriptフレームワークです。このフレームワークは、既存のHTMLに対して行動を追加することに焦点を当てており、特にRailsアプリケーションと組み合わせて使われることが多いですが、任意のWebプロジェクトで使用することが可能です。
 import { Application } from "@hotwired/stimulus"
 
 // Stimulusアプリケーションのインスタンスを作成し、アプリケーションを開始します。
