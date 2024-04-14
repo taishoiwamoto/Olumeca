@@ -8,6 +8,7 @@
           <div class="flex-end">
             <% if current_user && @service.user_id == current_user.id %>
               <!-- 編集ボタン -->
+              <!-- GET メソッド　編集フォームをユーザーに表示するため -->
               <%= button_to edit_service_path(@service), method: :get, class: "btn btn-primary btn-sm me-2" do %>
                 <i class="fa-solid fa-pen-to-square"></i> Editar
               <% end %>
@@ -46,6 +47,8 @@
             </div>
           </div>
           <!-- カテゴリ表示 -->
+          <!-- @service.category&.name: ここでは、@service インスタンスの category という関連オブジェクトの name 属性にアクセスしています。&. はセーフナビゲーション演算子と呼ばれ、category が nil である場合に NoMethodError を防ぐために使われます。つまり、category が存在しない場合には、name メソッドを呼び出すことなく nil を返します。 -->
+          <!-- || "": これは、左辺の式が nil または false を返した場合に右辺の値（この場合は空文字列 ""）を返すOR演算子です。つまり、@service.category が nil または @service.category.name が nil の場合には、空文字列を出力します。 -->
           <div class="mb-1"><%= @service.category&.name || "" %></div>
           <!-- サービス画像 -->
           <div class="service-image">
@@ -56,6 +59,8 @@
             <% end %>
           </div>
           <!-- サービス詳細説明 -->
+          <!-- h(@service.detail): h は HTML エスケープヘルパーです。これは、@service.detail に含まれる文字列を安全にHTMLに表示するために使われます。つまり、HTMLに影響を与える可能性のある文字（例えば <, >, & など）をエスケープし、安全な文字列としてブラウザに表示するための処理を行います。これにより、クロスサイトスクリプティング（XSS）攻撃などのセキュリティリスクを防ぎます。 -->
+          <!-- simple_format(text): このヘルパーメソッドは、テキストをより読みやすい形式のHTMLに変換します。具体的には、改行文字（\n）を <br> タグに変換し、段落として整形するためにテキストを <p> タグで囲みます。simple_format は引数として渡されたテキストを受け取り、改行ごとに段落を作成します。 -->
           <p><%= simple_format(h(@service.detail)) %></p>
         </div>
         <!-- サービス注文リンク -->
@@ -98,6 +103,7 @@
                         <div class>Actualización: <%= review.updated_at.strftime("%d/%m/%Y %H:%M") %></div>
                       </div>
                       <!-- レビューコメント -->
+                      <!-- h(review.comment): h は HTML エスケープヘルパーです。これは、@review.comment に含まれる文字列を安全にHTMLに表示するために使われます。つまり、HTMLに影響を与える可能性のある文字（例えば <, >, & など）をエスケープし、安全な文字列としてブラウザに表示するための処理を行います。これにより、クロスサイトスクリプティング（XSS）攻撃などのセキュリティリスクを防ぎます。 -->
                       <p><%= simple_format(h(review.comment)) %></p>
                     </div>
                   </div>

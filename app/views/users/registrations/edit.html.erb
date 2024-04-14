@@ -7,6 +7,8 @@
           <%= render "users/shared/error_messages", resource: resource %>
           <div class="mb-3">
             <%= f.label :name, 'Nombre', class: 'form-label' %>
+            <!-- autofocus: true: このオプションは、ページが読み込まれたときに自動的にこの入力フィールドにフォーカスを設定します。これにより、ユーザーがページを開いた直後にすぐに入力を開始できます。 -->
+            <!-- autocomplete 属性は、ユーザーが以前に入力した値をブラウザが記憶し、入力中に予測候補を表示するかどうかを制御します。ここでは "name" を指定しており、通常、ユーザーの名前を入力するフィールドに適した自動補完候補をブラウザに提供するよう指示しています。 -->
             <%= f.text_field :name, autofocus: true, autocomplete: "name", class: 'form-control', maxlength: 50, required: true %>
           </div>
           <div class="mb-3">

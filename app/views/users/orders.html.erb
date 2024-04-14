@@ -37,8 +37,11 @@
               <% if order.seller.deleted? %>
                 N/A
               <% elsif order.accepted? %>
+                <!-- この行では、インスタンス変数 @reviews_by_userから特定のサービスIDに一致するレビューを検索します。 -->
+                <!-- find メソッドは最初に条件に一致する要素を返します。この場合、order.service_id と一致する service_id を持つレビューを探します。 -->
                 <% review_for_order = @reviews_by_user.find { |review| review.service_id == order.service_id } %>
                 <% if review_for_order %>
+                  <!-- review_for_order 変数が nil ではない場合（つまり、一致するレビューが見つかった場合）、そのレビューを編集するためのリンクを表示します。 -->
                   <%= link_to "Editar", edit_service_review_path(order.service, review_for_order), class: "btn btn-primary btn-sm"  %>
                 <% else %>
                   <%= link_to "Evaluar", new_service_review_path(order.service), class: "btn btn-primary btn-sm" %>
