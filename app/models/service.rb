@@ -46,6 +46,7 @@ class Service < ApplicationRecord
   # .average メソッドが返す値は通常 BigDecimal や nil です（特にレビューが存在しない場合）。
   # to_f はこの値を浮動小数点数に変換します。これにより、後続の数値操作が容易になります。
   # round(2) は、浮動小数点数を小数点以下2桁で丸めるためのメソッドです。これにより、表示や処理を行う際により扱いやすい形式になります。
+  # :rating シンボルがデータベースのカラム名
   def average_rating
     reviews.average(:rating).to_f.round(2)
   end

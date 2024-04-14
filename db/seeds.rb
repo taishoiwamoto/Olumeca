@@ -30,6 +30,7 @@ categories = [
 Category.delete_all
 
 # 上記で定義したカテゴリーをデータベースに追加する
+# Category.create!(name: category) は、Category モデル（Railsのモデルで、データベースのテーブルに対応しています）を使って新しいレコードを作成します。ここで create! メソッドを使用しており、これは新しいカテゴリをデータベースに保存します。create! メソッドは、name: キーワード引数に category 変数を渡しており、これにより新しいカテゴリの名前が設定されます。
 categories.each do |category|
   Category.create!(name: category)
 end
