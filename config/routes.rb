@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  # ルーティングを登録するファイルです。 ルーティングというのは、ブラウザからRailsアプリへ渡される情報をもとに、登録された動きを行わせるための振り分け設定 
+
   # ルートページをhomeコントローラのtopアクションに設定
   root "home#top"
 
