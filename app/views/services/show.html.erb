@@ -35,10 +35,12 @@
             <div class="like-button">
               <% if current_user %>
                 <% if @user_has_liked %>
+                  <!-- ハッシュ -->
                   <%= button_to like_path(service_id: @service.id), method: :delete do %>
                     <span class="fa fa-heart liked-btn"></span>
                   <% end %>
                 <% else %>
+                  <!-- ハッシュ -->
                   <%= button_to likes_path(service_id: @service.id), method: :post do %>
                     <span class="fa fa-heart unliked-btn"></span>
                   <% end %>
