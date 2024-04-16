@@ -5,6 +5,8 @@ class LikesController < ApplicationController
   # いいねを作成するアクション
   def create
     # URLからservice_idを使用してServiceオブジェクトを検索
+    # paramsは、HTTPリクエストを通じて送信されたパラメータを含むハッシュです。GETやPOSTリクエストで送信されたデータが含まれます。例えば、ユーザーがフォームを通じてデータを送信したり、URLの一部としてパラメータを送信したりした場合です。
+    # ハッシュ params から特定のキー :service_id に関連付けられた値を取得
     service = Service.find(params[:service_id])
 
     # Serviceが見つからない場合、トップページにリダイレクトし、アラートを表示
