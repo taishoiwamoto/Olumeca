@@ -24,6 +24,7 @@ class UsersController < ApplicationController
     # 「いいね」したサービスを取得し、ページネーションで表示
     # 各サービスに紐付けられたユーザー情報をあらかじめ読み込む（プリロードする）ことで、サービスに紐付くユーザー情報を表示する際に発生する追加のクエリ（N+1クエリ問題）を防ぎます。
     # where(likes: { user_id: current_user.id }):で、likes テーブルにある user_id カラムが現在ログインしているユーザー（current_user.id）と一致するレコードのみをフィルタリングします。これにより、現在のユーザーが「いいね」したサービスのみが取得されます。
+    # .page(params[:page])で、pageはメソッド、params[:page]は辞書。
     @services = Service.joins(:likes).preload(:user).where(likes: { user_id: current_user.id }).where(deleted_at: nil).order("likes.created_at desc").page(params[:page]).per(30)
   end
 
