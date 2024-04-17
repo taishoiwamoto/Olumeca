@@ -39,6 +39,7 @@
               <% elsif order.accepted? %>
                 <!-- この行では、インスタンス変数 @reviews_by_userから特定のサービスIDに一致するレビューを検索します。 -->
                 <!-- find メソッドは最初に条件に一致する要素を返します。この場合、order.service_id と一致する service_id を持つレビューを探します。 -->
+                <!-- 、|review|はブロック変数として機能し、@reviews_by_userの各要素（各レビュー）を順番にreviewという名前で参照できるようにします。ブロック内のコードはこの変数を使用して条件を評価し、条件に一致する最初の要素を見つけた場合にはその要素を返し、一致するものがない場合はnilを返します。 -->
                 <% review_for_order = @reviews_by_user.find { |review| review.service_id == order.service_id } %>
                 <% if review_for_order %>
                   <!-- review_for_order 変数が nil ではない場合（つまり、一致するレビューが見つかった場合）、そのレビューを編集するためのリンクを表示します。 -->
