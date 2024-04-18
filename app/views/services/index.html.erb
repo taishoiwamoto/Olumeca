@@ -12,6 +12,10 @@
         <!-- form_with:
         f.select :category_id でカテゴリの選択ドロップダウンを生成しています。options_for_select(Category.all.map{|category| [category.name, category.id]}) はすべてのカテゴリをデータベースから取得し、選択肢として表示しています。
         { prompt: 'Todas categorías' } はデフォルトの選択肢として「すべてのカテゴリ」と表示させるためのオプションです。-->
+        <!-- options_for_selectを使用して、ドロップダウンメニューの選択肢を生成しています。具体的には以下のように動作します：
+        Category.all：これはCategoryモデルの全てのレコードをデータベースから取得します。Categoryはデータベースのカテゴリーテーブルを表すモデルであると推測されます。
+        .map{|category| [category.name, category.id]}：取得したカテゴリーの各レコードに対して、mapメソッドを使用して配列の変換を行います。この変換では、各カテゴリーのnameとidを取得し、それらを小さな配列にしています。こうすることで、各選択肢にカテゴリーの名前が表示され、選択されたときにはそのカテゴリーのIDが値として使用されます。
+        options_for_select(...)：mapメソッドで作成した配列をoptions_for_selectヘルパーメソッドに渡します。このメソッドは、配列内の各要素からHTMLの<option>タグを生成し、これを使ってフォームのセレクトボックス（ドロップダウンメニュー）のオプションを構成します。 --> 
         <%= f.select :category_id, options_for_select(Category.all.map{|category| [category.name, category.id]}), { prompt: 'Todas categorías' }, class: "form-select" %>
       </div>
       <!-- キーワード入力フィールド -->
