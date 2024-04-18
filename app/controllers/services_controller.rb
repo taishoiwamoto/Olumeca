@@ -84,6 +84,7 @@ class ServicesController < ApplicationController
     # ユーザーの事前読み込みとアクティブなサービスの降順にページネーションで表示
     @services = @services.preload(:user).active.order(created_at: :desc).page(params[:page]).per(30)
 
+    # ページ全体をリロードすることなく、ページの一部分だけをサーバーからの新しい情報で更新するために使われます。 
     # respond_to ブロックを使用して、異なるフォーマットに応じた応答を設定します。
     # respond_to do |format| の箇所は、Ruby on Railsにおいて、クライアントからのリクエストに応じて異なるフォーマットでレスポンスを返すためのメソッドを設定する場所です。
     # このブロックを使用することで、同一のアクション（この場合は filter アクション）において、リクエストされたフォーマットに応じた適切な処理を行い、それぞれ異なるフォーマットでデータを返すことができます。
@@ -92,10 +93,11 @@ class ServicesController < ApplicationController
       format.turbo_stream { 
         # render メソッドを使用して、指定された部分テンプレートをレンダリングし、
         # turbo_stream.replace を使って特定のHTML要素('services')を置換します。
+        # 'services/services'は_services.html.erb（または同様のテンプレートエンジンを使用している場合は違う拡張子）というファイルを指す。
         render turbo_stream: turbo_stream.replace(
-          'services', # 置換するHTML要素のID
-          partial: 'services/services', # 使用する部分テンプレートのパス
-          locals: { services: @services } # テンプレートに渡すローカル変数
+          'services', # これは置換されるHTML要素のIDです。このIDを持つHTML要素が新しい内容で更新されます。
+          partial: 'services/services', # 置換に使用される部分テンプレートのパスです。部分テンプレートとは、再利用可能なビューの断片を意味します。
+          locals: { services: @services } # これは、部分テンプレートに渡すローカル変数を定義しています。ここでは@servicesというインスタンス変数がテンプレート内で使用されます。
           )
         }
     end

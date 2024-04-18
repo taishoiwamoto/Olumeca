@@ -37,6 +37,7 @@
           <div class="mb-3">
             <%= f.label :category_id, class: 'form-label' %>
             <%# カテゴリの選択フィールドを生成します。選択オプションはCategoryモデルから取得し、現在のサービスのカテゴリIDをデフォルト値として設定します。%>
+            <%# required: @service.category_id.nil?: @serviceのcategory_idが未設定（nil）の場合に、フォームの入力フィールドを必須（入力が必要）とするかどうかを動的に設定するために使用されます。これにより、ユーザーがフォームを送信する際に、カテゴリーIDがまだ選択されていない場合には値を入力しなければならないという要求がブラウザに伝えられます。%>
             <%= f.select :category_id, options_for_select(Category.all.map{|category| [category.name, category.id]}, @service.category_id), { include_blank: 'Por favor, elija de la siguiente lista' }, { class: 'form-select', required: @service.category_id.nil? } %>
             <div class="invalid-feedback">Por favor, selecciona una categoría.</div>
           </div>
