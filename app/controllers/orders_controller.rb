@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
   # 認証されたユーザーのみにアクセスを許可するアクションを指定
-  before_action :authenticate_user, only: [:new, :create, :completed, :accept, :reject, :user_info]
+  before_action :authenticate_user, only: [:new, :create, :completed, :accept, :reject]
   # 新しい注文を作成する前に、既に同じサービスに対する注文が存在するかをチェック
   before_action :check_order_existence, only: [:new, :create]
   # 自身のサービスを購入しようとするのを防止
@@ -67,9 +67,9 @@ class OrdersController < ApplicationController
   end
 
   # ユーザー情報を表示するページ
-  def user_info
-    @user = User.find(params[:user_id])
-  end
+  #def user_info
+  #  @user = User.find(params[:user_id])
+  #end
 
   private
 
