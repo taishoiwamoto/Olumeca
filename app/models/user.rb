@@ -23,9 +23,14 @@ class User < ApplicationRecord
   # ユーザーが削除されるとサービスの参照はnullifyされる。カラムの値を明示的に「null」に設定する。
   has_many :services, dependent: :nullify
 
+  # このコード行はUserモデルが複数の注文（Order）を購入者（buyer）として持つことを可能にし、そのモデルが削除された場合の注文の扱いを定義しています。
+  # has_many :purchased_orders：これにより、このモデルのインスタンスが複数のOrderインスタンスを持つことが示されます。ここでの:purchased_ordersは関連するオブジェクトを参照するために使用される名前です。
+  # class_name: 'Order'：関連付けられているモデルがOrderクラスであることを指定します。これは、関連名（purchased_orders）がモデルのクラス名と直接一致しない場合に必要です。
+  # foreign_key: 'buyer_id'：Orderテーブルのどのフィールドがこの関連を持つモデルのインスタンスに対応するかを示します。この場合、Orderモデルのbuyer_idフィールドが、このモデルのインスタンスのIDと関連付けられています。
   # ユーザーが削除されると注文の参照はnullifyされる。カラムの値を明示的に「null」に設定する。
   has_many :purchased_orders, class_name: 'Order', foreign_key: 'buyer_id', dependent: :nullify
 
+  # このコード行はUserモデルが複数の注文（Order）を出品者（seller）として持つことを可能にし、そのモデルが削除された場合の注文の扱いを定義しています。
   # ユーザーによる販売注文を管理。ユーザーが削除されると注文の参照はnullifyされる。カラムの値を明示的に「null」に設定する。
   has_many :sold_orders, class_name: 'Order', foreign_key: 'seller_id', dependent: :nullify
 
