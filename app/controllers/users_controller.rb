@@ -19,7 +19,7 @@ class UsersController < ApplicationController
     # 関連するレビューを取得し、ページネーションで表示
     # includes(:service, :user) がある場合: 最初のクエリで必要な Review, Service, User のデータを全て取得します。これにより、レビューを表示する際にそれぞれの Service と User を即座に参照できます。
     # includes(:service, :user) がない場合: Review をロードした後、それぞれの Review について、関連する Service と User を個別にクエリします。これは多くの追加クエリを引き起こし、パフォーマンスが低下する原因となります。
-    @reviews = Review.where(service_id: service_ids).order(created_at: :desc).page(params[:page]).per(10)
+    @reviews = Review.includes(:service, :user).where(service_id: service_ids).order(created_at: :desc).page(params[:page]).per(10)
   end
 
   # ユーザーが「いいね」したサービス一覧

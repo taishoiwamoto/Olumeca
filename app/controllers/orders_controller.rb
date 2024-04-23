@@ -21,7 +21,7 @@ class OrdersController < ApplicationController
   # purchased_orders: これは User モデルに定義されている has_many 関連を表します。つまり、一人のユーザーが複数の注文（Order レコード）を持つことができるという関係です。
   # .build(): build メソッドは、関連オブジェクトの新しいインスタンスをメモリ上に作成しますが、データベースには保存しません。この新しい注文オブジェクトは @order インスタンス変数に保存され、通常、フォームで使用してユーザーに情報入力を促します。
   def create
-    @service = Service.find(params[:order][:service_id])
+    @service = Service.includes(:user).find(params[:order][:service_id])
     @order = current_user.purchased_orders.build(
       service_id: @service.id,
       seller_id: @service.user_id
