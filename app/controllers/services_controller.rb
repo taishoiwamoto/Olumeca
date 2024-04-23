@@ -117,6 +117,7 @@ class ServicesController < ApplicationController
   # 編集・更新・削除用にサービスを設定
   # 特定の Service オブジェクトをロードし、アクセス制御を行うために使用されるメソッドです。
   def set_service
+    # user オブジェクトを直接比較する場合、事前にユーザー情報を読み込んでおくことで処理速度が向上します。
     @service = Service.preload(:user).find(params[:id])
 
     # この条件文は、@service の関連付けられた user が現在ログインしているユーザー (current_user) と同一であるかを確認します。
