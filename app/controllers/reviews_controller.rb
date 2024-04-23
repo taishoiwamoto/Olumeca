@@ -49,6 +49,7 @@ class ReviewsController < ApplicationController
   # サービスを設定し、レビュー可能かどうかをチェック
   # Service.includes(:reviews): Service モデルからデータを取得する際に、関連する reviews（レビュー）も一緒に事前読み込み（Eager Loading）します。これにより、後続の処理でレビュー情報が必要になった時、効率的にアクセスできるようになり、N+1 クエリ問題を防ぐことができます。
   # params[:service_id] はURLまたはフォームから送信された service_id パラメータの値を指し、これは通常、サービスのIDを指します。
+  # Serviceをロードした後にServiceに紐づくすべてのReviewを取得し、その後特定のReviewを取得しています。これによりデータベースのクエリ回数が合計で3回になっています。応答時間は早い。
   def set_service
     @service = Service.includes(:reviews).find(params[:service_id])
 
