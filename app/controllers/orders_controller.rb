@@ -21,6 +21,7 @@ class OrdersController < ApplicationController
   # purchased_orders: これは User モデルに定義されている has_many 関連を表します。つまり、一人のユーザーが複数の注文（Order レコード）を持つことができるという関係です。
   # .build(): build メソッドは、関連オブジェクトの新しいインスタンスをメモリ上に作成しますが、データベースには保存しません。この新しい注文オブジェクトは @order インスタンス変数に保存され、通常、フォームで使用してユーザーに情報入力を促します。
   def create
+    # includes(:user)により、処理時間が短く、ActiveRecordのクエリ時間も少ないため、より高速にリクエストを処理,を確認
     @service = Service.includes(:user).find(params[:order][:service_id])
     @order = current_user.purchased_orders.build(
       service_id: @service.id,
@@ -48,6 +49,7 @@ class OrdersController < ApplicationController
   # 注文を受け入れる
   def accept
     #Order.includes(service: :user).find(params[:id])：この部分で、データベースから特定のIDを持つOrderオブジェクトを検索しています。includes(service: :user)はEager Loadingを使って、関連するserviceオブジェクトとそのuserオブジェクトを一緒に前もってロードすることで、後の処理で発生する可能性のあるN+1クエリ問題を防ぎます。
+    # includes(service: :user)があることで、全体の応答時間が短く、またメモリの使用量も少ないため、リソースの使用がより最適化されている
     @order = Order.includes(service: :user).find(params[:id])
     # accepted! は Order モデルに定義された状態遷移メソッドの一つで、enumを用いて注文のステータスを「受け付け済み」に変更しています。
     @order.accepted!
@@ -59,6 +61,7 @@ class OrdersController < ApplicationController
   # 注文を拒否する
   def reject
     #Order.includes(service: :user).find(params[:id])：この部分で、データベースから特定のIDを持つOrderオブジェクトを検索しています。includes(service: :user)はEager Loadingを使って、関連するserviceオブジェクトとそのuserオブジェクトを一緒に前もってロードすることで、後の処理で発生する可能性のあるN+1クエリ問題を防ぎます。
+    # includes(service: :user)があることで、全体の応答時間が短く、またメモリの使用量も少ないため、リソースの使用がより最適化されている
     @order = Order.includes(service: :user).find(params[:id])
     # rejected! は Order モデルに定義された状態遷移メソッドの一つで、enumを用いて注文のステータスを「拒否済み」に変更しています。
     @order.rejected!
