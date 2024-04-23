@@ -14,9 +14,12 @@ class UsersController < ApplicationController
     # 表示するサービスIDを取得
     # .pluck(:id) を使用して、そのコレクション内の全サービスオブジェクトから id 属性のみを抽出し、配列として service_ids に格納しています。
     # .pluck メソッドは、指定されたカラムの値だけを直接データベースから取り出すので、メモリ使用量と処理時間の節約に効果的です。
+    # 直接的なIN句でIDを指定しているため、データベースがより効率的にデータをフィルタリングし、取得することができるからです。
     service_ids = @services.pluck(:id)
     # 関連するレビューを取得し、ページネーションで表示
-    @reviews = Review.includes(:service, :user).where(service_id: service_ids).order(created_at: :desc).page(params[:page]).per(10)
+    # includes(:service, :user) がある場合: 最初のクエリで必要な Review, Service, User のデータを全て取得します。これにより、レビューを表示する際にそれぞれの Service と User を即座に参照できます。
+    # includes(:service, :user) がない場合: Review をロードした後、それぞれの Review について、関連する Service と User を個別にクエリします。これは多くの追加クエリを引き起こし、パフォーマンスが低下する原因となります。
+    @reviews = Review.where(service_id: service_ids).order(created_at: :desc).page(params[:page]).per(10)
   end
 
   # ユーザーが「いいね」したサービス一覧

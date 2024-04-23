@@ -21,9 +21,11 @@ class ServicesController < ApplicationController
   # サービスの詳細表示
   def show
     # 特定のサービスを取得し、関連するユーザーとレビューも事前に読み込む
+    # preload(:user)があることで処理速度の改善を確認
     @service = Service.active.preload(:user).find(params[:id])
     @user = @service.user
     @user_has_liked = Like.user_and_service(current_user.id, @service.id) if current_user
+    # preload(:user)によりUser Loadの削減を確認
     @reviews = @service.reviews.preload(:user).order(created_at: :desc).page(params[:page]).per(10)
   end
 
@@ -82,6 +84,7 @@ class ServicesController < ApplicationController
     end
 
     # ユーザーの事前読み込みとアクティブなサービスの降順にページネーションで表示
+    # preload(:user)によりUser Loadの読み込み回数削減を確認
     @services = @services.preload(:user).active.order(created_at: :desc).page(params[:page]).per(30)
 
     # ページ全体をリロードすることなく、ページの一部分だけをサーバーからの新しい情報で更新するために使われます。 
