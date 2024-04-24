@@ -23,8 +23,7 @@ Rails.application.routes.draw do
   # match 'users.:id' => 'registrations#destroy'：この部分はregistrations コントローラの destroy アクションにルーティングするための設定。
   # 'users.:id' は、URLにユーザーのIDを含めることを指定しており、このIDをパラメータとしてdestroyアクションに渡します。
   # :via => :delete：これはHTTPメソッドとしてDELETEを指定しています。DELETEメソッドは、RESTful API（分散型システムにおける複数のソフトウェアを連携させるのに適した設計原則の集合、考え方）においてリソースを削除するための標準的な方法。
-  # :as => :destroy_user：これは名前付きルートを設定しており、
-  # このルートにdestroy_user_pathやdestroy_user_urlといったヘルパーメソッドでアクセスできるようにしています。
+  # :as => :destroy_user：これは名前付きルートを設定しており、このルートにdestroy_user_pathやdestroy_user_urlといったヘルパーメソッドでアクセスできるようにしています。
   # これにより、ビューやコントローラー内でこのルートを簡単に参照できます。
   match 'users.:id' => 'registrations#destroy', :via => :delete, :as => :destroy_user
 
