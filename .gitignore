@@ -16,6 +16,8 @@
 /tmp/*
 !/log/.keep
 !/tmp/.keep
+*.cache
+*.tmp
 
 # Ignore pidfiles, but keep the directory.
 /tmp/pids/*
@@ -29,6 +31,9 @@
 !/tmp/storage/
 !/tmp/storage/.keep
 
+# ビルド生成物:
+/build
+/dist
 /public/assets
 
 # Ignore master key for decrypting credentials and more.
@@ -41,9 +46,23 @@
 yarn-debug.log*
 .yarn-integrity
 
+*.env
 .env*
 
+/log/*.log
 development.log
 pg_upgrade_utility.log
 pg_upgrade_server.log
 pg_upgrade_internal.log
+
+# IDE設定ファイル:
+/.idea
+/.vscode
+
+# バックアップファイル:
+*.bak
+*~
+
+# 依存関係とパッケージファイル:
+*.lock
+/vendor/bundle
