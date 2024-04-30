@@ -17,6 +17,3 @@ window.Stimulus   = application
 // application変数をエクスポートします。
 // 他のファイルやモジュールからこのアプリケーションインスタンスにアクセスできるようにするためです。
 export { application }
-
-// ブラウザにアラートを表示し、'hi'というメッセージをユーザーに通知します。
-alert('hi')
