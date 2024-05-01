@@ -63,3 +63,5 @@ yarn-debug.log*
 # 依存関係とパッケージファイル:
 *.lock
 /vendor/bundle
+
+config/secrets.yml
